@@ -31,7 +31,6 @@ Thumbs.db
 *.sublime-project
 
 # Build and dependency directories
-/dist/
 /build/
 /vendor/
 /bower_components/
@@ -41,10 +40,6 @@ Thumbs.db
 .env.*
 !.env.example
 
-# Compiled CSS and JS
-*.min.css
-*.min.js
-*.map
 
 # Package files
 package-lock.json
