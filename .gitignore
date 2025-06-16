@@ -1,0 +1,63 @@
+# WordPress specific files
+wp-config.php
+wp-content/advanced-cache.php
+wp-content/backup-db/
+wp-content/backups/
+wp-content/blogs.dir/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/
+wp-content/mu-plugins/
+wp-content/wp-cache-config.php
+wp-content/plugins/hello.php
+
+# Theme specific files
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+*.sql
+*.sqlite
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# Build and dependency directories
+/dist/
+/build/
+/vendor/
+/bower_components/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Compiled CSS and JS
+*.min.css
+*.min.js
+*.map
+
+# Package files
+package-lock.json
+yarn.lock
+composer.lock
+
+# Debug logs
+debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+.cache/ 

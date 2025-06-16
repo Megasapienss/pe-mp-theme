@@ -1,0 +1,106 @@
+/**
+ * Typography
+ * Base typography styles
+ */
+
+body {
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-dark;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: $spacing-md;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5rem;
+  @include respond-to(md) {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-size: 2rem;
+  @include respond-to(md) {
+    font-size: 2.5rem;
+  }
+}
+
+h3 {
+  font-size: 1.75rem;
+  @include respond-to(md) {
+    font-size: 2rem;
+  }
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: $spacing-md;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  @include transition(color);
+
+  &:hover {
+    color: darken($color-primary, 10%);
+  }
+}
+
+small {
+  font-size: 0.875em;
+}
+
+strong {
+  font-weight: 600;
+}
+
+em {
+  font-style: italic;
+}
+
+blockquote {
+  margin: 0 0 $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  border-left: 4px solid $color-primary;
+  font-style: italic;
+  background-color: $color-light;
+}
+
+code {
+  font-family: monospace;
+  background-color: $color-light;
+  padding: 0.2em 0.4em;
+  border-radius: $border-radius;
+}
+
+pre {
+  margin: 0 0 $spacing-md;
+  padding: $spacing-md;
+  background-color: $color-light;
+  border-radius: $border-radius;
+  overflow-x: auto;
+
+  code {
+    padding: 0;
+    background-color: transparent;
+  }
+} 
