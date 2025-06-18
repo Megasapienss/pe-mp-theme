@@ -38,7 +38,38 @@ module.exports = (env, argv) => {
                     ]
                 },
                 {
-                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                    test: /\.(png|jpg|jpeg|gif)$/i,
+                    type: 'asset/resource',
+                    generator: {
+                        filename: 'images/[name][ext]'
+                    },
+                    use: [
+                        {
+                            loader: 'image-webpack-loader',
+                            options: {
+                                mozjpeg: {
+                                    progressive: true,
+                                    quality: 65
+                                },
+                                optipng: {
+                                    enabled: true,
+                                },
+                                pngquant: {
+                                    quality: [0.65, 0.90],
+                                    speed: 4
+                                },
+                                gifsicle: {
+                                    interlaced: false,
+                                },
+                                webp: {
+                                    quality: 75
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.svg$/,
                     type: 'asset/resource',
                     generator: {
                         filename: 'images/[name][ext]'

@@ -103,7 +103,7 @@ while (have_posts()) :
                     <?php endif; ?>
 
                     <?php if ($booking_url): ?>
-                        <div class="provider-actions">
+                        <div class="provider-actions mt-5">
                             <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank">
                                 <?php _e('Request now', 'pe-mp-theme'); ?>
                             </a>
@@ -115,11 +115,6 @@ while (have_posts()) :
 
         <!-- Provider Content -->
         <div class="provider-content">
-            <?php if ($short_description): ?>
-                <div class="provider-short-description">
-                    <?php echo wp_kses_post($short_description); ?>
-                </div>
-            <?php endif; ?>
 
             <?php if ($full_description): ?>
                 <div class="provider-full-description">

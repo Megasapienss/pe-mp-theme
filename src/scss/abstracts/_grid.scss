@@ -1,0 +1,110 @@
+// Grid System
+@mixin grid($columns: 1) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+
+}
+
+.grid {
+  @include grid;
+  gap: $grid-gap;
+  justify-content: stretch;
+
+  @include less-than(md) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+// Generate grid classes (grid--1 through grid--12)
+@for $i from 1 through $grid-max-columns {
+  .grid--#{$i} {
+    @include grid($i);
+  }
+}
+
+// Responsive grid classes
+@for $i from 1 through $grid-max-columns {
+  .grid--sm-#{$i} {
+    @media (min-width: $breakpoint-sm) {
+      @include grid($i);
+    }
+  }
+
+  .grid--md-#{$i} {
+    @media (min-width: $breakpoint-md) {
+      @include grid($i);
+    }
+  }
+
+  .grid--lg-#{$i} {
+    @media (min-width: $breakpoint-lg) {
+      @include grid($i);
+    }
+  }
+
+  .grid--xl-#{$i} {
+    @media (min-width: $breakpoint-xl) {
+      @include grid($i);
+    }
+  }
+
+  .grid--xxl-#{$i} {
+    @media (min-width: $breakpoint-xxl) {
+      @include grid($i);
+    }
+  }
+}
+
+// Grid Gap Utilities
+.gap-0 {
+  gap: 0;
+}
+
+.gap-1 {
+  gap: $grid-gap-sm;
+}
+
+.gap-2 {
+  gap: $grid-gap;
+}
+
+.gap-3 {
+  gap: $grid-gap-lg;
+}
+
+.gap-4 {
+  gap: $grid-gap-xl;
+}
+
+// Grid Alignment Utilities
+.items-start {
+  align-items: start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-end {
+  align-items: end;
+}
+
+.justify-start {
+  justify-items: start;
+}
+
+.justify-center {
+  justify-items: center;
+}
+
+.justify-end {
+  justify-items: end;
+}
+
+.justify-between {
+  justify-items: space-between;
+}
+
+.justify-around {
+  justify-items: space-around;
+}

@@ -1,0 +1,112 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding-top: 16px;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    gap: 8px;
+    border-radius: 150px;
+    background-color: transparent;
+    border: 1px solid #E8E8E8;
+    text-align: center;
+    white-space: nowrap;
+
+    @include text-button;
+    color: $color-text;
+
+    &--muted {
+        background: $bg-muted;
+        border-color: $bg-muted;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+
+}
+
+.arrow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 4px 4px 4px 18px;
+    gap: 10px;
+    border-radius: 150px;
+
+    @include text-button;
+    color: $color-text;
+
+    &::after {
+        content: '';
+        width: 40px;
+        height: 32px;
+        background-image: url('../icons/button-arrow-right.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &--primary {
+        background: $color-dark;
+        border-color: $color-dark;
+        color: $color-white;
+
+        &::after {
+            background-image: url('../icons/button-arrow-right--white.svg');
+        }
+    }
+}
+
+.text-btn {
+    @include text-button;
+    color: $color-text;
+    border-bottom: 1px solid $color-text;
+    padding-bottom: 4px;
+
+    &:hover {
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+    }
+}
+
+.label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 4px 10px;
+    border: 1px solid #E8E8E8;
+    gap: 6px;
+    border-radius: 150px;
+    @include text-label;
+
+    &--arrow {
+        padding-right: 12px;
+        padding-left: 4px;
+
+        &::before {
+            content: '';
+            width: 26px;
+            height: 22px;
+            background-image: url('../icons/label-arrow-right.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+    }
+
+    &--muted {
+        background: $bg-muted;
+        border-color: $bg-muted;
+    }
+
+
+}

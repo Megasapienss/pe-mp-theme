@@ -174,35 +174,3 @@
 .location-icon {
     color: #3498db;
 }
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    width: 100%;
-    box-sizing: border-box;
-
-    &-primary {
-        background: #3498db;
-        color: #fff;
-
-        &:hover {
-            background: #2980b9;
-        }
-    }
-
-    &-secondary {
-        background: #f8f9fa;
-        color: #2c3e50;
-        border: 1px solid #e9ecef;
-
-        &:hover {
-            background: #e9ecef;
-        }
-    }
-} 

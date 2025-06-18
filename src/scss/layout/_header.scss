@@ -1,0 +1,39 @@
+.header {
+    align-items: center;
+    grid-template-columns: 160px 1fr 160px;
+    margin-bottom: 24px;
+    padding: 0 12px;
+
+    &__navigation {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__menu {
+        @include less-than(md) {
+            display: none;
+        }
+
+        display: flex;
+        justify-content: center;
+        gap: 2px;
+
+        & a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            @include text-button;
+            color: $color-text;
+
+            padding: 6px 12px;
+            border-radius: 150px;
+
+            &:hover {
+                text-decoration: none;
+                background-color: $bg-muted;
+            }
+        }
+
+    }
+}

@@ -1,0 +1,43 @@
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 24px;
+
+    color: $color-text;
+
+    & a {
+        color: rgba(0, 0, 0, 0.6);
+        text-decoration: none;
+
+        &:hover {
+            color: $color-text;
+        }
+    }
+
+    &__separator {
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    &--light {
+        color: $color-white;
+
+        & a {
+            color: rgba(255, 255, 255, 0.6);
+
+            &:hover {
+                color: $color-white;
+            }
+        }
+
+        .breadcrumbs__separator {
+            color: rgba(255, 255, 255, 0.6);
+        }
+    }
+
+
+
+
+}

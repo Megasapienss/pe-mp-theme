@@ -10,49 +10,191 @@ body {
   color: $color-dark;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom: $spacing-md;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-h1 {
-  font-size: 2.5rem;
-  @include respond-to(md) {
-    font-size: 3rem;
-  }
-}
-
-h2 {
-  font-size: 2rem;
-  @include respond-to(md) {
-    font-size: 2.5rem;
-  }
-}
-
-h3 {
-  font-size: 1.75rem;
-  @include respond-to(md) {
-    font-size: 2rem;
-  }
-}
-
-h4 {
-  font-size: 1.5rem;
-}
-
-h5 {
-  font-size: 1.25rem;
-}
-
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
-  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+@mixin title {
+  font-family: $font-primary;
+  font-weight: 400;
+}
+
+@mixin title-xl {
+  @include title;
+  font-size: 160px;
+  line-height: 100%;
+  letter-spacing: -6px;
+}
+
+@mixin title-lg {
+  @include title;
+  font-size: 128px;
+  line-height: 110%;
+  letter-spacing: -4px;
+}
+
+@mixin title-md {
+  @include title;
+  font-size: 96px;
+  line-height: 100%;
+  letter-spacing: -4px;
+
+
+}
+
+@mixin title-sm {
+  @include title;
+  font-size: 80px;
+  line-height: 110%;
+  letter-spacing: -4px;
+
+}
+
+@mixin heading-h1 {
+  @include title;
+  font-size: 64px;
+  line-height: 110%;
+  letter-spacing: -3px;
+}
+
+
+@mixin heading-h2 {
+  @include title;
+  font-size: 48px;
+  line-height: 120%;
+  letter-spacing: -1px;
+}
+
+@mixin heading-h3 {
+  @include title;
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: 0px;
+
+
+}
+
+@mixin heading-h4 {
+  @include title;
+  font-size: 26px;
+  line-height: 110%;
+  letter-spacing: -0.5px;
+}
+
+@mixin heading-h5 {
+  @include title;
+  font-size: 22px;
+  line-height: 110%;
+  letter-spacing: 0px;
+}
+
+@mixin heading-h6 {
+  @include title;
+  font-size: 18px;
+  line-height: 110%;
+  letter-spacing: 0px;
+}
+
+
+@mixin text {
+  font-family: $font-secondary;
+  font-weight: 400;
+}
+
+@mixin body {
+  @include text;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0px;
+}
+
+@mixin body-md {
+  @include text;
+  font-size: 22px;
+  line-height: 150%;
+  letter-spacing: 0px;
+}
+
+@mixin body-lg {
+  @include text;
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: 0px;
+}
+
+
+@mixin text-button {
+  @include text;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+
+@mixin text-label {
+  @include text;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0;
+
+}
+
+.title-xl {
+  @include title-xl;
+}
+
+.title-lg {
+  @include title-lg;
+}
+
+.title-md {
+  @include title-md;
+}
+
+.title-sm {
+  @include title-sm;
+}
+
+.heading-h1,
+h1 {
+  @include heading-h1;
+}
+
+.heading-h2,
+h2 {
+  @include heading-h2;
+}
+
+.heading-h3,
+h3 {
+  @include heading-h3;
+}
+
+.heading-h4,
+h4 {
+  @include heading-h4;
+}
+
+.heading-h5,
+h5 {
+  @include heading-h5;
+}
+
+.heading-h6,
+h6 {
+  @include heading-h6;
 }
 
 p {
-  margin-top: 0;
-  margin-bottom: $spacing-md;
+  margin: 0;
+  @include body;
 }
 
 a {
@@ -61,7 +203,7 @@ a {
   @include transition(color);
 
   &:hover {
-    color: darken($color-primary, 10%);
+    text-decoration: underline;
   }
 }
 
@@ -103,4 +245,4 @@ pre {
     padding: 0;
     background-color: transparent;
   }
-} 
+}

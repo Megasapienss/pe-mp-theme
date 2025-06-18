@@ -4,18 +4,26 @@
  */
 
 // Colors
-$color-primary: #007bff;
+$color-primary: #007AFF;
 $color-secondary: #6c757d;
 $color-success: #28a745;
 $color-danger: #dc3545;
 $color-warning: #ffc107;
 $color-info: #17a2b8;
 $color-light: #f8f9fa;
-$color-dark: #343a40;
+$color-dark: #202527;
+$color-text: $color-dark;
+$color-white: #FFFFFF;
+
+//Backgrounds
+
+$bg-muted: #F6F6F6;
+$bg-white: #FFFFFF;
+$bg-primary: $bg-white;
 
 // Typography
-$font-primary: 'Arial', sans-serif;
-$font-secondary: 'Georgia', serif;
+$font-primary: 'Almarai', sans-serif;
+$font-secondary: 'Figtree', sans-serif;
 $font-size-base: 16px;
 $line-height-base: 1.5;
 
@@ -24,6 +32,7 @@ $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
+$breakpoint-xxl: 1600px;
 
 // Spacing
 $spacing-unit: 8px;
@@ -32,6 +41,14 @@ $spacing-sm: $spacing-unit * 2;
 $spacing-md: $spacing-unit * 3;
 $spacing-lg: $spacing-unit * 4;
 $spacing-xl: $spacing-unit * 5;
+
+// Grid System
+$grid-gap: $spacing-md;
+$grid-gap-sm: $spacing-sm;
+$grid-gap-lg: $spacing-lg;
+$grid-gap-xl: $spacing-xl;
+$grid-container-padding: $spacing-md;
+$grid-max-columns: 12;
 
 // Z-index
 $z-index-dropdown: 1000;
@@ -50,4 +67,4 @@ $border-color: #dee2e6;
 // Transitions
 $transition-base: all 0.3s ease-in-out;
 $transition-fast: all 0.15s ease-in-out;
-$transition-slow: all 0.5s ease-in-out; 
+$transition-slow: all 0.5s ease-in-out;

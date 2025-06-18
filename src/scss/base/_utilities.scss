@@ -10,16 +10,11 @@
 .d-inline { display: inline !important; }
 .d-inline-block { display: inline-block !important; }
 
-// Flex utilities
+// Flex utilities (only for flex containers)
 .flex-row { flex-direction: row !important; }
 .flex-column { flex-direction: column !important; }
-.justify-start { justify-content: flex-start !important; }
-.justify-end { justify-content: flex-end !important; }
-.justify-center { justify-content: center !important; }
-.justify-between { justify-content: space-between !important; }
-.align-start { align-items: flex-start !important; }
-.align-end { align-items: flex-end !important; }
-.align-center { align-items: center !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
 
 // Spacing
 .m-0 { margin: 0 !important; }

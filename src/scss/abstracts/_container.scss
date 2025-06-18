@@ -1,0 +1,27 @@
+// Container System
+@mixin container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 48px;
+  padding-left: 48px;
+  box-sizing: border-box;
+
+  max-width: $breakpoint-xxl;
+
+  @include less-than('md') {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+// Container Utility Class
+.container {
+  @include container;
+
+  &--wide {
+    max-width: 100%;
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+}

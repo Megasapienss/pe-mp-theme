@@ -1,0 +1,23 @@
+.archive-title {
+    padding-top: 72px;
+    padding-bottom: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+
+    text-align: center;
+
+    &__breadcrumbs {
+        margin-bottom: 40px;
+    }
+
+    &__description {
+        color: #20252799;
+        max-width: 1200px;
+        text-wrap: pretty;
+    }
+
+
+}
