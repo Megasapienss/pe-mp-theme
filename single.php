@@ -12,6 +12,11 @@ if (! defined('ABSPATH')) {
 
 get_header();
 
+$categories = get_the_category();
+$main_category = !empty($categories) ? $categories[0] : null;
+$category_link = $main_category ? get_category_link($main_category->term_id) : '';
+$category_name = $main_category ? $main_category->name : '';
+
 ?>
 
 <?php while (have_posts()) : the_post(); ?>
@@ -20,9 +25,9 @@ get_header();
         <div class="breadcrumbs breadcrumbs--light hero__breadcrumbs">
             <a href="<?= home_url(); ?>" class="breadcrumbs__link">Home</a>
             <span class="breadcrumbs__separator">/</span>
-            <a href="<?= home_url('/blog'); ?>" class="breadcrumbs__link">Articles</a>
-            <!-- <span class="breadcrumbs__separator">/</span>
-            <span><?= get_the_title(); ?></span> -->
+            <a href="<?= home_url('/blog/'); ?>" class="breadcrumbs__link">Blog</a>
+            <span class="breadcrumbs__separator">/</span>
+            <a href="<?= $category_link; ?>" class="breadcrumbs__link"><?= $category_name; ?></a>
         </div>
         <div class="hero__inner">
             <div class="hero__date label label--arrow label--muted">

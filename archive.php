@@ -14,7 +14,7 @@ $term = get_queried_object();
     <div class="breadcrumbs breadcrumbs--dark archive-title__breadcrumbs">
         <a href="<?= home_url(); ?>" class="breadcrumbs__link">Home</a>
         <span class="breadcrumbs__separator">/</span>
-        <a href="<?= home_url('/blog'); ?>" class="breadcrumbs__link">Articles</a>
+        <a href="<?= home_url('/blog/'); ?>" class="breadcrumbs__link">Blog</a>
     </div>
     <h1 class="archive-title__name title-lg"><?= $term->name; ?></h1>
     <p class="archive-title__description heading-h2"><?= $term->description; ?></p>
