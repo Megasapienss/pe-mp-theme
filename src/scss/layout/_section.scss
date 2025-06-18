@@ -1,21 +1,58 @@
 .section {
+    
     margin-top: 16px;
     margin-bottom: 16px;
 
     &__title {
-        @include title-lg;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+
         padding-top: 160px;
         padding-left: 60px;
         padding-right: 60px;
         padding-bottom: 64px;
 
         @include less-than('md') {
+
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
             padding-top: 80px;
             padding-left: 12px;
             padding-right: 12px;
             padding-bottom: 32px;
         }
 
+
+        &-text {
+            @include title-lg;
+        }
+
+        &-link {
+            white-space: nowrap;
+            margin-bottom: 12px;
+        }
+
     }
 
+}
+
+.providers-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+
+    @include less-than('xl') {
+        grid-template-columns: 1fr;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
 }

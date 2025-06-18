@@ -27,7 +27,7 @@
     <?php wp_body_open(); ?>
 
     <header class="header grid">
-        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/Logo.svg" alt="<?php bloginfo('name'); ?>" class="header__logo">
+        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-placeholder.svg" alt="<?php bloginfo('name'); ?>" class="header__logo">
 
         <nav class="header__navigation">
             <?php

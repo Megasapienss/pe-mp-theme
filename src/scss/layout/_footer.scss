@@ -1,6 +1,14 @@
-footer {
+.footer {
     display: flex;
     justify-content: center;
-    margin-top: 48px;
-    color: #20252799;
+    margin-top: 160px;
+    background-color: $bg-dark;
+    padding: 48px 64px 128px;
+    border-radius: 20px;
+
+    &__logo {
+        width: 100%;
+    }
+
+    position: relative;
 }

@@ -23,5 +23,10 @@
     max-width: 100%;
     padding-right: 60px;
     padding-left: 60px;
+
+    @include less-than('md') {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
   }
 }

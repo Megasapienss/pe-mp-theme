@@ -1,0 +1,34 @@
+.banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 96px 80px;
+
+    @include less-than('lg') {
+        padding: 32px;
+        min-height: 0;
+    }
+
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+
+
+    &__title {
+        color: $color-white;
+        max-width: 600px;
+    }
+
+    &__description {
+        color: $color-white;
+        max-width: 600px;
+    }
+
+    &__link {
+        margin-top: 32px;
+    }
+}

@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
     return {
         entry: {
             main: './src/js/main.js',
-            main: './src/scss/main.scss',
+            styles: './src/scss/main.scss',
             'components/provider-single': './src/js/components/provider-single.js',
             'components/provider-archive': './src/js/components/provider-archive.js'
         },
@@ -18,6 +18,9 @@ module.exports = (env, argv) => {
             filename: 'js/[name].js',
             path: path.resolve(__dirname, 'dist'),
             clean: true
+        },
+        stats: {
+            errorDetails: true
         },
         module: {
             rules: [

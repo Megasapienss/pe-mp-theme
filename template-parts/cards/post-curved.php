@@ -21,12 +21,12 @@ $excerpt = wp_trim_words(get_the_excerpt($post), 20);
 
 <article class="card card--post card--curved">
     <div class="card__cover" style="background-image: url(<?= get_the_post_thumbnail_url($post->ID, 'large'); ?>);">
-        <div class="card__cover-corner card__cover-corner--left-top">
+        <div class="card__corner corner corner--left-top">
             <div class="label label--muted">
                 <?php echo esc_html($date); ?>
             </div>
         </div>
-        <div class="card__cover-corner card__cover-corner--right-bottom">
+        <div class="card__corner corner corner--right-bottom">
             <a href="<?php echo esc_url($permalink); ?>">
                 <img src="<?= get_template_directory_uri(); ?>/dist/icons/button-arrow-right.svg">
             </a>

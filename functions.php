@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PE Media Portal Theme functions and definitions
  */
@@ -25,7 +26,8 @@ require_once PE_MP_THEME_DIR . '/inc/acf-fields/init.php';
 require_once get_template_directory() . '/inc/ajax-handlers.php';
 
 // Theme Setup
-function pe_mp_theme_setup() {
+function pe_mp_theme_setup()
+{
     // Add default posts and comments RSS feed links to head
     add_theme_support('automatic-feed-links');
 
@@ -53,13 +55,21 @@ function pe_mp_theme_setup() {
 add_action('after_setup_theme', 'pe_mp_theme_setup');
 
 // Enqueue scripts and styles
-function pe_mp_theme_scripts() {
+function pe_mp_theme_scripts()
+{
+    // Get file modification times for cache busting
+    $css_file = PE_MP_THEME_DIR . '/dist/css/main.css';
+    $js_file = PE_MP_THEME_DIR . '/dist/js/main.js';
+    
+    $css_version = file_exists($css_file) ? filemtime($css_file) : PE_MP_THEME_VERSION;
+    $js_version = file_exists($js_file) ? filemtime($js_file) : PE_MP_THEME_VERSION;
+
     // Enqueue main stylesheet
     wp_enqueue_style(
         'pe-mp-theme-style',
         PE_MP_THEME_URI . '/dist/css/main.css',
         array(),
-        PE_MP_THEME_VERSION
+        $css_version
     );
 
     // Enqueue main JavaScript file
@@ -67,7 +77,7 @@ function pe_mp_theme_scripts() {
         'pe-mp-theme-script',
         PE_MP_THEME_URI . '/dist/js/main.js',
         array('jquery'),
-        PE_MP_THEME_VERSION,
+        $js_version,
         true
     );
 
@@ -77,16 +87,16 @@ function pe_mp_theme_scripts() {
 
     // Provider Single Page Script
     if (is_singular('provider')) {
-        $js_file = get_template_directory() . '/dist/js/components/provider-single.js';
-        $js_version = file_exists($js_file) ? filemtime($js_file) : PE_MP_THEME_VERSION;
-        
+        $provider_js_file = PE_MP_THEME_DIR . '/dist/js/components/provider-single.js';
+        $provider_js_version = file_exists($provider_js_file) ? filemtime($provider_js_file) : PE_MP_THEME_VERSION;
+
         wp_enqueue_script(
             'pe-mp-provider-single',
-            get_template_directory_uri() . '/dist/js/components/provider-single.js',
+            PE_MP_THEME_URI . '/dist/js/components/provider-single.js',
             array('jquery'),
-            $js_version,
+            $provider_js_version,
             true
         );
     }
 }
-add_action('wp_enqueue_scripts', 'pe_mp_theme_scripts'); 
+add_action('wp_enqueue_scripts', 'pe_mp_theme_scripts');

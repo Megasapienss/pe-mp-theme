@@ -200,6 +200,10 @@ h6 {
   @include heading-h6;
 }
 
+.body-lg {
+  @include body-lg;
+}
+
 p {
   margin: 0;
   @include body;

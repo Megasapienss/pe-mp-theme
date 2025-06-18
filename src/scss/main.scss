@@ -10,12 +10,12 @@
 @import 'abstracts/grid';
 @import 'abstracts/container';
 
-// Base
+// // Base
 @import 'base/typography';
 @import 'base/utilities';
 @import 'base/buttons';
 
-// Layout
+// // Layout
 @import 'layout/body';
 @import 'layout/article';
 @import 'layout/archive';
@@ -23,7 +23,9 @@
 @import 'layout/header';
 @import 'layout/footer';
 
-// Components
+// // Components
+@import 'components/corners';
+@import 'components/banners';
 @import 'components/provider-card';
 @import 'components/provider-archive';
 @import 'components/provider-single'; 

@@ -14,12 +14,15 @@ $color-light: #f8f9fa;
 $color-dark: #202527;
 $color-text: $color-dark;
 $color-white: #FFFFFF;
+$color-muted: #20252799;
 
 //Backgrounds
-
 $bg-muted: #F6F6F6;
 $bg-white: #FFFFFF;
+$bg-dark: $color-dark;
 $bg-primary: $bg-white;
+
+$border-default: #E8E8E8;
 
 // Typography
 $font-primary: 'Almarai', sans-serif;
