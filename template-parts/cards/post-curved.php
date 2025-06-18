@@ -28,7 +28,7 @@ $excerpt = wp_trim_words(get_the_excerpt($post), 20);
         </div>
         <div class="card__cover-corner card__cover-corner--right-bottom">
             <a href="<?php echo esc_url($permalink); ?>">
-                <img src="<?= get_template_directory_uri(); ?>/src/icons/button-arrow-right.svg">
+                <img src="<?= get_template_directory_uri(); ?>/dist/icons/button-arrow-right.svg">
             </a>
         </div>
     </div>
