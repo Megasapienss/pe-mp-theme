@@ -32,6 +32,10 @@ h6 {
   font-size: 160px;
   line-height: 100%;
   letter-spacing: -6px;
+
+  @include less-than('md') {
+    font-size: 80px;
+  }
 }
 
 @mixin title-lg {

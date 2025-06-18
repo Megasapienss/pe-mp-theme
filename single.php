@@ -64,7 +64,7 @@ $category_name = $main_category ? $main_category->name : '';
     </article>
     <section class="section">
         <h2 class="section__title">What else is worth exploring?</h2>
-        <div class="cards">
+        <div class="cards grid grid--3">
             <?php
             // Get the current post's categories
             $categories = get_the_category();

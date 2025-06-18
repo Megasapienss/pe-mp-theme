@@ -9,6 +9,13 @@
         padding-right: 60px;
         padding-bottom: 64px;
 
+        @include less-than('md') {
+            padding-top: 80px;
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-bottom: 32px;
+        }
+
     }
 
 }
