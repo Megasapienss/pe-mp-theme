@@ -9,7 +9,7 @@
 get_header();
 ?>
 
-<section class="hero hero--banner hero--xl" style="background-image: url(<?= get_the_post_thumbnail_url(); ?>);">
+<section class="hero hero--banner hero--xl" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/cover.jpg');">
     <h1 class="hero__title title-lg">Rethink Mental Health. Rethink Psychedelics.</h1>
     <h2 class="hero__description">Science-backed guidance, tools and real human stories to help you reset, reconnect, and heal — with intention.</h2>
     <a href="#topics" class="btn btn--muted">Explore Topics</a>
