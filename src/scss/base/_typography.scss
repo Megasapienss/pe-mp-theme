@@ -55,6 +55,9 @@ h6 {
   line-height: 100%;
   letter-spacing: -4px;
 
+  @include less-than('md') {
+    font-size: 48px;
+  }
 
 }
 
@@ -64,6 +67,9 @@ h6 {
   line-height: 110%;
   letter-spacing: -4px;
 
+  @include less-than('md') {
+    font-size: 40px;
+  }
 }
 
 @mixin heading-h1 {
@@ -71,6 +77,10 @@ h6 {
   font-size: 64px;
   line-height: 110%;
   letter-spacing: -3px;
+
+  @include less-than('md') {
+    font-size: 32px;
+  }
 }
 
 
@@ -79,6 +89,10 @@ h6 {
   font-size: 48px;
   line-height: 120%;
   letter-spacing: -1px;
+
+  @include less-than('md') {
+    font-size: 24px;
+  }
 }
 
 @mixin heading-h3 {
@@ -87,7 +101,9 @@ h6 {
   line-height: 120%;
   letter-spacing: 0px;
 
-
+  @include less-than('md') {
+    font-size: 20px;
+  }
 }
 
 @mixin heading-h4 {
@@ -95,6 +111,10 @@ h6 {
   font-size: 26px;
   line-height: 110%;
   letter-spacing: -0.5px;
+
+  @include less-than('md') {
+    font-size: 18px;
+  }
 }
 
 @mixin heading-h5 {
@@ -102,6 +122,10 @@ h6 {
   font-size: 22px;
   line-height: 110%;
   letter-spacing: 0px;
+
+  @include less-than('md') {
+    font-size: 16px;
+  }
 }
 
 @mixin heading-h6 {
@@ -109,6 +133,10 @@ h6 {
   font-size: 18px;
   line-height: 110%;
   letter-spacing: 0px;
+
+  @include less-than('md') {
+    font-size: 14px;
+  }
 }
 
 
@@ -122,6 +150,10 @@ h6 {
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0px;
+
+  @include less-than('md') {
+    font-size: 14px;
+  }
 }
 
 @mixin body-md {
@@ -129,6 +161,10 @@ h6 {
   font-size: 22px;
   line-height: 150%;
   letter-spacing: 0px;
+
+  @include less-than('md') {
+    font-size: 18px;
+  }
 }
 
 @mixin body-lg {
@@ -136,6 +172,10 @@ h6 {
   font-size: 24px;
   line-height: 140%;
   letter-spacing: 0px;
+
+  @include less-than('md') {
+    font-size: 20px;
+  }
 }
 
 
@@ -144,6 +184,10 @@ h6 {
   font-size: 18px;
   line-height: 100%;
   letter-spacing: 0;
+
+  @include less-than('md') {
+    font-size: 16px;
+  }
 }
 
 @mixin text-label {
@@ -152,6 +196,9 @@ h6 {
   line-height: 100%;
   letter-spacing: 0;
 
+  @include less-than('md') {
+    font-size: 12px;
+  }
 }
 
 .title-xl {

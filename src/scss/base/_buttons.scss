@@ -102,6 +102,18 @@
         background-color: $bg-muted;
     }
 
+    &--primary {
+        border-color: $color-dark;
+        background-color: $color-dark;
+        color: $color-white;
+    }
+
+    &--primary-inversed {
+        border-color: $color-white;
+        background-color: $color-white;
+        color: $color-dark;
+    }
+
     &--arrow {
         padding-right: 12px;
         padding-left: 4px;

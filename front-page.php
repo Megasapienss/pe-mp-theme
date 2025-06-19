@@ -20,11 +20,76 @@ get_header();
     <div class="label label--arrow">
         About Us
     </div>
-    <h2>We’re building a new approach to mental health — rooted in science, ritual and empathy.
+    <h2>We're building a new approach to mental health — rooted in science, ritual and empathy.
         Explore our guides, tools, specialists and curated knowledge base.</h2>
 </section>
 
-<section class="section">
+<section class="section" id="topics">
+    <div class="section__title">
+        <h2 class="section__title-text">Explore by Topic</h2>
+        <a href="#" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
+    </div>
+    <div class="cards grid grid--2 container container--wide">
+        <div class="card card--topic">
+            <img src="<?= get_template_directory_uri(); ?>/dist/images/topic-card-placeholder.png" alt="" class="card__image">
+            <div class="d-flex flex-column">
+                <h3 class="card__title">
+                    Microdosing
+                </h3>
+                <div class="card__excerpt">
+                    Understand what microdosing is, how it works in the brain, and what users report. </div>
+                <div class="card__tags tags">
+                    <span class="label label--squared label--primary-inversed">
+                        Protocols
+                    </span>
+                    <span class="label label--squared label--primary-inversed">
+                        Mood
+                    </span>
+                    <span class="label label--squared label--primary-inversed">
+                        Focus
+                    </span>
+                </div>
+            </div>
+
+            <div class="card__corner corner corner--right-top">
+                <a href="/microdosing/" class="arrow-btn arrow-btn--primary">
+                    Microdosing
+                </a>
+            </div>
+        </div>
+        <div class="card card--topic">
+            <img src="<?= get_template_directory_uri(); ?>/dist/images/topic-card-placeholder.png" alt="" class="card__image">
+            <div class="d-flex flex-column">
+                <h3 class="card__title">
+                    Ketamine
+                </h3>
+                <div class="card__excerpt">
+                    If you're new to this space — start here. Learn the basics of psychedelics, legality, and safe use.
+                </div>
+                <div class="card__tags tags">
+                    <span class="label label--squared label--primary-inversed">
+                        Protocols
+                    </span>
+                    <span class="label label--squared label--primary-inversed">
+                        Mood
+                    </span>
+                    <span class="label label--squared label--primary-inversed">
+                        Focus
+                    </span>
+                </div>
+            </div>
+
+            <div class="card__corner corner corner--right-top">
+                <a href="/ketamine/" class="arrow-btn arrow-btn--primary">
+                    Ketamine
+                </a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="section" id="topics">
     <div class="section__title">
         <h2 class="section__title-text">Top Articles</h2>
         <a href="#" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
