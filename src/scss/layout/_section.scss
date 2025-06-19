@@ -56,3 +56,18 @@
         gap: 16px;
     }
 }
+
+.about-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 16px;
+    padding-top: 96px;
+
+    @include less-than('xl') {
+        grid-template-columns: 1fr;
+    }
+
+    & > .label{
+        width: fit-content;
+    }
+}

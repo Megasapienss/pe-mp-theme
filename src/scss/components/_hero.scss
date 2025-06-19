@@ -16,6 +16,21 @@
         }
     }
 
+    &--xl{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: $color-white;
+        text-wrap: balance;
+        min-height: calc(100vh - 96px);
+
+        gap: 40px;
+
+        & > h2{
+            font-weight: 300;
+        }
+    }
+
     &__inner{
         max-width: 700px;
         display: flex;

@@ -25,7 +25,7 @@ $category_name = $main_category ? $main_category->name : '';
         <div class="breadcrumbs breadcrumbs--light hero__breadcrumbs">
             <a href="<?= home_url(); ?>" class="breadcrumbs__link">Home</a>
             <span class="breadcrumbs__separator">/</span>
-            <a href="<?= home_url('/blog/'); ?>" class="breadcrumbs__link">Blog</a>
+            <a href="<?= home_url(); ?>" class="breadcrumbs__link">Explore</a>
             <span class="breadcrumbs__separator">/</span>
             <a href="<?= $category_link; ?>" class="breadcrumbs__link"><?= $category_name; ?></a>
         </div>

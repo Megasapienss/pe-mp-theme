@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
     return {
         entry: {
             main: './src/js/main.js',
-            styles: './src/scss/main.scss',
+            main: './src/scss/main.scss',
             'components/provider-single': './src/js/components/provider-single.js',
             'components/provider-archive': './src/js/components/provider-archive.js'
         },
