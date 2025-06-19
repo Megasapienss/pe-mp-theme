@@ -15,8 +15,11 @@ $term = get_queried_object();
         <a href="<?= home_url(); ?>" class="breadcrumbs__link">Home</a>
         <span class="breadcrumbs__separator">/</span>
         <a href="<?= home_url(); ?>" class="breadcrumbs__link">Explore</a>
+        <span class="breadcrumbs__separator">/</span>
+        <span><?= $term->name; ?></span>
+
     </div>
-    <h1 class="archive-title__name title-lg"><?= $term->name; ?></h1>
+    <h1 class="archive-title__name title-lg"><?= get_field('h1', $term) ?: $term->name; ?></h1>
     <p class="archive-title__description heading-h2"><?= $term->description; ?></p>
 </section>
 
@@ -30,9 +33,8 @@ $term = get_queried_object();
         ?>
 
     <?php else: ?>
-        <div class="no-results">
-            <p><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
-        </div>
+        <p class="text-center"><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
+        <p class="text-center"><?php _e('Come back later!', 'pe-mp-theme'); ?></p>
     <?php endif; ?>
 </section>
 

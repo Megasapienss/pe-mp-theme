@@ -8,4 +8,5 @@ if (!defined('ABSPATH')) {
 }
 
 // Load ACF field groups
-require_once get_template_directory() . '/inc/acf-fields/provider-fields.php'; 
+require_once get_template_directory() . '/inc/acf-fields/provider-fields.php';
+require_once get_template_directory() . '/inc/acf-fields/taxonomy-fields.php';
