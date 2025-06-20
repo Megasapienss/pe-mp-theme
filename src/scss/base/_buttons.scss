@@ -115,6 +115,7 @@
         color: $color-dark;
     }
 
+    &--icon,
     &--arrow {
         padding-right: 12px;
         padding-left: 4px;
@@ -127,6 +128,12 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
+        }
+    }
+
+    &--clock {
+        &::before {
+            background-image: url('../icons/label-clock.svg');
         }
     }
 

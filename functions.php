@@ -25,6 +25,9 @@ require_once PE_MP_THEME_DIR . '/inc/acf-fields/init.php';
 // Include AJAX handlers
 require_once get_template_directory() . '/inc/ajax-handlers.php';
 
+// Load shortcodes
+require_once get_template_directory() . '/inc/shortcodes.php';
+
 // Theme Setup
 function pe_mp_theme_setup()
 {
@@ -100,3 +103,13 @@ function pe_mp_theme_scripts()
     }
 }
 add_action('wp_enqueue_scripts', 'pe_mp_theme_scripts');
+
+/**
+ * Get quiz link from theme options
+ * 
+ * @return string The quiz link URL
+ */
+function pe_mp_get_quiz_link() {
+    $quiz_link = get_field('quiz_link', 'option');
+    return $quiz_link ? $quiz_link : '#';
+}

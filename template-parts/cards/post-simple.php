@@ -29,9 +29,9 @@ $excerpt = wp_trim_words(get_the_excerpt($post), 20);
         </h3>
         <div class="card__excerpt">
             <?php echo esc_html($excerpt); ?>
-            <span class="text-btn">
+            <!-- <span class="text-btn">
                 <?php _e('Read', 'pe-mp-theme'); ?>
-            </span>
+            </span> -->
         </div>
 
     </div>

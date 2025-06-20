@@ -11,7 +11,6 @@
         min-height: 0;
     }
 
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -30,5 +29,30 @@
 
     &__link {
         margin-top: 32px;
+    }
+
+    &--quiz {
+        background-color: $bg-muted;
+        padding: 64px;
+
+        @include less-than('lg') {
+            padding: 40px;
+        }
+
+        & .banner {
+            &__label {
+                margin-bottom: 16px;
+            }
+
+            &__title {
+                color: $color-text;
+            }
+
+            &__description {
+                max-width: none;
+                color: $color-muted;
+            }
+        }
+
     }
 }

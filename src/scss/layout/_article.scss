@@ -9,6 +9,7 @@
 
     @include less-than(xl) {
         grid-template-columns: 1fr;
+        gap: 32px;
     }
 
     &__content {
@@ -19,6 +20,10 @@
         & p {
             @include body-md;
             color: #202527;
+        }
+
+        @include less-than('xl') {
+            order: 2;
         }
 
     }
@@ -35,6 +40,12 @@
         & > img {
             width: 100%;
         }
+
+        @include less-than('xl') {
+            order: 1;
+            position: static;
+        }
+
     }
 }
 

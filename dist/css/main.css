@@ -1296,6 +1296,30 @@ pre code {
   height: 100% !important;
 }
 
+@media (max-width: 991px) {
+  .hidden-less-than-lg {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .hidden-more-than-lg {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hidden-more-than-xl {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  .hidden-less-than-xl {
+    display: none !important;
+  }
+}
+
 .btn {
   display: flex;
   align-items: center;
@@ -1434,11 +1458,11 @@ pre code {
   background-color: #FFFFFF;
   color: #202527;
 }
-.label--arrow {
+.label--icon, .label--arrow {
   padding-right: 12px;
   padding-left: 4px;
 }
-.label--arrow::before {
+.label--icon::before, .label--arrow::before {
   content: "";
   width: 26px;
   height: 22px;
@@ -1446,6 +1470,9 @@ pre code {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+.label--clock::before {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyNiAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI2IiBoZWlnaHQ9IjIyIiByeD0iMTEiIGZpbGw9IiMyMDI1MjciLz4KPHBhdGggZD0iTTEzIDkuMlYxMUwxNC4xMjUgMTIuMTI1TTE3LjUgMTFDMTcuNSAxMy40ODUzIDE1LjQ4NTMgMTUuNSAxMyAxNS41QzEwLjUxNDcgMTUuNSA4LjUgMTMuNDg1MyA4LjUgMTFDOC41IDguNTE0NzIgMTAuNTE0NyA2LjUgMTMgNi41QzE1LjQ4NTMgNi41IDE3LjUgOC41MTQ3MiAxNy41IDExWiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIwLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==);
 }
 .label--muted {
   background: #F6F6F6;
@@ -1498,6 +1525,7 @@ body {
 @media (max-width: 1199px) {
   .article {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 }
 .article__content {
@@ -1518,6 +1546,11 @@ body {
     font-size: 18px;
   }
 }
+@media (max-width: 1199px) {
+  .article__content {
+    order: 2;
+  }
+}
 .article__sidebar {
   position: sticky;
   top: 64px;
@@ -1527,6 +1560,12 @@ body {
 }
 .article__sidebar > img {
   width: 100%;
+}
+@media (max-width: 1199px) {
+  .article__sidebar {
+    order: 1;
+    position: static;
+  }
 }
 
 .sidebar-card {
@@ -1881,6 +1920,25 @@ body {
 }
 .banner__link {
   margin-top: 32px;
+}
+.banner--quiz {
+  background-color: #F6F6F6;
+  padding: 64px;
+}
+@media (max-width: 991px) {
+  .banner--quiz {
+    padding: 40px;
+  }
+}
+.banner--quiz .banner__label {
+  margin-bottom: 16px;
+}
+.banner--quiz .banner__title {
+  color: #202527;
+}
+.banner--quiz .banner__description {
+  max-width: none;
+  color: rgba(32, 37, 39, 0.6);
 }
 
 .provider-card {
