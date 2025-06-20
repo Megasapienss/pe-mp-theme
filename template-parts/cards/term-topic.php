@@ -28,7 +28,7 @@ $child_categories = get_terms(array(
 ));
 ?>
 
-<div class="card card--topic">
+<a href="<?php echo esc_url($term_link); ?>" class="card card--topic">
     <img src="<?php echo esc_url($term_image); ?>" alt="<?php echo esc_attr($term->name); ?>" class="card__image">
     <div class="d-flex flex-column">
         <h3 class="card__title">
@@ -49,8 +49,8 @@ $child_categories = get_terms(array(
     </div>
 
     <div class="card__corner corner corner--right-top">
-        <a href="<?php echo esc_url($term_link); ?>" class="arrow-btn arrow-btn--primary">
+        <span class="arrow-btn arrow-btn--primary">
             <?php echo esc_html($term->name); ?>
-        </a>
+        </span>
     </div>
-</div> 
+</a>

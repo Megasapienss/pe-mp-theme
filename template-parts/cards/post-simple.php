@@ -19,22 +19,20 @@ $date = get_the_date('', $post->ID);
 $excerpt = wp_trim_words(get_the_excerpt($post), 20);
 ?>
 
-<article class="card card--post" style="background-image: url(<?= get_the_post_thumbnail_url($post->ID, 'large'); ?>);">
+<a href="<?php echo esc_url($permalink); ?>" class="card card--post" style="background-image: url(<?= get_the_post_thumbnail_url($post->ID, 'large'); ?>);">
     <div class="card__content">
         <div class="label label--muted">
             <?php echo esc_html($date); ?>
         </div>
         <h3 class="card__title">
-            <a href="<?php echo esc_url($permalink); ?>">
-                <?php echo esc_html($post->post_title); ?>
-            </a>
+            <?php echo esc_html($post->post_title); ?>
         </h3>
         <div class="card__excerpt">
             <?php echo esc_html($excerpt); ?>
-            <a href="<?php echo esc_url($permalink); ?>" class="text-btn">
+            <span class="text-btn">
                 <?php _e('Read', 'pe-mp-theme'); ?>
-            </a>
+            </span>
         </div>
 
     </div>
-</article>
+</a>

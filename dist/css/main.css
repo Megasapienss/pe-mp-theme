@@ -1422,6 +1422,7 @@ pre code {
 .label--muted {
   border-color: #F6F6F6;
   background-color: #F6F6F6;
+  color: #202527;
 }
 .label--primary {
   border-color: #202527;
@@ -3185,6 +3186,15 @@ body {
   justify-content: flex-end;
   position: relative;
 }
+.card:hover {
+  text-decoration: none;
+}
+.card:hover .card__cover {
+  background-size: auto 110%;
+}
+.card:hover .card__title {
+  text-decoration: underline;
+}
 .card__content {
   width: 100%;
   padding: 24px 32px;
@@ -3195,7 +3205,7 @@ body {
   align-items: flex-start;
   gap: 16px;
 }
-.card__title a {
+.card__title {
   color: #202527;
 }
 .card__excerpt {
@@ -3209,6 +3219,7 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   gap: 24px;
+  color: #202527;
 }
 @media (max-width: 767px) {
   .card__excerpt {
@@ -3216,10 +3227,12 @@ body {
   }
 }
 .card__cover {
-  background-size: cover;
   aspect-ratio: 16/9;
   border-radius: 20px;
   position: relative;
+  background-size: auto 100%;
+  background-position: center;
+  transition: background-size 0.3s ease;
 }
 .card__tags {
   display: flex;
@@ -3320,7 +3333,11 @@ body {
     grid-template-columns: 1fr;
   }
 }
+.card--topic .card {
+  position: relative;
+}
 .card--topic .card__image {
+  max-width: 100%;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -3336,6 +3353,19 @@ body {
 }
 .card--topic .card__tags {
   margin-top: 36px;
+}
+.card--compact {
+  min-height: 0;
+  aspect-ratio: 1/1;
+  background-size: auto 100%;
+  background-position: center;
+  transition: background-size 0.3s ease;
+}
+.card--compact:hover {
+  background-size: auto 110%;
+}
+.card--compact:hover .heading-h6 {
+  text-decoration: underline !important;
 }
 
 /*# sourceMappingURL=main.css.map*/
