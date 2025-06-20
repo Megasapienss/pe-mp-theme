@@ -36,6 +36,7 @@ $category_name = $main_category ? $main_category->name : '';
             <h1 class="hero__title heading-h2"><?= get_the_title(); ?></h1>
         </div>
     </section>
+
     <article class="article container">
         <section class="article__content body-lg">
             <?= get_the_content(); ?>
@@ -79,6 +80,7 @@ $category_name = $main_category ? $main_category->name : '';
             </div>
         </aside>
     </article>
+
     <section class="section">
         <div class="section__title">
             <h2 class="section__title-text">What else is worth exploring?</h2>
@@ -112,116 +114,13 @@ $category_name = $main_category ? $main_category->name : '';
             ?>
         </div>
     </section>
-    <section class="section">
-        <div class="section__title">
-            <h2 class="section__title-text">Looking for support?</h2>
-            <a href="#" class="section__title-link arrow-btn arrow-btn--muted">See All Experts</a>
-        </div>
-        <div class="cards grid grid--3">
-            <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-1.jpg');">
-                <div class="card__content">
-                    <h3 class="card__title">
-                        Jesse Kwon
-                    </h3>
-                    <div class="card__excerpt">
-                        Supports burnout recovery, emotional processing, integration after microdosing
-                    </div>
-                    <div class="card__tags">
-                        <span class="label label--squared label--muted">
-                            Psychedelic Coach
-                        </span>
-                        <span class="label label--squared label--muted">
-                            San Francisco
-                        </span>
-                    </div>
-                </div>
-                <div class="card__corner corner corner--right-bottom">
-                    <a href="#" class="arrow-btn arrow-btn--primary">
-                        About
-                    </a>
-                </div>
-            </div>
-            <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-2.jpg');">
-                <div class="card__content">
-                    <h3 class="card__title">
-                        Dr. Sarah Lee
-                    </h3>
-                    <div class="card__excerpt">
-                        Supports burnout recovery, emotional processing, integration after microdosing
-                    </div>
-                    <div class="card__tags">
-                        <span class="label label--squared label--muted">
-                            Psychedelic Coach
-                        </span>
-                        <span class="label label--squared label--muted">
-                            San Francisco
-                        </span>
-                    </div>
-                </div>
-                <div class="card__corner corner corner--right-bottom">
-                    <a href="#" class="arrow-btn arrow-btn--primary">
-                        About
-                    </a>
-                </div>
-            </div>
-            <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-3.jpg');">
-                <div class="card__content">
-                    <h3 class="card__title">
-                        Dr. Hanna Feldman
-                    </h3>
-                    <div class="card__excerpt">
-                        Supports burnout recovery, emotional processing, integration after microdosing
-                    </div>
-                    <div class="card__tags">
-                        <span class="label label--squared label--muted">
-                            Psychedelic Coach
-                        </span>
-                        <span class="label label--squared label--muted">
-                            San Francisco
-                        </span>
-                    </div>
-                </div>
-                <div class="card__corner corner corner--right-bottom">
-                    <a href="#" class="arrow-btn arrow-btn--primary">
-                        About
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section">
-        <div class="section__title">
-            <h2 class="section__title-text">Latest Articles</h2>
-            <a href="#" class="section__title-link arrow-btn arrow-btn--muted">View all</a>
-        </div>
-        <div class="container container--wide cards grid grid--3">
-            <?php
-            // Get the current post's categories
-            $categories = get_the_category();
-            $category_ids = array();
-            foreach ($categories as $category) {
-                $category_ids[] = $category->term_id;
-            }
 
-            // Query related posts
-            $related_posts = new WP_Query(array(
-                'category__in' => $category_ids,
-                // 'post__not_in' => array(get_the_ID()),
-                'posts_per_page' => 3,
-                'orderby' => 'rand'
-            ));
+    <?php //get_template_part('template-parts/sections/experts'); 
+    ?>
 
-            // Display related posts
-            if ($related_posts->have_posts()) :
-                foreach ($related_posts->posts as $post) :
-                    get_template_part('template-parts/cards/post', 'compact', ['post' => $post]);
-                endforeach;
-            else :
-                echo '<p>' . __('No related posts found.', 'pe-mp-theme') . '</p>';
-            endif;
-            ?>
-        </div>
-    </section>
+    <?php get_template_part('template-parts/sections/articles', 'latest'); ?>
+
+
 <?php endwhile; ?>
 
 <?php

@@ -1606,6 +1606,10 @@ body {
   text-wrap: pretty;
 }
 
+#topics + .archive-grid {
+  margin-top: 80px;
+}
+
 .section {
   margin-top: 16px;
   margin-bottom: 16px;

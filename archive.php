@@ -23,6 +23,23 @@ $term = get_queried_object();
     <p class="archive-title__description heading-h2"><?= $term->description; ?></p>
 </section>
 
+<?php
+// Get child categories of the current term
+$child_categories = get_terms(array(
+    'taxonomy' => 'category',
+    'parent' => $term->term_id,
+    'hide_empty' => true
+));
+
+// Display child categories if they exist
+if (!empty($child_categories) && !is_wp_error($child_categories)) :
+    get_template_part('template-parts/sections/topics', null, array(
+        'custom_categories' => $child_categories,
+        'section_title' => ''
+    ));
+endif;
+?>
+
 <section class="archive-grid grid grid--2 container">
     <?php if (have_posts()): ?>
         <?php
@@ -38,138 +55,11 @@ $term = get_queried_object();
     <?php endif; ?>
 </section>
 
-<section class="section">
-    <div class="section__title">
-        <h2 class="section__title-text">Helpful Tools for Integration</h2>
-    </div>
-    <div class="cards grid grid--2">
-        <div class="card card--app">
-            <img src="<?= get_template_directory_uri(); ?>/dist/images/app-placeholder.png" alt="" class="card__image">
-            <div class="card__content">
-                <h3 class="card__title">
-                    MindTrack
-                </h3>
-                <div class="card__excerpt">
-                    Track your mood, mindset and energy during microdosing cycles. </div>
-                <div class="card__tags">
-                    <span class="label label--squared label--muted">
-                        Tracker App
-                    </span>
-                    <span class="label label--squared label--muted">
-                        iOS / Android
-                    </span>
-                </div>
-            </div>
-            <div class="card__corner corner corner--right-bottom">
-                <a href="#" class="arrow-btn arrow-btn--primary">
-                    Download
-                </a>
-            </div>
-        </div>
-        <div class="card card--app">
-            <img src="<?= get_template_directory_uri(); ?>/dist/images/app-placeholder.png" alt="" class="card__image">
-            <div class="card__content">
-                <h3 class="card__title">
-                    JourneyNotes
-                </h3>
-                <div class="card__excerpt">
-                    Integration journaling with prompts & voice notes.
-                </div>
-                <div class="card__tags">
-                    <span class="label label--squared label--muted">
-                        Journaling App
-                    </span>
-                    <span class="label label--squared label--muted">
-                        iOS only
-                    </span>
-                </div>
-            </div>
-            <div class="card__corner corner corner--right-bottom">
-                <a href="#" class="arrow-btn arrow-btn--primary">
-                    Download
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+<?php //get_template_part('template-parts/sections/apps'); 
+?>
 
-<section class="section">
-    <div class="section__title">
-        <h2 class="section__title-text">Looking for support?</h2>
-        <a href="#" class="section__title-link arrow-btn arrow-btn--muted">See All Experts</a>
-    </div>
-    <div class="cards grid grid--3">
-        <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-1.jpg');">
-            <div class="card__content">
-                <h3 class="card__title">
-                    Jesse Kwon
-                </h3>
-                <div class="card__excerpt">
-                    Supports burnout recovery, emotional processing, integration after microdosing
-                </div>
-                <div class="card__tags">
-                    <span class="label label--squared label--muted">
-                        Psychedelic Coach
-                    </span>
-                    <span class="label label--squared label--muted">
-                        San Francisco
-                    </span>
-                </div>
-            </div>
-            <div class="card__corner corner corner--right-bottom">
-                <a href="#" class="arrow-btn arrow-btn--primary">
-                    About
-                </a>
-            </div>
-        </div>
-        <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-2.jpg');">
-            <div class="card__content">
-                <h3 class="card__title">
-                    Dr. Sarah Lee
-                </h3>
-                <div class="card__excerpt">
-                    Supports burnout recovery, emotional processing, integration after microdosing
-                </div>
-                <div class="card__tags">
-                    <span class="label label--squared label--muted">
-                        Psychedelic Coach
-                    </span>
-                    <span class="label label--squared label--muted">
-                        San Francisco
-                    </span>
-                </div>
-            </div>
-            <div class="card__corner corner corner--right-bottom">
-                <a href="#" class="arrow-btn arrow-btn--primary">
-                    About
-                </a>
-            </div>
-        </div>
-        <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-3.jpg');">
-            <div class="card__content">
-                <h3 class="card__title">
-                    Dr. Hanna Feldman
-                </h3>
-                <div class="card__excerpt">
-                    Supports burnout recovery, emotional processing, integration after microdosing
-                </div>
-                <div class="card__tags">
-                    <span class="label label--squared label--muted">
-                        Psychedelic Coach
-                    </span>
-                    <span class="label label--squared label--muted">
-                        San Francisco
-                    </span>
-                </div>
-            </div>
-            <div class="card__corner corner corner--right-bottom">
-                <a href="#" class="arrow-btn arrow-btn--primary">
-                    About
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+<?php //get_template_part('template-parts/sections/experts'); 
+?>
 
 <section class="section">
     <div class="section__title">
