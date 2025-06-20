@@ -17,7 +17,7 @@ if ($custom_categories && !is_wp_error($custom_categories)) {
 } else {
     // Get the 6 most popular categories (original behavior)
     $categories = get_terms(array(
-        'taxonomy' => 'category',
+        'taxonomy' => 'post_tag',
         'number' => 6,
         'orderby' => 'count',
         'order' => 'DESC',

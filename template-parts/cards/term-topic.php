@@ -21,7 +21,7 @@ $term_image = get_template_directory_uri() . '/dist/images/topic-card-placeholde
 
 // Get child categories for tags (if any)
 $child_categories = get_terms(array(
-    'taxonomy' => 'category',
+    'taxonomy' => $term->taxonomy,
     'parent' => $term->term_id,
     'number' => 3,
     'hide_empty' => false

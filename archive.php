@@ -26,7 +26,7 @@ $term = get_queried_object();
 <?php
 // Get child categories of the current term
 $child_categories = get_terms(array(
-    'taxonomy' => 'category',
+    'taxonomy' => $term->taxonomy,
     'parent' => $term->term_id,
     'hide_empty' => true
 ));
