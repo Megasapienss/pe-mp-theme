@@ -111,5 +111,5 @@ add_action('wp_enqueue_scripts', 'pe_mp_theme_scripts');
  */
 function pe_mp_get_quiz_link() {
     $quiz_link = get_field('quiz_link', 'option');
-    return $quiz_link ? $quiz_link : '#';
+    return $quiz_link ? $quiz_link : 'https://thepsychedelics.guide/quiz/';
 }
