@@ -1320,6 +1320,13 @@ pre code {
   }
 }
 
+button {
+  appearance: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
 .btn {
   display: flex;
   align-items: center;
@@ -1342,6 +1349,7 @@ pre code {
   letter-spacing: 0;
   color: #202527;
   cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
 }
 @media (max-width: 767px) {
   .btn {
@@ -1354,6 +1362,7 @@ pre code {
 }
 .btn:hover {
   text-decoration: none;
+  opacity: 0.75;
 }
 
 .arrow-btn {
@@ -1370,6 +1379,8 @@ pre code {
   line-height: 100%;
   letter-spacing: 0;
   color: #202527;
+  cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
 }
 @media (max-width: 767px) {
   .arrow-btn {
@@ -1387,6 +1398,7 @@ pre code {
 }
 .arrow-btn:hover {
   text-decoration: none;
+  opacity: 0.75;
 }
 .arrow-btn--primary {
   background: #202527;
@@ -1410,6 +1422,7 @@ pre code {
   color: #202527;
   border-bottom: 1px solid #202527;
   padding-bottom: 4px;
+  cursor: pointer;
 }
 @media (max-width: 767px) {
   .text-btn {
@@ -1435,6 +1448,7 @@ pre code {
   font-size: 14px;
   line-height: 100%;
   letter-spacing: 0;
+  transition: opacity 0.1s ease-in-out;
 }
 @media (max-width: 767px) {
   .label {
@@ -1478,6 +1492,9 @@ pre code {
 .label--muted {
   background: #F6F6F6;
   border-color: #F6F6F6;
+}
+.label:hover {
+  opacity: 0.75;
 }
 
 .tags__title {
