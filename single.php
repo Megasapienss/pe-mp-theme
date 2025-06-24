@@ -44,7 +44,10 @@ $category_name = $main_category ? $main_category->name : '';
                 <h3 class="sidebar-card__title">Feeling mentally drained?</h3>
                 <p class="sidebar-card__excerpt">Take our 2-minute burnout quiz
                     and get instant insights on your emotional state.</p>
-                <a href="<?= pe_mp_get_quiz_link(); ?>" class="sidebar-card__link arrow-btn arrow-btn--primary">Start the Quiz</a>
+                <!-- <a href="<?= pe_mp_get_quiz_link(); ?>" class="sidebar-card__link arrow-btn arrow-btn--primary">Start the Quiz</a> -->
+                <button class="sidebar-card__link arrow-btn arrow-btn--primary" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
+                    <?php esc_html_e('Start the Quiz', 'pe-mp-theme'); ?>
+                </button>
             </div>
         </section>
         <aside class="article__sidebar">
@@ -81,8 +84,11 @@ $category_name = $main_category ? $main_category->name : '';
             <div class="sidebar-card sidebar-card--quiz hidden-less-than-xl">
                 <h3 class="sidebar-card__title">Feeling mentally drained?</h3>
                 <p class="sidebar-card__excerpt">Take our 2-minute burnout quiz
-                    and get instant insights on your emotional state.</p>
-                <a href="<?= pe_mp_get_quiz_link(); ?>" class="sidebar-card__link arrow-btn arrow-btn--primary">Start the Quiz</a>
+                    and get instant insights on your emotional state.
+                </p>
+                <button class="sidebar-card__link arrow-btn arrow-btn--primary" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
+                    <?php esc_html_e('Start the Quiz', 'pe-mp-theme'); ?>
+                </button>
             </div>
         </aside>
     </article>

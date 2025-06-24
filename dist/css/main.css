@@ -1341,6 +1341,7 @@ pre code {
   line-height: 100%;
   letter-spacing: 0;
   color: #202527;
+  cursor: pointer;
 }
 @media (max-width: 767px) {
   .btn {
