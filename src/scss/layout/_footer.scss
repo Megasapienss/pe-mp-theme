@@ -11,4 +11,10 @@
     }
 
     position: relative;
+
+    @include less-than('md') {
+        & > .corner {
+            display: none;
+        }
+    }
 }

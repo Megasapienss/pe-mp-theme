@@ -23,7 +23,7 @@
         }
 
         @include less-than('xl') {
-            order: 2;
+            order: 1;
         }
 
     }
@@ -42,7 +42,7 @@
         }
 
         @include less-than('xl') {
-            order: 1;
+            order: 2;
             position: static;
         }
 
@@ -62,8 +62,8 @@
 
     position: relative;
 
-    &--author {
-        padding: 40px;
+    @include less-than('md') {
+        padding: 24px 16px;
     }
 
     &__excerpt {
