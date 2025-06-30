@@ -79,6 +79,8 @@
                 'fallback_cb'    => false,
             ));
             ?>
+
+            <img class="header__toggle toggle--off-canvas--menu" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/icons/icon-menu-open.svg" alt="Menu">
         </nav>
 
         <div class="header__actions">
@@ -87,5 +89,29 @@
             </button>
         </div>
     </header>
+    <aside class="off-canvas off-canvas--menu">
+        <div class="off-canvas__header">
+            <a href="<?php echo esc_url(home_url('/')); ?>">
+                <img title="Go to Homepage" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>" class="header__logo">
+            </a>
+            <img class="header__toggle toggle--off-canvas--menu" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/icons/icon-menu-close.svg" alt="Menu">
+        </div>
+        <nav class="off-canvas__navigation">
+            <?php
+            wp_nav_menu(array(
+                'theme_location' => 'primary',
+                'menu_id'        => 'primary-menu',
+                'container'      => false,
+                'menu_class'     => 'off-canvas__menu',
+                'fallback_cb'    => false,
+            ));
+            ?>
+        </nav>
+        <div class="off-canvas__actions">
+            <button class="btn btn--accent" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
+                <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
+            </button>
+        </div>
+    </aside>
 
     <main class="main">

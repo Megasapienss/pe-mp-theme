@@ -1,24 +1,39 @@
 .header {
     display: grid;
     align-items: center;
-    grid-template-columns: 160px 1fr 160px;
+    grid-template-columns: 180px 1fr 180px;
     margin-bottom: 24px;
-    padding: 0 12px;
+    padding: 0 4px;
+    height: 48px;
 
-    @include less-than(md) {
+    @include less-than(lg) {
         grid-template-columns: 1fr 1fr;
+        margin-bottom: 16px;
+        margin-top: 4px;
+
     }
 
     &__navigation {
         display: flex;
         justify-content: center;
 
-        @include less-than(md) {
-            display: none;
+        @include less-than(lg) {
+            justify-content: flex-end;
+        }
+    }
+
+    &__toggle {
+        display: none;
+        @include less-than(lg) {
+            display: block;
         }
     }
 
     &__menu {
+
+        @include less-than(lg) {
+            display: none;
+        }
 
         display: flex;
         justify-content: center;
@@ -48,5 +63,11 @@
             }
         }
 
+    }
+
+    &__actions {
+        @include less-than(lg) {
+            display: none;
+        }
     }
 }

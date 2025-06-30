@@ -1,12 +1,15 @@
 // Main JavaScript file
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNavigation = document.querySelector('.main-navigation');
+document.addEventListener('DOMContentLoaded', function () {
 
-    if (menuToggle && mainNavigation) {
-        menuToggle.addEventListener('click', function() {
-            mainNavigation.classList.toggle('toggled');
+    // Off-canvas menu toggle
+    const offCanvasToggleButtons = document.querySelectorAll('.toggle--off-canvas--menu');
+    const offCanvas = document.querySelector('.off-canvas--menu');
+
+    if (offCanvasToggleButtons.length > 0 && offCanvas) {
+        offCanvasToggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                offCanvas.classList.toggle('off-canvas--visible');
+            });
         });
     }
-}); 
+});

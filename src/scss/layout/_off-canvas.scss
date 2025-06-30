@@ -1,0 +1,70 @@
+.off-canvas {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-white;
+
+    z-index: 999;
+
+    &--visible {
+        display: flex;
+    }
+
+
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 48px;
+        box-sizing: content-box;
+        margin-bottom: 0;
+        padding: 16px;
+    }
+
+    &__navigation {}
+
+    &__menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 2px;
+
+        & a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 36px;
+            padding: 0 16px;
+            @include text-button;
+            color: $color-text;
+            width: 100%;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        & li.current-menu-item {
+            & a {
+                background-color: $color-accent;
+                color: $color-white;
+            }
+        }
+    }
+
+    &__actions {
+        padding: 16px;
+        margin-top: auto;
+        display: flex;
+        justify-content: center;
+
+        &>.btn {
+            width: 100%;
+        }
+    }
+}
