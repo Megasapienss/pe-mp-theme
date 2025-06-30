@@ -153,7 +153,7 @@ endif;
         // Display related posts
         if ($related_posts->have_posts()) :
             foreach ($related_posts->posts as $post) :
-                get_template_part('template-parts/cards/post', 'compact', ['post' => $post]);
+                get_template_part('template-parts/cards/post', 'simple', ['post' => $post]);
             endforeach;
         else :
             echo '<p>' . __('No related posts found.', 'pe-mp-theme') . '</p>';

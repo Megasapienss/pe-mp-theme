@@ -35,7 +35,7 @@ if (!$related_posts->have_posts()) {
         <?php
         // Display related posts
         foreach ($related_posts->posts as $post) :
-            get_template_part('template-parts/cards/post', 'compact', ['post' => $post]);
+            get_template_part('template-parts/cards/post', 'simple', ['post' => $post]);
         endforeach;
         ?>
     </div>
