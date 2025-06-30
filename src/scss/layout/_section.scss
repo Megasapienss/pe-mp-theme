@@ -1,5 +1,5 @@
 .section {
-    
+
     margin-top: 16px;
     margin-bottom: 16px;
 
@@ -11,25 +11,25 @@
         gap: 16px;
 
         padding-top: 160px;
+        padding-bottom: 64px;
         padding-left: 60px;
         padding-right: 60px;
-        padding-bottom: 64px;
 
         @include less-than('md') {
 
-            flex-direction: column;
+            // flex-direction: column;
             align-items: flex-start;
             justify-content: flex-start;
 
-            padding-top: 80px;
-            padding-left: 12px;
-            padding-right: 12px;
-            padding-bottom: 32px;
+            padding-top: 64px;
+            padding-bottom: 24px;
+            padding-left: 0px;
+            padding-right: 0px;
         }
 
 
         &-text {
-            @include title-lg;
+            @include title-md;
         }
 
         &-link {
@@ -62,12 +62,105 @@
     grid-template-columns: 1fr 2fr;
     gap: 16px;
     padding-top: 96px;
+    margin-top: 16px;
 
     @include less-than('xl') {
         grid-template-columns: 1fr;
+        padding-top: 56px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
-    & > .label{
+    &>.label {
         width: fit-content;
     }
+}
+
+.topics-section {
+    & .cards {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+}
+
+.newsletter-section {
+    background-color: $bg-muted;
+    padding: 160px 24px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+
+    @include less-than('lg') {
+        padding: 60px 16px;
+    }
+
+    &__card {
+        max-width: 1600px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+
+        @include less-than('lg') {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        & [data-hsfc-id=Renderer] .hsfc-RichText p,
+        & [data-hsfc-id=Renderer] span {
+            @include body;
+            color: $color-muted;
+        }
+
+        & [data-hsfc-id=Renderer] .hsfc-TextInput {
+            border-radius: 8px !important;
+            border-color: white !important;
+            background-color: white !important;
+        }
+
+        & .hsfc-Step__Content {
+            padding: 0 !important;
+
+            & .hsfc-Button[type="submit"] {
+                width: 100% !important;
+                background: $bg-dark;
+                border-radius: 150px;
+                @include text-button;
+                height: 48px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                    background: $bg-accent !important;
+                    transform: none !important
+                }
+            }
+        }
+
+
+    }
+
+    &__cover {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        width: 100%;
+
+        @include less-than('lg') {
+            display: none;
+        }
+    }
+
+
+
 }

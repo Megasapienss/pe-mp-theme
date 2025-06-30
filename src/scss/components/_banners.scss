@@ -36,7 +36,7 @@
         padding: 64px;
 
         @include less-than('lg') {
-            padding: 40px;
+            padding: 32px 24px;
         }
 
         & .banner {
@@ -51,6 +51,67 @@
             &__description {
                 max-width: none;
                 color: $color-muted;
+            }
+        }
+
+    }
+
+    &--newsletter {
+        background-color: $bg-muted;
+        padding: 64px;
+
+        @include less-than('lg') {
+            padding: 32px 24px;
+        }
+
+        & .banner {
+            &__label {
+                margin-bottom: 16px;
+            }
+
+            &__title {
+                color: $color-text;
+            }
+
+            &__description {
+                max-width: none;
+                color: $color-muted;
+            }
+        }
+
+        .hs-form-html {
+            width: 100%;
+        }
+
+        & [data-hsfc-id=Renderer] .hsfc-RichText p,
+        & [data-hsfc-id=Renderer] span {
+            @include body;
+            color: $color-muted;
+        }
+
+        & [data-hsfc-id=Renderer] .hsfc-TextInput {
+            border-radius: 8px !important;
+            border-color: white !important;
+            background-color: white !important;
+        }
+
+        & .hsfc-Step__Content {
+            padding: 0 !important;
+
+            & .hsfc-Button[type="submit"] {
+                width: 100% !important;
+                background: $bg-dark;
+                border-radius: 150px;
+                @include text-button;
+                height: 48px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                    background: $bg-accent !important;
+                    transform: none !important
+                }
             }
         }
 

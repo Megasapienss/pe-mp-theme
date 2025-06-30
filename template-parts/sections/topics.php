@@ -33,7 +33,7 @@ if (empty($categories) || is_wp_error($categories)) {
 }
 ?>
 
-<section class="section" id="topics">
+<section class="section topics-section" id="topics">
     <?php if (!empty($section_title)) : ?>
         <div class="section__title">
             <h2 class="section__title-text"><?= $section_title; ?></h2>

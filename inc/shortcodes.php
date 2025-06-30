@@ -42,3 +42,31 @@ function pe_mp_quiz_banner_shortcode($atts)
     return ob_get_clean();
 }
 add_shortcode('quiz_banner', 'pe_mp_quiz_banner_shortcode');
+
+/**
+ * Newsletter Banner Shortcode
+ * 
+ * Usage: [newsletter_banner] or [newsletter_banner class="custom-class" link="https://example.com"]
+ *  
+ * @param array $atts Shortcode attributes
+ * @return string HTML output
+ */
+function pe_mp_newsletter_banner_shortcode($atts)
+{
+    // Parse shortcode attributes
+    $atts = shortcode_atts(array(
+        'class' => '',
+    ), $atts, 'newsletter_banner');
+
+    // Start output buffering to capture the template part
+    ob_start();
+
+    // Include the quiz banner template part
+    get_template_part('template-parts/banners/newsletter', null, array(
+        'class' => $atts['class'],
+    ));
+
+    // Return the buffered content
+    return ob_get_clean();
+}
+add_shortcode('newsletter_banner', 'pe_mp_newsletter_banner_shortcode');

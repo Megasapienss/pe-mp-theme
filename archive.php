@@ -52,6 +52,10 @@ endif;
     <?php endif; ?>
 </section>
 
+<?php
+get_template_part('template-parts/sections/newsletter');
+?>
+
 <?php //get_template_part('template-parts/sections/apps'); 
 ?>
 

@@ -86,6 +86,10 @@ if ($mental_wellness_category && !is_wp_error($mental_wellness_category)) {
 ?>
 
 <?php
+get_template_part('template-parts/sections/newsletter');
+?>
+
+<?php
 get_template_part('template-parts/sections/articles', 'top');
 ?>
 
