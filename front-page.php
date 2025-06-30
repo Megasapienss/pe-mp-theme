@@ -85,7 +85,9 @@ if ($mental_wellness_category && !is_wp_error($mental_wellness_category)) {
 }
 ?>
 
-<?php get_template_part('template-parts/sections/articles', 'top'); ?>
+<?php
+get_template_part('template-parts/sections/articles', 'top');
+?>
 
 <?php
 //get_template_part('template-parts/sections/experts'); 
@@ -100,7 +102,9 @@ if ($mental_wellness_category && !is_wp_error($mental_wellness_category)) {
 ?>
 
 <?php
-// get_template_part('template-parts/sections/articles', 'latest'); 
+get_template_part('template-parts/sections/articles', 'latest');
 ?>
 
-<?php get_footer(); ?>
+<?php
+get_footer();
+?>

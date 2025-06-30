@@ -82,7 +82,7 @@
         </nav>
 
         <div class="header__actions">
-            <button class="btn btn--muted" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
+            <button class="btn btn--accent" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
                 <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
             </button>
         </div>

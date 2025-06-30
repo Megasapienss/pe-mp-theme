@@ -29,8 +29,15 @@ button {
         border-color: $bg-muted;
     }
 
+    &--accent {
+        background: $bg-accent;
+        border-color: $bg-accent;
+        color: $color-white;
+    }
+
     cursor: pointer;
     transition: opacity 0.1s ease-in-out;
+
     &:hover {
         text-decoration: none;
         opacity: 0.75;
@@ -63,6 +70,7 @@ button {
     cursor: pointer;
 
     transition: opacity 0.1s ease-in-out;
+
     &:hover {
         text-decoration: none;
         opacity: 0.75;
@@ -153,12 +161,19 @@ button {
         }
     }
 
+    &--share {
+        &::before {
+            background-image: url('../icons/label-share.svg');
+        }
+    }
+
     &--muted {
         background: $bg-muted;
         border-color: $bg-muted;
     }
 
     transition: opacity 0.1s ease-in-out;
+
     &:hover {
         opacity: 0.75;
 

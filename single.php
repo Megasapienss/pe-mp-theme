@@ -17,9 +17,7 @@ get_header();
 <?php while (have_posts()) : the_post(); ?>
 
     <section class="hero hero--banner" style="background-image: url(<?= get_the_post_thumbnail_url() ?: get_template_directory_uri() . '/dist/images/cover.jpg'; ?>);">
-        <?php
-        get_template_part('template-parts/components/breadcrumbs', 'rankmath');
-        ?>
+        <?php get_template_part('template-parts/components/breadcrumbs', 'rankmath'); ?>
         <div class="hero__inner">
             <div class="hero__date label label--arrow label--muted">
                 <?= get_the_date('d M Y'); ?>
@@ -57,19 +55,19 @@ get_header();
                 <p class="sidebar-card__excerpt">
                     <?= $author_description; ?>
                 </p>
-                <div class="sidebar-card__time">
+
+                <!-- <div class="sidebar-card__time">
                     <span class="heading-h6">Estimated reading time</span>
                     <span class="sidebar-card__time-value">6 min</span>
-                </div>
+                </div> -->
 
                 <div class="sidebar-card__share">
-                    <span class="heading-h6">Share</span>
-                    <div class="sidebar-card__share-icons d-flex flex-row">
+                    <span class="label label--share label--primary label--icon">Share</span>
+                    <!-- <div class="sidebar-card__share-icons d-flex flex-row">
                         <img src="<?= get_template_directory_uri(); ?>/dist/icons/badge-instagram.svg">
                         <img src="<?= get_template_directory_uri(); ?>/dist/icons/badge-x.svg">
                         <img src="<?= get_template_directory_uri(); ?>/dist/icons/badge-f.svg">
-
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="sidebar-card sidebar-card--quiz hidden-less-than-xl">
@@ -84,44 +82,11 @@ get_header();
         </aside>
     </article>
 
-    <section class="section">
-        <div class="section__title">
-            <h2 class="section__title-text">What else is worth exploring?</h2>
-            <a href="<?= get_permalink(get_option('page_for_posts')); ?>#posts" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
-        </div>
-        <div class="cards grid grid--3">
-            <?php
-            // Get the current post's categories
-            $categories = get_the_category();
-            $category_ids = array();
-            foreach ($categories as $category) {
-                $category_ids[] = $category->term_id;
-            }
-
-            // Query related posts
-            $related_posts = new WP_Query(array(
-                'category__in' => $category_ids,
-                'post__not_in' => array(get_the_ID()),
-                'posts_per_page' => 3,
-                'orderby' => 'rand'
-            ));
-
-            // Display related posts
-            if ($related_posts->have_posts()) :
-                foreach ($related_posts->posts as $post) :
-                    get_template_part('template-parts/cards/post', 'simple', ['post' => $post]);
-                endforeach;
-            else :
-                echo '<p>' . __('No related posts found.', 'pe-mp-theme') . '</p>';
-            endif;
-            ?>
-        </div>
-    </section>
-
-    <?php //get_template_part('template-parts/sections/experts'); 
+    <?php
+    //get_template_part('template-parts/sections/experts'); 
     ?>
 
-    <?php get_template_part('template-parts/sections/articles', 'latest'); ?>
+    <?php get_template_part('template-parts/sections/articles', 'related'); ?>
 
 
 <?php endwhile; ?>

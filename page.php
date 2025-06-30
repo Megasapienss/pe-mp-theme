@@ -27,14 +27,6 @@ get_header();
 
     <section class="page__content container body-lg">
         <?php the_content(); ?>
-        <div class="sidebar-card sidebar-card--quiz hidden-more-than-xl">
-            <h3 class="sidebar-card__title">Feeling mentally drained?</h3>
-            <p class="sidebar-card__excerpt">Take our 2-minute burnout quiz
-                and get instant insights on your emotional state.</p>
-            <button class="sidebar-card__link arrow-btn arrow-btn--primary" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
-                <?php esc_html_e('Start the Quiz', 'pe-mp-theme'); ?>
-            </button>
-        </div>
     </section>
 
     <?php get_template_part('template-parts/sections/articles', 'latest'); ?>
