@@ -1,15 +1,50 @@
-.wp-block-list {
-    li {
-        margin-bottom: 16px;
+.article__content,
+.page__content {
+    .wp-block-list {
+        li {
+            margin-bottom: 16px;
+        }
     }
-}
 
-ul.wp-block-list {
-    list-style: disc;
-    padding-left: 24px;
-}
+    ul.wp-block-list {
+        list-style: disc;
+        padding-left: 24px;
+    }
 
-ol.wp-block-list {
-    list-style: decimal-leading-zero;
-    padding-left: 44px;
+    ol.wp-block-list {
+        list-style: decimal-leading-zero;
+        padding-left: 44px;
+    }
+
+    .wp-block-heading {
+        font-weight: 400 !important;
+    }
+
+    .wp-block-quote {
+        border: 0;
+        padding: 0;
+        background: transparent;
+
+        & p {
+            font-family: "Instrument Serif", serif;
+            font-weight: 400;
+            font-style: italic;
+            font-size: 40px !important;
+            line-height: 140%;
+            letter-spacing: 0px;
+        }
+
+        & cite {
+            font-family: "Figtree", sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 140%;
+            letter-spacing: 0px;
+            margin-top: 16px;
+            color: $color-muted;
+            font-style: normal;
+
+        }
+
+    }
 }

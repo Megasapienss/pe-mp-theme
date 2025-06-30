@@ -1,0 +1,14 @@
+.page {
+    &__content {
+        margin-top: 64px;
+        margin-bottom: 64px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+
+        & p {
+            @include body-md;
+            color: #202527;
+        }
+    }
+}

@@ -1,13 +1,17 @@
-.breadcrumbs {
+.breadcrumbs,
+.rank-math-breadcrumb {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
-    font-size: 24px;
 
     color: $color-text;
+    
     @include body-md;
+    & p{
+        @include body-md;
+    }
 
     & a {
         color: rgba(0, 0, 0, 0.6);
@@ -18,11 +22,13 @@
         }
     }
 
-    &__separator {
+    &__separator,
+    .separator {
         color: rgba(0, 0, 0, 0.6);
     }
 
-    &--light {
+    &--light,
+    .hero--banner & {
         color: $color-white;
 
         & a {
@@ -33,7 +39,8 @@
             }
         }
 
-        .breadcrumbs__separator {
+        .breadcrumbs__separator,
+        .separator {
             color: rgba(255, 255, 255, 0.6);
         }
     }

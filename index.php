@@ -14,16 +14,32 @@ get_header();
 ?>
 
 <section class="archive-title container">
-    <div class="breadcrumbs breadcrumbs--dark archive-title__breadcrumbs">
-        <a href="<?= home_url(); ?>" class="breadcrumbs__link">Home</a>
-        <span class="breadcrumbs__separator">/</span>
-        <span class="breadcrumbs__current">Blog</span>
-    </div>
-    <h1 class="archive-title__name title-lg">Blog</h1>
+    <?php 
+    get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
+        'class' => 'breadcrumbs breadcrumbs--dark archive-title__breadcrumbs'
+    )); 
+    ?>
+    <h1 class="archive-title__name title-lg">Explore</h1>
     <p class="archive-title__description heading-h2">Latest articles and updates</p>
 </section>
 
-<section class="archive-grid grid grid--2 container">
+<?php
+// Get all post tags
+$post_tags = get_terms(array(
+    'taxonomy' => 'post_tag',
+    'hide_empty' => true
+));
+
+// Display post tags if they exist
+if (!empty($post_tags) && !is_wp_error($post_tags)) :
+    get_template_part('template-parts/sections/topics', null, array(
+        'custom_categories' => $post_tags,
+        'section_title' => ''
+    ));
+endif;
+?>
+
+<section id="posts" class="archive-grid grid grid--2 container container--wide">
     <?php if (have_posts()): ?>
         <?php
         while (have_posts()) {

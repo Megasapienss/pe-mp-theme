@@ -16,7 +16,7 @@ foreach ($categories as $category) {
 // Query related posts
 $related_posts = new WP_Query(array(
     'category__in' => $category_ids,
-    // 'post__not_in' => array(get_the_ID()),
+    'post__not_in' => array(get_the_ID()),
     'posts_per_page' => 3,
     'orderby' => 'rand'
 ));
@@ -30,7 +30,7 @@ if (!$related_posts->have_posts()) {
 <section class="section">
     <div class="section__title">
         <h2 class="section__title-text">Top Articles</h2>
-        <a href="#" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
+        <a href="<?= get_permalink(get_option('page_for_posts')); ?>#posts" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
     </div>
     <div class="cards grid grid--3">
         <?php

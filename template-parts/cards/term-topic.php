@@ -16,8 +16,8 @@ $term_link = get_term_link($term);
 $term_description = wp_trim_words($term->description, 15);
 $term_count = $term->count;
 
-// Get a placeholder image or use a default
-$term_image = get_template_directory_uri() . '/dist/images/topic-card-placeholder.png';
+// Get the featured image from ACF field, fallback to placeholder
+$term_image = get_field('featured_image', $term) ?: get_template_directory_uri() . '/src/images/topic-card-placeholder.png';
 
 // Get child categories for tags (if any)
 $child_categories = get_terms(array(

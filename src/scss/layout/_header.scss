@@ -41,5 +41,12 @@
             }
         }
 
+        & li.current-menu-item {
+            & a {
+                background-color: $color-accent;
+                color: $color-white;
+            }
+        }
+
     }
 }

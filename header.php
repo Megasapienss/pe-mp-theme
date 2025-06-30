@@ -16,11 +16,15 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/svg+xml" href="<?php echo esc_url(get_template_directory_uri()); ?>/favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="<?php echo esc_url(get_template_directory_uri()); ?>/favicon.svg">
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <?php wp_head(); ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <script src="https://assets.prd.heyflow.com/builder/widget/latest/webview.js"></script>
     <!-- Google Tag Manager -->
     <script>
@@ -61,7 +65,9 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <header class="header">
-        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-placeholder.svg" alt="<?php bloginfo('name'); ?>" class="header__logo">
+        <a href="<?php echo esc_url(home_url('/')); ?>">
+            <img title="Go to Homepage" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>" class="header__logo">
+        </a>
 
         <nav class="header__navigation">
             <?php
@@ -77,7 +83,7 @@
 
         <div class="header__actions">
             <button class="btn btn--muted" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
-                <?php esc_html_e('Start the Quiz', 'pe-mp-theme'); ?>
+                <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
             </button>
         </div>
     </header>

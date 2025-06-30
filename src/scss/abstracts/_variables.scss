@@ -5,6 +5,7 @@
 
 // Colors
 $color-primary: #007AFF;
+$color-accent: #B877FF;
 $color-secondary: #6c757d;
 $color-success: #28a745;
 $color-danger: #dc3545;
@@ -16,11 +17,13 @@ $color-text: $color-dark;
 $color-white: #FFFFFF;
 $color-muted: #20252799;
 
+
 //Backgrounds
 $bg-muted: #F6F6F6;
 $bg-white: #FFFFFF;
 $bg-dark: $color-dark;
 $bg-primary: $bg-white;
+$bg-accent: $color-accent;
 
 $border-default: #E8E8E8;
 

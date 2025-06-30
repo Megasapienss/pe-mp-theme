@@ -1,61 +1,9 @@
 <?php
-
 /**
- * The template for displaying post archives
+ * Template part for displaying the clinics section
  * 
  * @package PE_MP_Theme
  */
-
-get_header();
-$term = get_queried_object();
-?>
-
-<section class="archive-title container">
-    <?php 
-    get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
-        'class' => 'breadcrumbs breadcrumbs--dark archive-title__breadcrumbs'
-    )); 
-    ?>
-    <h1 class="archive-title__name title-lg"><?= get_field('h1', $term) ?: $term->name; ?></h1>
-    <p class="archive-title__description heading-h2"><?= $term->description; ?></p>
-</section>
-
-<?php
-// Get child categories of the current term
-$child_categories = get_terms(array(
-    'taxonomy' => $term->taxonomy,
-    'parent' => $term->term_id,
-    'hide_empty' => true
-));
-
-// Display child categories if they exist
-if (!empty($child_categories) && !is_wp_error($child_categories)) :
-    get_template_part('template-parts/sections/topics', null, array(
-        'custom_categories' => $child_categories,
-        'section_title' => ''
-    ));
-endif;
-?>
-
-<section class="archive-grid grid grid--2 container">
-    <?php if (have_posts()): ?>
-        <?php
-        while (have_posts()) {
-            the_post();
-            get_template_part('template-parts/cards/post', 'curved', ['post' => get_post()]);
-        }
-        ?>
-
-    <?php else: ?>
-        <p class="text-center"><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
-        <p class="text-center"><?php _e('Come back later!', 'pe-mp-theme'); ?></p>
-    <?php endif; ?>
-</section>
-
-<?php //get_template_part('template-parts/sections/apps'); 
-?>
-
-<?php //get_template_part('template-parts/sections/experts'); 
 ?>
 
 <section class="section">
@@ -125,43 +73,4 @@ endif;
             </div>
         </div>
     </div>
-</section>
-
-
-<section class="section">
-    <div class="section__title">
-        <h2 class="section__title-text">Continue Your Exploration</h2>
-        <a href="#" class="section__title-link arrow-btn arrow-btn--muted">View all</a>
-    </div>
-    <div class="container container--wide cards grid grid--3">
-        <?php
-        // Get the current post's categories
-        $categories = get_the_category();
-        $category_ids = array();
-        foreach ($categories as $category) {
-            $category_ids[] = $category->term_id;
-        }
-
-        // Query related posts
-        $related_posts = new WP_Query(array(
-            'category__in' => $category_ids,
-            // 'post__not_in' => array(get_the_ID()),
-            'posts_per_page' => 3,
-            'orderby' => 'rand'
-        ));
-
-        // Display related posts
-        if ($related_posts->have_posts()) :
-            foreach ($related_posts->posts as $post) :
-                get_template_part('template-parts/cards/post', 'compact', ['post' => $post]);
-            endforeach;
-        else :
-            echo '<p>' . __('No related posts found.', 'pe-mp-theme') . '</p>';
-        endif;
-        ?>
-    </div>
-</section>
-
-<?php
-get_footer();
-?>
+</section> 

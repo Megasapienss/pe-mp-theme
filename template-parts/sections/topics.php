@@ -10,21 +10,22 @@
 $custom_categories = isset($args['custom_categories']) ? $args['custom_categories'] : null;
 $custom_title = isset($args['section_title']) ? $args['section_title'] : null;
 
+
 if ($custom_categories && !is_wp_error($custom_categories)) {
     // Use the custom categories passed from archive
     $categories = $custom_categories;
-    $section_title = $custom_title !== null ? $custom_title : 'Explore Topics';
 } else {
-    // Get the 6 most popular categories (original behavior)
+    // Get the 6 most popular categories and tags combined
     $categories = get_terms(array(
-        'taxonomy' => 'post_tag',
+        'taxonomy' => array('category', 'post_tag'),
         'number' => 6,
         'orderby' => 'count',
         'order' => 'DESC',
         'hide_empty' => true
     ));
-    $section_title = 'Explore by Topic';
 }
+
+$section_title = $custom_title !== null ? $custom_title : 'Explore Topics';
 
 // Don't output anything if there are no categories
 if (empty($categories) || is_wp_error($categories)) {
@@ -34,10 +35,10 @@ if (empty($categories) || is_wp_error($categories)) {
 
 <section class="section" id="topics">
     <?php if (!empty($section_title)) : ?>
-    <div class="section__title">
-        <h2 class="section__title-text"><?= $section_title; ?></h2>
-        <a href="#" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
-    </div>
+        <div class="section__title">
+            <h2 class="section__title-text"><?= $section_title; ?></h2>
+            <a href="<?= get_permalink(get_option('page_for_posts')); ?>#topics" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
+        </div>
     <?php endif; ?>
     <div class="cards grid grid--2 container container--wide">
         <?php
@@ -47,4 +48,4 @@ if (empty($categories) || is_wp_error($categories)) {
         endforeach;
         ?>
     </div>
-</section> 
+</section>

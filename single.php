@@ -12,23 +12,14 @@ if (! defined('ABSPATH')) {
 
 get_header();
 
-$categories = get_the_category();
-$main_category = !empty($categories) ? $categories[0] : null;
-$category_link = $main_category ? get_category_link($main_category->term_id) : '';
-$category_name = $main_category ? $main_category->name : '';
-
 ?>
 
 <?php while (have_posts()) : the_post(); ?>
 
-    <section class="hero hero--banner" style="background-image: url(<?= get_the_post_thumbnail_url(); ?>);">
-        <div class="breadcrumbs breadcrumbs--light hero__breadcrumbs">
-            <a href="<?= home_url(); ?>" class="breadcrumbs__link">Home</a>
-            <span class="breadcrumbs__separator">/</span>
-            <a href="<?= home_url(); ?>" class="breadcrumbs__link">Explore</a>
-            <span class="breadcrumbs__separator">/</span>
-            <a href="<?= $category_link; ?>" class="breadcrumbs__link"><?= $category_name; ?></a>
-        </div>
+    <section class="hero hero--banner" style="background-image: url(<?= get_the_post_thumbnail_url() ?: get_template_directory_uri() . '/dist/images/cover.jpg'; ?>);">
+        <?php
+        get_template_part('template-parts/components/breadcrumbs', 'rankmath');
+        ?>
         <div class="hero__inner">
             <div class="hero__date label label--arrow label--muted">
                 <?= get_the_date('d M Y'); ?>
@@ -96,7 +87,7 @@ $category_name = $main_category ? $main_category->name : '';
     <section class="section">
         <div class="section__title">
             <h2 class="section__title-text">What else is worth exploring?</h2>
-            <a href="#" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
+            <a href="<?= get_permalink(get_option('page_for_posts')); ?>#posts" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
         </div>
         <div class="cards grid grid--3">
             <?php
@@ -110,7 +101,7 @@ $category_name = $main_category ? $main_category->name : '';
             // Query related posts
             $related_posts = new WP_Query(array(
                 'category__in' => $category_ids,
-                // 'post__not_in' => array(get_the_ID()),
+                'post__not_in' => array(get_the_ID()),
                 'posts_per_page' => 3,
                 'orderby' => 'rand'
             ));
