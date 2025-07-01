@@ -14,12 +14,12 @@ get_header();
 ?>
 
 <section class="archive-title container">
-    <?php 
+    <?php
     get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
         'class' => 'breadcrumbs breadcrumbs--dark archive-title__breadcrumbs'
-    )); 
+    ));
     ?>
-    <h1 class="archive-title__name title-lg">Explore</h1>
+    <h1 class="archive-title__name title-lg">Explore our topics</h1>
     <p class="archive-title__description heading-h2">Latest articles and updates</p>
 </section>
 

@@ -3678,6 +3678,13 @@ body {
     gap: 64px;
   }
 }
+@media (max-width: 767px) {
+  .hero--banner .hero__breadcrumbs,
+  .hero--banner .rank-math-breadcrumb {
+    justify-content: flex-start;
+    text-align: start;
+  }
+}
 .hero--xl {
   justify-content: center;
   align-items: center;
@@ -3721,13 +3728,6 @@ body {
   font-size: 22px;
   line-height: 150%;
   letter-spacing: 0px;
-}
-@media (max-width: 767px) {
-  .breadcrumbs,
-  .rank-math-breadcrumb {
-    justify-content: flex-start;
-    text-align: start;
-  }
 }
 @media (max-width: 767px) {
   .breadcrumbs,

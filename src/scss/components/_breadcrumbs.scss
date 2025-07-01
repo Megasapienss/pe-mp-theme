@@ -7,15 +7,11 @@
     flex-wrap: wrap;
     gap: 8px;
 
-    @include less-than('md') {
-        justify-content: flex-start;
-        text-align: start;
-    }
-
     color: $color-text;
-    
+
     @include body-md;
-    & p{
+
+    & p {
         @include body-md;
     }
 

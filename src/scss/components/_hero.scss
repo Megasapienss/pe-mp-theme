@@ -1,5 +1,5 @@
-.hero{
-    &--banner{
+.hero {
+    &--banner {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -16,9 +16,19 @@
             min-height: 0;
             gap: 64px;
         }
+
+        .hero__breadcrumbs,
+        .rank-math-breadcrumb {
+            @include less-than('md') {
+                justify-content: flex-start;
+                text-align: start;
+            }
+        }
+
+
     }
 
-    &--xl{
+    &--xl {
         justify-content: center;
         align-items: center;
         text-align: center;
@@ -28,12 +38,12 @@
 
         gap: 40px;
 
-        & > h2{
+        &>h2 {
             font-weight: 300;
         }
     }
 
-    &__inner{
+    &__inner {
         max-width: 700px;
         display: flex;
         flex-direction: column;
@@ -41,7 +51,7 @@
         align-items: flex-start;
         gap: 32px;
         padding: 64px;
-        background-color: white;   
+        background-color: white;
         border-radius: 20px;
 
         @include less-than(md) {
