@@ -32,9 +32,9 @@ $excerpt = wp_trim_words(get_the_excerpt($post), 20);
     </div>
     <div class="card__content">
 
-        <h4 class="card__title">
+        <h3 class="card__title">
             <?php echo esc_html($post->post_title); ?>
-        </h4>
+        </h3>
         <div class="card__excerpt">
             <?= esc_html($excerpt); ?>
         </div>

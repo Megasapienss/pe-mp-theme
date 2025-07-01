@@ -10,7 +10,7 @@
 
 <script src="https://js-eu1.hsforms.net/forms/embed/developer/146352434.js" defer></script>
 <div class="banner banner--newsletter">
-    <span class="heading-h6 text-accent">
+    <span class="banner__title heading-h6 text-accent">
         Newsletter
     </span>
     <h2 class="banner__title heading-h2">

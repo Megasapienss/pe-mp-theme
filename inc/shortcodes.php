@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 /**
  * Quiz Banner Shortcode
  * 
- * Usage: [quiz_banner] or [quiz_banner class="custom-class" link="https://example.com"]
+ * Usage: [quiz_banner] or [quiz_banner class="custom-class" link="https://example.com" title="Custom Title" description="Custom description"]
  * 
  * @param array $atts Shortcode attributes
  * @return string HTML output
@@ -24,6 +24,8 @@ function pe_mp_quiz_banner_shortcode($atts)
     $atts = shortcode_atts(array(
         'class' => '',
         'link' => '',
+        'title' => '',
+        'description' => '',
     ), $atts, 'quiz_banner');
 
     // Use provided link or fall back to default quiz link
@@ -35,7 +37,9 @@ function pe_mp_quiz_banner_shortcode($atts)
     // Include the quiz banner template part
     get_template_part('template-parts/banners/quiz', null, array(
         'class' => $atts['class'],
-        'link' => $link
+        'link' => $link,
+        'title' => $atts['title'],
+        'description' => $atts['description']
     ));
 
     // Return the buffered content

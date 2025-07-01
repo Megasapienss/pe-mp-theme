@@ -2350,6 +2350,10 @@ body {
   transform: none !important;
 }
 
+.archive-grid .banner {
+  justify-content: center;
+}
+
 .provider-card {
   background: #fff;
   border-radius: 12px;

@@ -8,6 +8,7 @@
 
 get_header();
 $term = get_queried_object();
+$post_count = $wp_query->found_posts;
 ?>
 
 <section class="archive-title container">
@@ -38,28 +39,33 @@ endif;
 ?>
 
 <section class="archive-grid grid grid--2 container container--wide">
-    <?php if (have_posts()): ?>
-        <?php
+    <?php if (have_posts()) {
         while (have_posts()) {
             the_post();
             get_template_part('template-parts/cards/post', 'curved', ['post' => get_post()]);
         }
-        ?>
-
-    <?php else: ?>
+        // If this is the middle post (when total is odd), insert newsletter banner
+        if ($post_count % 2 !== 0) {
+            get_template_part('template-parts/banners/newsletter');
+        }
+    } else { ?>
         <p class="text-center"><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
         <p class="text-center"><?php _e('Come back later!', 'pe-mp-theme'); ?></p>
-    <?php endif; ?>
+    <?php } ?>
 </section>
 
 <?php
-get_template_part('template-parts/sections/newsletter');
+if ($post_count % 2 == 0) {
+    get_template_part('template-parts/sections/newsletter');
+}
 ?>
 
-<?php //get_template_part('template-parts/sections/apps'); 
+<?php
+//get_template_part('template-parts/sections/apps'); 
 ?>
 
-<?php //get_template_part('template-parts/sections/experts'); 
+<?php
+//get_template_part('template-parts/sections/experts'); 
 ?>
 
 <?php
