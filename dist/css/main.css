@@ -1572,16 +1572,20 @@ button {
   font-weight: 400 !important;
 }
 .article__content .wp-block-pullquote,
+.article__content .wp-block-pullquote blockquote,
 .article__content .wp-block-quote,
 .page__content .wp-block-pullquote,
+.page__content .wp-block-pullquote blockquote,
 .page__content .wp-block-quote {
   border: 0;
   padding: 0;
   background: transparent;
 }
 .article__content .wp-block-pullquote p,
+.article__content .wp-block-pullquote blockquote p,
 .article__content .wp-block-quote p,
 .page__content .wp-block-pullquote p,
+.page__content .wp-block-pullquote blockquote p,
 .page__content .wp-block-quote p {
   font-family: "Instrument Serif", serif;
   font-weight: 400;
@@ -1591,8 +1595,10 @@ button {
   letter-spacing: 0px;
 }
 .article__content .wp-block-pullquote cite,
+.article__content .wp-block-pullquote blockquote cite,
 .article__content .wp-block-quote cite,
 .page__content .wp-block-pullquote cite,
+.page__content .wp-block-pullquote blockquote cite,
 .page__content .wp-block-quote cite {
   font-family: "Figtree", sans-serif;
   font-weight: 400;
