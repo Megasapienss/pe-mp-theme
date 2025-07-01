@@ -86,7 +86,7 @@
 
 .newsletter-section {
     background-color: $bg-muted;
-    padding: 160px 24px;
+    padding: 80px 24px;
     margin-top: 16px;
     margin-bottom: 16px;
     display: flex;
@@ -101,7 +101,7 @@
     &__card {
         max-width: 1600px;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 40px;
 
         @include less-than('lg') {
