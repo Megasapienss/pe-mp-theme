@@ -162,6 +162,8 @@ button {
     }
 
     &--share {
+        cursor: pointer;
+        
         &::before {
             background-image: url('../icons/label-share.svg');
         }

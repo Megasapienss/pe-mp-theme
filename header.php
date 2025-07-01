@@ -16,6 +16,26 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <?php if (is_single() || is_page()): ?>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="<?php echo esc_url(get_permalink()); ?>" />
+    <meta property="og:title" content="<?php echo esc_attr(get_the_title()); ?>" />
+    <meta property="og:description" content="<?php echo esc_attr(get_the_excerpt() ?: get_bloginfo('description')); ?>" />
+    <?php if (has_post_thumbnail()): ?>
+    <meta property="og:image" content="<?php echo esc_url(get_the_post_thumbnail_url('large')); ?>" />
+    <?php endif; ?>
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="<?php echo esc_url(get_permalink()); ?>" />
+    <meta property="twitter:title" content="<?php echo esc_attr(get_the_title()); ?>" />
+    <meta property="twitter:description" content="<?php echo esc_attr(get_the_excerpt() ?: get_bloginfo('description')); ?>" />
+    <?php if (has_post_thumbnail()): ?>
+    <meta property="twitter:image" content="<?php echo esc_url(get_the_post_thumbnail_url('large')); ?>" />
+    <?php endif; ?>
+    <?php endif; ?>
     <link rel="icon" type="image/svg+xml" href="<?php echo esc_url(get_template_directory_uri()); ?>/favicon.svg">
     <link rel="shortcut icon" type="image/svg+xml" href="<?php echo esc_url(get_template_directory_uri()); ?>/favicon.svg">
     <link rel="profile" href="https://gmpg.org/xfn/11">

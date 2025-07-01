@@ -1,20 +1,2 @@
-/******/ (() => { // webpackBootstrap
-/*!************************!*\
-  !*** ./src/js/main.js ***!
-  \************************/
-// Main JavaScript file
-document.addEventListener('DOMContentLoaded', function () {
-  // Off-canvas menu toggle
-  var offCanvasToggleButtons = document.querySelectorAll('.toggle--off-canvas--menu');
-  var offCanvas = document.querySelector('.off-canvas--menu');
-  if (offCanvasToggleButtons.length > 0 && offCanvas) {
-    offCanvasToggleButtons.forEach(function (button) {
-      button.addEventListener('click', function () {
-        offCanvas.classList.toggle('off-canvas--visible');
-      });
-    });
-  }
-});
-/******/ })()
-;
-//# sourceMappingURL=scripts.js.map
+/*! For license information please see scripts.js.LICENSE.txt */
+(()=>{function t(){var n,r,o="function"==typeof Symbol?Symbol:{},i=o.iterator||"@@iterator",c=o.toStringTag||"@@toStringTag";function a(t,o,i,c){var a=o&&o.prototype instanceof l?o:l,f=Object.create(a.prototype);return e(f,"_invoke",function(t,e,o){var i,c,a,l=0,f=o||[],s=!1,d={p:0,n:0,v:n,a:p,f:p.bind(n,4),d:function(t,e){return i=t,c=0,a=n,d.n=e,u}};function p(t,e){for(c=t,a=e,r=0;!s&&l&&!o&&r<f.length;r++){var o,i=f[r],p=d.p,v=i[2];t>3?(o=v===e)&&(a=i[(c=i[4])?5:(c=3,3)],i[4]=i[5]=n):i[0]<=p&&((o=t<2&&p<i[1])?(c=0,d.v=e,d.n=i[1]):p<v&&(o=t<3||i[0]>e||e>v)&&(i[4]=t,i[5]=e,d.n=v,c=0))}if(o||t>1)return u;throw s=!0,e}return function(o,f,v){if(l>1)throw TypeError("Generator is already running");for(s&&1===f&&p(f,v),c=f,a=v;(r=c<2?n:a)||!s;){i||(c?c<3?(c>1&&(d.n=-1),p(c,a)):d.n=a:d.v=a);try{if(l=2,i){if(c||(o="next"),r=i[o]){if(!(r=r.call(i,a)))throw TypeError("iterator result is not an object");if(!r.done)return r;a=r.value,c<2&&(c=0)}else 1===c&&(r=i.return)&&r.call(i),c<2&&(a=TypeError("The iterator does not provide a '"+o+"' method"),c=1);i=n}else if((r=(s=d.n<0)?a:t.call(e,d))!==u)break}catch(t){i=n,c=1,a=t}finally{l=1}}return{value:r,done:s}}}(t,i,c),!0),f}var u={};function l(){}function f(){}function s(){}r=Object.getPrototypeOf;var d=[][i]?r(r([][i]())):(e(r={},i,(function(){return this})),r),p=s.prototype=l.prototype=Object.create(d);function v(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,s):(t.__proto__=s,e(t,c,"GeneratorFunction")),t.prototype=Object.create(p),t}return f.prototype=s,e(p,"constructor",s),e(s,"constructor",f),f.displayName="GeneratorFunction",e(s,c,"GeneratorFunction"),e(p),e(p,c,"Generator"),e(p,i,(function(){return this})),e(p,"toString",(function(){return"[object Generator]"})),(t=function(){return{w:a,m:v}})()}function e(t,n,r,o){var i=Object.defineProperty;try{i({},"",{})}catch(t){i=0}e=function(t,n,r,o){if(n)i?i(t,n,{value:r,enumerable:!o,configurable:!o,writable:!o}):t[n]=r;else{var c=function(n,r){e(t,n,(function(t){return this._invoke(n,r,t)}))};c("next",0),c("throw",1),c("return",2)}},e(t,n,r,o)}function n(t,e,n,r,o,i,c){try{var a=t[i](c),u=a.value}catch(t){return void n(t)}a.done?e(u):Promise.resolve(u).then(r,o)}function r(t){return function(){var e=this,r=arguments;return new Promise((function(o,i){var c=t.apply(e,r);function a(t){n(c,o,i,a,u,"next",t)}function u(t){n(c,o,i,a,u,"throw",t)}a(void 0)}))}}document.addEventListener("DOMContentLoaded",(function(){var e=document.querySelectorAll(".toggle--off-canvas--menu"),n=document.querySelector(".off-canvas--menu");e.length>0&&n&&e.forEach((function(t){t.addEventListener("click",(function(){n.classList.toggle("off-canvas--visible")}))})),document.querySelectorAll(".label--share").forEach((function(e){e.addEventListener("click",r(t().m((function e(){var n,r,o,i;return t().w((function(t){for(;;)switch(t.n){case 0:if(!navigator.share){t.n=5;break}return t.p=1,r={title:document.title,text:(null===(n=document.querySelector('meta[name="description"]'))||void 0===n?void 0:n.content)||"Check out this article",url:window.location.href},t.n=2,navigator.share(r);case 2:t.n=4;break;case 3:t.p=3,o=t.v,console.log("Share cancelled or failed:",o);case 4:t.n=8;break;case 5:return t.p=5,t.n=6,navigator.clipboard.writeText(window.location.href);case 6:alert("Link copied to clipboard!"),t.n=8;break;case 7:t.p=7,i=t.v,console.log("Failed to copy to clipboard:",i),prompt("Copy this link:",window.location.href);case 8:return t.a(2)}}),e,null,[[5,7],[1,3]])}))))}))}))})();
