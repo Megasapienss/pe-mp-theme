@@ -56,6 +56,8 @@ button {
 
     @include text-button;
     color: $color-text;
+    background: $color-white;
+    border-color: $color-white;
 
     &::after {
         content: '';
@@ -117,6 +119,10 @@ button {
     border-radius: 150px;
     @include text-label;
 
+    border-color: $bg-white;
+    background-color: $bg-white;
+    color: $color-text;
+
     &--squared {
         border-radius: 4px;
     }
@@ -163,7 +169,7 @@ button {
 
     &--share {
         cursor: pointer;
-        
+
         &::before {
             background-image: url('../icons/label-share.svg');
         }

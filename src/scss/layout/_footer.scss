@@ -1,24 +1,106 @@
 .footer {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
     margin-top: 160px;
     background-color: $bg-dark;
-    padding: 48px 64px 128px;
+    padding: 48px 64px 128px 64px;
     border-radius: 20px;
 
-    @include less-than('lg') {
+    @include less-than('xl') {
         margin-top: 60px;
+        grid-template-columns: 1fr;
+        padding: 48px 16px 64px 16px;
+        gap: 40px;
     }
 
     &__logo {
+        max-width: 400px;
         width: 100%;
     }
 
+    & .community-banner {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background: #2D2F30;
+        padding: 40px;
+        margin-top: 40px;
+        border-radius: 20px;
+
+        @include less-than('xl') {
+            margin-top: 20px;
+            padding: 16px;
+        }
+
+        &__actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        & h4 {
+            color: #F1F1F1;
+
+        }
+
+        & p,
+        & ul,
+        & li {
+            color: #FAF9F7;
+        }
+    }
+
+    & .newsletter-section__card {
+        & .heading-h1 {
+            color: $color-white;
+        }
+
+        & .heading-h6 {
+            color: $color-white;
+        }
+
+
+        & [data-hsfc-id=Renderer] .hsfc-RichText p,
+        & [data-hsfc-id=Renderer] span {
+            color: $color-muted-inverse;
+        }
+
+        & [data-hsfc-id=Renderer] .hsfc-TextInput {
+            border-radius: 8px !important;
+            border-color: $bg-dark !important;
+            background-color: $color-muted-inverse !important;
+            color: $color-white !important;
+        }
+
+        & .hsfc-Step__Content {
+
+            & .hsfc-Button[type="submit"] {
+                background: $bg-accent;
+
+                &:hover {
+                    background: $bg-white !important;
+                    color: $color-dark !important;
+                }
+            }
+
+        }
+
+    }
+
+
     position: relative;
 
-    @include less-than('md') {
+    @include less-than('xl') {
         &>.corner {
-            display: none;
+            font-size: 12px;
+            // display: none;
+            // padding: 0;
+
+            // &::before,
+            // &::after {
+            //     display: none;
+            // }
         }
     }
 }

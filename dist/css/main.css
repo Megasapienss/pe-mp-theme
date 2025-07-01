@@ -914,6 +914,11 @@ pre code {
   background-color: transparent;
 }
 
+ul.list-basic {
+  list-style: disc;
+  padding-left: 24px;
+}
+
 /**
  * Utilities
  * Helper classes for common styling needs
@@ -1410,6 +1415,8 @@ button {
   line-height: 100%;
   letter-spacing: 0;
   color: #202527;
+  background: #FFFFFF;
+  border-color: #FFFFFF;
   cursor: pointer;
   transition: opacity 0.1s ease-in-out;
 }
@@ -1479,6 +1486,9 @@ button {
   font-size: 14px;
   line-height: 100%;
   letter-spacing: 0;
+  border-color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #202527;
   transition: opacity 0.1s ease-in-out;
 }
 @media (max-width: 767px) {
@@ -1950,6 +1960,9 @@ body {
   border-radius: 8px !important;
   border-color: white !important;
   background-color: white !important;
+  box-shadow: none !important;
+  padding: 12.5px 20px !important;
+  border-radius: 8px !important;
 }
 .newsletter-section__content .hsfc-Step__Content {
   padding: 0 !important;
@@ -2078,25 +2091,78 @@ body {
 }
 
 .footer {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
   margin-top: 160px;
   background-color: #202527;
-  padding: 48px 64px 128px;
+  padding: 48px 64px 128px 64px;
   border-radius: 20px;
   position: relative;
 }
-@media (max-width: 991px) {
+@media (max-width: 1199px) {
   .footer {
     margin-top: 60px;
+    grid-template-columns: 1fr;
+    padding: 48px 16px 64px 16px;
+    gap: 40px;
   }
 }
 .footer__logo {
+  max-width: 400px;
   width: 100%;
 }
-@media (max-width: 767px) {
+.footer .community-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #2D2F30;
+  padding: 40px;
+  margin-top: 40px;
+  border-radius: 20px;
+}
+@media (max-width: 1199px) {
+  .footer .community-banner {
+    margin-top: 20px;
+    padding: 16px;
+  }
+}
+.footer .community-banner__actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.footer .community-banner h4 {
+  color: #F1F1F1;
+}
+.footer .community-banner p, .footer .community-banner ul, .footer .community-banner li {
+  color: #FAF9F7;
+}
+.footer .newsletter-section__card .heading-h1 {
+  color: #FFFFFF;
+}
+.footer .newsletter-section__card .heading-h6 {
+  color: #FFFFFF;
+}
+.footer .newsletter-section__card [data-hsfc-id=Renderer] .hsfc-RichText p, .footer .newsletter-section__card [data-hsfc-id=Renderer] span {
+  color: rgba(255, 255, 255, 0.6);
+}
+.footer .newsletter-section__card [data-hsfc-id=Renderer] .hsfc-TextInput {
+  border-radius: 8px !important;
+  border-color: #202527 !important;
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  color: #FFFFFF !important;
+}
+.footer .newsletter-section__card .hsfc-Step__Content .hsfc-Button[type=submit] {
+  background: #B877FF;
+}
+.footer .newsletter-section__card .hsfc-Step__Content .hsfc-Button[type=submit]:hover {
+  background: #FFFFFF !important;
+  color: #202527 !important;
+}
+@media (max-width: 1199px) {
   .footer > .corner {
-    display: none;
+    font-size: 12px;
   }
 }
 

@@ -16,7 +16,9 @@ get_header();
     <h2 class="hero__description">
         Discover the latest mental health breakthroughs, advanced diagnostics, and the therapies leading tomorrow's care.
     </h2>
-    <a href="#topics" class="btn btn--muted">Explore Topics</a>
+    <button class="arrow-btn" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
+        <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
+    </button>
 </section>
 
 

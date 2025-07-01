@@ -23,5 +23,5 @@ $args = wp_parse_args($args, array(
     <button class="banner__link arrow-btn arrow-btn--primary" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
         <?php esc_html_e('Start test', 'pe-mp-theme'); ?>
     </button>
-    <!-- <a href="<?= esc_url($args['link']); ?>" class="banner__link arrow-btn arrow-btn--primary">Start the Quiz</a> -->
+    <!-- <a href="<?= esc_url($args['link']); ?>" class="banner__link arrow-btn arrow-btn--primary">Start test</a> -->
 </div>

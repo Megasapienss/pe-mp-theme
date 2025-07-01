@@ -19,7 +19,5 @@
             </h2>
             <div class="hs-form-html" data-region="eu1" data-form-id="ab76425d-a602-4457-8367-191cb709b159" data-portal-id="146352434"></div>
         </div>
-        <!-- <div class="newsletter-section__cover" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/newsletter-cover.jpg');">
-        </div> -->
     </div>
 </section>
