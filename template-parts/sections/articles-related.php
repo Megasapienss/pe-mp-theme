@@ -34,7 +34,7 @@ if (!$related_posts->have_posts()) {
         <h2 class="section__title-text">What else is worth exploring?</h2>
         <a href="<?= get_permalink(get_option('page_for_posts')); ?>#posts" class="section__title-link arrow-btn arrow-btn--muted">View all</a>
     </div>
-    <div class="container container--wide cards grid grid--3">
+    <div class="cards grid grid--3">
         <?php
         // Display related posts
         foreach ($related_posts->posts as $post) :

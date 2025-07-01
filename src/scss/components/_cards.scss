@@ -36,7 +36,7 @@
         gap: 16px;
 
         @include less-than('lg') {
-            padding: 16px;
+            padding: 24px 16px;
         }
     }
 
@@ -209,15 +209,23 @@
                 height: auto;
                 object-fit: cover;
                 border-radius: 12px;
-                aspect-ratio: 3/4;
+                aspect-ratio: 1/1;
 
                 @include less-than('xl') {
-                    aspect-ratio: 3/2;
+                    aspect-ratio: 1/1;
                 }
             }
 
             &__excerpt {
                 color: $color-muted;
+            }
+
+            &__title{
+                padding-right: 32px;
+
+                @include less-than('xl') {
+                    padding-right: 0;
+                }
             }
 
             &__tags {

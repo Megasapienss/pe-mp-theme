@@ -9,7 +9,7 @@
         flex-direction: column;
         justify-content: space-between;
         gap: 32px;
-        min-height: 600px;
+        min-height: min(calc(100vh - 96px), 700px);
 
         @include less-than(md) {
             padding: 16px;
@@ -24,7 +24,7 @@
         text-align: center;
         color: $color-white;
         text-wrap: balance;
-        min-height: calc(100vh - 168px);
+        min-height: calc(100vh - 96px);
 
         gap: 40px;
 

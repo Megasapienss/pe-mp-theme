@@ -30,6 +30,10 @@ get_header();
     </h2>
 </section>
 
+<?php
+get_template_part('template-parts/sections/articles', 'latest');
+?>
+
 
 <?php
 // Get the "Science & Innovation" category and its subcategories
@@ -105,9 +109,7 @@ get_template_part('template-parts/sections/articles', 'top');
 //get_template_part('template-parts/sections/apps'); 
 ?>
 
-<?php
-get_template_part('template-parts/sections/articles', 'latest');
-?>
+
 
 <?php
 get_footer();

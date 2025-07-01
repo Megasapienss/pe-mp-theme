@@ -16,13 +16,13 @@
         padding-right: 60px;
 
         @include less-than('md') {
+            align-items: flex-start;
 
             // flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
+            // justify-content: flex-start;
 
-            padding-top: 64px;
-            padding-bottom: 24px;
+            padding-top: 60px;
+            padding-bottom: 32px;
             padding-left: 0px;
             padding-right: 0px;
         }
@@ -66,9 +66,9 @@
 
     @include less-than('xl') {
         grid-template-columns: 1fr;
-        padding-top: 56px;
-        padding-left: 12px;
-        padding-right: 12px;
+        padding-top: 40px;
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
     &>.label {
@@ -77,9 +77,14 @@
 }
 
 .topics-section {
-    & .cards {
+    & .section__title + .cards {
         padding-top: 80px;
         padding-bottom: 80px;
+
+        @include less-than('md') {
+            padding-top: 0px;
+            padding-bottom: 60px;
+        }
     }
 
 }

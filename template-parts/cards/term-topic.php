@@ -49,8 +49,9 @@ $child_categories = get_terms(array(
     </div>
 
     <div class="card__corner corner corner--right-top">
-        <span class="arrow-btn arrow-btn--primary">
+        <img src="<?= get_template_directory_uri(); ?>/dist/icons/badge-arrow-45.svg" alt="">
+        <!-- <span class="arrow-btn arrow-btn--primary">
             <?php echo esc_html($term->name); ?>
-        </span>
+        </span> -->
     </div>
 </a>

@@ -3,8 +3,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     flex-wrap: wrap;
     gap: 8px;
+
+    @include less-than('md') {
+        justify-content: flex-start;
+        text-align: start;
+    }
 
     color: $color-text;
     

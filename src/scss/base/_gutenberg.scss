@@ -17,6 +17,12 @@
     }
 
     .wp-block-heading {
+        margin-top: 32px !important;
+
+        @include less-than('md') {
+            margin-top: 16px !important;
+        }
+
         font-weight: 400 !important;
 
         & strong {

@@ -73,7 +73,7 @@ if ($post_count % 2 == 0) {
 ?>
 
 <?php
-get_template_part('template-parts/sections/articles', 'related');
+get_template_part('template-parts/sections/articles', 'top');
 ?>
 
 <?php

@@ -6,6 +6,10 @@
     padding: 48px 64px 128px;
     border-radius: 20px;
 
+    @include less-than('lg') {
+        margin-top: 60px;
+    }
+
     &__logo {
         width: 100%;
     }
@@ -13,7 +17,7 @@
     position: relative;
 
     @include less-than('md') {
-        & > .corner {
+        &>.corner {
             display: none;
         }
     }

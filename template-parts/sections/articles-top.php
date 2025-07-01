@@ -6,38 +6,30 @@
  * @package PE_MP_Theme
  */
 
-// Get the current post's categories
-$categories = get_the_category();
-$category_ids = array();
-foreach ($categories as $category) {
-    $category_ids[] = $category->term_id;
-}
-
-// Query related posts
-$related_posts = new WP_Query(array(
-    'category__in' => $category_ids,
+// Query random posts
+$random_posts = new WP_Query(array(
     'post__not_in' => array(get_the_ID()),
     'posts_per_page' => 6,
     'orderby' => 'rand'
 ));
 
 // Don't output anything if there are no posts
-if (!$related_posts->have_posts()) {
+if (!$random_posts->have_posts()) {
     return;
 }
 ?>
 
 <section class="section">
     <div class="section__title">
-        <h2 class="section__title-text">Top Articles</h2>
-        <a href="<?= get_permalink(get_option('page_for_posts')); ?>#posts" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
+        <h2 class="section__title-text">What else is worth exploring?</h2>
+        <a href="<?= get_permalink(get_option('page_for_posts')); ?>#posts" class="section__title-link arrow-btn arrow-btn--muted">View all</a>
     </div>
     <div class="cards grid grid--3">
         <?php
-        // Display related posts
-        foreach ($related_posts->posts as $post) :
+        // Display random posts
+        foreach ($random_posts->posts as $post) :
             get_template_part('template-parts/cards/post', 'simple', ['post' => $post]);
         endforeach;
         ?>
     </div>
-</section> 
+</section>

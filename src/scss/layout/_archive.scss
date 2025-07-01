@@ -14,9 +14,15 @@
     justify-content: center;
     gap: 24px;
 
+    @include less-than('md') {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+
     text-align: center;
 
-    &__breadcrumbs {
+    &__breadcrumbs,
+    .rank-math-breadcrumb {
         margin-bottom: 40px;
     }
 
@@ -27,6 +33,6 @@
     }
 }
 
-#topics + .archive-grid {
-    margin-top: 80px;
+.topics-section+.archive-grid {
+    padding-top: 64px;
 }
