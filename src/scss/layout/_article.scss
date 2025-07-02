@@ -17,9 +17,10 @@
         flex-direction: column;
         gap: 16px;
 
-        & p {
+        & p,
+        & li {
             @include body-md;
-            color: #202527;
+            color: $color-dark;
         }
 
         & .banner{

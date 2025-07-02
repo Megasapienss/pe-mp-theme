@@ -3,25 +3,6 @@
  * Base typography styles
  */
 
-body {
-  font-family: $font-primary;
-  font-size: $font-size-base;
-  line-height: $line-height-base;
-  color: $color-dark;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
 @mixin title {
   font-family: $font-primary;
   font-weight: 400;
@@ -274,9 +255,15 @@ h6 {
   @include body-lg;
 }
 
-p {
+body {
+  @include body;
+}
+
+p,
+li {
   margin: 0;
   @include body;
+  color: $color-dark;
 }
 
 a {

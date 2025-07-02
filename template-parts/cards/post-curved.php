@@ -19,7 +19,7 @@ $date = get_the_date('', $post->ID);
 $excerpt = wp_trim_words(get_the_excerpt($post), 20);
 ?>
 
-<a href="<?php echo esc_url($permalink); ?>" class="card card--post card--curved">
+<a href="<?php echo esc_url($permalink); ?>" class="card card--curved">
     <div class="card__cover" style="background-image: url(<?= get_the_post_thumbnail_url($post->ID, 'large'); ?>);">
         <div class="card__corner corner corner--left-top">
             <div class="label label--muted">

@@ -47,6 +47,10 @@ ol {
   list-style: none;
 }
 
+li {
+  margin: 0;
+}
+
 /* Make images easier to work with */
 img,
 picture {
@@ -656,25 +660,6 @@ select {
  * Typography
  * Base typography styles
  */
-body {
-  font-family: "Almarai", sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #202527;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
 .title-xl {
   font-family: "Almarai", sans-serif;
   font-weight: 400;
@@ -851,8 +836,7 @@ h6 {
   }
 }
 
-p {
-  margin: 0;
+body {
   font-family: "Figtree", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -860,7 +844,25 @@ p {
   letter-spacing: 0px;
 }
 @media (max-width: 767px) {
-  p {
+  body {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+p,
+li {
+  margin: 0;
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  color: #202527;
+}
+@media (max-width: 767px) {
+  p,
+  li {
     font-size: 16px;
     line-height: 22px;
   }
@@ -1566,6 +1568,10 @@ button {
 .page__content .wp-block-list li {
   margin-bottom: 16px;
 }
+.article__content .wp-block-list li:last-child,
+.page__content .wp-block-list li:last-child {
+  margin-bottom: 0;
+}
 .article__content ul.wp-block-list,
 .page__content ul.wp-block-list {
   list-style: disc;
@@ -1654,7 +1660,7 @@ body {
   flex-direction: column;
   gap: 16px;
 }
-.article__content p {
+.article__content p, .article__content li {
   font-family: "Figtree", sans-serif;
   font-weight: 400;
   font-size: 22px;
@@ -1663,7 +1669,7 @@ body {
   color: #202527;
 }
 @media (max-width: 767px) {
-  .article__content p {
+  .article__content p, .article__content li {
     font-size: 18px;
     line-height: 24px;
   }
@@ -3670,13 +3676,14 @@ body {
   flex-direction: column;
   justify-content: space-between;
   gap: 32px;
-  min-height: min(100vh - 96px, 700px);
+  aspect-ratio: 21/9;
 }
 @media (max-width: 767px) {
   .hero--banner {
     padding: 16px;
     min-height: 0;
     gap: 64px;
+    aspect-ratio: auto;
   }
 }
 @media (max-width: 767px) {
@@ -3687,6 +3694,7 @@ body {
   }
 }
 .hero--xl {
+  aspect-ratio: auto;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -3791,6 +3799,11 @@ body {
 .hero--banner .rank-math-breadcrumb .separator {
   color: rgba(255, 255, 255, 0.6);
 }
+.breadcrumbs--light .last, .hero--banner .breadcrumbs .last,
+.rank-math-breadcrumb--light .last,
+.hero--banner .rank-math-breadcrumb .last {
+  color: #FFFFFF;
+}
 
 .cards {
   display: grid;
@@ -3851,7 +3864,7 @@ body {
   }
 }
 .card__cover {
-  aspect-ratio: 16/9;
+  aspect-ratio: 21/9;
   border-radius: 20px;
   position: relative;
   background-size: cover;
@@ -3865,13 +3878,8 @@ body {
   flex-wrap: wrap;
 }
 .card--post {
-  min-height: 600px;
+  aspect-ratio: 1/1;
   background-color: #F6F6F6;
-}
-@media (max-width: 991px) {
-  .card--post {
-    min-height: 400px;
-  }
 }
 .card--curved {
   padding: 0;

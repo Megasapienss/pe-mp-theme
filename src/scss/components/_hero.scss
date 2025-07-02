@@ -9,12 +9,14 @@
         flex-direction: column;
         justify-content: space-between;
         gap: 32px;
-        min-height: min(calc(100vh - 96px), 700px);
+        // min-height: min(calc(100vh - 96px), 700px);
+        aspect-ratio: 21/9;
 
         @include less-than(md) {
             padding: 16px;
             min-height: 0;
             gap: 64px;
+            aspect-ratio: auto;
         }
 
         .hero__breadcrumbs,
@@ -29,6 +31,7 @@
     }
 
     &--xl {
+        aspect-ratio: auto;
         justify-content: center;
         align-items: center;
         text-align: center;
