@@ -36,6 +36,7 @@
         </div>
     </div>
     <div class="d-flex flex-column">
+        <script src="https://js-eu1.hsforms.net/forms/embed/developer/146352434.js" defer></script>
         <div class="newsletter-section__card">
             <div class="newsletter-section__content">
                 <p class="heading-h6 text-accent">
