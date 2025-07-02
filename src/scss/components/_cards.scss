@@ -5,6 +5,7 @@
 
 .card {
     background-size: cover;
+    background-position: center;
     border-radius: 20px;
 
     padding: 16px;
@@ -77,6 +78,10 @@
     &--post {
         min-height: 600px;
         background-color: $bg-muted;
+
+        @include less-than('lg') {
+            min-height: 400px;
+        }
     }
 
     &--curved {
@@ -220,7 +225,7 @@
                 color: $color-muted;
             }
 
-            &__title{
+            &__title {
                 padding-right: 32px;
 
                 @include less-than('xl') {

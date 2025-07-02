@@ -1,2 +1,75 @@
-/*! For license information please see scripts.js.LICENSE.txt */
-(()=>{function t(){var n,r,o="function"==typeof Symbol?Symbol:{},i=o.iterator||"@@iterator",c=o.toStringTag||"@@toStringTag";function a(t,o,i,c){var a=o&&o.prototype instanceof l?o:l,f=Object.create(a.prototype);return e(f,"_invoke",function(t,e,o){var i,c,a,l=0,f=o||[],s=!1,d={p:0,n:0,v:n,a:p,f:p.bind(n,4),d:function(t,e){return i=t,c=0,a=n,d.n=e,u}};function p(t,e){for(c=t,a=e,r=0;!s&&l&&!o&&r<f.length;r++){var o,i=f[r],p=d.p,v=i[2];t>3?(o=v===e)&&(a=i[(c=i[4])?5:(c=3,3)],i[4]=i[5]=n):i[0]<=p&&((o=t<2&&p<i[1])?(c=0,d.v=e,d.n=i[1]):p<v&&(o=t<3||i[0]>e||e>v)&&(i[4]=t,i[5]=e,d.n=v,c=0))}if(o||t>1)return u;throw s=!0,e}return function(o,f,v){if(l>1)throw TypeError("Generator is already running");for(s&&1===f&&p(f,v),c=f,a=v;(r=c<2?n:a)||!s;){i||(c?c<3?(c>1&&(d.n=-1),p(c,a)):d.n=a:d.v=a);try{if(l=2,i){if(c||(o="next"),r=i[o]){if(!(r=r.call(i,a)))throw TypeError("iterator result is not an object");if(!r.done)return r;a=r.value,c<2&&(c=0)}else 1===c&&(r=i.return)&&r.call(i),c<2&&(a=TypeError("The iterator does not provide a '"+o+"' method"),c=1);i=n}else if((r=(s=d.n<0)?a:t.call(e,d))!==u)break}catch(t){i=n,c=1,a=t}finally{l=1}}return{value:r,done:s}}}(t,i,c),!0),f}var u={};function l(){}function f(){}function s(){}r=Object.getPrototypeOf;var d=[][i]?r(r([][i]())):(e(r={},i,(function(){return this})),r),p=s.prototype=l.prototype=Object.create(d);function v(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,s):(t.__proto__=s,e(t,c,"GeneratorFunction")),t.prototype=Object.create(p),t}return f.prototype=s,e(p,"constructor",s),e(s,"constructor",f),f.displayName="GeneratorFunction",e(s,c,"GeneratorFunction"),e(p),e(p,c,"Generator"),e(p,i,(function(){return this})),e(p,"toString",(function(){return"[object Generator]"})),(t=function(){return{w:a,m:v}})()}function e(t,n,r,o){var i=Object.defineProperty;try{i({},"",{})}catch(t){i=0}e=function(t,n,r,o){if(n)i?i(t,n,{value:r,enumerable:!o,configurable:!o,writable:!o}):t[n]=r;else{var c=function(n,r){e(t,n,(function(t){return this._invoke(n,r,t)}))};c("next",0),c("throw",1),c("return",2)}},e(t,n,r,o)}function n(t,e,n,r,o,i,c){try{var a=t[i](c),u=a.value}catch(t){return void n(t)}a.done?e(u):Promise.resolve(u).then(r,o)}function r(t){return function(){var e=this,r=arguments;return new Promise((function(o,i){var c=t.apply(e,r);function a(t){n(c,o,i,a,u,"next",t)}function u(t){n(c,o,i,a,u,"throw",t)}a(void 0)}))}}document.addEventListener("DOMContentLoaded",(function(){var e=document.querySelectorAll(".toggle--off-canvas--menu"),n=document.querySelector(".off-canvas--menu");e.length>0&&n&&e.forEach((function(t){t.addEventListener("click",(function(){n.classList.toggle("off-canvas--visible")}))})),document.querySelectorAll(".label--share").forEach((function(e){e.addEventListener("click",r(t().m((function e(){var n,r,o,i;return t().w((function(t){for(;;)switch(t.n){case 0:if(!navigator.share){t.n=5;break}return t.p=1,r={title:document.title,text:(null===(n=document.querySelector('meta[name="description"]'))||void 0===n?void 0:n.content)||"Check out this article",url:window.location.href},t.n=2,navigator.share(r);case 2:t.n=4;break;case 3:t.p=3,o=t.v,console.log("Share cancelled or failed:",o);case 4:t.n=8;break;case 5:return t.p=5,t.n=6,navigator.clipboard.writeText(window.location.href);case 6:alert("Link copied to clipboard!"),t.n=8;break;case 7:t.p=7,i=t.v,console.log("Failed to copy to clipboard:",i),prompt("Copy this link:",window.location.href);case 8:return t.a(2)}}),e,null,[[5,7],[1,3]])}))))}))}))})();
+/******/ (() => { // webpackBootstrap
+/*!************************!*\
+  !*** ./src/js/main.js ***!
+  \************************/
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { if (r) i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n;else { var o = function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); }; o("next", 0), o("throw", 1), o("return", 2); } }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+// Main JavaScript file
+document.addEventListener('DOMContentLoaded', function () {
+  // Off-canvas menu toggle
+  var offCanvasToggleButtons = document.querySelectorAll('.toggle--off-canvas--menu');
+  var offCanvas = document.querySelector('.off-canvas--menu');
+  if (offCanvasToggleButtons.length > 0 && offCanvas) {
+    offCanvasToggleButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        offCanvas.classList.toggle('off-canvas--visible');
+      });
+    });
+  }
+
+  // Native share functionality
+  var shareButtons = document.querySelectorAll('.label--share');
+  shareButtons.forEach(function (button) {
+    button.addEventListener('click', /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var _document$querySelect, shareData, _t, _t2;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.n) {
+          case 0:
+            if (!navigator.share) {
+              _context.n = 5;
+              break;
+            }
+            _context.p = 1;
+            shareData = {
+              title: document.title,
+              text: ((_document$querySelect = document.querySelector('meta[name="description"]')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.content) || 'Check out this article',
+              url: window.location.href
+            };
+            _context.n = 2;
+            return navigator.share(shareData);
+          case 2:
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            console.log('Share cancelled or failed:', _t);
+          case 4:
+            _context.n = 8;
+            break;
+          case 5:
+            _context.p = 5;
+            _context.n = 6;
+            return navigator.clipboard.writeText(window.location.href);
+          case 6:
+            alert('Link copied to clipboard!');
+            _context.n = 8;
+            break;
+          case 7:
+            _context.p = 7;
+            _t2 = _context.v;
+            console.log('Failed to copy to clipboard:', _t2);
+            // Fallback: prompt user to copy manually
+            prompt('Copy this link:', window.location.href);
+          case 8:
+            return _context.a(2);
+        }
+      }, _callee, null, [[5, 7], [1, 3]]);
+    })));
+  });
+});
+/******/ })()
+;
+//# sourceMappingURL=scripts.js.map

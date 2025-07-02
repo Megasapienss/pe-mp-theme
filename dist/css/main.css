@@ -2129,6 +2129,7 @@ body {
 }
 .footer .community-banner__actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
 }
@@ -3798,6 +3799,7 @@ body {
 
 .card {
   background-size: cover;
+  background-position: center;
   border-radius: 20px;
   padding: 16px;
   display: flex;
@@ -3865,6 +3867,11 @@ body {
 .card--post {
   min-height: 600px;
   background-color: #F6F6F6;
+}
+@media (max-width: 991px) {
+  .card--post {
+    min-height: 400px;
+  }
 }
 .card--curved {
   padding: 0;
