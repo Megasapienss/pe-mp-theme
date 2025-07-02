@@ -78,12 +78,10 @@
 
 .topics-section {
     & .section__title + .cards {
-        padding-top: 80px;
-        padding-bottom: 80px;
+        margin-top: 80px;
 
         @include less-than('md') {
-            padding-top: 0px;
-            padding-bottom: 60px;
+            margin-top: 0px;
         }
     }
 

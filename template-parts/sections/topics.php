@@ -37,7 +37,7 @@ if (empty($categories) || is_wp_error($categories)) {
     <?php if (!empty($section_title)) : ?>
         <div class="section__title">
             <h2 class="section__title-text"><?= $section_title; ?></h2>
-            <a href="<?= get_permalink(get_option('page_for_posts')); ?>#topics" class="section__title-link arrow-btn arrow-btn--muted">See all</a>
+            <a href="<?= get_permalink(get_option('page_for_posts')); ?>#topics" class="section__title-link arrow-btn arrow-btn--muted">View all</a>
         </div>
     <?php endif; ?>
     <div class="cards grid grid--2 container container--wide">

@@ -26,7 +26,7 @@ get_header();
 <?php
 // Get all post tags
 $post_tags = get_terms(array(
-    'taxonomy' => 'post_tag',
+    'taxonomy' => 'category',
     'hide_empty' => true
 ));
 

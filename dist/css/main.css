@@ -1907,13 +1907,11 @@ body {
 }
 
 .topics-section .section__title + .cards {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  margin-top: 80px;
 }
 @media (max-width: 767px) {
   .topics-section .section__title + .cards {
-    padding-top: 0px;
-    padding-bottom: 60px;
+    margin-top: 0px;
   }
 }
 
