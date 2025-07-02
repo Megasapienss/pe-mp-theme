@@ -62,12 +62,12 @@ get_header();
                 </div>
             </div>
             <div class="sidebar-card sidebar-card--quiz">
-                <h3 class="sidebar-card__title">Feeling mentally drained?</h3>
-                <p class="sidebar-card__excerpt">Take our 2-minute burnout quiz
-                    and get instant insights on your emotional state.
+                <h3 class="sidebar-card__title">Feeling low?</h3>
+                <p class="sidebar-card__excerpt">
+                    Check your depression level and get a personalized action plan in 3 minutes.
                 </p>
                 <button class="sidebar-card__link arrow-btn arrow-btn--primary" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
-                    <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
+                    <?php esc_html_e('Start test', 'pe-mp-theme'); ?>
                 </button>
             </div>
         </aside>
