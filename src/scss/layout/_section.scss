@@ -41,6 +41,22 @@
 
 }
 
+.articles-section {
+    & > .grid {
+        @include less-than('xxl') {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @include less-than('lg') {
+            grid-template-columns: 1fr;
+        }
+
+        & > .banner {
+            aspect-ratio: 1/1;
+        }
+    }
+}
+
 .providers-section {
     display: grid;
     grid-template-columns: 2fr 1fr;

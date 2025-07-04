@@ -1871,6 +1871,20 @@ body {
   margin-bottom: 12px;
 }
 
+@media (max-width: 1599px) {
+  .articles-section > .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 991px) {
+  .articles-section > .grid {
+    grid-template-columns: 1fr;
+  }
+}
+.articles-section > .grid > .banner {
+  aspect-ratio: 1/1;
+}
+
 .providers-section {
   display: grid;
   grid-template-columns: 2fr 1fr;

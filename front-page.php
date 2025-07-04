@@ -36,7 +36,6 @@ get_header();
 get_template_part('template-parts/sections/articles', 'latest');
 ?>
 
-
 <?php
 // Get the "Science & Innovation" category and its subcategories
 $science_innovation_category = get_term_by('name', 'Science & Innovation', 'category');
@@ -53,7 +52,8 @@ if ($science_innovation_category && !is_wp_error($science_innovation_category)) 
     if (!empty($science_innovation_subcategories) && !is_wp_error($science_innovation_subcategories)) {
         get_template_part('template-parts/sections/topics', null, array(
             'custom_categories' => $science_innovation_subcategories,
-            'section_title' => 'Science & Innovation'
+            'section_title' => 'Science & Innovation',
+            'view_all_link' => get_term_link($science_innovation_category)
         ));
     }
 } else {
@@ -80,7 +80,8 @@ if ($mental_wellness_category && !is_wp_error($mental_wellness_category)) {
     if (!empty($mental_wellness_subcategories) && !is_wp_error($mental_wellness_subcategories)) {
         get_template_part('template-parts/sections/topics', null, array(
             'custom_categories' => $mental_wellness_subcategories,
-            'section_title' => 'Mental Wellness'
+            'section_title' => 'Mental Wellness',
+            'view_all_link' => get_term_link($mental_wellness_category)
         ));
     }
 } else {

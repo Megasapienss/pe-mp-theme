@@ -19,21 +19,31 @@ get_header();
         'class' => 'breadcrumbs breadcrumbs--dark archive-title__breadcrumbs'
     ));
     ?>
-    <h1 class="archive-title__name title-lg">Explore our topics</h1>
-    <p class="archive-title__description heading-h2">Latest articles and updates</p>
+    <h1 class="archive-title__name title-lg">Stories and Guides</h1>
+    <p class="archive-title__description heading-h2">Discover insights for a healthier mind and life</p>
 </section>
 
 <?php
-// Get all post tags
-$post_tags = get_terms(array(
+// Get only subcategories (child categories)
+$all_categories = get_terms(array(
     'taxonomy' => 'category',
-    'hide_empty' => true
+    'hide_empty' => true,
+    'orderby' => 'name',
+    'order' => 'ASC'
 ));
 
-// Display post tags if they exist
-if (!empty($post_tags) && !is_wp_error($post_tags)) :
+// Filter to only include subcategories (categories with a parent)
+$subcategories = array();
+foreach ($all_categories as $category) {
+    if ($category->parent > 0 && $category->parent != 1) {
+        $subcategories[] = $category;
+    }
+}
+
+// Display subcategories if they exist
+if (!empty($subcategories) && !is_wp_error($subcategories)) :
     get_template_part('template-parts/sections/topics', null, array(
-        'custom_categories' => $post_tags,
+        'custom_categories' => $subcategories,
         'section_title' => ''
     ));
 endif;

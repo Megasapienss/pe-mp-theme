@@ -9,6 +9,7 @@
 // Check if custom categories are passed via $args
 $custom_categories = isset($args['custom_categories']) ? $args['custom_categories'] : null;
 $custom_title = isset($args['section_title']) ? $args['section_title'] : null;
+$custom_view_all_link = isset($args['view_all_link']) ? $args['view_all_link'] : null;
 
 
 if ($custom_categories && !is_wp_error($custom_categories)) {
@@ -26,6 +27,7 @@ if ($custom_categories && !is_wp_error($custom_categories)) {
 }
 
 $section_title = $custom_title !== null ? $custom_title : 'Explore Topics';
+$view_all_link = $custom_view_all_link !== null ? $custom_view_all_link : get_permalink(get_option('page_for_posts')) . '#topics';
 
 // Don't output anything if there are no categories
 if (empty($categories) || is_wp_error($categories)) {
@@ -37,7 +39,7 @@ if (empty($categories) || is_wp_error($categories)) {
     <?php if (!empty($section_title)) : ?>
         <div class="section__title">
             <h2 class="section__title-text"><?= $section_title; ?></h2>
-            <a href="<?= get_permalink(get_option('page_for_posts')); ?>#topics" class="section__title-link arrow-btn arrow-btn--muted">View all</a>
+            <a href="<?= $view_all_link; ?>" class="section__title-link arrow-btn arrow-btn--muted">View all</a>
         </div>
     <?php endif; ?>
     <div class="cards grid grid--2 container container--wide">
