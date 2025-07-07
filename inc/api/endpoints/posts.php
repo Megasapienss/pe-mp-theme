@@ -38,7 +38,7 @@ function pe_mp_get_all_posts($request)
     // Get parameters
     $post_type = $request->get_param('post_type');
     $category = $request->get_param('category');
-    
+
     // Build query arguments - get ALL posts
     $args = array(
         'post_type' => $post_type,
@@ -47,39 +47,39 @@ function pe_mp_get_all_posts($request)
         'orderby' => 'date',
         'order' => 'DESC'
     );
-    
+
     // Add category filter if specified
     if (!empty($category)) {
         $args['category_name'] = $category;
     }
-    
+
     // Get posts
     $query = new WP_Query($args);
     $posts = array();
-    
+
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
-            
+
             // Get the main category (first category)
             $categories = get_the_category();
             $main_category = !empty($categories) ? $categories[0]->name : '';
-            
+
             $posts[] = array(
                 'title' => get_the_title(),
-                'url' => get_permalink(),
                 'category' => $main_category,
+                'link' => get_permalink(),
             );
         }
         wp_reset_postdata();
     }
-    
+
     // Prepare response
     $response = array(
         'success' => true,
         'data' => $posts,
         'total' => count($posts)
     );
-    
+
     return new WP_REST_Response($response, 200);
 }
