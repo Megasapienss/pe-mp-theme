@@ -28,6 +28,9 @@ require_once get_template_directory() . '/inc/ajax-handlers.php';
 // Load shortcodes
 require_once get_template_directory() . '/inc/shortcodes.php';
 
+// Load REST API
+require_once get_template_directory() . '/inc/api/init.php';
+
 // Theme Setup
 function pe_mp_theme_setup()
 {
