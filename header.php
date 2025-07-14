@@ -64,6 +64,7 @@
         })(window, document, 'script', 'dataLayer', 'GTM-WCXW64N3');
     </script>
     <!-- End Google Tag Manager -->
+    <!-- Amplitude -->
     <script src="https://cdn.eu.amplitude.com/script/b1ebe560a0af47578b4306df667e3d2c.js"></script>
     <script>
         window.amplitude.add(window.sessionReplay.plugin({
@@ -75,6 +76,7 @@
             "autocapture": true
         });
     </script>
+    <!-- End Amplitude -->
 </head>
 
 <body <?php body_class(); ?>>
