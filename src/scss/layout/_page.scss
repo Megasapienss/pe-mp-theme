@@ -6,7 +6,8 @@
         flex-direction: column;
         gap: 32px;
 
-        & p {
+        & p,
+        & li {
             @include body-md;
             color: #202527;
         }

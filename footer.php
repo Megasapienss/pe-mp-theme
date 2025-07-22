@@ -11,7 +11,7 @@
 
 <footer class="footer">
     <div class="d-flex flex-column">
-        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1--footer.svg" alt="<?php bloginfo('name'); ?>" class="footer__logo">
+        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>" class="footer__logo">
         <div class="community-banner">
             <h4>JOIN OUR COMMUNITY INNER TALKS</h4>
             <p>From psychedelic guidance to AI-powered psychotherapy, from microdosing practices to fully held emotional deep work — we’re mapping what’s next in mental health to help you find the right tool.</p>

@@ -66,9 +66,9 @@ get_header();
                 <p class="sidebar-card__excerpt">
                     Check your depression level and get a personalized action plan in 3 minutes.
                 </p>
-                <button class="sidebar-card__link arrow-btn arrow-btn--primary" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
+                <a href="/tests/assessment/" class="sidebar-card__link arrow-btn arrow-btn--primary">
                     <?php esc_html_e('Start test', 'pe-mp-theme'); ?>
-                </button>
+                </a>
             </div>
         </aside>
     </article>

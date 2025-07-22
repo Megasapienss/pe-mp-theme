@@ -1779,7 +1779,7 @@ body {
   flex-direction: column;
   gap: 32px;
 }
-.page__content p {
+.page__content p, .page__content li {
   font-family: "Figtree", sans-serif;
   font-weight: 400;
   font-size: 22px;
@@ -1788,7 +1788,7 @@ body {
   color: #202527;
 }
 @media (max-width: 767px) {
-  .page__content p {
+  .page__content p, .page__content li {
     font-size: 18px;
     line-height: 24px;
   }

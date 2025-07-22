@@ -106,9 +106,9 @@
         </nav>
 
         <div class="header__actions">
-            <button class="btn btn--accent" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
+            <a href="/tests/assessment/" class="btn btn--accent">
                 <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
-            </button>
+            </a>
         </div>
     </header>
     <aside class="off-canvas off-canvas--menu">
@@ -130,9 +130,9 @@
             ?>
         </nav>
         <div class="off-canvas__actions">
-            <button class="btn btn--accent" onclick="window.dispatchEvent(new CustomEvent('heyflow-modal-element:open', { detail: { modalId: '2yeWxj1NPN' }}))">
+            <a href="/tests/assessment/" class="btn btn--accent">
                 <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
-            </button>
+            </a>
         </div>
     </aside>
 
