@@ -22,6 +22,62 @@ $post_count = $wp_query->found_posts;
 </section>
 
 <?php
+// Quiz Cards Section - Only show for diagnostics category
+if ($term && !is_wp_error($term) && $term->slug === 'diagnostics') :
+    $quiz_categories = array(
+        array(
+            'name' => 'Depression',
+            'description' => 'This assessment will help us understand your depression symptoms.',
+            'link' => '/tests/depression/',
+            'image' => get_template_directory_uri() . '/dist/images/states/depression.png'
+        ),
+        array(
+            'name' => 'Anxiety',
+            'description' => 'This assessment will help us understand your anxiety symptoms.',
+            'link' => '/tests/anxiety/',
+            'image' => get_template_directory_uri() . '/dist/images/states/anxiety.png'
+        ),
+        array(
+            'name' => 'PTSD',
+            'description' => 'This assessment will help us understand your PTSD symptoms.',
+            'link' => '/tests/ptsd/',
+            'image' => get_template_directory_uri() . '/dist/images/states/ptsd.png'
+        ),
+        array(
+            'name' => 'ADHD',
+            'description' => 'This assessment will help us understand your ADHD symptoms.',
+            'link' => '/tests/adhd/',
+            'image' => get_template_directory_uri() . '/dist/images/states/adhd.png'
+        )
+    );
+?>
+    <section class="section tests-section" id="tests">
+        <div class="cards grid grid--2 container container--wide">
+            <?php foreach ($quiz_categories as $quiz) : ?>
+                <a href="<?php echo esc_url($quiz['link']); ?>" class="card card--topic">
+                    <img src="<?php echo esc_url($quiz['image']); ?>" alt="<?php echo esc_attr($quiz['name']); ?>" class="card__image">
+                    <div class="d-flex flex-column">
+                        <h3 class="card__title">
+                            <?php echo esc_html($quiz['name']); ?>
+                        </h3>
+                        <div class="card__excerpt">
+                            <?php echo esc_html($quiz['description']); ?>
+                        </div>
+                        <div class="card__tags tags">
+                            <span class="label label--squared label--primary-inversed">Takes only 3 minutes</span>
+                            <span class="label label--squared label--primary-inversed">Free</span>
+                        </div>
+                    </div>
+                    <div class="card__corner corner corner--right-top">
+                        <img src="<?= get_template_directory_uri(); ?>/dist/icons/badge-arrow-45.svg" alt="">
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </section>
+<?php endif; ?>
+
+<?php
 // Get child categories of the current term
 $child_categories = get_terms(array(
     'taxonomy' => $term->taxonomy,

@@ -1825,7 +1825,8 @@ body {
   text-wrap: pretty;
 }
 
-.topics-section + .archive-grid {
+.topics-section + .archive-grid,
+.tests-section + .archive-grid {
   padding-top: 64px;
 }
 
@@ -2129,6 +2130,15 @@ body {
 .footer__logo {
   max-width: 400px;
   width: 100%;
+}
+.footer__links {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.footer__links a {
+  color: rgba(255, 255, 255, 0.6);
 }
 .footer .community-banner {
   display: flex;

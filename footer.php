@@ -34,6 +34,14 @@
                 <li>Clear it out — we tackle the questions Reddit left hanging and no one else dares to answer</li>
             </ul>
         </div>
+        <div class="d-flex footer__links">
+            <a href="/privacy-policy/">
+                <?php esc_html_e('Privacy Policy', 'pe-mp-theme'); ?>
+            </a>
+            <a href="/terms-and-conditions/">
+                <?php esc_html_e('Terms and Conditions', 'pe-mp-theme'); ?>
+            </a>
+        </div>
     </div>
     <div class="d-flex flex-column">
         <script src="https://js-eu1.hsforms.net/forms/embed/developer/146352434.js" defer></script>
