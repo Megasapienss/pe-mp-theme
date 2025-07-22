@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="corner corner--left-bottom">
-        <span>@Created by mindandhealth</span>
+        <span>@Created by State of Mind</span>
     </div>
     <div class="corner corner--right-bottom">
         <span>All Rights Reserved</span>

@@ -27,25 +27,25 @@ if ($term && !is_wp_error($term) && $term->slug === 'diagnostics') :
     $quiz_categories = array(
         array(
             'name' => 'Depression',
-            'description' => 'This assessment will help us understand your depression symptoms.',
+            'description' => 'Explore how depression may be affecting your daily life.',
             'link' => '/tests/depression/',
             'image' => get_template_directory_uri() . '/dist/images/states/depression.png'
         ),
         array(
             'name' => 'Anxiety',
-            'description' => 'This assessment will help us understand your anxiety symptoms.',
+            'description' => 'Gain insight into your experience with anxiety.',
             'link' => '/tests/anxiety/',
             'image' => get_template_directory_uri() . '/dist/images/states/anxiety.png'
         ),
         array(
             'name' => 'PTSD',
-            'description' => 'This assessment will help us understand your PTSD symptoms.',
+            'description' => 'Discover how trauma may be impacting your wellbeing.',
             'link' => '/tests/ptsd/',
             'image' => get_template_directory_uri() . '/dist/images/states/ptsd.png'
         ),
         array(
             'name' => 'ADHD',
-            'description' => 'This assessment will help us understand your ADHD symptoms.',
+            'description' => 'Find out if ADHD traits are present in your life.',
             'link' => '/tests/adhd/',
             'image' => get_template_directory_uri() . '/dist/images/states/adhd.png'
         )
