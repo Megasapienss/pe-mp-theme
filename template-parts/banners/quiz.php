@@ -20,7 +20,7 @@ $args = wp_parse_args($args, array(
     <p class="banner__description">
         <?= !empty($args['description']) ? esc_html($args['description']) : 'Check your depression level and get a personalized action plan in 3 minutes.'; ?>
     </p>
-    <a href="/diagnostics/#tests" class="banner__link arrow-btn arrow-btn--primary">
+    <a href="/tests/assessment/" class="banner__link arrow-btn arrow-btn--primary">
         <?php esc_html_e('Start test', 'pe-mp-theme'); ?>
     </a>
     <!-- <a href="<?= esc_url($args['link']); ?>" class="banner__link arrow-btn arrow-btn--primary">Start test</a> -->

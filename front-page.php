@@ -16,7 +16,7 @@ get_header();
     <h2 class="hero__description">
         Discover the latest mental health breakthroughs, advanced diagnostics, and the therapies leading tomorrow's care.
     </h2>
-    <a href="/diagnostics/#tests" class="arrow-btn">
+    <a href="/tests/assessment/" class="arrow-btn">
         <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
     </a>
 </section>

@@ -66,7 +66,7 @@ get_header();
                 <p class="sidebar-card__excerpt">
                     Check your depression level and get a personalized action plan in 3 minutes.
                 </p>
-                <a href="/diagnostics/#tests" class="sidebar-card__link arrow-btn arrow-btn--primary">
+                <a href="/tests/assessment/" class="sidebar-card__link arrow-btn arrow-btn--primary">
                     <?php esc_html_e('Start test', 'pe-mp-theme'); ?>
                 </a>
             </div>
