@@ -14,6 +14,23 @@
         gap: 40px;
     }
 
+    &--focused {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        .footer__links {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 0;
+        }
+    }
+
     &__logo {
         max-width: 400px;
         width: 100%;
@@ -27,7 +44,7 @@
 
         & a {
             color: $color-muted-inverse;
-            
+
         }
     }
 

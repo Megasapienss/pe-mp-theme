@@ -44,8 +44,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <script src="https://assets.prd.heyflow.com/builder/widget/latest/webview.js"></script>
     <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
@@ -73,54 +71,8 @@
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <header class="header header--fixed">
-        <a href="<?php echo esc_url(home_url('/')); ?>">
-            <img title="Go to Homepage" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>" class="header__logo">
-        </a>
-
-        <nav class="header__navigation">
-            <?php
-            wp_nav_menu(array(
-                'theme_location' => 'primary',
-                'menu_id'        => 'primary-menu',
-                'container'      => false,
-                'menu_class'     => 'header__menu',
-                'fallback_cb'    => false,
-            ));
-            ?>
-
-            <img class="header__toggle toggle--off-canvas--menu" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/icons/icon-menu-open.svg" alt="Menu">
-        </nav>
-
-        <div class="header__actions">
-            <a href="/diagnostics/#tests" class="btn btn--accent">
-                <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
-            </a>
-        </div>
+    <header class="header header--focused">
+        <img title="Go to Homepage" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>" class="header__logo">
     </header>
-    <aside class="off-canvas off-canvas--menu">
-        <div class="off-canvas__header">
-            <a href="<?php echo esc_url(home_url('/')); ?>">
-                <img title="Go to Homepage" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>" class="header__logo">
-            </a>
-            <img class="header__toggle toggle--off-canvas--menu" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/icons/icon-menu-close.svg" alt="Menu">
-        </div>
-        <nav class="off-canvas__navigation">
-            <?php
-            wp_nav_menu(array(
-                'theme_location' => 'primary',
-                'menu_id'        => 'primary-menu',
-                'container'      => false,
-                'menu_class'     => 'off-canvas__menu',
-                'fallback_cb'    => false,
-            ));
-            ?>
-        </nav>
-        <div class="off-canvas__actions">
-            <a href="/diagnostics/#tests" class="btn btn--accent">
-                <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
-            </a>
-        </div>
-    </aside>
 
     <main class="main">

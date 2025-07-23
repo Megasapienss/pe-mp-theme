@@ -28,25 +28,25 @@ if ($term && !is_wp_error($term) && $term->slug === 'diagnostics') :
         array(
             'name' => 'Depression',
             'description' => 'Explore how depression may be affecting your daily life.',
-            'link' => '/tests/depression/',
+            'link' => '/tests/depression-standalone/',
             'image' => get_template_directory_uri() . '/dist/images/states/depression.png'
         ),
         array(
             'name' => 'Anxiety',
             'description' => 'Gain insight into your experience with anxiety.',
-            'link' => '/tests/anxiety/',
+            'link' => '/tests/anxiety-standalone/',
             'image' => get_template_directory_uri() . '/dist/images/states/anxiety.png'
         ),
         array(
             'name' => 'PTSD',
             'description' => 'Discover how trauma may be impacting your wellbeing.',
-            'link' => '/tests/ptsd/',
+            'link' => '/tests/ptsd-standalone/',
             'image' => get_template_directory_uri() . '/dist/images/states/ptsd.png'
         ),
         array(
             'name' => 'ADHD',
             'description' => 'Find out if ADHD traits are present in your life.',
-            'link' => '/tests/adhd/',
+            'link' => '/tests/adhd-standalone/',
             'image' => get_template_directory_uri() . '/dist/images/states/adhd.png'
         )
     );
