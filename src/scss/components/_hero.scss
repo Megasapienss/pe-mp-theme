@@ -7,7 +7,7 @@
         border-radius: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
         gap: 32px;
         // min-height: min(calc(100vh - 96px), 700px);
         aspect-ratio: 21/9;
@@ -15,12 +15,13 @@
         @include less-than(md) {
             padding: 16px;
             min-height: 0;
-            gap: 64px;
+            // gap: 64px;
             aspect-ratio: auto;
         }
 
         .hero__breadcrumbs,
         .rank-math-breadcrumb {
+            margin-bottom: auto;
             @include less-than('md') {
                 justify-content: flex-start;
                 text-align: start;

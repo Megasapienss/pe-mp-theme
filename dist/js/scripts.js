@@ -19,6 +19,213 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Table of Contents functionality
+  var tocList = document.querySelector('.hero__toc-list');
+  var articleContent = document.querySelector('.article__content');
+  if (tocList && articleContent) {
+    // Define updateCurrentHeading function
+    var updateCurrentHeading = function updateCurrentHeading() {
+      var newCurrentHeading = null;
+
+      // Check if we're at the top (Overview)
+      if (h2Headings.length === 0) {
+        newCurrentHeading = 'overview';
+      } else {
+        var firstHeading = h2Headings[0];
+        var firstChild = articleContent.firstElementChild;
+
+        // Check if we're at the top (Overview)
+        if (firstChild) {
+          var rect = firstChild.getBoundingClientRect();
+          var firstChildTopPosition = rect.top;
+
+          // If first child is above the offset position, we're in overview
+          if (firstChildTopPosition > 120) {
+            newCurrentHeading = 'overview';
+          } else {
+            // Find the current heading by checking which one is at the top position
+            var foundHeading = false;
+            for (var i = h2Headings.length - 1; i >= 0; i--) {
+              var heading = h2Headings[i];
+              // Skip newsletter headings
+              if (heading.textContent.toLowerCase().includes('newsletter')) {
+                continue;
+              }
+              var headingRect = heading.getBoundingClientRect();
+              var headingTopPosition = headingRect.top;
+
+              // Check if this heading is at the top position (120px from top)
+              if (headingTopPosition <= 120) {
+                newCurrentHeading = heading;
+                foundHeading = true;
+                break;
+              }
+            }
+
+            // If no heading was found, we're in overview
+            if (!foundHeading) {
+              newCurrentHeading = 'overview';
+            }
+          }
+        } else {
+          newCurrentHeading = 'overview';
+        }
+      }
+
+      // Only update if the current heading has changed
+      if (newCurrentHeading !== currentActiveHeading) {
+        // Remove current class from all links
+        tocLinks.forEach(function (link) {
+          return link.classList.remove('current');
+        });
+
+        // Add current class to the new active heading
+        if (newCurrentHeading === 'overview') {
+          var _overviewLink = tocList.querySelector('a[href="#article-overview"]');
+          if (_overviewLink) {
+            _overviewLink.classList.add('current');
+          }
+        } else if (newCurrentHeading) {
+          var currentLink = tocList.querySelector("a[href=\"#".concat(newCurrentHeading.id, "\"]"));
+          if (currentLink) {
+            currentLink.classList.add('current');
+          }
+        }
+
+        // Update the current active heading
+        currentActiveHeading = newCurrentHeading;
+      }
+    }; // Define throttledScrollHandler function
+    var throttledScrollHandler = function throttledScrollHandler() {
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = setTimeout(updateCurrentHeading, 50);
+    }; // Clear existing placeholder content
+    var h2Headings = articleContent.querySelectorAll('h2');
+    var tocLinks = tocList.querySelectorAll('a');
+    var currentActiveHeading = null;
+    var scrollTimeout = null;
+    tocList.innerHTML = '';
+
+    // Add "Overview" link
+    var overviewLink = document.createElement('a');
+    overviewLink.href = '#article-overview';
+    overviewLink.textContent = 'Overview';
+    overviewLink.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Find the first child element of article content
+      var firstChild = articleContent.firstElementChild;
+      if (firstChild) {
+        // Use scrollIntoView with offset
+        firstChild.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+
+        // Temporarily disable scroll detection to prevent interference
+        window.removeEventListener('scroll', throttledScrollHandler);
+
+        // Re-enable after scroll animation completes
+        setTimeout(function () {
+          window.addEventListener('scroll', throttledScrollHandler);
+          updateCurrentHeading();
+        }, 800);
+        history.pushState(null, null, '#article-overview');
+      }
+    });
+    tocList.appendChild(overviewLink);
+
+    // Add ID to article content
+    if (!articleContent.id) {
+      articleContent.id = 'article-content';
+    }
+
+    // Create TOC links for headings
+    if (h2Headings.length > 0) {
+      h2Headings.forEach(function (heading, index) {
+        // Skip newsletter headings
+        if (heading.textContent.toLowerCase().includes('newsletter')) {
+          return;
+        }
+
+        // Create ID for heading
+        if (!heading.id) {
+          heading.id = "heading-".concat(index + 1);
+        }
+
+        // Create TOC link
+        var tocLink = document.createElement('a');
+        tocLink.href = "#".concat(heading.id);
+        tocLink.textContent = heading.textContent;
+        tocLink.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          // Use scrollIntoView with offset
+          heading.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+
+          // Temporarily disable scroll detection to prevent interference
+          window.removeEventListener('scroll', throttledScrollHandler);
+
+          // Re-enable after scroll animation completes
+          setTimeout(function () {
+            window.addEventListener('scroll', throttledScrollHandler);
+            updateCurrentHeading();
+          }, 800);
+          history.pushState(null, null, "#".concat(heading.id));
+        });
+        tocList.appendChild(tocLink);
+      });
+    }
+
+    // Update on scroll with throttling
+    window.addEventListener('scroll', throttledScrollHandler);
+
+    // Update tocLinks reference after all links are created
+    tocLinks = tocList.querySelectorAll('a');
+
+    // Initial update - make Overview current by default
+    setTimeout(function () {
+      updateCurrentHeading();
+      // Force Overview to be current on page load
+      var overviewLink = tocList.querySelector('a[href="#article-overview"]');
+      if (overviewLink) {
+        tocLinks.forEach(function (link) {
+          return link.classList.remove('current');
+        });
+        overviewLink.classList.add('current');
+      }
+    }, 100);
+  }
+
+  // Mouse wheel scrolling for TOC
+  if (tocList) {
+    tocList.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      // Reduce scroll sensitivity for smoother movement
+      var scrollAmount = e.deltaY * 3;
+      tocList.scrollLeft += scrollAmount;
+    });
+  }
+
+  // Sticky TOC functionality
+  var toc = document.querySelector('.hero__toc');
+  if (toc) {
+    var tocWrapper = document.querySelector('.hero__toc-wrapper');
+    var tocOffset = tocWrapper.offsetTop;
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset >= tocOffset) {
+        toc.classList.add('sticky');
+      } else {
+        toc.classList.remove('sticky');
+      }
+    });
+  }
+
   // Native share functionality
   var shareButtons = document.querySelectorAll('.label--share');
   shareButtons.forEach(function (button) {
@@ -69,6 +276,115 @@ document.addEventListener('DOMContentLoaded', function () {
       }, _callee, null, [[5, 7], [1, 3]]);
     })));
   });
+
+  // External links collection and sources list
+  function collectExternalLinks() {
+    var articleContent = document.querySelector('.article__content');
+    if (!articleContent) return;
+
+    // Get current domain for comparison
+    var currentDomain = window.location.hostname;
+
+    // Find all links in the article content
+    var links = articleContent.querySelectorAll('a[href]');
+    var externalLinks = [];
+    links.forEach(function (link) {
+      var href = link.href;
+      var url = new URL(href);
+
+      // Check if it's an external link (different domain)
+      if (url.hostname !== currentDomain && url.hostname !== '') {
+        // Get link text or fallback to URL
+        var linkText = link.textContent.trim() || link.href;
+
+        // Check if this link is already in our list
+        var existingLink = externalLinks.find(function (item) {
+          return item.url === href;
+        });
+        if (!existingLink) {
+          externalLinks.push({
+            text: linkText,
+            url: href
+          });
+        }
+      }
+    });
+
+    // If we found external links, create the sources section and add superscript numbers
+    if (externalLinks.length > 0) {
+      // Replace external links in the text with anchor links to sources
+      links.forEach(function (link) {
+        var href = link.href;
+        var url = new URL(href);
+
+        // Check if it's an external link (different domain)
+        if (url.hostname !== currentDomain && url.hostname !== '') {
+          // Find the index of this link in our external links array
+          var linkIndex = externalLinks.findIndex(function (item) {
+            return item.url === href;
+          });
+          if (linkIndex !== -1) {
+            // Store the original link text
+            var originalText = link.textContent;
+
+            // Create new anchor link
+            var newLink = document.createElement('a');
+            newLink.href = '#article-sources';
+            newLink.textContent = originalText;
+
+            // Add smooth scroll behavior
+            newLink.addEventListener('click', function (e) {
+              e.preventDefault();
+              var sourcesSection = document.getElementById('article-sources');
+              if (sourcesSection) {
+                sourcesSection.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }
+            });
+
+            // Create superscript element
+            var superscript = document.createElement('sup');
+            superscript.textContent = '[' + (linkIndex + 1) + ']';
+            superscript.style.fontSize = '0.75em';
+            superscript.style.verticalAlign = 'super';
+            superscript.style.paddingLeft = '2px';
+
+            // Append superscript to the new link
+            newLink.appendChild(superscript);
+
+            // Replace the original link with the new one
+            link.parentNode.replaceChild(newLink, link);
+          }
+        }
+      });
+
+      // Create sources section
+      var sourcesSection = document.createElement('section');
+      sourcesSection.className = 'article__sources';
+      sourcesSection.id = 'article-sources';
+      var sourcesTitle = document.createElement('h2');
+      sourcesTitle.textContent = 'Sources';
+      sourcesSection.appendChild(sourcesTitle);
+      var sourcesList = document.createElement('nav');
+      externalLinks.forEach(function (link, index) {
+        var sourceLink = document.createElement('a');
+        sourceLink.href = link.url;
+        sourceLink.textContent = "[".concat(index + 1, "] ").concat(link.url);
+        sourceLink.target = '_blank';
+        sourceLink.rel = 'noopener noreferrer';
+        sourcesList.appendChild(sourceLink);
+      });
+      sourcesSection.appendChild(sourcesList);
+
+      // Append to the end of article content
+      articleContent.appendChild(sourcesSection);
+    }
+  }
+
+  // Run external links collection
+  collectExternalLinks();
 });
 /******/ })()
 ;

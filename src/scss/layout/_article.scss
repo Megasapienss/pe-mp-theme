@@ -17,7 +17,11 @@
         flex-direction: column;
         gap: 16px;
 
-        & .banner{
+        @include less-than('xl') {
+            order: 1;
+        }
+
+        & .banner {
             margin-top: 32px;
             margin-bottom: 32px;
 
@@ -27,8 +31,10 @@
             }
         }
 
-        @include less-than('xl') {
-            order: 1;
+
+        & h2,
+        &>*:first-child {
+            scroll-margin-top: 80px;
         }
 
     }
@@ -51,6 +57,33 @@
             position: static;
         }
 
+    }
+
+    &__sources {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        & h2 {
+            // color: $color-muted;
+            font-family: "Instrument Serif", serif;
+            font-style: italic;
+        }
+
+        & nav {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 16px 32px;
+
+            & a {
+                font-size: 16px;
+                line-height: 120%;
+                word-break: break-all;
+                text-wrap: unset;
+            }
+        }
     }
 }
 

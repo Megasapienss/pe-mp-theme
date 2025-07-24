@@ -20,7 +20,7 @@
         </a>
     </div>
     <div class="corner corner--left-bottom">
-        <span>@Created by State of Mind</span>
+        <span>@Created by States of Mind</span>
     </div>
     <div class="corner corner--right-bottom">
         <span>All Rights Reserved</span>
