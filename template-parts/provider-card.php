@@ -46,7 +46,7 @@ if ($provider_types && !is_wp_error($provider_types)) {
                 } elseif ($main_image) {
                     echo '<img src="' . esc_url($main_image) . '" alt="' . esc_attr(get_the_title()) . '" class="provider-card__image">';
                 } else {
-                    echo '<img src="' . get_template_directory_uri() . '/src/images/topic-card-placeholder.png" alt="' . esc_attr(get_the_title()) . '" class="provider-card__image">';
+                    echo '<img src="' . get_template_directory_uri() . '/dist/images/topic-card-placeholder.webp" alt="' . esc_attr(get_the_title()) . '" class="provider-card__image">';
                 }
                 ?>
                 

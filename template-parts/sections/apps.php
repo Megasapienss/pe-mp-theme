@@ -12,7 +12,7 @@
     </div>
     <div class="cards grid grid--2">
         <div class="card card--app">
-            <img src="<?= get_template_directory_uri(); ?>/dist/images/app-placeholder.png" alt="" class="card__image">
+            <img src="<?= get_template_directory_uri(); ?>/dist/images/app-placeholder.webp" alt="" class="card__image">
             <div class="card__content">
                 <h3 class="card__title">
                     MindTrack
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="card card--app">
-            <img src="<?= get_template_directory_uri(); ?>/dist/images/app-placeholder.png" alt="" class="card__image">
+            <img src="<?= get_template_directory_uri(); ?>/dist/images/app-placeholder.webp" alt="" class="card__image">
             <div class="card__content">
                 <h3 class="card__title">
                     JourneyNotes

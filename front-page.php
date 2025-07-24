@@ -9,7 +9,7 @@
 get_header();
 ?>
 
-<section class="hero hero--banner hero--xl" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/cover.jpg');">
+<section class="hero hero--banner hero--xl" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/cover.webp');">
     <h1 class="hero__title title-lg">
         Heal your mind & health will follow
     </h1>

@@ -12,7 +12,7 @@
         <a href="#" class="section__title-link arrow-btn arrow-btn--muted">See All Experts</a>
     </div>
     <div class="cards grid grid--3">
-        <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-1.jpg');">
+        <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-1.webp');">
             <div class="card__content">
                 <h3 class="card__title">
                     Jesse Kwon
@@ -35,7 +35,7 @@
                 </a>
             </div>
         </div>
-        <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-2.jpg');">
+        <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-2.webp');">
             <div class="card__content">
                 <h3 class="card__title">
                     Dr. Sarah Lee
@@ -58,7 +58,7 @@
                 </a>
             </div>
         </div>
-        <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-3.jpg');">
+        <div class="card card--expert" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/expert-3.webp');">
             <div class="card__content">
                 <h3 class="card__title">
                     Dr. Hanna Feldman

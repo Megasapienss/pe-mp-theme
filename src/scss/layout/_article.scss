@@ -17,12 +17,6 @@
         flex-direction: column;
         gap: 16px;
 
-        & p,
-        & li {
-            @include body-md;
-            color: $color-dark;
-        }
-
         & .banner{
             margin-top: 32px;
             margin-bottom: 32px;

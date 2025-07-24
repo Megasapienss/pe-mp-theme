@@ -16,7 +16,7 @@ get_header();
 
 <?php while (have_posts()) : the_post(); ?>
 
-    <section class="hero hero--banner" style="background-image: url(<?= get_the_post_thumbnail_url() ?: get_template_directory_uri() . '/dist/images/cover.jpg'; ?>);">
+    <section class="hero hero--banner" style="background-image: url(<?= get_the_post_thumbnail_url() ?: get_template_directory_uri() . '/dist/images/cover.webp'; ?>);">
         <?php
         get_template_part('template-parts/components/breadcrumbs', 'rankmath');
         ?>

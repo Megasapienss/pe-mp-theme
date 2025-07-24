@@ -12,7 +12,7 @@
         <a href="/providers/" class="section__title-link arrow-btn arrow-btn--muted">Find More Clinics</a>
     </div>
     <div class="providers-section">
-        <div class="banner" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/banner-default.jpg');">
+        <div class="banner" style="background-image: url('<?= get_template_directory_uri(); ?>/dist/images/banner-default.webp');">
             <h2 class="banner__title title-lg">Integration Journey</h2>
             <p class="banner__description body-lg">
                 Your path to healing begins with safe, supported experiences. Explore retreat centers that focus on reconnection, grounding and long-term transformation.

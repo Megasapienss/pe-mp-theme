@@ -3,6 +3,78 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const sharp = require('sharp');
+const fs = require('fs').promises;
+
+// Custom plugin to convert images to WebP
+class WebPConverterPlugin {
+    constructor(options = {}) {
+        this.options = options;
+    }
+
+    apply(compiler) {
+        compiler.hooks.afterEmit.tapAsync('WebPConverterPlugin', async (compilation, callback) => {
+            try {
+                const outputPath = compilation.outputOptions.path;
+                const imagesDir = path.join(outputPath, 'images');
+                
+                // Check if images directory exists
+                try {
+                    await fs.access(imagesDir);
+                } catch {
+                    callback();
+                    return;
+                }
+
+                // Get all files in images directory
+                const files = await this.getFilesRecursively(imagesDir);
+                
+                for (const file of files) {
+                    const ext = path.extname(file).toLowerCase();
+                    if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
+                        try {
+                            const webpPath = file.replace(ext, '.webp');
+                            
+                            // Convert to WebP
+                            await sharp(file)
+                                .webp({ quality: 75, effort: 6 })
+                                .toFile(webpPath);
+                            
+                            console.log(`Converted ${path.basename(file)} to WebP`);
+                            
+                            // Remove original file
+                            await fs.unlink(file);
+                            
+                        } catch (error) {
+                            console.warn(`Failed to convert ${file} to WebP:`, error.message);
+                        }
+                    }
+                }
+                
+                callback();
+            } catch (error) {
+                console.error('WebP conversion error:', error);
+                callback();
+            }
+        });
+    }
+
+    async getFilesRecursively(dir) {
+        const files = [];
+        const items = await fs.readdir(dir, { withFileTypes: true });
+        
+        for (const item of items) {
+            const fullPath = path.join(dir, item.name);
+            if (item.isDirectory()) {
+                files.push(...await this.getFilesRecursively(fullPath));
+            } else {
+                files.push(fullPath);
+            }
+        }
+        
+        return files;
+    }
+}
 
 module.exports = (env, argv) => {
     const isProduction = argv.mode === 'production';
@@ -55,34 +127,7 @@ module.exports = (env, argv) => {
                             // Keep images in their original path structure
                             return pathData.filename.replace('src/', '');
                         }
-                    },
-                    use: [
-                        {
-                            loader: 'image-webpack-loader',
-                            options: {
-                                mozjpeg: {
-                                    progressive: true,
-                                    quality: 75
-                                },
-                                optipng: {
-                                    enabled: true,
-                                    optimizationLevel: 5
-                                },
-                                pngquant: {
-                                    quality: [0.65, 0.90],
-                                    speed: 4
-                                },
-                                gifsicle: {
-                                    interlaced: false,
-                                    optimizationLevel: 3
-                                },
-                                webp: {
-                                    quality: 75,
-                                    method: 6
-                                }
-                            }
-                        }
-                    ]
+                    }
                 },
                 {
                     test: /\.svg$/,
@@ -123,14 +168,15 @@ module.exports = (env, argv) => {
                     },
                     {
                         from: 'src/icons',
-                        to: 'icons', // Changed from 'images/icons' to 'icons'
+                        to: 'icons',
                         noErrorOnMissing: true,
                         globOptions: {
                             ignore: ['**/*.DS_Store']
                         }
                     }
                 ]
-            })
+            }),
+            new WebPConverterPlugin()
         ],
         devtool: isProduction ? false : 'source-map'
     };

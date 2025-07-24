@@ -45,7 +45,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <script src="https://assets.prd.heyflow.com/builder/widget/latest/webview.js"></script>
     <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {

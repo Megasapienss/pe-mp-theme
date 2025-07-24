@@ -31,6 +31,9 @@ require_once get_template_directory() . '/inc/shortcodes.php';
 // Load REST API
 require_once get_template_directory() . '/inc/api/init.php';
 
+// Load Performance Module (includes WebP functionality)
+require_once get_template_directory() . '/inc/performance/init.php';
+
 // Theme Setup
 function pe_mp_theme_setup()
 {
