@@ -1,0 +1,53 @@
+/* Accordion */
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    &__body {
+        background: #F6F6F6;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s linear;
+
+        &--open {
+            max-height: 2000px;
+        }
+    }
+
+    &__link {
+        color: var(--quiz-primary-color) !important;
+        text-decoration: none;
+        padding: 10px 20px;
+        display: block;
+        width: 100%;
+
+        &:first-child {
+            padding-top: 20px;
+        }
+
+        &:last-child {
+            padding-bottom: 20px;
+        }
+    }
+
+
+
+}

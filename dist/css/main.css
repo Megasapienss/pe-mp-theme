@@ -1790,8 +1790,7 @@ body {
 .article__sources nav {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px 32px;
+  padding: 32px;
 }
 .article__sources nav a {
   font-size: 16px;
@@ -4254,6 +4253,50 @@ body.single-post .header {
 .hero__toc-list a:hover {
   background: #007AFF;
   color: #FFFFFF;
+}
+
+/* Accordion */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.accordion__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.accordion__header img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+.accordion__body {
+  background: #F6F6F6;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s linear;
+}
+.accordion__body--open {
+  max-height: 2000px;
+}
+.accordion__link {
+  color: var(--quiz-primary-color) !important;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: block;
+  width: 100%;
+}
+.accordion__link:first-child {
+  padding-top: 20px;
+}
+.accordion__link:last-child {
+  padding-bottom: 20px;
 }
 
 /*# sourceMappingURL=main.css.map*/

@@ -36,6 +36,17 @@ get_header();
     <article class="article container">
         <section class="article__content body-lg">
             <?php the_content(); ?>
+            <div class="article__sources accordion">
+                <div class="accordion__header">
+                    <h2 class="accordion__title">Sources</h2>
+                    <img src="<?= get_template_directory_uri(); ?>/dist/icons/icon-arrow-down.svg">
+                </div>
+                <div class="accordion__body">
+                    <nav class="sources-list">
+                        <!-- Sources will be populated by JavaScript -->
+                    </nav>
+                </div>
+            </div>
         </section>
         <aside class="article__sidebar">
             <div class="sidebar-card sidebar-card--author">

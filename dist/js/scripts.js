@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // If we found external links, create the sources section
+    // If we found external links, populate the sources section
     if (externalLinks.length > 0) {
       // Function to add superscript numbers to external links in text (currently disabled)
       var addSuperscriptNumbersToLinks = function addSuperscriptNumbersToLinks() {
@@ -374,31 +374,84 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }; // Uncomment the line below to enable superscript numbers on external links
       // addSuperscriptNumbersToLinks();
-      // Create sources section
-      var sourcesSection = document.createElement('section');
-      sourcesSection.className = 'article__sources';
-      sourcesSection.id = 'article-sources';
-      var sourcesTitle = document.createElement('h2');
-      sourcesTitle.textContent = 'Sources';
-      sourcesSection.appendChild(sourcesTitle);
-      var sourcesList = document.createElement('nav');
-      externalLinks.forEach(function (link, index) {
-        var sourceLink = document.createElement('a');
-        sourceLink.href = link.url;
-        sourceLink.textContent = "[".concat(index + 1, "] ").concat(link.url);
-        sourceLink.target = '_blank';
-        sourceLink.rel = 'noopener noreferrer';
-        sourcesList.appendChild(sourceLink);
-      });
-      sourcesSection.appendChild(sourcesList);
-
-      // Append to the end of article content
-      articleContent.appendChild(sourcesSection);
+      // Populate existing sources section
+      var sourcesList = document.querySelector('.sources-list');
+      if (sourcesList) {
+        externalLinks.forEach(function (link, index) {
+          var sourceLink = document.createElement('a');
+          sourceLink.href = link.url;
+          sourceLink.textContent = "[".concat(index + 1, "] ").concat(link.url);
+          sourceLink.target = '_blank';
+          sourceLink.rel = 'noopener noreferrer';
+          sourceLink.className = 'accordion__link';
+          sourcesList.appendChild(sourceLink);
+        });
+      }
     }
   }
 
   // Run external links collection
   collectExternalLinks();
+
+  // Accordion functionality
+  function initAccordion() {
+    console.log('Accordion - Initializing accordion functionality');
+
+    // Find all accordion headers
+    var accordionHeaders = document.querySelectorAll('.accordion__header');
+    console.log('Accordion - Accordion headers found:', accordionHeaders.length);
+    if (accordionHeaders.length === 0) {
+      console.log('Accordion - No accordion headers found');
+      // Try again after a short delay in case content loads later
+      setTimeout(function () {
+        console.log('Accordion - Retrying accordion initialization...');
+        initAccordion();
+      }, 1000);
+      return;
+    }
+
+    // Add click event listeners to each accordion header
+    accordionHeaders.forEach(function (header, index) {
+      console.log("Accordion - Setting up accordion header ".concat(index, ":"), header);
+      header.addEventListener('click', function (e) {
+        console.log('Accordion - Accordion header clicked:', header);
+        e.preventDefault();
+        toggleAccordion(header);
+      });
+
+      // Add cursor pointer style
+      header.style.cursor = 'pointer';
+    });
+  }
+  function toggleAccordion(header) {
+    console.log('Accordion - toggleAccordion called with header:', header);
+    var accordion = header.closest('.accordion');
+    var body = accordion.querySelector('.accordion__body');
+    var arrow = header.querySelector('img');
+    if (!accordion || !body) {
+      console.log('Accordion - Accordion body not found');
+      return;
+    }
+
+    // Toggle the open class
+    var isOpen = body.classList.contains('accordion__body--open');
+    if (isOpen) {
+      // Close accordion
+      body.classList.remove('accordion__body--open');
+      if (arrow) {
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    } else {
+      // Open accordion
+      body.classList.add('accordion__body--open');
+      if (arrow) {
+        arrow.style.transform = 'rotate(180deg)';
+      }
+    }
+  }
+
+  // Initialize accordion functionality
+  initAccordion();
 });
 /******/ })()
 ;
