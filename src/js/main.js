@@ -307,54 +307,59 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // If we found external links, create the sources section and add superscript numbers
+        // If we found external links, create the sources section
         if (externalLinks.length > 0) {
-            // Replace external links in the text with anchor links to sources
-            links.forEach(link => {
-                const href = link.href;
-                const url = new URL(href);
-                
-                // Check if it's an external link (different domain)
-                if (url.hostname !== currentDomain && url.hostname !== '') {
-                    // Find the index of this link in our external links array
-                    const linkIndex = externalLinks.findIndex(item => item.url === href);
-                    if (linkIndex !== -1) {
-                        // Store the original link text
-                        const originalText = link.textContent;
-                        
-                        // Create new anchor link
-                        const newLink = document.createElement('a');
-                        newLink.href = '#article-sources';
-                        newLink.textContent = originalText;
-                        
-                        // Add smooth scroll behavior
-                        newLink.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            const sourcesSection = document.getElementById('article-sources');
-                            if (sourcesSection) {
-                                sourcesSection.scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'start'
-                                });
-                            }
-                        });
-                        
-                        // Create superscript element
-                        const superscript = document.createElement('sup');
-                        superscript.textContent = '[' + (linkIndex + 1) + ']';
-                        superscript.style.fontSize = '0.75em';
-                        superscript.style.verticalAlign = 'super';
-                        superscript.style.paddingLeft = '2px';
-                        
-                        // Append superscript to the new link
-                        newLink.appendChild(superscript);
-                        
-                        // Replace the original link with the new one
-                        link.parentNode.replaceChild(newLink, link);
+            // Function to add superscript numbers to external links in text (currently disabled)
+            function addSuperscriptNumbersToLinks() {
+                links.forEach(link => {
+                    const href = link.href;
+                    const url = new URL(href);
+                    
+                    // Check if it's an external link (different domain)
+                    if (url.hostname !== currentDomain && url.hostname !== '') {
+                        // Find the index of this link in our external links array
+                        const linkIndex = externalLinks.findIndex(item => item.url === href);
+                        if (linkIndex !== -1) {
+                            // Store the original link text
+                            const originalText = link.textContent;
+                            
+                            // Create new anchor link
+                            const newLink = document.createElement('a');
+                            newLink.href = '#article-sources';
+                            newLink.textContent = originalText;
+                            
+                            // Add smooth scroll behavior
+                            newLink.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                const sourcesSection = document.getElementById('article-sources');
+                                if (sourcesSection) {
+                                    sourcesSection.scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'start'
+                                    });
+                                }
+                            });
+                            
+                            // Create superscript element
+                            const superscript = document.createElement('sup');
+                            superscript.textContent = '[' + (linkIndex + 1) + ']';
+                            superscript.style.fontSize = '0.75em';
+                            superscript.style.verticalAlign = 'super';
+                            superscript.style.paddingLeft = '2px';
+                            
+                            // Append superscript to the new link
+                            newLink.appendChild(superscript);
+                            
+                            // Replace the original link with the new one
+                            link.parentNode.replaceChild(newLink, link);
+                        }
                     }
-                }
-            });
-
+                });
+            }
+            
+            // Uncomment the line below to enable superscript numbers on external links
+            // addSuperscriptNumbersToLinks();
+            
             // Create sources section
             const sourcesSection = document.createElement('section');
             sourcesSection.className = 'article__sources';
@@ -367,7 +372,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const sourcesList = document.createElement('nav');
             
             externalLinks.forEach((link, index) => {
-                
                 const sourceLink = document.createElement('a');
                 sourceLink.href = link.url;
                 sourceLink.textContent = `[${index + 1}] ${link.url}`;
