@@ -83,11 +83,23 @@ document.addEventListener('DOMContentLoaded', function () {
                     const overviewLink = tocList.querySelector('a[href="#article-overview"]');
                     if (overviewLink) {
                         overviewLink.classList.add('current');
+                        // Scroll TOC to show the overview link
+                        overviewLink.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest',
+                            inline: 'center'
+                        });
                     }
                 } else if (newCurrentHeading) {
                     const currentLink = tocList.querySelector(`a[href="#${newCurrentHeading.id}"]`);
                     if (currentLink) {
                         currentLink.classList.add('current');
+                        // Scroll TOC to show the current link
+                        currentLink.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest',
+                            inline: 'center'
+                        });
                     }
                 }
 
