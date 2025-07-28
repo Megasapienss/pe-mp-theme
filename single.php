@@ -25,12 +25,12 @@ get_header();
             <h1 class="hero__title heading-h2"><?= get_the_title(); ?></h1>
 
         </div>
-        <div class="hero__toc-wrapper">
+        <!-- <div class="hero__toc-wrapper">
             <div class="hero__toc">
                 <div class="hero__toc-list">
                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
 
     <article class="article container">

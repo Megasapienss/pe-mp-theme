@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Table of Contents functionality - EXTRACTED FUNCTION
+  // Table of Contents functionality
   function initTableOfContents() {
     var tocList = document.querySelector('.hero__toc-list');
     var articleContent = document.querySelector('.article__content');
@@ -240,7 +240,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // COMMENTED OUT: TOC function call
   // initTableOfContents();
 
   // Native share functionality
