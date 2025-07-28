@@ -13,8 +13,8 @@
     <div class="d-flex flex-column">
         <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>" class="footer__logo">
         <div class="community-banner">
-            <h4>JOIN OUR COMMUNITY INNER TALKS</h4>
-            <p>From psychedelic guidance to AI-powered psychotherapy, from microdosing practices to fully held emotional deep work — we’re mapping what’s next in mental health to help you find the right tool.</p>
+            <h4>JOIN OUR COMMUNITY STATES OF MIND</h4>
+            <p>From deep psychedelic talks to live therapist support in chat, from microdosing practices to fully held emotional deep work — we’re mapping what’s next in mental health to help you find the right tool.</p>
             <div class="community-banner__actions">
                 <a href="https://discord.gg/XwGZ82yeXz" target="_blank" class="arrow-btn">
                     <?php esc_html_e('Discord', 'pe-mp-theme'); ?>

@@ -65,9 +65,19 @@ function pe_mp_get_all_posts($request)
             $categories = get_the_category();
             $main_category = !empty($categories) ? $categories[0]->name : '';
 
+            // Get tags
+            $tags = get_the_tags();
+            $tag_names = array();
+            if ($tags) {
+                foreach ($tags as $tag) {
+                    $tag_names[] = $tag->name;
+                }
+            }
+
             $posts[] = array(
                 'title' => get_the_title(),
                 'category' => $main_category,
+                'tags' => $tag_names,
                 'link' => get_permalink(),
             );
         }

@@ -3,7 +3,7 @@
   !*** ./src/js/main.js ***!
   \************************/
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { if (r) i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n;else { var o = function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); }; o("next", 0), o("throw", 1), o("return", 2); } }, _regeneratorDefine2(e, r, n, t); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 // Main JavaScript file
@@ -19,163 +19,120 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Table of Contents functionality
-  var tocList = document.querySelector('.hero__toc-list');
-  var articleContent = document.querySelector('.article__content');
-  if (tocList && articleContent) {
-    // Define updateCurrentHeading function
-    var updateCurrentHeading = function updateCurrentHeading() {
-      var newCurrentHeading = null;
-
-      // Check if we're at the top (Overview)
-      if (h2Headings.length === 0) {
-        newCurrentHeading = 'overview';
-      } else {
-        var firstHeading = h2Headings[0];
-        var firstChild = articleContent.firstElementChild;
+  // Table of Contents functionality - EXTRACTED FUNCTION
+  function initTableOfContents() {
+    var tocList = document.querySelector('.hero__toc-list');
+    var articleContent = document.querySelector('.article__content');
+    if (tocList && articleContent) {
+      // Define updateCurrentHeading function
+      var updateCurrentHeading = function updateCurrentHeading() {
+        var newCurrentHeading = null;
 
         // Check if we're at the top (Overview)
-        if (firstChild) {
-          var rect = firstChild.getBoundingClientRect();
-          var firstChildTopPosition = rect.top;
-
-          // If first child is above the offset position, we're in overview
-          if (firstChildTopPosition > 120) {
-            newCurrentHeading = 'overview';
-          } else {
-            // Find the current heading by checking which one is at the top position
-            var foundHeading = false;
-            for (var i = h2Headings.length - 1; i >= 0; i--) {
-              var heading = h2Headings[i];
-              // Skip newsletter headings
-              if (heading.textContent.toLowerCase().includes('newsletter')) {
-                continue;
-              }
-              var headingRect = heading.getBoundingClientRect();
-              var headingTopPosition = headingRect.top;
-
-              // Check if this heading is at the top position (120px from top)
-              if (headingTopPosition <= 120) {
-                newCurrentHeading = heading;
-                foundHeading = true;
-                break;
-              }
-            }
-
-            // If no heading was found, we're in overview
-            if (!foundHeading) {
-              newCurrentHeading = 'overview';
-            }
-          }
-        } else {
+        if (h2Headings.length === 0) {
           newCurrentHeading = 'overview';
-        }
-      }
+        } else {
+          var firstHeading = h2Headings[0];
+          var firstChild = articleContent.firstElementChild;
 
-      // Only update if the current heading has changed
-      if (newCurrentHeading !== currentActiveHeading) {
-        // Remove current class from all links
-        tocLinks.forEach(function (link) {
-          return link.classList.remove('current');
-        });
+          // Check if we're at the top (Overview)
+          if (firstChild) {
+            var rect = firstChild.getBoundingClientRect();
+            var firstChildTopPosition = rect.top;
 
-        // Add current class to the new active heading
-        if (newCurrentHeading === 'overview') {
-          var _overviewLink = tocList.querySelector('a[href="#article-overview"]');
-          if (_overviewLink) {
-            _overviewLink.classList.add('current');
-            // Scroll TOC to show the overview link
-            _overviewLink.scrollIntoView({
-              behavior: 'smooth',
-              block: 'nearest',
-              inline: 'center'
-            });
+            // If first child is above the offset position, we're in overview
+            if (firstChildTopPosition > 120) {
+              newCurrentHeading = 'overview';
+            } else {
+              // Find the current heading by checking which one is at the top position
+              var foundHeading = false;
+              for (var i = h2Headings.length - 1; i >= 0; i--) {
+                var heading = h2Headings[i];
+                // Skip newsletter headings
+                if (heading.textContent.toLowerCase().includes('newsletter')) {
+                  continue;
+                }
+                var headingRect = heading.getBoundingClientRect();
+                var headingTopPosition = headingRect.top;
+
+                // Check if this heading is at the top position (120px from top)
+                if (headingTopPosition <= 120) {
+                  newCurrentHeading = heading;
+                  foundHeading = true;
+                  break;
+                }
+              }
+
+              // If no heading was found, we're in overview
+              if (!foundHeading) {
+                newCurrentHeading = 'overview';
+              }
+            }
+          } else {
+            newCurrentHeading = 'overview';
           }
-        } else if (newCurrentHeading) {
-          var currentLink = tocList.querySelector("a[href=\"#".concat(newCurrentHeading.id, "\"]"));
-          if (currentLink) {
-            currentLink.classList.add('current');
-            // Scroll TOC to show the current link
-            currentLink.scrollIntoView({
-              behavior: 'smooth',
-              block: 'nearest',
-              inline: 'center'
-            });
+        }
+
+        // Only update if the current heading has changed
+        if (newCurrentHeading !== currentActiveHeading) {
+          // Remove current class from all links
+          tocLinks.forEach(function (link) {
+            return link.classList.remove('current');
+          });
+
+          // Add current class to the new active heading
+          if (newCurrentHeading === 'overview') {
+            var _overviewLink = tocList.querySelector('a[href="#article-overview"]');
+            if (_overviewLink) {
+              _overviewLink.classList.add('current');
+              // Scroll TOC to show the overview link
+              _overviewLink.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+              });
+            }
+          } else if (newCurrentHeading) {
+            var currentLink = tocList.querySelector("a[href=\"#".concat(newCurrentHeading.id, "\"]"));
+            if (currentLink) {
+              currentLink.classList.add('current');
+              // Scroll TOC to show the current link
+              currentLink.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+              });
+            }
           }
+
+          // Update the current active heading
+          currentActiveHeading = newCurrentHeading;
         }
-
-        // Update the current active heading
-        currentActiveHeading = newCurrentHeading;
-      }
-    }; // Define throttledScrollHandler function
-    var throttledScrollHandler = function throttledScrollHandler() {
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
-      scrollTimeout = setTimeout(updateCurrentHeading, 50);
-    }; // Clear existing placeholder content
-    var h2Headings = articleContent.querySelectorAll('h2');
-    var tocLinks = tocList.querySelectorAll('a');
-    var currentActiveHeading = null;
-    var scrollTimeout = null;
-    tocList.innerHTML = '';
-
-    // Add "Overview" link
-    var overviewLink = document.createElement('a');
-    overviewLink.href = '#article-overview';
-    overviewLink.textContent = 'Overview';
-    overviewLink.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      // Find the first child element of article content
-      var firstChild = articleContent.firstElementChild;
-      if (firstChild) {
-        // Use scrollIntoView with offset
-        firstChild.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-
-        // Temporarily disable scroll detection to prevent interference
-        window.removeEventListener('scroll', throttledScrollHandler);
-
-        // Re-enable after scroll animation completes
-        setTimeout(function () {
-          window.addEventListener('scroll', throttledScrollHandler);
-          updateCurrentHeading();
-        }, 800);
-        history.pushState(null, null, '#article-overview');
-      }
-    });
-    tocList.appendChild(overviewLink);
-
-    // Add ID to article content
-    if (!articleContent.id) {
-      articleContent.id = 'article-content';
-    }
-
-    // Create TOC links for headings
-    if (h2Headings.length > 0) {
-      h2Headings.forEach(function (heading, index) {
-        // Skip newsletter headings
-        if (heading.textContent.toLowerCase().includes('newsletter')) {
-          return;
+      }; // Define throttledScrollHandler function
+      var throttledScrollHandler = function throttledScrollHandler() {
+        if (scrollTimeout) {
+          clearTimeout(scrollTimeout);
         }
+        scrollTimeout = setTimeout(updateCurrentHeading, 50);
+      }; // Clear existing placeholder content
+      var h2Headings = articleContent.querySelectorAll('h2');
+      var tocLinks = tocList.querySelectorAll('a');
+      var currentActiveHeading = null;
+      var scrollTimeout = null;
+      tocList.innerHTML = '';
 
-        // Create ID for heading
-        if (!heading.id) {
-          heading.id = "heading-".concat(index + 1);
-        }
+      // Add "Overview" link
+      var overviewLink = document.createElement('a');
+      overviewLink.href = '#article-overview';
+      overviewLink.textContent = 'Overview';
+      overviewLink.addEventListener('click', function (e) {
+        e.preventDefault();
 
-        // Create TOC link
-        var tocLink = document.createElement('a');
-        tocLink.href = "#".concat(heading.id);
-        tocLink.textContent = heading.textContent;
-        tocLink.addEventListener('click', function (e) {
-          e.preventDefault();
-
+        // Find the first child element of article content
+        var firstChild = articleContent.firstElementChild;
+        if (firstChild) {
           // Use scrollIntoView with offset
-          heading.scrollIntoView({
+          firstChild.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
           });
@@ -188,55 +145,103 @@ document.addEventListener('DOMContentLoaded', function () {
             window.addEventListener('scroll', throttledScrollHandler);
             updateCurrentHeading();
           }, 800);
-          history.pushState(null, null, "#".concat(heading.id));
+          history.pushState(null, null, '#article-overview');
+        }
+      });
+      tocList.appendChild(overviewLink);
+
+      // Add ID to article content
+      if (!articleContent.id) {
+        articleContent.id = 'article-content';
+      }
+
+      // Create TOC links for headings
+      if (h2Headings.length > 0) {
+        h2Headings.forEach(function (heading, index) {
+          // Skip newsletter headings
+          if (heading.textContent.toLowerCase().includes('newsletter')) {
+            return;
+          }
+
+          // Create ID for heading
+          if (!heading.id) {
+            heading.id = "heading-".concat(index + 1);
+          }
+
+          // Create TOC link
+          var tocLink = document.createElement('a');
+          tocLink.href = "#".concat(heading.id);
+          tocLink.textContent = heading.textContent;
+          tocLink.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Use scrollIntoView with offset
+            heading.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+
+            // Temporarily disable scroll detection to prevent interference
+            window.removeEventListener('scroll', throttledScrollHandler);
+
+            // Re-enable after scroll animation completes
+            setTimeout(function () {
+              window.addEventListener('scroll', throttledScrollHandler);
+              updateCurrentHeading();
+            }, 800);
+            history.pushState(null, null, "#".concat(heading.id));
+          });
+          tocList.appendChild(tocLink);
         });
-        tocList.appendChild(tocLink);
+      }
+
+      // Update on scroll with throttling
+      window.addEventListener('scroll', throttledScrollHandler);
+
+      // Update tocLinks reference after all links are created
+      tocLinks = tocList.querySelectorAll('a');
+
+      // Initial update - make Overview current by default
+      setTimeout(function () {
+        updateCurrentHeading();
+        // Force Overview to be current on page load
+        var overviewLink = tocList.querySelector('a[href="#article-overview"]');
+        if (overviewLink) {
+          tocLinks.forEach(function (link) {
+            return link.classList.remove('current');
+          });
+          overviewLink.classList.add('current');
+        }
+      }, 100);
+    }
+
+    // Mouse wheel scrolling for TOC
+    if (tocList) {
+      tocList.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        // Reduce scroll sensitivity for smoother movement
+        var scrollAmount = e.deltaY * 3;
+        tocList.scrollLeft += scrollAmount;
       });
     }
 
-    // Update on scroll with throttling
-    window.addEventListener('scroll', throttledScrollHandler);
-
-    // Update tocLinks reference after all links are created
-    tocLinks = tocList.querySelectorAll('a');
-
-    // Initial update - make Overview current by default
-    setTimeout(function () {
-      updateCurrentHeading();
-      // Force Overview to be current on page load
-      var overviewLink = tocList.querySelector('a[href="#article-overview"]');
-      if (overviewLink) {
-        tocLinks.forEach(function (link) {
-          return link.classList.remove('current');
-        });
-        overviewLink.classList.add('current');
-      }
-    }, 100);
+    // Sticky TOC functionality
+    var toc = document.querySelector('.hero__toc');
+    if (toc) {
+      var tocWrapper = document.querySelector('.hero__toc-wrapper');
+      var tocOffset = tocWrapper.offsetTop;
+      window.addEventListener('scroll', function () {
+        if (window.pageYOffset >= tocOffset) {
+          toc.classList.add('sticky');
+        } else {
+          toc.classList.remove('sticky');
+        }
+      });
+    }
   }
 
-  // Mouse wheel scrolling for TOC
-  if (tocList) {
-    tocList.addEventListener('wheel', function (e) {
-      e.preventDefault();
-      // Reduce scroll sensitivity for smoother movement
-      var scrollAmount = e.deltaY * 3;
-      tocList.scrollLeft += scrollAmount;
-    });
-  }
-
-  // Sticky TOC functionality
-  var toc = document.querySelector('.hero__toc');
-  if (toc) {
-    var tocWrapper = document.querySelector('.hero__toc-wrapper');
-    var tocOffset = tocWrapper.offsetTop;
-    window.addEventListener('scroll', function () {
-      if (window.pageYOffset >= tocOffset) {
-        toc.classList.add('sticky');
-      } else {
-        toc.classList.remove('sticky');
-      }
-    });
-  }
+  // COMMENTED OUT: TOC function call
+  // initTableOfContents();
 
   // Native share functionality
   var shareButtons = document.querySelectorAll('.label--share');
@@ -244,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
     button.addEventListener('click', /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
       var _document$querySelect, shareData, _t, _t2;
       return _regenerator().w(function (_context) {
-        while (1) switch (_context.n) {
+        while (1) switch (_context.p = _context.n) {
           case 0:
             if (!navigator.share) {
               _context.n = 5;
