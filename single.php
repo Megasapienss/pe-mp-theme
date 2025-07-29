@@ -84,7 +84,16 @@ get_header();
                 <p class="sidebar-card__excerpt">
                     Check your mental state level and get a personalized action plan in 3 minutes.
                 </p>
-                <a href="/tests/assessment/" class="sidebar-card__link arrow-btn arrow-btn--primary">
+                <?php
+                // Priority system for link:
+                // 1. Assigned page from ACF field
+                // 2. Hardcoded link
+                $quiz_link = pe_mp_get_related_test_page_url();
+                if (empty($quiz_link)) {
+                    $quiz_link = PE_MP_QUIZ_DEFAULT_LINK;
+                }
+                ?>
+                <a href="<?= esc_url($quiz_link); ?>" class="sidebar-card__link arrow-btn arrow-btn--primary">
                     <?php esc_html_e('Start test', 'pe-mp-theme'); ?>
                 </a>
             </div>

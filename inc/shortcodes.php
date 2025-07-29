@@ -28,8 +28,25 @@ function pe_mp_quiz_banner_shortcode($atts)
         'description' => '',
     ), $atts, 'quiz_banner');
 
-    // Use provided link or fall back to default quiz link
-    $link = !empty($atts['link']) ? $atts['link'] : pe_mp_get_quiz_link();
+    // Priority system for link:
+    // 1. Shortcode argument (highest priority)
+    // 2. Assigned page from ACF field
+    // 3. Hardcoded link (lowest priority)
+    $link = '';
+    
+    if (!empty($atts['link'])) {
+        // Priority 1: Shortcode argument
+        $link = $atts['link'];
+    } else {
+        // Priority 2: Assigned page from ACF field
+        $related_test_url = pe_mp_get_related_test_page_url();
+        if (!empty($related_test_url)) {
+            $link = $related_test_url;
+        } else {
+            // Priority 3: Hardcoded link
+            $link = PE_MP_QUIZ_DEFAULT_LINK;
+        }
+    }
 
     // Start output buffering to capture the template part
     ob_start();

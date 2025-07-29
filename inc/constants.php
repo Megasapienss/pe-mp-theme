@@ -7,11 +7,6 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-// Theme Information
-define('PE_MP_THEME_VERSION', '1.0.0');
-define('PE_MP_THEME_DIR', get_template_directory());
-define('PE_MP_THEME_URI', get_template_directory_uri());
-
 // Quiz Configuration
 define('PE_MP_QUIZ_DEFAULT_LINK', '/tests/assessment/');
 
