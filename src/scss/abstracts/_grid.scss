@@ -61,19 +61,19 @@
 }
 
 .gap-1 {
-  gap: $grid-gap-sm;
+  gap: $spacing-1;
 }
 
 .gap-2 {
-  gap: $grid-gap;
+  gap: $spacing-2;
 }
 
 .gap-3 {
-  gap: $grid-gap-lg;
+  gap: $spacing-3;
 }
 
 .gap-4 {
-  gap: $grid-gap-xl;
+  gap: $spacing-4;
 }
 
 // Grid Alignment Utilities

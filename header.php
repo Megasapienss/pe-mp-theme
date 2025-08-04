@@ -73,6 +73,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <header class="header header--fixed">
+        <div class="header__content">
         <a href="<?php echo esc_url(home_url('/')); ?>">
             <img title="Go to Homepage" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>" class="header__logo">
         </a>
@@ -96,6 +97,8 @@
                 <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
             </a>
         </div>
+        </div>
+        
     </header>
     <aside class="off-canvas off-canvas--menu">
         <div class="off-canvas__header">

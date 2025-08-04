@@ -16,7 +16,28 @@ get_header();
 
 <?php while (have_posts()) : the_post(); ?>
 
-    <section class="hero hero--banner" style="background-image: url('<?= pe_mp_get_webp_url(get_post_thumbnail_id()) ?: get_template_directory_uri() . '/dist/images/cover.webp'; ?>');">
+    <?php
+    $thumbnail_id = get_post_thumbnail_id();
+    $background_url = '';
+    
+    if ($thumbnail_id) {
+        // First try to get WebP version
+        $webp_url = pe_mp_get_webp_url($thumbnail_id);
+        if ($webp_url) {
+            $background_url = $webp_url;
+        } else {
+            // If no WebP, use original thumbnail
+            $background_url = get_the_post_thumbnail_url($thumbnail_id, 'full');
+        }
+    }
+    
+    // If no thumbnail or WebP, use default cover
+    if (empty($background_url)) {
+        $background_url = get_template_directory_uri() . '/dist/images/cover.webp';
+    }
+    ?>
+    
+    <section class="hero hero--banner" style="background-image: url('<?= esc_url($background_url); ?>');">
         <?php get_template_part('template-parts/components/breadcrumbs', 'rankmath'); ?>
         <div class="hero__inner">
             <div class="hero__date label label--arrow label--muted">

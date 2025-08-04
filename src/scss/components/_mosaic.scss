@@ -1,0 +1,56 @@
+.mosaic{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    @include less-than(lg) {    
+        grid-template-columns: 1fr !important;
+    }
+
+    &--2-1{
+        grid-template-columns: 2fr 1fr;
+    }
+
+    &--2-1-1{
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    &--1-1-1{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    &--1-2-1{
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+
+    &__item{
+        border-top: 1px solid $color-border;
+        border-right: 1px solid $color-border;
+        padding: $spacing-2;
+
+
+
+        .mosaic > &:last-child{
+            border-right: none;
+        }
+
+        @include less-than(lg) {
+            border-right: none;
+            padding: $spacing-2 0;
+        }
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+
+        &:last-child > *{
+            border-right: 0;
+        }
+
+        & > .banner {
+            margin-left: $spacing-2;
+            margin-top: $spacing-2;
+        }
+    }
+}

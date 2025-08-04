@@ -1,11 +1,11 @@
 .footer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    margin-top: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    margin-top: $spacing-4;
     background-color: $bg-dark;
-    padding: 48px 64px 128px 64px;
-    border-radius: 20px;
+    padding: $spacing-4;
+    // border-radius: 20px;
 
     @include less-than('xl') {
         margin-top: 60px;
@@ -31,15 +31,35 @@
         }
     }
 
+    & p{
+        color: $color-muted-inverse;
+    }
+
     &__logo {
-        max-width: 400px;
+        max-width: 200px;
         width: 100%;
+    }
+
+    &__menu-top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: $spacing-4;
+    }
+
+    &__menu-bottom{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: $spacing-2;
+        margin-top: $spacing-1;
+
+        border-top: 1px solid #403F3C;
     }
 
     &__links {
         display: flex;
-        gap: 20px;
-        margin-top: 20px;
+        gap: $spacing-2;
         flex-wrap: wrap;
 
         & a {
@@ -48,18 +68,31 @@
         }
     }
 
-    & .community-banner {
+    &__copyright {
         display: flex;
-        flex-direction: column;
-        gap: 20px;
+        justify-content: space-between;
+        align-items: center;
+        gap: $spacing-2;
+
+        @include less-than('lg') {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    & .community-banner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacing-4;
         background: #2D2F30;
-        padding: 40px;
-        margin-top: 40px;
-        border-radius: 20px;
+        padding: $spacing-4;
 
         @include less-than('xl') {
-            margin-top: 20px;
-            padding: 16px;
+            padding: $spacing-2;
+        }
+
+        @include less-than('lg') {
+            grid-template-columns: 1fr;
         }
 
         &__actions {
@@ -78,6 +111,12 @@
         & ul,
         & li {
             color: #FAF9F7;
+            @include body-sm;
+
+        }
+
+        & .flex-column{
+            gap: $spacing-2;
         }
     }
 

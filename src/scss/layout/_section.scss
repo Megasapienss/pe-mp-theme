@@ -41,6 +41,30 @@
 
 }
 
+.section-v2 {
+    padding-top: $spacing-6;
+    padding-bottom: 0;
+    margin-bottom: $spacing-6;
+
+    @include less-than(md) {
+        padding-top: $spacing-5;
+        margin-bottom: $spacing-5;
+    }
+
+    &__title {
+        margin-bottom: 40px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        @include less-than(md) {
+            align-items: flex-end;
+        }
+    }
+}
+
 .articles-section {
     & > .grid {
         @include less-than('xxl') {
@@ -185,4 +209,111 @@
 
 
 
+}
+
+.newsletter-section-v2{
+    @include less-than(lg) {
+        padding: 0;
+    }
+}
+
+.tests-section{
+    &__content{
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: $spacing-2;
+
+        & > .banner{
+            min-width: 310px;
+            max-width: 310px;
+            width: 100%;
+        }
+    }
+}
+
+// New class for overflow-x that breaks out of body padding
+.overflow-breakout {
+    position: relative;
+    margin-left: -100vw;  // Negative margin to break out of body padding
+    margin-right: -100vw; // Negative margin to break out of body padding
+    padding-left: 100vw;  // Add padding back to maintain content spacing
+    padding-right: 100vw; // Add padding back to maintain content spacing
+    
+    // Ensure the overflow content appears above other elements
+    z-index: 1;
+    
+    // Optional: Add some visual separation
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        z-index: -1;
+    }
+
+    // Custom scrollbar for horizontal overflow
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.community-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-2;
+    margin-bottom: 0;
+
+    & *{
+        text-align: center;
+    }
+
+    & h2{
+        color: $color-dark;
+    }
+
+    & > img{
+        width: 100%;
+        transform: translateY(-40px);
+    }
+
+    @include less-than(lg) {
+        align-items: flex-start;
+        *{
+            text-align: left;
+        }
+
+        & > img{
+            transform: translateY(0);
+            min-width: 1000px;
+        }
+    }
+
+    &__text{
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-1;
+
+        & p{
+            @include heading-h4;
+            font-weight: 300;
+        }
+    }
+
+    &__actions{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: $spacing-1;
+
+        @include less-than(lg) {
+            // flex-direction: column;
+            // justify-content: stretch;
+            // width: 100%;
+        }
+    }
 }

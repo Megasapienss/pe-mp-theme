@@ -11,16 +11,17 @@
  */
 
 get_header();
+$post_count = $wp_query->found_posts;
 ?>
 
-<section class="archive-title container">
+<section class="archive-title-v2 container">
     <?php
     get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
         'class' => 'breadcrumbs breadcrumbs--dark archive-title__breadcrumbs'
     ));
     ?>
-    <h1 class="archive-title__name title-lg">Stories and Guides</h1>
-    <p class="archive-title__description heading-h2">Discover insights for a healthier mind and life</p>
+    <h1 class="archive-title-v2__name">Stories and Guides</h1>
+    <p class="archive-title-v2__description">Discover insights for a healthier mind and life</p>
 </section>
 
 <?php
@@ -40,30 +41,51 @@ foreach ($all_categories as $category) {
     }
 }
 
-// Display subcategories if they exist
+// If there are subcategories, display a mosaic for each subcategory
 if (!empty($subcategories) && !is_wp_error($subcategories)) :
-    get_template_part('template-parts/sections/topics', null, array(
-        'custom_categories' => $subcategories,
-        'section_title' => ''
-    ));
-endif;
+    foreach ($subcategories as $subcategory) :
+        get_template_part('template-parts/mosaics/category', null, array(
+            'title' => $subcategory->name,
+            'category' => $subcategory->slug
+        ));
+    endforeach;
+else :
+    // If no subcategories, display the current archive-grid
 ?>
 
-<section id="posts" class="archive-grid grid grid--2 container container--wide">
-    <?php if (have_posts()): ?>
-        <?php
-        while (have_posts()) {
-            the_post();
-            get_template_part('template-parts/cards/post', 'curved', ['post' => get_post()]);
-        }
-        ?>
+    <section class="archive-grid mosaic mosaic--1-1-1 container container--wide">
+        <?php if (have_posts()) {
+            while (have_posts()) {
+                the_post();
+                ?>
+                <div class="mosaic__item">
+                    <?php get_template_part('template-parts/cards/post', 'v2', ['post' => get_post()]); ?>
+                </div>
+                <?php
+            }
+        } else { ?>
+            <p class="text-center"><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
+            <p class="text-center"><?php _e('Come back later!', 'pe-mp-theme'); ?></p>
+        <?php } ?>
+    </section>
+<?php endif; ?>
 
-    <?php else: ?>
-        <div class="no-results">
-            <p><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
-        </div>
-    <?php endif; ?>
-</section>
+<?php
+//get_template_part('template-parts/sections/apps'); 
+?>
+
+<?php
+//get_template_part('template-parts/sections/experts'); 
+?>
+
+<?php
+//get_template_part('template-parts/sections/clinics'); 
+?>
+
+<?php
+// get_template_part('template-parts/sections/articles', 'top');
+?>
 
 <?php
 get_footer();
+?>

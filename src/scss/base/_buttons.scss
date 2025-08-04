@@ -35,6 +35,27 @@ button {
         color: $color-white;
     }
 
+    &--dark {
+        background: $bg-dark;
+        border-color: $bg-dark;
+        color: $color-white;
+    }
+
+    &--icon,
+    &--arrow {
+        padding-right: 16px;
+
+        &::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-image: url('../icons/arrow-up-right.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+    }
+
     cursor: pointer;
     transition: opacity 0.1s ease-in-out;
 
@@ -112,16 +133,15 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 30px;
-    padding: 4px 10px;
+    padding: 6px 8px;
     border: 1px solid $border-default;
     gap: 6px;
     border-radius: 150px;
     @include text-label;
+    text-transform: uppercase;
 
-    border-color: $bg-white;
     background-color: $bg-white;
-    color: $color-text;
+    color: $color-muted;
 
     &--squared {
         border-radius: 4px;
@@ -182,9 +202,9 @@ button {
 
     transition: opacity 0.1s ease-in-out;
 
-    &:hover {
+    &:is(a):hover {
+        cursor: pointer;
         opacity: 0.75;
-
     }
 }
 

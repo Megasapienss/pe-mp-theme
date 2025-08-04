@@ -116,9 +116,115 @@
         }
 
     }
+
+    &--test {
+        background-color: #5D5FEF;
+        padding: 30px 20px;
+        border-radius: 0;
+
+        @include flex(column, center, center);
+
+        & .banner{
+            &__content{
+                @include flex(column, center, center);
+            }
+
+            &__title{
+                font-weight: 600;
+            }
+
+            &__description{
+                @include body;
+                color: $color-muted-inverse;
+                text-align: center;
+                opacity: 0.6;
+            }
+
+            &__image{
+                width: 200px;
+                height: 200px;
+                object-fit: contain;
+                object-position: center;
+                aspect-ratio: 1/1;
+                margin: $spacing-1 auto;
+            }
+
+            &__button{
+                margin-top: auto;
+                color: $color-white;
+                border: none;
+
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 }
 
 .archive-grid .banner {
     margin: 0;
     justify-content: center;
+}
+
+.newsletter-banner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-2;
+    padding: $spacing-6 $spacing-4;
+    background-color: $bg-accent;
+
+    @include less-than(lg) {
+        grid-template-columns: 1fr;
+        padding: $spacing-5 $spacing-2;
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-2;
+    }
+
+    &__form {
+        & [data-hsfc-id=Renderer] .hsfc-RichText p,
+        & [data-hsfc-id=Renderer] span {
+            @include body;
+            color: $color-white;
+        }
+
+        & [data-hsfc-id=Renderer] .hsfc-TextInput {
+            border-radius: 8px !important;
+            border-color: white !important;
+            background-color: white !important;
+            box-shadow: none !important;
+            padding: 12.5px 20px !important;
+            border-radius: 150px !important;
+        }
+
+        & .hsfc-Step__Content {
+            padding: $spacing-2 !important;
+            border-left: 1px solid $color-muted-inverse;
+
+            @include less-than(lg) {
+                border-left: none;
+                padding: 0 !important;
+            }
+
+            & .hsfc-Button[type="submit"] {
+                width: 100% !important;
+                background: $bg-dark;
+                border-radius: 150px;
+                @include text-button;
+                height: 48px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                    background: $color-muted !important;
+                    transform: none !important
+                }
+            }
+        }
+    }
 }

@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * Template part for displaying posts in post-v2 format
+ * 
+ * @param WP_Post $args['post'] The post object to display
+ * @param string $args['size'] Optional size modifier (e.g., 'small')
+ * @param string $args['image_align'] Optional image alignment ('left' or 'right', default: 'left')
+ * @param bool $args['show_image'] Whether to show the image (default: true)
+ * @param bool $args['show_excerpt'] Whether to show the excerpt (default: true)
+ * @param bool $args['show_author'] Whether to show the author (default: true)
+ */
+
+// Exit if accessed directly or post is not passed
+if (!isset($args['post'])) {
+    return;
+}
+
+$post = $args['post'];
+$permalink = get_permalink($post->ID);
+$thumbnail = get_the_post_thumbnail_url($post->ID, 'medium') ?: get_template_directory_uri() . '/dist/images/banner-default.webp';
+
+// Derive data from post
+$categories = get_the_category($post->ID);
+$tag = !empty($categories) ? $categories[0]->name : 'Mental Wellness';
+$excerpt = wp_trim_words(get_the_excerpt($post), 15);
+$author = get_the_author_meta('display_name', $post->post_author);
+$author_link = get_author_posts_url($post->post_author);
+
+// Card variations
+$size = isset($args['size']) ? $args['size'] : '';
+$image_align = isset($args['image_align']) ? $args['image_align'] : 'left';
+$show_image = isset($args['show_image']) ? $args['show_image'] : true;
+$show_excerpt = isset($args['show_excerpt']) ? $args['show_excerpt'] : true;
+$show_author = isset($args['show_author']) ? $args['show_author'] : true;
+
+$card_classes = 'card-v2';
+if ($size) {
+    $card_classes .= ' card-v2--' . $size;
+}
+if ($image_align === 'right') {
+    $card_classes .= ' card-v2--image-right';
+}
+?>
+
+<div class="<?= esc_attr($card_classes); ?>">
+    <?php if ($show_image && $image_align === 'left') : ?>
+    <div class="card-v2__image">
+        <img src="<?= esc_url($thumbnail); ?>">
+    </div>
+    <?php endif; ?>
+    
+    <div class="card-v2__content">
+        <span class="card-v2__tag label">
+            <?= esc_html($tag); ?>
+        </span>
+        <h5 class="card-v2__title<?= isset($args['title_class']) ? ' ' . esc_attr($args['title_class']) : ''; ?>">
+            <a href="<?= esc_url($permalink); ?>"><?= esc_html($post->post_title); ?></a>
+        </h5>
+        
+        <?php if ($show_excerpt && $excerpt) : ?>
+        <p class="card-v2__excerpt">
+            <?= esc_html($excerpt); ?>
+        </p>
+        <?php endif; ?>
+        
+        <?php if ($show_author && $author) : ?>
+        <div class="card-v2__author">
+            Written by: <a href="<?= esc_url($author_link); ?>"><?= esc_html($author); ?></a>
+        </div>
+        <?php endif; ?>
+    </div>
+    
+    <?php if ($show_image && $image_align === 'right') : ?>
+    <div class="card-v2__image">
+        <img src="<?= esc_url($thumbnail); ?>">
+    </div>
+    <?php endif; ?>
+</div> 

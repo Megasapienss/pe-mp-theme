@@ -17,6 +17,7 @@ $color-text: $color-dark;
 $color-white: #FFFFFF;
 $color-muted: #20252799;
 $color-muted-inverse: #FFFFFF99;
+$color-border: #E8E8E8;
 
 
 
@@ -27,7 +28,7 @@ $bg-dark: $color-dark;
 $bg-primary: $bg-white;
 $bg-accent: $color-accent;
 
-$border-default: #E8E8E8;
+$border-default: $color-border;
 
 // Typography
 $font-primary: 'Almarai', sans-serif;
@@ -43,19 +44,22 @@ $breakpoint-xl: 1200px;
 $breakpoint-xxl: 1600px;
 
 // Spacing
-$spacing-unit: 8px;
-$spacing-xs: $spacing-unit;
-$spacing-sm: $spacing-unit * 2;
-$spacing-md: $spacing-unit * 3;
-$spacing-lg: $spacing-unit * 4;
-$spacing-xl: $spacing-unit * 5;
+$spacing-unit: 10px;
+$spacing-05: $spacing-unit * 0.5;
+$spacing-1: $spacing-unit;
+$spacing-2: $spacing-unit * 2;
+$spacing-3: $spacing-unit * 3;
+$spacing-4: $spacing-unit * 4;
+$spacing-5: $spacing-unit * 6;
+$spacing-6: $spacing-unit * 8;
+$spacing-7: $spacing-unit * 16;
 
 // Grid System
-$grid-gap: $spacing-md;
-$grid-gap-sm: $spacing-sm;
-$grid-gap-lg: $spacing-lg;
-$grid-gap-xl: $spacing-xl;
-$grid-container-padding: $spacing-md;
+$grid-gap: $spacing-4;
+$grid-gap-sm: $spacing-2;
+$grid-gap-lg: $spacing-5;
+$grid-gap-xl: $spacing-5;
+$grid-container-padding: $spacing-6;
 $grid-max-columns: 12;
 
 // Z-index

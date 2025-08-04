@@ -1,0 +1,41 @@
+// Spacing Mixins
+
+// Margin mixin
+@mixin m($value) {
+  margin: $value !important;
+}
+@mixin mt($value) {
+  margin-top: $value !important;
+}
+@mixin mr($value) {
+  margin-right: $value !important;
+}
+@mixin mb($value) {
+  margin-bottom: $value !important;
+}
+@mixin ml($value) {
+  margin-left: $value !important;
+}
+
+// Padding mixin
+@mixin p($value) {
+  padding: $value !important;
+}
+@mixin pt($value) {
+  padding-top: $value !important;
+}
+@mixin pr($value) {
+  padding-right: $value !important;
+}
+@mixin pb($value) {
+  padding-bottom: $value !important;
+}
+@mixin pl($value) {
+  padding-left: $value !important;
+}
+
+// Example usage (for reference):
+// .my-class {
+//   @include m($spacing-2);
+//   @include pt(0);
+// }

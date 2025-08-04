@@ -11,19 +11,19 @@ $term = get_queried_object();
 $post_count = $wp_query->found_posts;
 ?>
 
-<section class="archive-title container">
+<section class="archive-title-v2 container">
     <?php
     get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
         'class' => 'breadcrumbs breadcrumbs--dark archive-title__breadcrumbs'
     ));
     ?>
-    <h1 class="archive-title__name title-lg"><?= get_field('h1', $term) ?: $term->name; ?></h1>
-    <p class="archive-title__description heading-h2"><?= $term->description; ?></p>
+    <h1 class="archive-title-v2__name"><?= get_field('h1', $term) ?: $term->name; ?></h1>
+    <p class="archive-title-v2__description"><?= $term->description; ?></p>
 </section>
 
 <?php
 // Quiz Cards Section - Only show for diagnostics category
-if ($term && !is_wp_error($term) && $term->slug === 'diagnostics') :
+if (false) :
     $quiz_categories = array(
         array(
             'name' => 'Depression',
@@ -77,6 +77,28 @@ if ($term && !is_wp_error($term) && $term->slug === 'diagnostics') :
     </section>
 <?php endif; ?>
 
+<?php if ($term && !is_wp_error($term) && $term->slug === 'diagnostics') : ?>
+    <section class="section-v2 container grid grid--4">
+    <?php
+        $test_ids = [
+            'anxiety',
+            'depression',
+            'adhd',
+            'ptsd',
+            // 'ed',
+            // 'ocd',
+            // 'burnout'
+        ];
+        foreach ($test_ids as $test_id){
+            get_template_part('template-parts/banners/test', '', [
+                'test_id' => $test_id
+            ]); 
+        }
+    ?>
+    </section>
+<?php endif; ?>
+
+
 <?php
 // Get child categories of the current term
 $child_categories = get_terms(array(
@@ -85,35 +107,42 @@ $child_categories = get_terms(array(
     'hide_empty' => true
 ));
 
-// Display child categories if they exist
+// If there are subcategories, display a mosaic for each subcategory
 if (!empty($child_categories) && !is_wp_error($child_categories)) :
-    get_template_part('template-parts/sections/topics', null, array(
-        'custom_categories' => $child_categories,
-        'section_title' => ''
-    ));
-endif;
+    foreach ($child_categories as $child_category) :
+        get_template_part('template-parts/mosaics/category', null, array(
+            'title' => $child_category->name,
+            'category' => $child_category->slug
+        ));
+    endforeach;
+else :
+    // If no subcategories, display the current archive-grid
 ?>
-
-<section class="archive-grid grid grid--2 container container--wide">
-    <?php if (have_posts()) {
-        while (have_posts()) {
-            the_post();
-            get_template_part('template-parts/cards/post', 'curved', ['post' => get_post()]);
-        }
-        // If this is the middle post (when total is odd), insert newsletter banner
-        if ($post_count % 2 !== 0) {
-            get_template_part('template-parts/banners/newsletter');
-        }
-    } else { ?>
-        <p class="text-center"><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
-        <p class="text-center"><?php _e('Come back later!', 'pe-mp-theme'); ?></p>
-    <?php } ?>
-</section>
+    <section class="archive-grid mosaic mosaic--1-1 container container--wide">
+        <?php if (have_posts()) {
+            while (have_posts()) {
+                the_post();
+                ?>
+                <div class="mosaic__item">
+                    <?php get_template_part('template-parts/cards/post', 'v2', ['post' => get_post(), 'size' => 'large']); ?>
+                </div>
+                <?php
+            }
+            // If this is the middle post (when total is odd), insert newsletter banner
+            // if ($post_count % 2 !== 0) {
+            //     get_template_part('template-parts/banners/newsletter');
+            // }
+        } else { ?>
+            <p class="text-center"><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
+            <p class="text-center"><?php _e('Come back later!', 'pe-mp-theme'); ?></p>
+        <?php } ?>
+    </section>
+<?php endif; ?>
 
 <?php
-if ($post_count % 2 == 0) {
-    get_template_part('template-parts/sections/newsletter');
-}
+// if ($post_count % 2 == 0) {
+//     get_template_part('template-parts/sections/newsletter');
+// }
 ?>
 
 <?php
@@ -129,7 +158,7 @@ if ($post_count % 2 == 0) {
 ?>
 
 <?php
-get_template_part('template-parts/sections/articles', 'top');
+// get_template_part('template-parts/sections/articles', 'top');
 ?>
 
 <?php
