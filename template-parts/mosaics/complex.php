@@ -9,7 +9,7 @@
  * @package PE_MP_Theme
  */
 
-$title = isset($args['title']) ? $args['title'] : 'Mental Wellness';
+$title = isset($args['title']) ? $args['title'] : 'Editor\'s Picks';
 $category = isset($args['category']) ? $args['category'] : '';
 
 // Query posts by category

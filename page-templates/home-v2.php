@@ -36,10 +36,9 @@ get_template_part('template-parts/mosaics/category', '', [
     'category' => 'mental-wellness'
 ]);
 
-// Complex Mental Wellness Section
+// New articles Section
 get_template_part('template-parts/mosaics/complex', '', [
-    'title' => 'Mental Wellness',
-    'category' => 'mental-wellness'
+    'title' => 'New articles'
 ]);
 ?>
 

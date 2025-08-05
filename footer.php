@@ -37,7 +37,7 @@ get_template_part('template-parts/sections/tests');
             <?php esc_html_e('WhatsApp', 'pe-mp-theme'); ?>
         </a>
     </div>
-    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/community.avif" alt="Community">
+    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/community.webp" alt="Community">
 </section>
 
 <footer class="footer">

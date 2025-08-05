@@ -136,6 +136,7 @@ button {
     padding: 6px 8px;
     border: 1px solid $border-default;
     gap: 6px;
+    height: 32px;
     border-radius: 150px;
     @include text-label;
     text-transform: uppercase;
@@ -150,7 +151,6 @@ button {
     &--muted {
         border-color: $bg-muted;
         background-color: $bg-muted;
-        color: $color-text;
     }
 
     &--primary {

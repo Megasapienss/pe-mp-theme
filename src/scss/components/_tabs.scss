@@ -1,0 +1,28 @@
+.tabs {
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        gap: $spacing-1;
+        flex-wrap: nowrap;
+    }
+
+    &__body {
+        margin-top: $spacing-2;
+    }
+
+    &__button {
+        @include body;
+        color: $color-muted;
+        background-color: #F0F0F0;
+        padding: 8px;
+        border-radius: 150px;
+        flex: 1;
+        text-align: center;
+
+        &--active {
+            color: $color-white;    
+            background-color: #2D2F30;
+        }
+    }
+}

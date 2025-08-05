@@ -1,0 +1,18 @@
+.single-title-v2 {
+    padding-top: $spacing-6;
+    padding-bottom: $spacing-4;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+
+    &__name{
+        @include heading-h2;
+        // font-weight: 600;
+        color: $color-dark;
+    }
+
+    &__description{
+        @include body-lg;
+        color: $color-muted;
+    }
+}

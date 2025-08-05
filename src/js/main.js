@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Table of Contents functionality
     function initTableOfContents() {
-        const tocList = document.querySelector('.hero__toc-list');
-        const articleContent = document.querySelector('.article__content');
+        const tocList = document.querySelector('.article-v2__toc-list');
+        const articleContent = document.querySelector('.article-v2__content');
 
         if (tocList && articleContent) {
             const h2Headings = articleContent.querySelectorAll('h2');
@@ -24,132 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
             let currentActiveHeading = null;
             let scrollTimeout = null;
 
-            // Define updateCurrentHeading function
-            function updateCurrentHeading() {
-                let newCurrentHeading = null;
 
-                // Check if we're at the top (Overview)
-                if (h2Headings.length === 0) {
-                    newCurrentHeading = 'overview';
-                } else {
-                    const firstHeading = h2Headings[0];
-                    const firstChild = articleContent.firstElementChild;
-                    
-                    // Check if we're at the top (Overview)
-                    if (firstChild) {
-                        const rect = firstChild.getBoundingClientRect();
-                        const firstChildTopPosition = rect.top;
-                        
-                        // If first child is above the offset position, we're in overview
-                        if (firstChildTopPosition > 120) {
-                            newCurrentHeading = 'overview';
-                        } else {
-                            // Find the current heading by checking which one is at the top position
-                            let foundHeading = false;
-                            for (let i = h2Headings.length - 1; i >= 0; i--) {
-                                const heading = h2Headings[i];
-                                // Skip newsletter headings
-                                if (heading.textContent.toLowerCase().includes('newsletter')) {
-                                    continue;
-                                }
-                                
-                                const headingRect = heading.getBoundingClientRect();
-                                const headingTopPosition = headingRect.top;
-                                
-                                // Check if this heading is at the top position (120px from top)
-                                if (headingTopPosition <= 120) {
-                                    newCurrentHeading = heading;
-                                    foundHeading = true;
-                                    break;
-                                }
-                            }
-                            
-                            // If no heading was found, we're in overview
-                            if (!foundHeading) {
-                                newCurrentHeading = 'overview';
-                            }
-                        }
-                    } else {
-                        newCurrentHeading = 'overview';
-                    }
-                }
-
-                // Only update if the current heading has changed
-                if (newCurrentHeading !== currentActiveHeading) {
-                    // Remove current class from all links
-                    tocLinks.forEach(link => link.classList.remove('current'));
-
-                    // Add current class to the new active heading
-                    if (newCurrentHeading === 'overview') {
-                        const overviewLink = tocList.querySelector('a[href="#article-overview"]');
-                        if (overviewLink) {
-                            overviewLink.classList.add('current');
-                            // Scroll TOC to show the overview link
-                            overviewLink.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'nearest',
-                                inline: 'center'
-                            });
-                        }
-                    } else if (newCurrentHeading) {
-                        const currentLink = tocList.querySelector(`a[href="#${newCurrentHeading.id}"]`);
-                        if (currentLink) {
-                            currentLink.classList.add('current');
-                            // Scroll TOC to show the current link
-                            currentLink.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'nearest',
-                                inline: 'center'
-                            });
-                        }
-                    }
-
-                    // Update the current active heading
-                    currentActiveHeading = newCurrentHeading;
-                }
-            }
-
-            // Define throttledScrollHandler function
-            function throttledScrollHandler() {
-                if (scrollTimeout) {
-                    clearTimeout(scrollTimeout);
-                }
-                scrollTimeout = setTimeout(updateCurrentHeading, 50);
-            }
 
             // Clear existing placeholder content
             tocList.innerHTML = '';
-
-            // Add "Overview" link
-            const overviewLink = document.createElement('a');
-            overviewLink.href = '#article-overview';
-            overviewLink.textContent = 'Overview';
-            overviewLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Find the first child element of article content
-                const firstChild = articleContent.firstElementChild;
-                if (firstChild) {
-                    // Use scrollIntoView with offset
-                    firstChild.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    // Temporarily disable scroll detection to prevent interference
-                    window.removeEventListener('scroll', throttledScrollHandler);
-                    
-                    // Re-enable after scroll animation completes
-                    setTimeout(() => {
-                        window.addEventListener('scroll', throttledScrollHandler);
-                        updateCurrentHeading();
-                    }, 800);
-                    
-                    history.pushState(null, null, '#article-overview');
-                }
-            });
-
-            tocList.appendChild(overviewLink);
 
             // Add ID to article content
             if (!articleContent.id) {
@@ -182,14 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             block: 'start'
                         });
                         
-                        // Temporarily disable scroll detection to prevent interference
-                        window.removeEventListener('scroll', throttledScrollHandler);
-                        
-                        // Re-enable after scroll animation completes
-                        setTimeout(() => {
-                            window.addEventListener('scroll', throttledScrollHandler);
-                            updateCurrentHeading();
-                        }, 800);
+
                         
                         history.pushState(null, null, `#${heading.id}`);
                     });
@@ -198,22 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
-            // Update on scroll with throttling
-            window.addEventListener('scroll', throttledScrollHandler);
-
             // Update tocLinks reference after all links are created
             tocLinks = tocList.querySelectorAll('a');
-
-            // Initial update - make Overview current by default
-            setTimeout(() => {
-                updateCurrentHeading();
-                // Force Overview to be current on page load
-                const overviewLink = tocList.querySelector('a[href="#article-overview"]');
-                if (overviewLink) {
-                    tocLinks.forEach(link => link.classList.remove('current'));
-                    overviewLink.classList.add('current');
-                }
-            }, 100);
         }
 
         // Mouse wheel scrolling for TOC
@@ -242,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // initTableOfContents();
+    initTableOfContents();
 
 
     // Native share functionality

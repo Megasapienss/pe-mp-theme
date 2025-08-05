@@ -37,7 +37,7 @@ get_header();
     }
     ?>
     
-    <section class="hero hero--banner" style="background-image: url('<?= esc_url($background_url); ?>');">
+    <!-- <section class="hero hero--banner" style="background-image: url('<?= esc_url($background_url); ?>');">
         <?php get_template_part('template-parts/components/breadcrumbs', 'rankmath'); ?>
         <div class="hero__inner">
             <div class="hero__date label label--arrow label--muted">
@@ -46,14 +46,117 @@ get_header();
             <h1 class="hero__title heading-h2"><?= get_the_title(); ?></h1>
 
         </div>
-        <!-- <div class="hero__toc-wrapper">
+        <div class="hero__toc-wrapper">
             <div class="hero__toc">
                 <div class="hero__toc-list">
                 </div>
             </div>
-        </div> -->
+        </div>
+    </section> -->
+
+    <section class="single-title-v2 container">
+        <?php
+        get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
+            'class' => 'breadcrumbs breadcrumbs--dark single-title-v2__breadcrumbs'
+        ));
+        ?>
     </section>
 
+    <article class="article-v2 container">
+
+        <div class="article-v2__meta">
+            <div class="article-v2__meta-item">
+                <span class="article-v2__meta-label">Date</span>
+                <span class="article-v2__meta-value"><?= get_the_date('d M Y'); ?></span>
+            </div>
+            <div class="article-v2__meta-item">
+                <span class="article-v2__meta-label">Reading time</span>
+                <span class="article-v2__meta-value">
+                    <?php
+                        $content = get_post_field('post_content', get_the_ID());
+                        $word_count = str_word_count(strip_tags($content));
+                        $reading_time = ceil($word_count / 400);
+                        echo $reading_time . ' min';
+                    ?>
+                </span>
+            </div>
+            <div class="article-v2__meta-item">
+                <?php
+                $categories = get_the_category();
+                if (!empty($categories)) {
+                    $main_category = $categories[0];
+                    ?>
+                    <span class="label"><?= esc_html($main_category->name); ?></span>
+                    <?php
+                }
+                ?>
+            </div>
+        </div>
+
+        <div class="article-v2__inner">
+
+            <h1 class="article-v2__title"><?= get_the_title(); ?></h1>
+            <p class="article-v2__excerpt"><?= get_the_excerpt(); ?></p>
+            <div class="article-v2__author">
+                <div class="article-v2__author-avatar">
+                    <?php echo get_avatar(get_the_author_meta('ID'), 60); ?>
+                </div>
+                <div class="article-v2__author-name">Written by: <a href="<?= get_author_posts_url(get_the_author_meta('ID')); ?>"><?= get_the_author(); ?></a></div>
+                <div class="article-v2__author-description"><?= get_the_author_meta('description'); ?></div>
+            </div>
+
+            <div class="article-v2__cover">
+                <img src="<?= $background_url; ?>" alt="<?= get_the_title(); ?>">
+            </div>
+
+            <div class="article-v2__content-wrapper">
+
+                <div class="article-v2__content body-lg">
+                    <?php the_content(); ?>
+                    <div class="article-v2__share">
+                        <span class="label label--share label--primary label--icon">Share</span>
+                    </div>
+                </div>
+
+                <div class="article-v2__sidebar">
+                    <div class="sidebar-card-v2">
+                        <div class="tabs article-v2__sidebar-tabs">
+                            <div class="tabs__header">
+                                <span class="tabs__button tabs__button--active">Sections</span>
+                            </div>
+                            <div class="tabs__body">
+                                <div class="article-v2__toc">
+                                    <nav class="article-v2__toc-list">
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-card-v2">
+                    <?php
+
+                    get_template_part('template-parts/banners/test', '', [
+                        'test_id' => pe_mp_get_related_test_id()
+                    ]); 
+                        
+                    ?>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        
+    </article>
+
+    <?php
+    // New articles Section
+    get_template_part('template-parts/mosaics/complex', '', [
+        'title' => 'Editor\'s Picks'
+    ]);
+    ?>  
+
+    <?php if (false) : ?>
     <article class="article container">
         <section class="article__content body-lg">
             <?php the_content(); ?>
@@ -120,13 +223,7 @@ get_header();
             </div>
         </aside>
     </article>
-
-    <?php
-    //get_template_part('template-parts/sections/experts'); 
-    ?>
-
-    <?php get_template_part('template-parts/sections/articles', 'related'); ?>
-
+    <?php endif; ?>
 
 <?php endwhile; ?>
 

@@ -21,134 +21,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Table of Contents functionality
   function initTableOfContents() {
-    var tocList = document.querySelector('.hero__toc-list');
-    var articleContent = document.querySelector('.article__content');
+    var tocList = document.querySelector('.article-v2__toc-list');
+    var articleContent = document.querySelector('.article-v2__content');
     if (tocList && articleContent) {
-      // Define updateCurrentHeading function
-      var updateCurrentHeading = function updateCurrentHeading() {
-        var newCurrentHeading = null;
-
-        // Check if we're at the top (Overview)
-        if (h2Headings.length === 0) {
-          newCurrentHeading = 'overview';
-        } else {
-          var firstHeading = h2Headings[0];
-          var firstChild = articleContent.firstElementChild;
-
-          // Check if we're at the top (Overview)
-          if (firstChild) {
-            var rect = firstChild.getBoundingClientRect();
-            var firstChildTopPosition = rect.top;
-
-            // If first child is above the offset position, we're in overview
-            if (firstChildTopPosition > 120) {
-              newCurrentHeading = 'overview';
-            } else {
-              // Find the current heading by checking which one is at the top position
-              var foundHeading = false;
-              for (var i = h2Headings.length - 1; i >= 0; i--) {
-                var heading = h2Headings[i];
-                // Skip newsletter headings
-                if (heading.textContent.toLowerCase().includes('newsletter')) {
-                  continue;
-                }
-                var headingRect = heading.getBoundingClientRect();
-                var headingTopPosition = headingRect.top;
-
-                // Check if this heading is at the top position (120px from top)
-                if (headingTopPosition <= 120) {
-                  newCurrentHeading = heading;
-                  foundHeading = true;
-                  break;
-                }
-              }
-
-              // If no heading was found, we're in overview
-              if (!foundHeading) {
-                newCurrentHeading = 'overview';
-              }
-            }
-          } else {
-            newCurrentHeading = 'overview';
-          }
-        }
-
-        // Only update if the current heading has changed
-        if (newCurrentHeading !== currentActiveHeading) {
-          // Remove current class from all links
-          tocLinks.forEach(function (link) {
-            return link.classList.remove('current');
-          });
-
-          // Add current class to the new active heading
-          if (newCurrentHeading === 'overview') {
-            var _overviewLink = tocList.querySelector('a[href="#article-overview"]');
-            if (_overviewLink) {
-              _overviewLink.classList.add('current');
-              // Scroll TOC to show the overview link
-              _overviewLink.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-                inline: 'center'
-              });
-            }
-          } else if (newCurrentHeading) {
-            var currentLink = tocList.querySelector("a[href=\"#".concat(newCurrentHeading.id, "\"]"));
-            if (currentLink) {
-              currentLink.classList.add('current');
-              // Scroll TOC to show the current link
-              currentLink.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-                inline: 'center'
-              });
-            }
-          }
-
-          // Update the current active heading
-          currentActiveHeading = newCurrentHeading;
-        }
-      }; // Define throttledScrollHandler function
-      var throttledScrollHandler = function throttledScrollHandler() {
-        if (scrollTimeout) {
-          clearTimeout(scrollTimeout);
-        }
-        scrollTimeout = setTimeout(updateCurrentHeading, 50);
-      }; // Clear existing placeholder content
       var h2Headings = articleContent.querySelectorAll('h2');
       var tocLinks = tocList.querySelectorAll('a');
       var currentActiveHeading = null;
       var scrollTimeout = null;
+
+      // Clear existing placeholder content
       tocList.innerHTML = '';
-
-      // Add "Overview" link
-      var overviewLink = document.createElement('a');
-      overviewLink.href = '#article-overview';
-      overviewLink.textContent = 'Overview';
-      overviewLink.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        // Find the first child element of article content
-        var firstChild = articleContent.firstElementChild;
-        if (firstChild) {
-          // Use scrollIntoView with offset
-          firstChild.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-
-          // Temporarily disable scroll detection to prevent interference
-          window.removeEventListener('scroll', throttledScrollHandler);
-
-          // Re-enable after scroll animation completes
-          setTimeout(function () {
-            window.addEventListener('scroll', throttledScrollHandler);
-            updateCurrentHeading();
-          }, 800);
-          history.pushState(null, null, '#article-overview');
-        }
-      });
-      tocList.appendChild(overviewLink);
 
       // Add ID to article content
       if (!articleContent.id) {
@@ -180,39 +62,14 @@ document.addEventListener('DOMContentLoaded', function () {
               behavior: 'smooth',
               block: 'start'
             });
-
-            // Temporarily disable scroll detection to prevent interference
-            window.removeEventListener('scroll', throttledScrollHandler);
-
-            // Re-enable after scroll animation completes
-            setTimeout(function () {
-              window.addEventListener('scroll', throttledScrollHandler);
-              updateCurrentHeading();
-            }, 800);
             history.pushState(null, null, "#".concat(heading.id));
           });
           tocList.appendChild(tocLink);
         });
       }
 
-      // Update on scroll with throttling
-      window.addEventListener('scroll', throttledScrollHandler);
-
       // Update tocLinks reference after all links are created
       tocLinks = tocList.querySelectorAll('a');
-
-      // Initial update - make Overview current by default
-      setTimeout(function () {
-        updateCurrentHeading();
-        // Force Overview to be current on page load
-        var overviewLink = tocList.querySelector('a[href="#article-overview"]');
-        if (overviewLink) {
-          tocLinks.forEach(function (link) {
-            return link.classList.remove('current');
-          });
-          overviewLink.classList.add('current');
-        }
-      }, 100);
     }
 
     // Mouse wheel scrolling for TOC
@@ -239,8 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   }
-
-  // initTableOfContents();
+  initTableOfContents();
 
   // Native share functionality
   var shareButtons = document.querySelectorAll('.label--share');
