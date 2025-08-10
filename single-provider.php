@@ -191,16 +191,16 @@ get_header();
             </div>
             <?php endif; ?>
 
+            <?php if (get_field('image_url')) : ?>
             <div class="provider-page__section provider-page__section--gallery">
                 <h2 class="provider-page__section-heading">Gallery</h2>
                 <div class="provider-page__section-content">
-                <?php if (get_field('image_url')) : ?>
                     <div class="provider-page__cover">
                         <img src="<?= get_field('image_url'); ?>" alt="<?= get_the_title(); ?>">
                     </div>
-                <?php endif; ?>
                 </div>
             </div>
+            <?php endif; ?>
 
             <?php if (get_field('practitioners_relation')) : ?>
             <div class="provider-page__section">
