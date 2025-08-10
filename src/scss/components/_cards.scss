@@ -96,6 +96,7 @@
         color: $color-muted;
 
         & a {
+            pointer-events: none;
             color: $color-text;
         }
     }

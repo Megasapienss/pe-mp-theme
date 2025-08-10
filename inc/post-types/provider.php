@@ -47,12 +47,7 @@ function pe_mp_register_providers_post_type() {
         'menu_icon'          => 'dashicons-businessman',
         'supports'           => array(
             'title',           // Provider name
-            'editor',          // Full description
-            'thumbnail',       // Featured image
-            'excerpt',         // Short description
             'custom-fields',   // For ACF
-            'author',          // Author support
-            'revisions',       // Revisions
         ),
         'show_in_rest'       => false, // Disable Gutenberg editor
         'taxonomies'         => array('provider-category', 'provider-tag'),

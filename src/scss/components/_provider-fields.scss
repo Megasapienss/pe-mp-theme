@@ -1,0 +1,160 @@
+/**
+ * Provider Fields Styling
+ */
+
+
+
+// Provider type specific styling
+.acf-field[data-name="provider_type"] {
+    .acf-input {
+        select {
+            font-weight: 600;
+        }
+    }
+}
+
+// Card tier styling
+.acf-field[data-name="card_tier_badge"] {
+    .acf-input {
+        select {
+            font-weight: 600;
+        }
+    }
+}
+
+// Conditional field styling
+.acf-field[data-conditional-logic] {
+    transition: opacity 0.3s ease;
+    
+    &.acf-hidden {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+}
+
+// Repeater field styling
+.acf-field[data-type="repeater"] {
+    .acf-table {
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        td {
+            vertical-align: middle;
+        }
+    }
+}
+
+// Group field styling
+.acf-field[data-type="group"] {
+    .acf-fields {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        background-color: #fafafa;
+    }
+}
+
+// Tab styling
+.acf-tab-wrap {
+    .acf-tab-group {
+        border-bottom: 2px solid #ddd;
+        
+        li {
+            a {
+                background-color: #f8f9fa;
+                border: 1px solid #ddd;
+                border-bottom: none;
+                border-radius: 4px 4px 0 0;
+                color: #666;
+                font-weight: 500;
+                padding: 10px 15px;
+                text-decoration: none;
+                
+                &:hover {
+                    background-color: #e9ecef;
+                    color: #333;
+                }
+                
+                &.active {
+                    background-color: #fff;
+                    border-bottom: 2px solid #fff;
+                    color: #333;
+                    font-weight: 600;
+                    margin-bottom: -2px;
+                }
+            }
+        }
+    }
+}
+
+// Field instructions styling
+.acf-field {
+    .acf-label {
+        .description {
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+    }
+}
+
+// Required field styling
+.acf-field[data-required="1"] {
+    .acf-label {
+        label {
+            &::after {
+                content: " *";
+                color: #d63638;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+// Field validation styling
+.acf-field.acf-error {
+    .acf-input {
+        border-color: #d63638;
+        box-shadow: 0 0 0 1px #d63638;
+    }
+    
+    .acf-notice {
+        background-color: #d63638;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 3px;
+        margin-top: 5px;
+        font-size: 0.9em;
+    }
+}
+
+// Responsive styling
+@media (max-width: 782px) {
+    .acf-field {
+        .acf-label {
+            margin-bottom: 10px;
+        }
+        
+        .acf-input {
+            input[type="text"],
+            input[type="email"],
+            input[type="url"],
+            input[type="number"],
+            textarea,
+            select {
+                width: 100%;
+                max-width: none;
+            }
+        }
+    }
+    
+    .acf-field[data-type="group"] {
+        .acf-fields {
+            padding: 10px;
+        }
+    }
+}

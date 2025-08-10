@@ -247,6 +247,7 @@
 
             &>a {
                 color: $color-dark;
+                pointer-events: none;
             }
         }
 
@@ -261,6 +262,10 @@
                 border-radius: 50%;
             }
         }
+    }
+
+    &__cover {
+        width: 100%;
     }
 
     &__content {

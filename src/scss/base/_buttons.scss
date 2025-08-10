@@ -24,6 +24,7 @@ button {
     @include text-button;
     color: $color-text;
 
+    &--secondary,
     &--muted {
         background: $bg-muted;
         border-color: $bg-muted;
@@ -35,6 +36,7 @@ button {
         color: $color-white;
     }
 
+    &--primary,
     &--dark {
         background: $bg-dark;
         border-color: $bg-dark;
@@ -215,5 +217,61 @@ button {
         @include heading-h6;
         // color: $color-muted;
         padding-bottom: 8px;
+    }
+}
+
+.icon-tag {
+    @include body;
+    line-height: 100% !important;
+
+    @include less-than('md') {
+        @include body-sm;
+    }
+
+    color: $color-dark;
+    height: 24px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    position: relative;
+
+    padding-left: 28px;
+
+    &::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        content: '';
+        width: 24px;
+        height: 24px;
+        background-image: url('../icons/checkbox.svg');
+        background-repeat: no-repeat;
+    }
+
+    &--rounded {
+        border-radius: 150px;
+        height: 40px;
+        border: 1px solid $color-border;
+        padding-left: 44px;
+        padding-right: 12px;
+
+        &::before {
+            top: 8px;
+            left: 14px;
+        }
+    }
+
+    &--globe {
+        &::before {
+            background-image: url('../icons/globe.svg');
+        }
+    }
+
+    &--map {
+        &::before {
+            background-image: url('../icons/map.svg');
+        }
     }
 }

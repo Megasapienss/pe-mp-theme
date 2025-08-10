@@ -26,13 +26,12 @@
 @import 'layout/header';
 @import 'layout/footer';
 @import 'layout/off-canvas';
+@import 'layout/provider';
 
 // // Components
 @import 'components/corners';
 @import 'components/banners';
-@import 'components/provider-card';
-@import 'components/provider-archive';
-@import 'components/provider-single'; 
+@import 'components/provider-fields';
 @import 'components/hero';
 @import 'components/breadcrumbs';
 @import 'components/cards';

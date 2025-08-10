@@ -16,12 +16,12 @@ $test_id = isset($args['test_id']) ? $args['test_id'] : 'assessment';
 // Test configurations with default values
 $test_configs = [
     'assessment' => [
-        'title' => 'Assessment',
-        'description' => 'Your mental health self-scan',
+        'title' => 'Find out what treatment is for you in this 3 min quiz',
+        'description' => '',
         'url' => '/tests/assessment/',
-        'bg_color' => '#B877FF',
-        'text_color' => '#FFFFFF',
-        'image' => get_template_directory_uri() . '/dist/images/states/anxiety.svg'
+        'bg_color' => '#BEBFF9',
+        'text_color' => '#202527',
+        'image' => get_template_directory_uri() . '/dist/images/states/general.svg'
     ],
     'anxiety' => [
         'title' => 'Anxiety',

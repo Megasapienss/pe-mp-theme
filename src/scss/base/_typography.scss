@@ -135,7 +135,7 @@
 
   @include less-than('md') {
     font-size: 16px;
-    letter-spacing: 120%;
+    line-height: 120%;
   }
 }
 

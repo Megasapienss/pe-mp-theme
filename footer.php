@@ -13,10 +13,11 @@
 get_template_part('template-parts/sections/newsletter', 'v2');
 ?>
 
-<?php
-get_template_part('template-parts/sections/tests');
-?>
+<?php if ( !is_front_page() ) : ?>
+<?php get_template_part('template-parts/sections/tests'); ?>
+<?php endif; ?>
 
+<?php if ( is_front_page() ) : ?>
 <section class="section-v2 container community-section">
     <h2>Join our private community States of Mind</h2>
     <div class="community-section__text">
@@ -39,6 +40,7 @@ get_template_part('template-parts/sections/tests');
     </div>
     <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/community.webp" alt="Community">
 </section>
+<?php endif; ?>
 
 <footer class="footer">
     <div class="footer__menu">
@@ -60,6 +62,8 @@ get_template_part('template-parts/sections/tests');
             </div>
         </div>
     </div>
+
+    <?php if ( !is_front_page() ) : ?>
     <div class="community-banner">
         <div class="d-flex flex-column">
             <h4>Join our community States of Mind</h4>
@@ -85,9 +89,9 @@ get_template_part('template-parts/sections/tests');
                 <li>Clear it out — we tackle the questions Reddit left hanging and no one else dares to answer</li>
             </ul>
         </div>
-
-        
     </div>
+    <?php endif; ?>
+
     <div class="footer__copyright">
             <p>© 2025 States of Mind. All rights reserved.</p>
             <div class="footer__links">

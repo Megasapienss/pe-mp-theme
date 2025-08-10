@@ -11,14 +11,14 @@
 get_header();
 ?>
 
-<section class="hero hero--minimalistic">
+<!-- <section class="hero hero--minimalistic">
     <h1 class="hero__title">
         Heal your mind & health will follow
     </h1>
     <p class="hero__description heading-h4">
         Discover the latest mental health breakthroughs, advanced diagnostics, and the therapies leading tomorrow's care.
     </p>
-</section>
+</section> -->
 
 <?php
 // Hero Mosaic Section
@@ -29,6 +29,8 @@ get_template_part('template-parts/mosaics/category', '', [
     'title' => 'Science & Innovation',
     'category' => 'science-innovation'
 ]);
+
+get_template_part('template-parts/sections/tests');
 
 // Mental Wellness Section
 get_template_part('template-parts/mosaics/category', '', [
