@@ -2914,6 +2914,10 @@ body {
 .provider-page__cover {
   width: 100%;
 }
+.provider-page__cover img {
+  width: 100%;
+  height: auto;
+}
 .provider-page__section {
   display: flex;
   flex-direction: column;
@@ -2955,6 +2959,10 @@ body {
     line-height: 140%;
   }
 }
+.provider-page__section--gallery .provider-page__section-content {
+  padding-left: 0;
+  padding-right: 0;
+}
 .provider-page__section-content.grid {
   gap: 0 !important;
 }
@@ -2989,6 +2997,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+.provider-page__share {
+  margin-top: 60px;
 }
 
 .corner {
