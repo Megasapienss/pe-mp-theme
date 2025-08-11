@@ -114,7 +114,7 @@ get_header();
                 <div class="article-v2__content body-lg">
                     <?php the_content(); ?>
                     <div class="article-v2__share">
-                        <span class="label label--share label--primary label--icon">Share</span>
+                        <span class="icon-tag icon-tag--rounded icon-tag--globe share-trigger">Share this article</span>
                     </div>
                 </div>
 
@@ -122,11 +122,16 @@ get_header();
                     <div class="sidebar-card-v2">
                         <div class="tabs article-v2__sidebar-tabs">
                             <div class="tabs__header">
-                                <span class="tabs__button tabs__button--active">Sections</span>
+                                <span class="tabs__button tabs__button--active" data-tab="sections">Sections</span>
+                                <span class="tabs__button" data-tab="sources">Sources</span>
                             </div>
                             <div class="tabs__body">
-                                <div class="article-v2__toc">
+                                <div class="tabs__content article-v2__toc" data-tab="sections">
                                     <nav class="article-v2__toc-list">
+                                    </nav>
+                                </div>
+                                <div class="tabs__content article-v2__sources" data-tab="sources">
+                                    <nav class="article-v2__sources-list sources-list">
                                     </nav>
                                 </div>
                             </div>

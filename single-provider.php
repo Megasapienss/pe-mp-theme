@@ -114,7 +114,7 @@ get_header();
             <?php endif; ?>
 
             <?php if (get_field('pricing_details') || get_field('insurance_accepted_list') || get_field('cost_range')) : ?>
-            <div class="provider-single__section">
+            <div class="provider-single__section pb-0">
                 <h2 class="provider-single__section-heading">Pricing & Insurance</h2>
                 <div class="provider-single__section-content grid grid--3">
                     <?php if (get_field('pricing_details')) : ?>
@@ -125,14 +125,24 @@ get_header();
                         </p>
                     </div>
                     <?php endif; ?>
-                    <?php if (get_field('insurance_accepted_list')) : ?>
+
                     <div class="provider-single__section-column">
                         <h3 class="heading-h5">Insurance</h3>
                         <p class="body-md">
-                            <?= get_field('insurance_accepted_list') ? implode(', ', get_field('insurance_accepted_list')) : 'Currently not covered by insurance'; ?>
+                            <?php 
+                            $insurance_terms = get_field('insurance_accepted_list');
+                            if ($insurance_terms) {
+                                $insurance_names = array_map(function($term) {
+                                    return $term->name;
+                                }, $insurance_terms);
+                                echo implode(', ', $insurance_names);
+                            } else {
+                                echo 'Currently not covered by insurance';
+                            }
+                            ?>
                         </p>
                     </div>
-                    <?php endif; ?>
+
                     <?php if (get_field('cost_range')) : ?>
                     <div class="provider-single__section-column">
                         <h3 class="heading-h5">Tier</h3>

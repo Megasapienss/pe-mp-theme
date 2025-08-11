@@ -139,6 +139,30 @@
   }
 }
 
+@mixin quote {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@mixin quote-lg {
+  @include quote;
+  font-size: 22px;
+  line-height: 140%;
+  letter-spacing: 0px;
+}
+
+@mixin quote-xl {
+  @include quote;
+  font-size: 40px;
+  line-height: 130%;
+  letter-spacing: 0px;
+
+  @include less-than('md') {
+    @include quote-lg;
+  }
+}
+
 @mixin body {
   @include text;
   font-size: 16px;
@@ -166,7 +190,7 @@
 @mixin body-md {
   @include text;
   font-size: 18px;
-  line-height: 150%;
+  line-height: 27px;
   letter-spacing: 0px;
 
   @include less-than('md') {
@@ -190,13 +214,17 @@
 @mixin text-button {
   @include text;
   font-size: 18px;
-  line-height: 100%;
+  line-height: 130%;
   letter-spacing: 0;
-
-  @include less-than('md') {
-    font-size: 16px;
-  }
 }
+
+@mixin text-button-sm {
+  @include text;
+  font-size: 16px;
+  line-height: 130%;
+  letter-spacing: 0;
+}
+
 
 @mixin text-label {
   @include text;

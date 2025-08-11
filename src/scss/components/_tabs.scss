@@ -5,6 +5,7 @@
         flex-direction: row;
         gap: $spacing-1;
         flex-wrap: nowrap;
+        margin-bottom: $spacing-2;
     }
 
     &__body {
@@ -23,6 +24,19 @@
         &--active {
             color: $color-white;    
             background-color: #2D2F30;
+        }
+    }
+
+    &__content {
+        display: none;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease-in-out;
+
+        &--active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 }

@@ -6,14 +6,11 @@ button {
 }
 
 .btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     height: 48px;
-    padding-top: 16px;
-    padding-right: 24px;
-    padding-bottom: 16px;
-    padding-left: 24px;
+    padding: 12px 20px;
     gap: 8px;
     border-radius: 150px;
     background-color: transparent;
@@ -23,6 +20,10 @@ button {
 
     @include text-button;
     color: $color-text;
+
+    &--56{
+        height: 56px;
+    }
 
     &--secondary,
     &--muted {
@@ -250,6 +251,11 @@ button {
         background-repeat: no-repeat;
     }
 
+    &--dark{
+        color: $color-white;
+        background-color: $color-dark;
+    }
+
     &--rounded {
         border-radius: 150px;
         height: 40px;
@@ -273,5 +279,19 @@ button {
         &::before {
             background-image: url('../icons/map.svg');
         }
+    }
+
+    &--share {
+        &::before {
+            background-image: url('../icons/label-share.svg');
+        }
+    }
+}
+
+.share-trigger{
+    cursor: pointer;
+
+    &:hover{
+        opacity: 0.95;
     }
 }

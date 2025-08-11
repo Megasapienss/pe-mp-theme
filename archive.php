@@ -78,7 +78,7 @@ if (false) :
 <?php endif; ?>
 
 <?php if ($term && !is_wp_error($term) && $term->slug === 'diagnostics') : ?>
-    <section class="section-v2 container grid grid--4">
+    <section class="section-v2 container grid grid--3">
     <?php
         $test_ids = [
             'anxiety',
@@ -87,7 +87,7 @@ if (false) :
             'ptsd',
             // 'ed',
             // 'ocd',
-            // 'burnout'
+            'burnout'
         ];
         foreach ($test_ids as $test_id){
             get_template_part('template-parts/banners/test', '', [

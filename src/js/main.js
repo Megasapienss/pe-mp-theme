@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Native share functionality
-    const shareButtons = document.querySelectorAll('.label--share');
+    const shareButtons = document.querySelectorAll('.share-trigger');
 
     shareButtons.forEach(button => {
         button.addEventListener('click', async () => {
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // External links collection and sources list
     function collectExternalLinks() {
-        const articleContent = document.querySelector('.article__content');
+        const articleContent = document.querySelector('.article-v2__content');
         if (!articleContent) return;
 
         // Get current domain for comparison
@@ -232,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     sourceLink.textContent = `[${index + 1}] ${link.url}`;
                     sourceLink.target = '_blank';
                     sourceLink.rel = 'noopener noreferrer';
-                    sourceLink.className = 'accordion__link';
                     
                     sourcesList.appendChild(sourceLink);
                 });
@@ -309,6 +308,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize accordion functionality
     initAccordion();
+
+    // Tabs functionality
+    function initTabs() {
+        const tabContainers = document.querySelectorAll('.tabs');
+        
+        tabContainers.forEach(container => {
+            const tabButtons = container.querySelectorAll('.tabs__button');
+            const tabContents = container.querySelectorAll('.tabs__content[data-tab]');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('tabs__button--active'));
+                    tabContents.forEach(content => content.classList.remove('tabs__content--active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('tabs__button--active');
+                    const targetContent = container.querySelector(`.tabs__content[data-tab="${targetTab}"]`);
+                    if (targetContent) {
+                        targetContent.classList.add('tabs__content--active');
+                    }
+                });
+            });
+            
+            // Set first tab as active by default
+            if (tabButtons.length > 0) {
+                tabButtons[0].click();
+            }
+        });
+    }
+
+    // Initialize tabs functionality
+    initTabs();
 
     // Tests section horizontal scroll functionality
     function initTestsSectionScroll() {

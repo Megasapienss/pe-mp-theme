@@ -93,7 +93,7 @@
         </nav>
 
         <div class="header__actions">
-            <a href="/tests/assessment/" class="btn btn--accent">
+            <a href="/tests/assessment/" class="btn btn--56 btn--accent">
                 <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
             </a>
         </div>

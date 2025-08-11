@@ -84,23 +84,22 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            height: 36px;
+            height: 48px;
             @include text-button;
             color: $color-text;
 
-            padding: 6px 12px;
+            padding: 12px 36px;
             border-radius: 150px;
 
             &:hover {
-                text-decoration: none;
+                text-decoration: none;  
                 background-color: $bg-muted;
             }
         }
 
         & li.current-menu-item {
             & a {
-                background-color: $color-accent;
-                color: $color-white;
+                background-color: #2025271A;
             }
         }
 

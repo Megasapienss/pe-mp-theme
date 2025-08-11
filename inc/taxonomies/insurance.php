@@ -64,20 +64,6 @@ function register_insurance_taxonomy() {
     $default_insurance = array(
         'medicaid' => 'Medicaid',
         'medicare' => 'Medicare',
-        'blue_cross_blue_shield' => 'Blue Cross Blue Shield',
-        'aetna' => 'Aetna',
-        'cigna' => 'Cigna',
-        'united_healthcare' => 'UnitedHealthcare',
-        'humana' => 'Humana',
-        'kaiser_permanente' => 'Kaiser Permanente',
-        'anthem' => 'Anthem',
-        'healthnet' => 'HealthNet',
-        'molina' => 'Molina Healthcare',
-        'tricare' => 'TRICARE',
-        'va_healthcare' => 'VA Healthcare',
-        'sliding_scale' => 'Sliding Scale',
-        'private_pay' => 'Private Pay',
-        'cash_only' => 'Cash Only',
         'no_insurance' => 'No Insurance Accepted',
     );
 
