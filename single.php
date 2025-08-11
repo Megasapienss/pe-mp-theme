@@ -151,12 +151,7 @@ get_header();
 
     <?php
     // New articles Section
-    get_template_part('template-parts/mosaics/complex', '', [
-        'title' => 'Editor\'s Picks',
-        'taxonomy' => 'category',
-        'term' => 'related-topics',
-        'count' => 8
-    ]);
+    get_template_part('template-parts/mosaics/recommendations');
     ?>  
 
     <?php if (false) : ?>

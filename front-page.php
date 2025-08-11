@@ -49,9 +49,7 @@ get_template_part('template-parts/mosaics/category', '', [
 ]);
 
 // New articles Section
-get_template_part('template-parts/mosaics/complex', '', [
-    'title' => 'New articles',
-]);
+get_template_part('template-parts/mosaics/recommendations');
 ?>
 
 <?php
