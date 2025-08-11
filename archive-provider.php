@@ -50,7 +50,10 @@ $post_count = $wp_query->found_posts;
 <?php
 // New articles Section
 get_template_part('template-parts/mosaics/complex', '', [
-    'title' => 'Editor\'s Picks'
+    'title' => 'Editor\'s Picks',
+    'taxonomy' => 'category',
+    'term' => 'provider-insights',
+    'count' => 12
 ]);
 ?>
 

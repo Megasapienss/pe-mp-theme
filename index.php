@@ -46,7 +46,8 @@ if (!empty($subcategories) && !is_wp_error($subcategories)) :
     foreach ($subcategories as $subcategory) :
         get_template_part('template-parts/mosaics/category', null, array(
             'title' => $subcategory->name,
-            'category' => $subcategory->slug
+            'taxonomy' => $subcategory->taxonomy,
+            'term' => $subcategory->slug
         ));
     endforeach;
 else :

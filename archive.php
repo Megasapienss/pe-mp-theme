@@ -112,7 +112,8 @@ if (!empty($child_categories) && !is_wp_error($child_categories)) :
     foreach ($child_categories as $child_category) :
         get_template_part('template-parts/mosaics/category', null, array(
             'title' => $child_category->name,
-            'category' => $child_category->slug
+            'taxonomy' => $child_category->taxonomy,
+            'term' => $child_category->slug
         ));
     endforeach;
 else :

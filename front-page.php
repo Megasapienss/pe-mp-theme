@@ -27,7 +27,16 @@ get_template_part('template-parts/mosaics/hero', '');
 // Science & Innovation Section
 get_template_part('template-parts/mosaics/category', '', [
     'title' => 'Science & Innovation',
-    'category' => 'science-innovation'
+    'taxonomy' => 'category',
+    'term' => 'science-innovation'
+]);
+
+// Discover safe psychedelic care in Europe and Asia Section
+get_template_part('template-parts/mosaics/category', '', [
+    'title' => 'Discover safe psychedelic care in Europe and Asia',
+    'taxonomy' => 'post_tag',
+    'term' => 'providers',
+    'count' => 3
 ]);
 
 get_template_part('template-parts/sections/tests');
@@ -35,12 +44,13 @@ get_template_part('template-parts/sections/tests');
 // Mental Wellness Section
 get_template_part('template-parts/mosaics/category', '', [
     'title' => 'Mental Wellness',
-    'category' => 'mental-wellness'
+    'taxonomy' => 'category',
+    'term' => 'mental-wellness'
 ]);
 
 // New articles Section
 get_template_part('template-parts/mosaics/complex', '', [
-    'title' => 'New articles'
+    'title' => 'New articles',
 ]);
 ?>
 
