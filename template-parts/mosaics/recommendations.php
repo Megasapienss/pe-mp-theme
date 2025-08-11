@@ -16,7 +16,7 @@
  * @package PE_MP_Theme
  */
 
-$title = isset($args['title']) ? $args['title'] : 'Recommended Articles';
+$title = isset($args['title']) ? $args['title'] : 'Editorial Picks';
 $count = isset($args['count']) ? intval($args['count']) : 8;
 
 $posts_array = array();
@@ -131,17 +131,17 @@ if (in_array('editorial-pick', $sources)) {
     <div class="section-v2__title">
         <h2><?= esc_html($title); ?></h2>
         <?php if ($primary_source === 'editorial-pick') : ?>
-        <a href="<?= esc_url(get_tag_link(get_term_by('slug', 'editorial-pick', 'post_tag'))); ?>" class="btn btn--muted btn--arrow">
+        <!-- <a href="<?= esc_url(get_tag_link(get_term_by('slug', 'editorial-pick', 'post_tag'))); ?>" class="btn btn--muted btn--arrow">
             See all editorial picks
-        </a>
+        </a> -->
         <?php elseif ($primary_source === 'related') : ?>
-        <a href="<?= esc_url(get_permalink()); ?>#related" class="btn btn--muted btn--arrow">
+        <!-- <a href="<?= esc_url(get_permalink()); ?>#related" class="btn btn--muted btn--arrow">
             More like this
-        </a>
+        </a> -->
         <?php else : ?>
-        <a href="<?= esc_url(home_url('/')); ?>" class="btn btn--muted btn--arrow">
+        <!-- <a href="<?= esc_url(home_url('/')); ?>" class="btn btn--muted btn--arrow">
             Browse all articles
-        </a>
+        </a> -->
         <?php endif; ?>
     </div>
     <div class="section-v2__content">

@@ -34,7 +34,7 @@ if ($size) {
 }
 ?>
 
-<div class="<?= esc_attr($card_classes); ?>">
+<a class="<?= esc_attr($card_classes); ?>" href="<?= esc_url($permalink); ?>">
     <div class="card__image">
         <img src="<?= esc_url($thumbnail); ?>">
     </div>
@@ -49,13 +49,13 @@ if ($size) {
         </div>
         
         <h3 class="card__title<?= isset($args['title_class']) ? ' ' . esc_attr($args['title_class']) : ''; ?>">
-            <a href="<?= esc_url($permalink); ?>"><?= esc_html($post->post_title); ?></a>
+            <span><?= esc_html($post->post_title); ?></span>
         </h3>
         <p class="card__excerpt">
             <?= esc_html($excerpt); ?>
         </p>
         <div class="card__author">
-            Written By: <a href="<?= esc_url($author_link); ?>"><?= esc_html($author); ?></a>
+            Written By: <span><?= esc_html($author); ?></span>
         </div>
     </div>
-</div> 
+</a> 

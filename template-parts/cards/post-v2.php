@@ -43,7 +43,7 @@ if ($image_align === 'right') {
 }
 ?>
 
-<div class="<?= esc_attr($card_classes); ?>">
+<a class="<?= esc_attr($card_classes); ?>" href="<?= esc_url($permalink); ?>">
     <?php if ($show_image && $image_align === 'left') : ?>
     <div class="card-v2__image">
         <img src="<?= esc_url($thumbnail); ?>">
@@ -55,7 +55,7 @@ if ($image_align === 'right') {
             <?= esc_html($tag); ?>
         </span>
         <h5 class="card-v2__title<?= isset($args['title_class']) ? ' ' . esc_attr($args['title_class']) : ''; ?>">
-            <a href="<?= esc_url($permalink); ?>"><?= esc_html($post->post_title); ?></a>
+            <span><?= esc_html($post->post_title); ?></span>
         </h5>
         
         <?php if ($show_excerpt && $excerpt) : ?>
@@ -66,7 +66,7 @@ if ($image_align === 'right') {
         
         <?php if ($show_author && $author) : ?>
         <div class="card-v2__author">
-            Written by: <a href="<?= esc_url($author_link); ?>"><?= esc_html($author); ?></a>
+            Written by: <span><?= esc_html($author); ?></span>
         </div>
         <?php endif; ?>
     </div>
@@ -76,4 +76,4 @@ if ($image_align === 'right') {
         <img src="<?= esc_url($thumbnail); ?>">
     </div>
     <?php endif; ?>
-</div> 
+</a> 

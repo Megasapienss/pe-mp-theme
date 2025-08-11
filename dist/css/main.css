@@ -3305,13 +3305,13 @@ body {
   aspect-ratio: 1/1;
   margin: 10px auto;
   pointer-events: none;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 .banner--test .banner__button {
   margin-top: auto;
   color: #FFFFFF;
   border: none;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 .banner--test:hover {
   text-decoration: none;
@@ -3928,13 +3928,27 @@ body {
 .card--shifted {
   padding: 0;
 }
+.card--shifted:hover {
+  text-decoration: none;
+}
+.card--shifted:hover .card__title {
+  text-decoration: underline;
+}
+.card--shifted:hover .card__image img {
+  transform: scale(1.05);
+}
 .card--shifted .card__title a {
   color: #202527;
+}
+.card--shifted .card__image {
+  width: 100%;
+  overflow: hidden;
 }
 .card--shifted .card__image img {
   height: 600px;
   width: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
 }
 @media (max-width: 991px) {
   .card--shifted .card__image img {
@@ -3986,10 +4000,6 @@ body {
     letter-spacing: -0.3px;
   }
 }
-.card--shifted--small .card__image img {
-  height: 350px;
-}
-
 .card-v2 {
   display: flex;
   flex-direction: column;
@@ -3999,18 +4009,27 @@ body {
   gap: 20px;
   padding: 0;
 }
+.card-v2:hover {
+  text-decoration: none;
+}
+.card-v2:hover .card-v2__title {
+  text-decoration: underline;
+}
+.card-v2:hover .card-v2__image img {
+  transform: scale(1.05);
+}
 .card-v2__image {
   width: 100%;
+  overflow: hidden;
 }
 .card-v2__image img {
   width: 100%;
   height: 230px;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
 }
 .card-v2__title {
   font-weight: 600;
-}
-.card-v2__title a {
   color: #202527;
 }
 .card-v2__content {
@@ -4043,8 +4062,9 @@ body {
   letter-spacing: 0;
   color: rgba(32, 37, 39, 0.6);
 }
-.card-v2__author a {
+.card-v2__author a, .card-v2__author span {
   color: #202527;
+  pointer-events: none;
 }
 .card-v2--small {
   display: flex;

@@ -28,7 +28,7 @@ $posts_array = $hero_posts->posts;
             <?php if (!empty($posts_array)) : ?>
                 <?php 
                 $main_post = $posts_array[0];
-                get_template_part('template-parts/cards/post', '', [
+                get_template_part('template-parts/cards/post', 'shifted', [
                     'post' => $main_post
                 ]); 
                 ?>
