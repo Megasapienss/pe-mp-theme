@@ -1,18 +1,20 @@
 <?php
 
 /**
- * Template part for displaying category-based mosaic sections
+ * Template part for displaying category or tag-based mosaic sections
  *
  * @param string $args['title'] Section title
- * @param string $args['category'] Category slug or name
+ * @param string $args['category'] Category slug or name (optional)
+ * @param string $args['tag'] Tag slug or name (optional)
  *
  * @package PE_MP_Theme
  */
 
 $title = isset($args['title']) ? $args['title'] : 'Science & Innovation';
 $category = isset($args['category']) ? $args['category'] : '';
+$tag = isset($args['tag']) ? $args['tag'] : '';
 
-// Query posts by category
+// Query posts by category or tag
 $query_args = array(
     'posts_per_page' => 6,
     'post__not_in' => array(get_the_ID()),
@@ -22,29 +24,44 @@ $query_args = array(
 
 if ($category) {
     $query_args['category_name'] = $category;
+} elseif ($tag) {
+    $query_args['tag'] = $tag;
 }
 
-$category_posts = new WP_Query($query_args);
+$posts_query = new WP_Query($query_args);
 
 // Don't output anything if there are no posts
-if (!$category_posts->have_posts()) {
+if (!$posts_query->have_posts()) {
     return;
 }
 
-$posts_array = $category_posts->posts;
+$posts_array = $posts_query->posts;
 ?>
 
 <section class="section-v2 container">
     <div class="section-v2__title">
         <h2><?= esc_html($title); ?></h2>
         <?php 
-        $category_obj = get_category_by_slug($category);
-        if ($category_obj) : 
+        if ($category) {
+            $term_obj = get_category_by_slug($category);
+            if ($term_obj) : 
         ?>
-        <a href="<?= esc_url(get_category_link($category_obj)); ?>" class="btn btn--muted btn--arrow">
+        <a href="<?= esc_url(get_category_link($term_obj)); ?>" class="btn btn--muted btn--arrow">
             See all
         </a>
-        <?php endif; ?>
+        <?php 
+            endif;
+        } elseif ($tag) {
+            $term_obj = get_term_by('slug', $tag, 'post_tag');
+            if ($term_obj) : 
+        ?>
+        <a href="<?= esc_url(get_tag_link($term_obj)); ?>" class="btn btn--muted btn--arrow">
+            See all
+        </a>
+        <?php 
+            endif;
+        }
+        ?>
     </div>
     <div class="section-v2__content">
         <div class="mosaic mosaic--2-1-1">

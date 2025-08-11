@@ -101,7 +101,7 @@ $text_color = isset($args['custom_text_color']) ? $args['custom_text_color'] : $
 $image = isset($args['custom_image']) ? $args['custom_image'] : $test_config['image'];
 ?>
 
-<div class="banner banner--test" style="background-color: <?= esc_attr($bg_color); ?>; color: <?= esc_attr($text_color); ?>;">
+<a href="<?= esc_url($url); ?>" class="banner banner--test" style="background-color: <?= esc_attr($bg_color); ?>; color: <?= esc_attr($text_color); ?>;">
     <div class="banner__content">
         <h5 class="banner__title" style="color: <?= esc_attr($text_color); ?>;">
             <?= esc_html($title); ?>
@@ -110,8 +110,8 @@ $image = isset($args['custom_image']) ? $args['custom_image'] : $test_config['im
             <?= esc_html($description); ?>
         </p>
         <img class="banner__image" src="<?= esc_url($image); ?>" alt="<?= esc_attr($title); ?>">
-        <a href="<?= esc_url($url); ?>" class="banner__button text-btn" style="color: <?= esc_attr($text_color); ?>;">
+        <span class="banner__button text-btn" style="color: <?= esc_attr($text_color); ?>;" onclick="window.location.href='<?= esc_url($url); ?>'">
             Start 3 min test →
-        </a>
+        </span>
     </div>
-</div> 
+</a> 

@@ -3305,14 +3305,22 @@ body {
   aspect-ratio: 1/1;
   margin: 10px auto;
   pointer-events: none;
+  transition: transform 0.2s ease-in-out;
 }
 .banner--test .banner__button {
   margin-top: auto;
   color: #FFFFFF;
   border: none;
+  transition: transform 0.2s ease-in-out;
 }
-.banner--test .banner__button:hover {
+.banner--test:hover {
+  text-decoration: none;
+}
+.banner--test:hover .banner__title {
   text-decoration: underline;
+}
+.banner--test:hover .banner__image {
+  transform: scale(1.05);
 }
 
 .archive-grid .banner {

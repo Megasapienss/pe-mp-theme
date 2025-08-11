@@ -149,16 +149,26 @@
                 aspect-ratio: 1/1;
                 margin: $spacing-1 auto;
                 pointer-events: none;
+                transition: transform 0.2s ease-in-out;
             }
 
             &__button{
                 margin-top: auto;
                 color: $color-white;
                 border: none;
+                transition: transform 0.2s ease-in-out;
+            }
+        }
 
-                &:hover{
-                    text-decoration: underline;
-                }
+        &:hover{
+            text-decoration: none;
+
+            & .banner__title{
+                text-decoration: underline;
+            }
+
+            & .banner__image{
+                transform: scale(1.05);
             }
         }
     }
