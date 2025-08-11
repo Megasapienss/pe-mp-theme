@@ -19,13 +19,9 @@ get_template_part('template-parts/sections/newsletter', 'v2');
 
 <?php if ( is_front_page() ) : ?>
 <section class="section-v2 container community-section">
-    <h2>Join our private community States of Mind</h2>
+    <h2>Meaningful connection <br>can improve your well-being</h2>
     <div class="community-section__text">
-    <p>We're mapping what's next in mental health to help you find the right tool.</p>
-    <p>
-        From deep psychedelic talks to live therapist support in chat.<br>
-        From microdosing practices to fully held emotional deep work.
-    </p>
+        <p>Come join our little community inner talks</p>
     </div>
     <div class="community-section__actions">
         <a href="https://discord.gg/XwGZ82yeXz" target="_blank" class="arrow-btn arrow-btn--primary">
@@ -66,8 +62,8 @@ get_template_part('template-parts/sections/newsletter', 'v2');
     <?php if ( !is_front_page() ) : ?>
     <div class="community-banner">
         <div class="d-flex flex-column">
-            <h4>Join our community States of Mind</h4>
-            <p>From deep psychedelic talks to live therapist support in chat, from microdosing practices to fully held emotional deep work — we’re mapping what’s next in mental health to help you find the right tool.</p>
+            <h4>Meaningful connection can improve your well-being</h4>
+            <p>Come join our little community inner talks</p>
             <div class="community-banner__actions">
                 <a href="https://discord.gg/XwGZ82yeXz" target="_blank" class="arrow-btn">
                     <?php esc_html_e('Discord', 'pe-mp-theme'); ?>
@@ -100,6 +96,9 @@ get_template_part('template-parts/sections/newsletter', 'v2');
                 </a>
                 <a href="/terms-and-conditions/">
                     <?php esc_html_e('Terms and Conditions', 'pe-mp-theme'); ?>
+                </a>
+                <a href="/imprint/">
+                    <?php esc_html_e('Imprint', 'pe-mp-theme'); ?>
                 </a>
             </div>
         </div>
