@@ -133,13 +133,13 @@ get_header();
                         </div>
                     </div>
                     <div class="sidebar-card-v2">
-                    <?php
+                        <?php
 
-                    get_template_part('template-parts/banners/test', '', [
-                        'test_id' => pe_mp_get_related_test_id()
-                    ]); 
-                        
-                    ?>
+                        get_template_part('template-parts/banners/test', '', [
+                            'test_id' => pe_mp_get_related_test_id()
+                        ]); 
+                            
+                        ?>
                     </div>
                 </div>
 

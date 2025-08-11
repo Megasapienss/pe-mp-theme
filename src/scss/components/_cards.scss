@@ -367,11 +367,7 @@
     }
 
     &__title {
-
-        
         font-weight: 600;
-
-
         & a{
             color: $color-dark;
         }
@@ -423,6 +419,45 @@
                 & img{
                     height: 350px;
                 }
+            }
+        }
+    }
+
+    &--provider{
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        padding: $spacing-2 $spacing-2 $spacing-2 0;
+        border-top: 1px solid $color-border;
+
+        @include less-than(md){
+            grid-template-columns: 1fr;
+            padding: $spacing-2 0;
+        }
+
+        & .card-v2{
+
+            &__content{
+                
+            }
+
+            &__image{
+                & img{
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            &__title {
+                @include heading-h5;
+                font-weight: 600;
+            }
+
+            &__meta{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                margin-top: $spacing-1;
+                gap: $spacing-1;
             }
         }
     }

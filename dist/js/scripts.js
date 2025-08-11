@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Initialize tests section horizontal scroll
+  initTestsSectionScroll();
+
   // Table of Contents functionality
   function initTableOfContents() {
     var tocList = document.querySelector('.article-v2__toc-list');
@@ -312,6 +315,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Initialize accordion functionality
   initAccordion();
+
+  // Tests section horizontal scroll functionality
+  function initTestsSectionScroll() {
+    var testsSection = document.querySelector('.tests-section__content');
+    if (!testsSection) return;
+    var isDragging = false;
+    var startX = 0;
+    var scrollLeft = 0;
+
+    // Draggable functionality
+    testsSection.addEventListener('mousedown', function (e) {
+      isDragging = true;
+      startX = e.pageX - testsSection.offsetLeft;
+      scrollLeft = testsSection.scrollLeft;
+      testsSection.style.cursor = 'grabbing';
+      testsSection.style.userSelect = 'none';
+    });
+    testsSection.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      var x = e.pageX - testsSection.offsetLeft;
+      var walk = (x - startX) * 2; // Scroll speed multiplier
+      testsSection.scrollLeft = scrollLeft - walk;
+    });
+    testsSection.addEventListener('mouseup', function () {
+      isDragging = false;
+      testsSection.style.cursor = 'grab';
+      testsSection.style.userSelect = 'auto';
+    });
+    testsSection.addEventListener('mouseleave', function () {
+      isDragging = false;
+      testsSection.style.cursor = 'grab';
+      testsSection.style.userSelect = 'auto';
+    });
+
+    // Set initial cursor style
+    testsSection.style.cursor = 'grab';
+  }
 });
 /******/ })()
 ;

@@ -15,7 +15,7 @@ $default_test_ids = [
     'ptsd',
     // 'ed',
     // 'ocd',
-    // 'burnout'
+    'burnout'
 ];
 
 $test_ids = isset($args['test_ids']) ? $args['test_ids'] : $default_test_ids;

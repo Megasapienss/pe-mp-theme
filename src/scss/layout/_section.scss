@@ -223,12 +223,28 @@
         flex-wrap: nowrap;
         overflow-x: auto;
         gap: $spacing-2;
+        scroll-behavior: smooth; // Add smooth scrolling
+        -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+        cursor: grab; // Show grab cursor to indicate draggable
+
+        &:active {
+            cursor: grabbing; // Show grabbing cursor when dragging
+        }
 
         & > .banner{
             min-width: 310px;
             max-width: 310px;
             width: 100%;
+            user-select: none; // Prevent text selection during drag
         }
+
+        // Hide scrollbar but keep functionality
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        -ms-overflow-style: none;  // IE and Edge
+        scrollbar-width: none;  // Firefox
     }
 }
 

@@ -1,4 +1,4 @@
-.provider-page  {
+.provider-single  {
     display: grid;
     grid-template-columns: 310px 1fr;
     gap: $spacing-4;
@@ -157,5 +157,16 @@
 
     &__share {
         margin-top: $spacing-5;
+    }
+}
+
+.provider-archive{
+    display: grid;
+    grid-template-columns: 1fr 310px;
+    gap: $spacing-4;
+
+    @include less-than(xl) {
+        grid-template-columns: 1fr;
+        gap: $spacing-2;
     }
 }

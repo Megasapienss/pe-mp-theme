@@ -24,17 +24,17 @@ get_header();
         ?>
     </section>
 
-    <article class="provider-page container">
+    <article class="provider-single container">
 
-        <div class="provider-page__meta">
+        <div class="provider-single__meta">
 
             <?php if (get_field('image_url')) : ?>
-            <div class="provider-page__cover">
+            <div class="provider-single__cover">
                 <img src="<?= get_field('image_url'); ?>" alt="<?= get_the_title(); ?>">
             </div>
             <?php endif; ?>
 
-            <div class="provider-page__meta-item">
+            <div class="provider-single__meta-item">
                 <?php
                 // List of taxonomies to display
                 $taxonomies = array('provider-type', 'service-delivery-method');
@@ -52,33 +52,33 @@ get_header();
             </div>
         </div>
 
-        <div class="provider-page__inner">
+        <div class="provider-single__inner">
 
-            <div class="provider-page__title-wrapper">
+            <div class="provider-single__title-wrapper">
                 <?php if (get_field('logo_url')) : ?>
-                    <img src="<?= get_field('logo_url'); ?>" alt="" class="provider-page__avatar">
+                    <img src="<?= get_field('logo_url'); ?>" alt="" class="provider-single__avatar">
                 <?php endif; ?>
-                <h1 class="provider-page__title"><?= get_the_title(); ?></h1>
+                <h1 class="provider-single__title"><?= get_the_title(); ?></h1>
             </div>
             
             <?php if (get_field('subtitle')) : ?>
-                <p class="provider-page__excerpt"><?= get_field('subtitle'); ?></p>
+                <p class="provider-single__excerpt"><?= get_field('subtitle'); ?></p>
             <?php endif; ?>
 
             <?php if (get_field('countries_list')) : ?>
-            <div class="provider-page__meta-item">
+            <div class="provider-single__meta-item">
                 <?php $countries = get_field('countries_list'); ?>
                 <div class="d-flex flex-row">
                     <?php foreach ($countries as $country_id) : ?>
                         <?php $country = get_post($country_id); ?>
-                        <div class="icon-tag icon-tag--globe"><?= esc_html($country->name); ?></div>
+                        <div class="icon-tag icon-tag--globe text-muted"><?= esc_html($country->name); ?></div>
                     <?php endforeach; ?>
                 </div>
             </div>
             <?php endif; ?>
 
             <?php if (get_field('phone') || get_field('website_url')) : ?>
-            <div class="provider-page__buttons">
+            <div class="provider-single__buttons">
                 <?php if (get_field('phone')) : ?>
                     <a href="tel:<?= get_field('phone'); ?>" class="btn btn--primary">Call Now</a>
                 <?php endif; ?>
@@ -89,18 +89,18 @@ get_header();
             <?php endif; ?>
 
             <?php if (get_field('short_description_text')) : ?>
-            <div class="provider-page__section">
-                <h2 class="provider-page__section-heading">Description</h2>
-                <div class="provider-page__section-content">
+            <div class="provider-single__section">
+                <h2 class="provider-single__section-heading">Description</h2>
+                <div class="provider-single__section-content">
                     <?= get_field('short_description_text'); ?>
                 </div>
             </div>
             <?php endif; ?>
 
             <?php if (get_field('address') && !empty(get_field('address')['street'])) : ?>
-            <div class="provider-page__section">
-                <h2 class="provider-page__section-heading">Address</h2>
-                <div class="provider-page__section-content">
+            <div class="provider-single__section">
+                <h2 class="provider-single__section-heading">Address</h2>
+                <div class="provider-single__section-content">
                         <?php $address = get_field('address'); ?>
                         <span class="icon-tag icon-tag--map">
                             <?= $address['street'] ? $address['street'] . ', ' : ''; ?>
@@ -114,11 +114,11 @@ get_header();
             <?php endif; ?>
 
             <?php if (get_field('pricing_details') || get_field('insurance_accepted_list') || get_field('cost_range')) : ?>
-            <div class="provider-page__section">
-                <h2 class="provider-page__section-heading">Pricing & Insurance</h2>
-                <div class="provider-page__section-content grid grid--3">
+            <div class="provider-single__section">
+                <h2 class="provider-single__section-heading">Pricing & Insurance</h2>
+                <div class="provider-single__section-content grid grid--3">
                     <?php if (get_field('pricing_details')) : ?>
-                    <div class="provider-page__section-column">
+                    <div class="provider-single__section-column">
                         <h3 class="heading-h5">Cost</h3>
                         <p class="body-md">
                             <?= get_field('pricing_details'); ?>
@@ -126,7 +126,7 @@ get_header();
                     </div>
                     <?php endif; ?>
                     <?php if (get_field('insurance_accepted_list')) : ?>
-                    <div class="provider-page__section-column">
+                    <div class="provider-single__section-column">
                         <h3 class="heading-h5">Insurance</h3>
                         <p class="body-md">
                             <?= get_field('insurance_accepted_list') ? implode(', ', get_field('insurance_accepted_list')) : 'Currently not covered by insurance'; ?>
@@ -134,7 +134,7 @@ get_header();
                     </div>
                     <?php endif; ?>
                     <?php if (get_field('cost_range')) : ?>
-                    <div class="provider-page__section-column">
+                    <div class="provider-single__section-column">
                         <h3 class="heading-h5">Tier</h3>
                         <p class="body-md">
                             <?= get_field('cost_range')->name; ?>
@@ -146,9 +146,9 @@ get_header();
             <?php endif; ?>
 
             <?php if (get_field('services_catalogue_relation')) : ?>
-            <div class="provider-page__section">
-                <h2 class="provider-page__section-heading">Services Offered</h2>
-                <div class="provider-page__section-content">
+            <div class="provider-single__section">
+                <h2 class="provider-single__section-heading">Services Offered</h2>
+                <div class="provider-single__section-content">
                     <?php $services = get_field('services_catalogue_relation'); ?>
                     <?php if ($services) : ?>
                         <div class="d-flex flex-column justify-start items-start">
@@ -165,9 +165,9 @@ get_header();
             <?php endif; ?>
 
             <?php if (get_field('conditions_list')) : ?>
-            <div class="provider-page__section">
-                <h2 class="provider-page__section-heading">Conditions Treated</h2>
-                <div class="provider-page__section-content">
+            <div class="provider-single__section">
+                <h2 class="provider-single__section-heading">Conditions Treated</h2>
+                <div class="provider-single__section-content">
                     <?php $conditions = get_field('conditions_list'); ?>
                     <?php if ($conditions) : ?>
                         <div class="d-flex flex-row">
@@ -183,19 +183,19 @@ get_header();
             <?php endif; ?>
 
             <?php if (get_field('promo_article')) : ?>
-            <div class="provider-page__section">
-                <h2 class="provider-page__section-heading">Program Overview</h2>
-                <div class="provider-page__section-content">
+            <div class="provider-single__section">
+                <h2 class="provider-single__section-heading">Program Overview</h2>
+                <div class="provider-single__section-content">
                     <?= get_field('promo_article'); ?>
                 </div>
             </div>
             <?php endif; ?>
 
             <?php if (get_field('image_url')) : ?>
-            <div class="provider-page__section provider-page__section--gallery">
-                <h2 class="provider-page__section-heading">Gallery</h2>
-                <div class="provider-page__section-content">
-                    <div class="provider-page__cover">
+            <div class="provider-single__section provider-single__section--gallery">
+                <h2 class="provider-single__section-heading">Gallery</h2>
+                <div class="provider-single__section-content">
+                    <div class="provider-single__cover">
                         <img src="<?= get_field('image_url'); ?>" alt="<?= get_the_title(); ?>">
                     </div>
                 </div>
@@ -203,14 +203,14 @@ get_header();
             <?php endif; ?>
 
             <?php if (get_field('practitioners_relation')) : ?>
-            <div class="provider-page__section">
-                <h2 class="provider-page__section-heading">Team & Staff</h2>
-                <div class="provider-page__section-content grid grid--3">
+            <div class="provider-single__section">
+                <h2 class="provider-single__section-heading">Team & Staff</h2>
+                <div class="provider-single__section-content grid grid--3">
                     <?php $practitioners = get_field('practitioners_relation'); ?>
                     <?php if ($practitioners) : ?>
                         <?php foreach ($practitioners as $practitioner_id) : ?>
                             <?php $practitioner = get_post($practitioner_id); ?>
-                            <div class="provider-page__section-column">
+                            <div class="provider-single__section-column">
                                 <h3 class="heading-h5"><?= $practitioner->post_title; ?></h3>
                                 <p class="body-md"><?= get_field('subtitle', $practitioner_id); ?></p>
                             </div>
@@ -220,7 +220,7 @@ get_header();
             </div>
             <?php endif; ?>
 
-            <div class="provider-page__share">
+            <div class="provider-single__share">
                 <span class="label label--share label--primary label--icon">Share</span>
             </div>
 

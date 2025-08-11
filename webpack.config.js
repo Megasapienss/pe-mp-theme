@@ -82,9 +82,7 @@ module.exports = (env, argv) => {
     return {
         entry: {
             scripts: './src/js/main.js',
-            main: './src/scss/main.scss',
-            'components/provider-single': './src/js/components/provider-single.js',
-            'components/provider-archive': './src/js/components/provider-archive.js'
+            main: './src/scss/main.scss'
         },
         output: {
             filename: 'js/[name].js',

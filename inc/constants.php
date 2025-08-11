@@ -20,10 +20,6 @@ define('PE_MP_CSS_URI', PE_MP_DIST_URI . '/css/main.css');
 define('PE_MP_JS_FILE', PE_MP_DIST_DIR . '/js/scripts.js');
 define('PE_MP_JS_URI', PE_MP_DIST_URI . '/js/scripts.js');
 
-// Provider JS Paths
-define('PE_MP_PROVIDER_JS_FILE', PE_MP_DIST_DIR . '/js/components/provider-single.js');
-define('PE_MP_PROVIDER_JS_URI', PE_MP_DIST_URI . '/js/components/provider-single.js');
-
 // Image Paths
 define('PE_MP_IMAGES_DIR', PE_MP_DIST_DIR . '/images');
 define('PE_MP_IMAGES_URI', PE_MP_DIST_URI . '/images');

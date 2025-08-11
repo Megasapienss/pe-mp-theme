@@ -172,7 +172,7 @@
 
     @include less-than(xl) {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: $spacing-2;
     }
 
     &__meta {

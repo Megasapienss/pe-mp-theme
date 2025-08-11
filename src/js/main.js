@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Initialize tests section horizontal scroll
+    initTestsSectionScroll();
+
     // Table of Contents functionality
     function initTableOfContents() {
         const tocList = document.querySelector('.article-v2__toc-list');
@@ -306,4 +309,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize accordion functionality
     initAccordion();
+
+    // Tests section horizontal scroll functionality
+    function initTestsSectionScroll() {
+        const testsSection = document.querySelector('.tests-section__content');
+        
+        if (!testsSection) return;
+        
+        let isDragging = false;
+        let startX = 0;
+        let scrollLeft = 0;
+        
+        // Draggable functionality
+        testsSection.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - testsSection.offsetLeft;
+            scrollLeft = testsSection.scrollLeft;
+            testsSection.style.cursor = 'grabbing';
+            testsSection.style.userSelect = 'none';
+        });
+        
+        testsSection.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            e.preventDefault();
+            const x = e.pageX - testsSection.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll speed multiplier
+            testsSection.scrollLeft = scrollLeft - walk;
+        });
+        
+        testsSection.addEventListener('mouseup', () => {
+            isDragging = false;
+            testsSection.style.cursor = 'grab';
+            testsSection.style.userSelect = 'auto';
+        });
+        
+        testsSection.addEventListener('mouseleave', () => {
+            isDragging = false;
+            testsSection.style.cursor = 'grab';
+            testsSection.style.userSelect = 'auto';
+        });
+        
+        // Set initial cursor style
+        testsSection.style.cursor = 'grab';
+    }
 });
