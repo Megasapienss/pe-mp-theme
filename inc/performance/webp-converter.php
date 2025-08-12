@@ -215,14 +215,87 @@ class PE_MP_WebP_Converter
             $image_url = $src_match[1];
             $webp_url = $this->get_webp_url_from_image_url($image_url);
 
+            // Always create picture element for better fallback handling
             if ($webp_url && function_exists('pe_mp_browser_supports_webp') && pe_mp_browser_supports_webp()) {
                 // Replace with picture element
                 $picture_element = $this->create_picture_element($img_tag, $webp_url, $image_url);
                 $content = str_replace($img_tag, $picture_element, $content);
+            } else {
+                // If no WebP version exists, try to create one
+                $attachment_id = attachment_url_to_postid($image_url);
+                if ($attachment_id && function_exists('pe_mp_force_webp_conversion')) {
+                    $converted = pe_mp_force_webp_conversion($attachment_id);
+                    if ($converted) {
+                        $webp_url = pe_mp_get_webp_url($attachment_id);
+                        if ($webp_url) {
+                            $picture_element = $this->create_picture_element($img_tag, $webp_url, $image_url);
+                            $content = str_replace($img_tag, $picture_element, $content);
+                        }
+                    }
+                }
             }
         }
 
         return $content;
+    }
+
+    /**
+     * Convert existing images to WebP format
+     * This method can be called manually or via AJAX
+     */
+    public function convert_existing_images_to_webp($limit = 50)
+    {
+        // Get all image attachments that don't have WebP versions
+        $args = array(
+            'post_type' => 'attachment',
+            'post_mime_type' => array('image/jpeg', 'image/jpg', 'image/png'),
+            'post_status' => 'inherit',
+            'posts_per_page' => $limit,
+            'meta_query' => array(
+                array(
+                    'key' => '_wp_attachment_metadata',
+                    'value' => '"webp_url"',
+                    'compare' => 'NOT LIKE'
+                )
+            )
+        );
+
+        $attachments = get_posts($args);
+        $converted = 0;
+        $errors = array();
+
+        foreach ($attachments as $attachment) {
+            $file_path = get_attached_file($attachment->ID);
+            
+            if (!$file_path || !file_exists($file_path)) {
+                continue;
+            }
+
+            // Check if WebP already exists
+            $path_info = pathinfo($file_path);
+            $webp_path = $path_info['dirname'] . '/' . $path_info['filename'] . '.webp';
+            
+            if (file_exists($webp_path)) {
+                // Update metadata if WebP exists but not in metadata
+                $this->update_attachment_metadata($attachment->ID, $webp_path);
+                $converted++;
+                continue;
+            }
+
+            // Convert to WebP
+            if ($this->create_webp_version($file_path, $webp_path)) {
+                $this->update_attachment_metadata($attachment->ID, $webp_path);
+                $converted++;
+            } else {
+                $errors[] = $attachment->post_title;
+            }
+        }
+
+        return array(
+            'converted' => $converted,
+            'errors' => $errors,
+            'total_processed' => count($attachments)
+        );
     }
 
     /**
@@ -369,52 +442,220 @@ class PE_MP_WebP_Converter
      */
     public function admin_page()
     {
+        // Handle force convert for specific image
+        if (isset($_GET['force_convert']) && isset($_GET['_wpnonce'])) {
+            $attachment_id = intval($_GET['force_convert']);
+            if (wp_verify_nonce($_GET['_wpnonce'], 'force_convert_' . $attachment_id)) {
+                if (function_exists('pe_mp_force_webp_conversion')) {
+                    $result = pe_mp_force_webp_conversion($attachment_id);
+                    $message = $result ? 'Image successfully converted to WebP!' : 'Failed to convert image to WebP.';
+                }
+            }
+        }
+
+        // Handle bulk conversion
+        if (isset($_POST['action']) && $_POST['action'] === 'convert_existing_webp') {
+            if (wp_verify_nonce($_POST['nonce'], 'convert_existing_webp')) {
+                $result = $this->convert_existing_images_to_webp(100);
+                $message = sprintf(
+                    'Successfully converted %d images to WebP format. %d errors occurred.',
+                    $result['converted'],
+                    count($result['errors'])
+                );
+                if (!empty($result['errors'])) {
+                    $message .= '<br>Errors: ' . implode(', ', array_slice($result['errors'], 0, 10));
+                }
+            }
+        }
+
+        // Get statistics
+        $total_images = $this->get_image_statistics();
         ?>
         <div class="wrap">
-            <h1>Generate WebP Versions</h1>
-            <p>Convert existing images to WebP format for better performance.</p>
+            <h1>WebP Image Management</h1>
             
-            <button id="generate-webp" class="button button-primary">Generate WebP Versions</button>
-            <div id="webp-status"></div>
+            <?php if (isset($message)): ?>
+                <div class="notice notice-success">
+                    <p><?php echo $message; ?></p>
+                </div>
+            <?php endif; ?>
+
+            <div class="card">
+                <h2>Image Statistics</h2>
+                <p><strong>Total Images:</strong> <?php echo $total_images['total']; ?></p>
+                <p><strong>WebP Converted:</strong> <?php echo $total_images['webp_converted']; ?></p>
+                <p><strong>Pending Conversion:</strong> <?php echo $total_images['pending']; ?></p>
+                <p><strong>Conversion Rate:</strong> <?php echo round(($total_images['webp_converted'] / max(1, $total_images['total'])) * 100, 1); ?>%</p>
+            </div>
+
+            <div class="card">
+                <h2>Convert Existing Images</h2>
+                <p>Convert existing JPEG and PNG images to WebP format for better performance.</p>
+                
+                <form method="post">
+                    <?php wp_nonce_field('convert_existing_webp', 'nonce'); ?>
+                    <input type="hidden" name="action" value="convert_existing_webp">
+                    <button type="submit" class="button button-primary">Convert Images to WebP</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Manual Conversion</h2>
+                <p>Convert images in batches of 100. This process may take some time for large image libraries.</p>
+                
+                <button id="batch-convert" class="button button-secondary">Start Batch Conversion</button>
+                <div id="batch-status"></div>
+            </div>
+
+            <div class="card">
+                <h2>WebP Support Check</h2>
+                <p><strong>Server WebP Support:</strong> <?php echo $this->is_webp_supported() ? '✅ Supported' : '❌ Not Supported'; ?></p>
+                <p><strong>GD Extension:</strong> <?php echo extension_loaded('gd') ? '✅ Available' : '❌ Not Available'; ?></p>
+                <p><strong>imagewebp Function:</strong> <?php echo function_exists('imagewebp') ? '✅ Available' : '❌ Not Available'; ?></p>
+            </div>
+
+            <div class="card">
+                <h2>Debug Information</h2>
+                <p>Check specific images that might not be converting properly.</p>
+                
+                <form method="post">
+                    <?php wp_nonce_field('debug_webp', 'debug_nonce'); ?>
+                    <input type="hidden" name="action" value="debug_webp">
+                    <label for="debug_attachment_id">Attachment ID:</label>
+                    <input type="number" name="debug_attachment_id" id="debug_attachment_id" value="<?php echo isset($_POST['debug_attachment_id']) ? esc_attr($_POST['debug_attachment_id']) : ''; ?>">
+                    <button type="submit" class="button">Debug Image</button>
+                </form>
+
+                <?php if (isset($_POST['action']) && $_POST['action'] === 'debug_webp' && wp_verify_nonce($_POST['debug_nonce'], 'debug_webp')): ?>
+                    <?php 
+                    $attachment_id = intval($_POST['debug_attachment_id']);
+                    if ($attachment_id && function_exists('pe_mp_debug_webp_status')) {
+                        $debug = pe_mp_debug_webp_status($attachment_id);
+                    ?>
+                        <div style="background: #f9f9f9; padding: 15px; margin-top: 15px; border-left: 4px solid #0073aa;">
+                            <h3>Debug Results for Attachment ID: <?php echo $attachment_id; ?></h3>
+                            <ul>
+                                <li><strong>File Path:</strong> <?php echo esc_html($debug['file_path']); ?></li>
+                                <li><strong>File Exists:</strong> <?php echo $debug['file_exists'] ? '✅ Yes' : '❌ No'; ?></li>
+                                <li><strong>MIME Type:</strong> <?php echo esc_html($debug['mime_type']); ?></li>
+                                <li><strong>WebP Path:</strong> <?php echo esc_html($debug['webp_path']); ?></li>
+                                <li><strong>WebP File Exists:</strong> <?php echo $debug['webp_exists'] ? '✅ Yes' : '❌ No'; ?></li>
+                                <li><strong>Metadata Has WebP:</strong> <?php echo $debug['metadata_has_webp'] ? '✅ Yes' : '❌ No'; ?></li>
+                                <li><strong>WebP URL:</strong> <?php echo esc_html($debug['webp_url']); ?></li>
+                                <li><strong>Browser Supports WebP:</strong> <?php echo $debug['browser_supports_webp'] ? '✅ Yes' : '❌ No'; ?></li>
+                                <li><strong>Server Supports WebP:</strong> <?php echo $debug['server_supports_webp'] ? '✅ Yes' : '❌ No'; ?></li>
+                            </ul>
+                            <?php if (!empty($debug['errors'])): ?>
+                                <h4>Errors:</h4>
+                                <ul>
+                                    <?php foreach ($debug['errors'] as $error): ?>
+                                        <li style="color: red;"><?php echo esc_html($error); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                            
+                            <?php if (!$debug['webp_exists'] && $debug['file_exists'] && $debug['server_supports_webp']): ?>
+                                <p><a href="<?php echo admin_url('admin.php?page=generate-webp&force_convert=' . $attachment_id . '&_wpnonce=' . wp_create_nonce('force_convert_' . $attachment_id)); ?>" class="button button-secondary">Force Convert This Image</a></p>
+                            <?php endif; ?>
+                        </div>
+                    <?php } ?>
+                <?php endif; ?>
+            </div>
 
             <script>
             jQuery(document).ready(function($) {
-                $('#generate-webp').click(function() {
+                $('#batch-convert').click(function() {
                     var button = $(this);
-                    var status = $('#webp-status');
+                    var status = $('#batch-status');
+                    var totalConverted = 0;
+                    var totalErrors = 0;
                     
                     button.prop('disabled', true).text('Converting...');
-                    status.html('<p>Converting images to WebP format...</p>');
+                    status.html('<p>Starting batch conversion...</p>');
                     
-                    $.ajax({
-                        url: ajaxurl,
-                        type: 'POST',
-                        data: {
-                            action: 'generate_webp_versions',
-                            nonce: '<?php echo wp_create_nonce('generate_webp_versions'); ?>'
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                status.html('<p>Successfully converted ' + response.data.converted + ' images to WebP format.</p>');
-                                if (response.data.errors.length > 0) {
-                                    status.append('<p>Errors: ' + response.data.errors.join(', ') + '</p>');
+                    function convertBatch() {
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'POST',
+                            data: {
+                                action: 'generate_webp_versions',
+                                nonce: '<?php echo wp_create_nonce('generate_webp_versions'); ?>'
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    totalConverted += response.data.converted;
+                                    totalErrors += response.data.errors.length;
+                                    
+                                    status.html('<p>Converted: ' + totalConverted + ' images. Errors: ' + totalErrors + '</p>');
+                                    
+                                    if (response.data.converted > 0) {
+                                        // Continue with next batch
+                                        setTimeout(convertBatch, 1000);
+                                    } else {
+                                        status.append('<p><strong>Batch conversion completed!</strong></p>');
+                                        button.prop('disabled', false).text('Start Batch Conversion');
+                                        // Reload page to update statistics
+                                        setTimeout(function() { location.reload(); }, 2000);
+                                    }
+                                } else {
+                                    status.html('<p>Error: ' + response.data + '</p>');
+                                    button.prop('disabled', false).text('Start Batch Conversion');
                                 }
-                            } else {
-                                status.html('<p>Error: ' + response.data + '</p>');
+                            },
+                            error: function() {
+                                status.html('<p>Error occurred during conversion.</p>');
+                                button.prop('disabled', false).text('Start Batch Conversion');
                             }
-                        },
-                        error: function() {
-                            status.html('<p>Error occurred during conversion.</p>');
-                        },
-                        complete: function() {
-                            button.prop('disabled', false).text('Generate WebP Versions');
-                        }
-                    });
+                        });
+                    }
+                    
+                    convertBatch();
                 });
             });
             </script>
         </div>
         <?php
+    }
+
+    /**
+     * Get image statistics
+     */
+    private function get_image_statistics()
+    {
+        // Total images
+        $total_args = array(
+            'post_type' => 'attachment',
+            'post_mime_type' => array('image/jpeg', 'image/jpg', 'image/png'),
+            'post_status' => 'inherit',
+            'posts_per_page' => -1,
+            'fields' => 'ids'
+        );
+        $total_images = get_posts($total_args);
+        $total = count($total_images);
+
+        // WebP converted images
+        $webp_args = array(
+            'post_type' => 'attachment',
+            'post_mime_type' => array('image/jpeg', 'image/jpg', 'image/png'),
+            'post_status' => 'inherit',
+            'posts_per_page' => -1,
+            'meta_query' => array(
+                array(
+                    'key' => '_wp_attachment_metadata',
+                    'value' => '"webp_url"',
+                    'compare' => 'LIKE'
+                )
+            ),
+            'fields' => 'ids'
+        );
+        $webp_converted = get_posts($webp_args);
+        $webp_count = count($webp_converted);
+
+        return array(
+            'total' => $total,
+            'webp_converted' => $webp_count,
+            'pending' => $total - $webp_count
+        );
     }
 }
 

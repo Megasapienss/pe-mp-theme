@@ -4311,22 +4311,54 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .mosaic {
     grid-template-columns: 1fr !important;
+  }
+  .mosaic > div:first-child {
+    grid-column: span 1 !important;
   }
 }
 .mosaic--2-1 {
   grid-template-columns: 2fr 1fr;
 }
+@media (max-width: 991px) {
+  .mosaic--2-1 {
+    grid-template-columns: 1fr;
+  }
+}
 .mosaic--2-1-1 {
   grid-template-columns: 2fr 1fr 1fr;
+}
+@media (max-width: 991px) {
+  .mosaic--2-1-1 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .mosaic--2-1-1 > div:first-child {
+    grid-column: span 2;
+  }
 }
 .mosaic--1-1-1 {
   grid-template-columns: 1fr 1fr 1fr;
 }
+@media (max-width: 991px) {
+  .mosaic--1-1-1 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .mosaic--1-1-1 > div:first-child {
+    grid-column: span 2;
+  }
+}
 .mosaic--1-2-1 {
   grid-template-columns: 1fr 2fr 1fr;
+}
+@media (max-width: 991px) {
+  .mosaic--1-2-1 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .mosaic--1-2-1 > div:first-child {
+    grid-column: span 2;
+  }
 }
 .mosaic__item {
   border-top: 1px solid #E8E8E8;
@@ -4336,10 +4368,10 @@ body {
 .mosaic > .mosaic__item:last-child {
   border-right: none;
 }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .mosaic__item {
     border-right: none;
-    padding: 20px 0;
+    padding: 20px 0 !important;
   }
 }
 .mosaic__column {
