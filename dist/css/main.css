@@ -2108,7 +2108,7 @@ body {
 }
 
 .page-template-focused {
-  padding-top: 12px;
+  padding-top: 20px;
 }
 .page-template-focused .page__content {
   margin-top: 20px;
@@ -2568,7 +2568,7 @@ body {
   height: 80px;
   padding: 4px 20px;
   border-radius: 150px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
