@@ -95,7 +95,8 @@
         @include text-meta;
         color: $color-muted;
 
-        & a {
+        & a,
+        & span {
             pointer-events: none;
             color: $color-text;
         }

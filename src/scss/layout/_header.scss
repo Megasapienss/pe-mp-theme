@@ -31,29 +31,15 @@
 
     }
 
-    padding: $spacing-2 $spacing-4 0 $spacing-4;
-
-    // @include less-than(lg) {
-    //     padding: $spacing-2 $spacing-1 0 $spacing-1;
-    // }
-
-    @include less-than(lg) {
-        padding: 0;
-    }
+    padding: 0;
 
     &--fixed {
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+        width: calc(100% - 20px);
+        top: 20px;
+        left: 10px;
         z-index: 100;
-
-        @include less-than(lg) {
-            width: calc(100% - 20px);
-            top: 20px;
-            left: 10px;
-            border-radius: 150px;
-        }
+        border-radius: 150px;
     }
 
     &--focused {

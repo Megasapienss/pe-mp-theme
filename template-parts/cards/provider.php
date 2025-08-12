@@ -19,7 +19,7 @@ $thumbnail = get_field('image_url', $id) ?: get_template_directory_uri() . '/dis
 
 ?>
 
-<div class="card-v2 card-v2--provider">
+<a href="<?= esc_url($permalink); ?>" class="card-v2 card-v2--provider">
     <div class="card-v2__image">
         <img src="<?= esc_url($thumbnail); ?>">
     </div>
@@ -37,7 +37,7 @@ $thumbnail = get_field('image_url', $id) ?: get_template_directory_uri() . '/dis
         <?php endif; ?>
 
         <h3 class="card-v2__title">
-            <a href="<?= esc_url($permalink); ?>"><?= esc_html($post->post_title); ?></a>
+            <?= esc_html($post->post_title); ?>
         </h3>
 
         <p class="card-v2__excerpt">
@@ -62,4 +62,4 @@ $thumbnail = get_field('image_url', $id) ?: get_template_directory_uri() . '/dis
                 ?>
             </div>
     </div>
-</div> 
+</a> 

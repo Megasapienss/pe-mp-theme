@@ -27,7 +27,7 @@ get_header();
             $background_url = $webp_url;
         } else {
             // If no WebP, use original thumbnail
-            $background_url = get_the_post_thumbnail_url($thumbnail_id, 'full');
+            $background_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
         }
     }
     

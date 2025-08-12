@@ -134,8 +134,8 @@ else :
             //     get_template_part('template-parts/banners/newsletter');
             // }
         } else { ?>
-            <p class="text-center"><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
-            <p class="text-center"><?php _e('Come back later!', 'pe-mp-theme'); ?></p>
+            <!-- <p class="text-center"><?php _e('No posts found.', 'pe-mp-theme'); ?></p>
+            <p class="text-center"><?php _e('Come back later!', 'pe-mp-theme'); ?></p> -->
         <?php } ?>
     </section>
 <?php endif; ?>
