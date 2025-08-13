@@ -173,14 +173,14 @@ get_header();
                             </p>
                         </div>
 
-                        <?php if (get_field('cost_range')) : ?>
+                        <!-- <?php if (get_field('cost_range')) : ?>
                         <div class="provider-single__section-column">
                             <h3 class="heading-h5">Tier</h3>
                             <p class="body-md">
                                 <?= get_field('cost_range')->name; ?>
                             </p>
                         </div>
-                        <?php endif; ?>
+                        <?php endif; ?> -->
                     </div>
                 </div>
                 <?php endif; ?>
