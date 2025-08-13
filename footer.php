@@ -3,6 +3,7 @@
 /**
  * The template for displaying the footer
  */
+
 ?>
 
 
@@ -13,9 +14,15 @@
 get_template_part('template-parts/sections/newsletter', 'v2');
 ?>
 
-<?php if ( !is_front_page() ) : ?>
-<?php get_template_part('template-parts/sections/tests'); ?>
-<?php endif; ?>
+<?php
+$term = get_queried_object();
+if (
+    !is_front_page() &&
+    !(is_tax() && $term && !is_wp_error($term) && $term->slug === 'diagnostics')
+) :
+    get_template_part('template-parts/sections/tests');
+endif;
+?>
 
 <?php if ( is_front_page() ) : ?>
 <section class="section-v2 container community-section">

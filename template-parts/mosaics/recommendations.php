@@ -37,7 +37,7 @@ if ($editorial_posts->have_posts()) {
     $sources = array_merge($sources, array_fill(0, count($editorial_array), 'editorial-pick'));
 }
 
-// If we don't have enough posts, fill with related articles
+// If we don't have enough posts, fill with related articles using scoring system
 if (count($posts_array) < $count) {
     $remaining_slots = $count - count($posts_array);
     
@@ -46,7 +46,15 @@ if (count($posts_array) < $count) {
     $current_tags = wp_get_post_tags(get_the_ID());
     $current_tag_ids = wp_list_pluck($current_tags, 'term_id');
     
-    // Build tax query for related posts (same categories OR same tags)
+    // Get all potential related posts (both tag and category matches)
+    $related_query_args = array(
+        'posts_per_page' => -1, // Get all posts to score them
+        'post__not_in' => array_merge(array(get_the_ID()), wp_list_pluck($posts_array, 'ID')),
+        'orderby' => 'date',
+        'order' => 'DESC'
+    );
+    
+    // Build tax query to get posts that match either tags OR categories
     $tax_query = array();
     
     if (!empty($current_categories)) {
@@ -65,15 +73,7 @@ if (count($posts_array) < $count) {
         );
     }
     
-    // If we have either categories or tags, query for related posts
     if (!empty($tax_query)) {
-        $related_query_args = array(
-            'posts_per_page' => $remaining_slots,
-            'post__not_in' => array_merge(array(get_the_ID()), wp_list_pluck($posts_array, 'ID')),
-            'orderby' => 'date',
-            'order' => 'DESC'
-        );
-        
         // If we have both categories and tags, use OR logic
         if (count($tax_query) > 1) {
             $related_query_args['tax_query'] = array(
@@ -88,9 +88,52 @@ if (count($posts_array) < $count) {
         $related_posts = new WP_Query($related_query_args);
         
         if ($related_posts->have_posts()) {
-            $related_array = $related_posts->posts;
-            $posts_array = array_merge($posts_array, $related_array);
-            $sources = array_merge($sources, array_fill(0, count($related_array), 'related'));
+            $scored_posts = array();
+            
+            // Score each post based on matches
+            foreach ($related_posts->posts as $post) {
+                $score = 0;
+                
+                // Check for tag matches (+5 points per tag match)
+                if (!empty($current_tag_ids)) {
+                    $post_tags = wp_get_post_tags($post->ID);
+                    $post_tag_ids = wp_list_pluck($post_tags, 'term_id');
+                    $tag_matches = array_intersect($current_tag_ids, $post_tag_ids);
+                    $score += count($tag_matches) * 5;
+                }
+                
+                // Check for category matches (+2 points per category match)
+                if (!empty($current_categories)) {
+                    $post_categories = wp_get_post_categories($post->ID);
+                    $category_matches = array_intersect($current_categories, $post_categories);
+                    $score += count($category_matches) * 2;
+                }
+                
+                // Only include posts with at least one match
+                if ($score > 0) {
+                    $scored_posts[] = array(
+                        'post' => $post,
+                        'score' => $score
+                    );
+                }
+            }
+            
+            // Sort by score (highest first), then by date (newest first)
+            usort($scored_posts, function($a, $b) {
+                if ($a['score'] !== $b['score']) {
+                    return $b['score'] - $a['score']; // Higher score first
+                }
+                return strtotime($b['post']->post_date) - strtotime($a['post']->post_date); // Newer first
+            });
+            
+            // Take the top posts up to the remaining slots
+            $top_posts = array_slice($scored_posts, 0, $remaining_slots);
+            
+            if (!empty($top_posts)) {
+                $related_array = array_column($top_posts, 'post');
+                $posts_array = array_merge($posts_array, $related_array);
+                $sources = array_merge($sources, array_fill(0, count($related_array), 'related'));
+            }
         }
     }
 }

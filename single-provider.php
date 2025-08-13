@@ -54,184 +54,230 @@ get_header();
 
         <div class="provider-single__inner">
 
-            <div class="provider-single__title-wrapper">
-                <?php if (get_field('logo_url')) : ?>
-                    <img src="<?= get_field('logo_url'); ?>" alt="" class="provider-single__avatar">
+            <div class="provider-single__content">
+
+                <div class="provider-single__title-wrapper">
+                    <?php if (get_field('logo_url')) : ?>
+                        <img src="<?= get_field('logo_url'); ?>" alt="" class="provider-single__avatar">
+                    <?php endif; ?>
+                    <h1 class="provider-single__title"><?= get_the_title(); ?></h1>
+                </div>
+                
+                <?php if (get_field('subtitle')) : ?>
+                    <p class="provider-single__excerpt"><?= get_field('subtitle'); ?></p>
                 <?php endif; ?>
-                <h1 class="provider-single__title"><?= get_the_title(); ?></h1>
-            </div>
-            
-            <?php if (get_field('subtitle')) : ?>
-                <p class="provider-single__excerpt"><?= get_field('subtitle'); ?></p>
-            <?php endif; ?>
 
-            <?php if (get_field('countries_list')) : ?>
-            <div class="provider-single__meta-item">
-                <?php $countries = get_field('countries_list'); ?>
-                <div class="d-flex flex-row">
-                    <?php foreach ($countries as $country_id) : ?>
-                        <?php $country = get_post($country_id); ?>
-                        <div class="icon-tag icon-tag--globe text-muted"><?= esc_html($country->name); ?></div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <?php endif; ?>
-
-            <?php if (get_field('phone') || get_field('website_url')) : ?>
-            <div class="provider-single__buttons">
-                <?php if (get_field('phone')) : ?>
-                    <a href="tel:<?= get_field('phone'); ?>" class="btn btn--primary">Call Now</a>
-                <?php endif; ?>
-                <?php if (get_field('website_url')) : ?>
-                    <a href="<?= get_field('website_url'); ?>" class="btn btn--secondary" target="_blank">Website</a>
-                <?php endif; ?>
-            </div>
-            <?php endif; ?>
-
-            <?php if (get_field('short_description_text')) : ?>
-            <div class="provider-single__section">
-                <h2 class="provider-single__section-heading">Description</h2>
-                <div class="provider-single__section-content">
-                    <?= get_field('short_description_text'); ?>
-                </div>
-            </div>
-            <?php endif; ?>
-
-            <?php if (get_field('address') && !empty(get_field('address')['street'])) : ?>
-            <div class="provider-single__section">
-                <h2 class="provider-single__section-heading">Address</h2>
-                <div class="provider-single__section-content">
-                        <?php $address = get_field('address'); ?>
-                        <span class="icon-tag icon-tag--map">
-                            <?= $address['street'] ? $address['street'] . ', ' : ''; ?>
-                            <?= $address['city'] ? $address['city'] . ', ' : ''; ?>
-                            <?= $address['state'] ? $address['state'] . ', ' : ''; ?>
-                            <?= $address['postal_code'] ? $address['postal_code'] . ', ' : ''; ?>
-                            <?= $address['country'] ? $address['country'] : ''; ?>
-                        </span>
-                </div>
-            </div>
-            <?php endif; ?>
-
-            <?php if (get_field('pricing_details') || get_field('insurance_accepted_list') || get_field('cost_range')) : ?>
-            <div class="provider-single__section pb-0">
-                <h2 class="provider-single__section-heading">Pricing & Insurance</h2>
-                <div class="provider-single__section-content grid grid--3">
-                    <?php if (get_field('pricing_details')) : ?>
-                    <div class="provider-single__section-column">
-                        <h3 class="heading-h5">Cost</h3>
-                        <p class="body-md">
-                            <?= get_field('pricing_details'); ?>
-                        </p>
-                    </div>
-                    <?php endif; ?>
-
-                    <div class="provider-single__section-column">
-                        <h3 class="heading-h5">Insurance</h3>
-                        <p class="body-md">
-                            <?php 
-                            $insurance_terms = get_field('insurance_accepted_list');
-                            if ($insurance_terms) {
-                                $insurance_names = array_map(function($term) {
-                                    return $term->name;
-                                }, $insurance_terms);
-                                echo implode(', ', $insurance_names);
-                            } else {
-                                echo 'Currently not covered by insurance';
-                            }
-                            ?>
-                        </p>
-                    </div>
-
-                    <?php if (get_field('cost_range')) : ?>
-                    <div class="provider-single__section-column">
-                        <h3 class="heading-h5">Tier</h3>
-                        <p class="body-md">
-                            <?= get_field('cost_range')->name; ?>
-                        </p>
-                    </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <?php endif; ?>
-
-            <?php if (get_field('services_catalogue_relation')) : ?>
-            <div class="provider-single__section">
-                <h2 class="provider-single__section-heading">Services Offered</h2>
-                <div class="provider-single__section-content">
-                    <?php $services = get_field('services_catalogue_relation'); ?>
-                    <?php if ($services) : ?>
-                        <div class="d-flex flex-column justify-start items-start">
-                            <?php foreach ($services as $service_id) : ?>
-                                <?php $service = get_post($service_id); ?>
-                                <div class="icon-tag"><?= $service->post_title; ?></div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php else : ?>
-                        <p class="body-md">No services added yet.</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <?php endif; ?>
-
-            <?php if (get_field('conditions_list')) : ?>
-            <div class="provider-single__section">
-                <h2 class="provider-single__section-heading">Conditions Treated</h2>
-                <div class="provider-single__section-content">
-                    <?php $conditions = get_field('conditions_list'); ?>
-                    <?php if ($conditions) : ?>
-                        <div class="d-flex flex-row">
-                            <?php foreach ($conditions as $condition) : ?>
-                                <div class="icon-tag"><?= esc_html($condition->name); ?></div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php else : ?>
-                        <p class="body-md">No conditions added yet.</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <?php endif; ?>
-
-            <?php if (get_field('promo_article')) : ?>
-            <div class="provider-single__section">
-                <h2 class="provider-single__section-heading">Program Overview</h2>
-                <div class="provider-single__section-content">
-                    <?= get_field('promo_article'); ?>
-                </div>
-            </div>
-            <?php endif; ?>
-
-            <?php if (get_field('image_url')) : ?>
-            <div class="provider-single__section provider-single__section--gallery">
-                <h2 class="provider-single__section-heading">Gallery</h2>
-                <div class="provider-single__section-content">
-                    <div class="provider-single__cover">
-                        <img src="<?= get_field('image_url'); ?>" alt="<?= get_the_title(); ?>">
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
-
-            <?php if (get_field('practitioners_relation')) : ?>
-            <div class="provider-single__section">
-                <h2 class="provider-single__section-heading">Team & Staff</h2>
-                <div class="provider-single__section-content grid grid--3">
-                    <?php $practitioners = get_field('practitioners_relation'); ?>
-                    <?php if ($practitioners) : ?>
-                        <?php foreach ($practitioners as $practitioner_id) : ?>
-                            <?php $practitioner = get_post($practitioner_id); ?>
-                            <div class="provider-single__section-column">
-                                <h3 class="heading-h5"><?= $practitioner->post_title; ?></h3>
-                                <p class="body-md"><?= get_field('subtitle', $practitioner_id); ?></p>
+                <?php if (get_field('countries_list')) : ?>
+                <div class="provider-single__meta-item">
+                    <?php $countries = get_field('countries_list'); ?>
+                    <div class="d-flex flex-row">
+                        <?php foreach ($countries as $country_id) : ?>
+                            <?php $country = get_post($country_id); ?>
+                            <div class="provider-single__country">
+                                <img src="<?= get_template_directory_uri(); ?>/dist/icons/countries/Country=<?= $country->name; ?>, Style=Flag, Radius=Off.svg">
+                                <?= esc_html($country->name); ?>
                             </div>
                         <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if (get_field('phone') || get_field('website_url')) : ?>
+                <div class="provider-single__buttons">
+                    <?php if (get_field('phone')) : ?>
+                        <a href="tel:<?= get_field('phone'); ?>" class="btn btn--primary btn--show-phone" 
+                            onmouseover="this.querySelector('.btn__phone-number').style.display='inline'; this.querySelector('.btn__call-now').style.display='none';" 
+                            onmouseout="this.querySelector('.btn__phone-number').style.display='none'; this.querySelector('.btn__call-now').style.display='inline';">
+                            <span class="btn__call-now">Call Now</span>
+                            <span class="btn__phone-number" style="display:none;"><?= esc_html(get_field('phone')); ?></span>
+                        </a>
+                    <?php endif; ?>
+                    <?php if (get_field('website_url')) : ?>
+                        <a href="<?= get_field('website_url'); ?>" class="btn btn--secondary" target="_blank">Website</a>
                     <?php endif; ?>
                 </div>
-            </div>
-            <?php endif; ?>
+                <?php endif; ?>
 
-            <div class="provider-single__share">
-                <span class="label label--share label--primary label--icon">Share</span>
+                <?php if (get_field('short_description_text')) : ?>
+                <div class="provider-single__section">
+                    <h2 class="provider-single__section-heading">Description</h2>
+                    <div class="provider-single__section-content">
+                        <?= get_field('short_description_text'); ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if (get_field('address') && !empty(get_field('address')['street'])) : ?>
+                <div class="provider-single__section">
+                    <h2 class="provider-single__section-heading">Address</h2>
+                    <div class="provider-single__section-content">
+                            <?php $address = get_field('address'); ?>
+                            <span class="icon-tag icon-tag--map">
+                                <?= $address['street'] ? $address['street'] . ', ' : ''; ?>
+                                <?= $address['city'] ? $address['city'] . ', ' : ''; ?>
+                                <?= $address['state'] ? $address['state'] . ', ' : ''; ?>
+                                <?= $address['postal_code'] ? $address['postal_code'] . ', ' : ''; ?>
+                                <?= $address['country'] ? $address['country'] : ''; ?>
+                            </span>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if (get_field('pricing_details') || get_field('insurance_accepted_list') || get_field('cost_range')) : ?>
+                <div class="provider-single__section pb-0">
+                    <h2 class="provider-single__section-heading">Pricing & Insurance</h2>
+                    <div class="provider-single__section-content grid grid--3">
+                        <?php if (get_field('pricing_details')) : ?>
+                        <div class="provider-single__section-column">
+                            <h3 class="heading-h5">Cost</h3>
+                            <p class="body-md">
+                                <?= get_field('pricing_details'); ?>
+                            </p>
+                        </div>
+                        <?php endif; ?>
+
+                        <div class="provider-single__section-column">
+                            <h3 class="heading-h5">Insurance</h3>
+                            <p class="body-md">
+                                <?php 
+                                $insurance_terms = get_field('insurance_accepted_list');
+                                if ($insurance_terms) {
+                                    $insurance_names = array_map(function($term) {
+                                        return $term->name;
+                                    }, $insurance_terms);
+                                    echo implode(', ', $insurance_names);
+                                } else {
+                                    echo 'Currently not covered by insurance';
+                                }
+                                ?>
+                            </p>
+                        </div>
+
+                        <?php if (get_field('cost_range')) : ?>
+                        <div class="provider-single__section-column">
+                            <h3 class="heading-h5">Tier</h3>
+                            <p class="body-md">
+                                <?= get_field('cost_range')->name; ?>
+                            </p>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if (get_field('services_catalogue_relation')) : ?>
+                <div class="provider-single__section">
+                    <h2 class="provider-single__section-heading">Services Offered</h2>
+                    <div class="provider-single__section-content">
+                        <?php $services = get_field('services_catalogue_relation'); ?>
+                        <?php if ($services) : ?>
+                            <div class="d-flex flex-column justify-start items-start">
+                                <?php foreach ($services as $service_id) : ?>
+                                    <?php $service = get_post($service_id); ?>
+                                    <div class="icon-tag"><?= $service->post_title; ?></div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else : ?>
+                            <p class="body-md">No services added yet.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if (get_field('conditions_list')) : ?>
+                <div class="provider-single__section">
+                    <h2 class="provider-single__section-heading">Conditions Treated</h2>
+                    <div class="provider-single__section-content">
+                        <?php $conditions = get_field('conditions_list'); ?>
+                        <?php if ($conditions) : ?>
+                            <div class="d-flex flex-row">
+                                <?php foreach ($conditions as $condition) : ?>
+                                    <div class="icon-tag"><?= esc_html($condition->name); ?></div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else : ?>
+                            <p class="body-md">No conditions added yet.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if (get_field('promo_article')) : ?>
+                <div class="provider-single__section">
+                    <h2 class="provider-single__section-heading">Program Overview</h2>
+                    <div class="provider-single__section-content">
+                        <?= get_field('promo_article'); ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if (get_field('gallery_list')) : ?>
+                <div class="provider-single__section provider-single__section--gallery">
+                    <h2 class="provider-single__section-heading">Gallery</h2>
+                    <div class="provider-single__section-content">
+                        <?php $gallery = get_field('gallery_list'); ?>
+                        <?php if ($gallery && count($gallery) > 0) : ?>
+                            <!-- Debug: Gallery count: <?= count($gallery) ?> -->
+                            <div class="swiper gallery-swiper">
+                                <div class="swiper-wrapper">
+                                    <?php foreach ($gallery as $image) : ?>
+                                        <div class="swiper-slide">
+                                            <img src="<?= esc_url($image); ?>" alt="Gallery image">
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <!-- Navigation arrows -->
+                                <div class="swiper-button-next" style="display: flex !important;">
+                                        <img src="<?= get_template_directory_uri(); ?>/dist/icons/ph_arrow-right.svg" alt="Next">
+                                </div>
+                                <div class="swiper-button-prev" style="display: flex !important;">
+                                        <img src="<?= get_template_directory_uri(); ?>/dist/icons/ph_arrow-left.svg" alt="Previous">
+                                </div>
+                            </div>
+                            
+                            <!-- Thumbnail gallery -->
+                            <div class="swiper gallery-thumbs">
+                                <div class="swiper-wrapper">
+                                    <?php foreach ($gallery as $image) : ?>
+                                        <div class="swiper-slide">
+                                            <img src="<?= esc_url($image); ?>" alt="Gallery thumbnail">
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php else : ?>
+                            <p class="body-md">No gallery images available.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if (get_field('practitioners_relation')) : ?>
+                <div class="provider-single__section">
+                    <h2 class="provider-single__section-heading">Team & Staff</h2>
+                    <div class="provider-single__section-content grid grid--2">
+                        <?php $practitioners = get_field('practitioners_relation'); ?>
+                        <?php if ($practitioners) : ?>
+                            <?php foreach ($practitioners as $practitioner_id) : ?>
+                                <?php $practitioner = get_post($practitioner_id); ?>
+                                <div class="provider-single__section-column">
+                                    <h3 class="heading-h5"><?= $practitioner->post_title; ?></h3>
+                                    <p class="body-md"><?= get_field('subtitle', $practitioner_id); ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <div class="provider-single__share">
+                    <span class="icon-tag icon-tag--rounded icon-tag--globe share-trigger">Share this provider</span>
+                </div>
+
+            </div>
+
+            <div class="provider-single__sidebar">
+                
             </div>
 
         </div>

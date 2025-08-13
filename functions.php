@@ -48,3 +48,18 @@ require_once PE_MP_THEME_DIR . '/inc/api/init.php';
 
 // Load Performance Module (includes WebP functionality)
 require_once PE_MP_THEME_DIR . '/inc/performance/init.php';
+
+// Modify provider archive query to exclude practitioners
+function pe_mp_exclude_practitioners_from_archive($query) {
+    if (!is_admin() && $query->is_main_query() && is_post_type_archive('provider')) {
+        $query->set('tax_query', array(
+            array(
+                'taxonomy' => 'provider-type',
+                'field' => 'slug',
+                'terms' => 'practitioner',
+                'operator' => 'NOT IN'
+            )
+        ));
+    }
+}
+add_action('pre_get_posts', 'pe_mp_exclude_practitioners_from_archive');
