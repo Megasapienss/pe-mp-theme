@@ -18,7 +18,7 @@ get_template_part('template-parts/sections/newsletter', 'v2');
 $term = get_queried_object();
 if (
     !is_front_page() &&
-    !(is_tax() && $term && !is_wp_error($term) && $term->slug === 'diagnostics')
+    !(is_category('diagnostics') || (is_tax() && $term && !is_wp_error($term) && $term->slug === 'diagnostics'))
 ) :
     get_template_part('template-parts/sections/tests');
 endif;
