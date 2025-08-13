@@ -3031,6 +3031,13 @@ body {
   gap: 20px;
   align-items: center;
 }
+@media (max-width: 767px) {
+  .provider-single__title-wrapper {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
 .provider-single__avatar {
   width: 60px;
   height: 60px;
