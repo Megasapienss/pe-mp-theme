@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 310px 1fr;
     gap: $spacing-4;
+    overflow: hidden; // Prevent overflow
 
     @include less-than('lg') {
         grid-template-columns: 1fr;
@@ -43,6 +44,7 @@
         display: grid;
         grid-template-columns: 1fr 310px;
         gap: $spacing-4;
+        overflow: hidden; // Prevent overflow
 
         @include less-than('xl') {
             grid-template-columns: 1fr;
@@ -54,6 +56,7 @@
         display: flex;
         flex-direction: column;
         gap: $spacing-2;
+        overflow: hidden; // Prevent overflow
     }
 
     &__title {
@@ -126,10 +129,12 @@
         border-bottom: 1px solid $color-border;
         padding-top: $spacing-2;
         padding-bottom: $spacing-2;
+        overflow: hidden; // Prevent overflow
 
         &--gallery > div{
             padding-left: 0;
             padding-right: 0;
+            overflow: hidden; // Prevent gallery overflow
         }
 
         &-heading{
@@ -145,10 +150,12 @@
             color: $color-dark;
             padding-left: $spacing-2;
             padding-right: $spacing-2;
+            overflow: hidden; // Prevent content overflow
 
-            .provider-page__section--gallery &{
+            .provider-single__section--gallery &{
                 padding-left: 0;
                 padding-right: 0;
+                overflow: hidden; // Ensure gallery content doesn't overflow
             }
             
             &.grid{
@@ -159,31 +166,28 @@
                 gap: $spacing-1;
                 flex-wrap: wrap;
             }
+
+            &:has(.provider-single__section-column){
+                padding-left: 0;
+                padding-right: 0;
+            }
         }
 
-        &:has(.provider-page__section-column){
-            padding-bottom: 0;
-        }
+
 
         &-column{
             display: flex;
             flex-direction: column;
             gap: $spacing-1;
-            padding: 0 $spacing-2 $spacing-2 $spacing-2;
-            border-right: 1px solid $color-border;
-
-            &:last-child{
-                border-right: none;
+            padding: $spacing-2 $spacing-2 $spacing-2 $spacing-2;
+            border-bottom: 1px solid $color-border;
+            
+            &:first-child{
+                padding-top: 0;
             }
 
-            @include less-than('md') {
-                border-right: none;
-                border-bottom: 1px solid $color-border;
-                padding-top: $spacing-2;
-
-                &:last-child{
-                    border-bottom: none;
-                }
+            &:last-child{
+                border-bottom: none;
             }
         }
     }

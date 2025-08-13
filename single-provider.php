@@ -146,7 +146,7 @@ get_header();
                 <?php if (get_field('pricing_details') || get_field('insurance_accepted_list') || get_field('cost_range')) : ?>
                 <div class="provider-single__section pb-0">
                     <h2 class="provider-single__section-heading">Pricing & Insurance</h2>
-                    <div class="provider-single__section-content grid grid--3">
+                    <div class="provider-single__section-content">
                         <?php if (get_field('pricing_details')) : ?>
                         <div class="provider-single__section-column">
                             <h3 class="heading-h5">Cost</h3>
