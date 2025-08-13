@@ -286,6 +286,12 @@ button {
             background-image: url('../icons/label-share.svg');
         }
     }
+
+    &--condition {
+        &::before {
+            background-image: url('../icons/condition.svg');
+        }
+    }
 }
 
 .share-trigger{

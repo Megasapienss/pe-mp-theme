@@ -61,26 +61,46 @@ get_header();
                         <img src="<?= get_field('logo_url'); ?>" alt="" class="provider-single__avatar">
                     <?php endif; ?>
                     <h1 class="provider-single__title"><?= get_the_title(); ?></h1>
+                    <?php
+                    $card_tier = get_field('card_tier_badge');
+                    if ($card_tier && is_object($card_tier)) {
+                        $tier_slug = $card_tier->slug;
+                        $tier_name = $card_tier->name;
+                        $icon_path = get_template_directory_uri() . '/dist/icons/badges/' . $tier_slug . '.svg';
+                        if (file_exists(get_template_directory() . '/dist/icons/badges/' . $tier_slug . '.svg')) {
+                            ?>
+                            <img src="<?= esc_url($icon_path); ?>" alt="<?= esc_attr($tier_name); ?>" class="provider-single__tier">
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
                 
                 <?php if (get_field('subtitle')) : ?>
                     <p class="provider-single__excerpt"><?= get_field('subtitle'); ?></p>
                 <?php endif; ?>
 
-                <?php if (get_field('countries_list')) : ?>
+                
                 <div class="provider-single__meta-item">
-                    <?php $countries = get_field('countries_list'); ?>
-                    <div class="d-flex flex-row">
-                        <?php foreach ($countries as $country_id) : ?>
-                            <?php $country = get_post($country_id); ?>
-                            <div class="provider-single__country">
-                                <img src="<?= get_template_directory_uri(); ?>/dist/icons/countries/Country=<?= $country->name; ?>, Style=Flag, Radius=Off.svg">
-                                <?= esc_html($country->name); ?>
-                            </div>
-                        <?php endforeach; ?>
+                    <div class="provider-single__country">
+                        <img src="<?= get_template_directory_uri(); ?>/dist/icons/countries/Country=<?= get_field('address')['country']; ?>, Style=Flag, Radius=Off.svg">
+                        <?= esc_html(get_field('address')['country']); ?>
                     </div>
+                    <?php if (get_field('countries_list')) : ?>
+                        <?php $countries = get_field('countries_list'); ?>
+                        <div class="d-flex flex-row">
+                            <span class="text-muted ml-1 mr-1">Countries served:</span>
+                            <?php foreach ($countries as $country_id) : ?>
+                                <?php $country = get_post($country_id); ?>
+                                <div class="provider-single__country">
+                                    <img src="<?= get_template_directory_uri(); ?>/dist/icons/countries/Country=<?= $country->name; ?>, Style=Flag, Radius=Off.svg">
+                                    <?= esc_html($country->name); ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
-                <?php endif; ?>
+                
 
                 <?php if (get_field('phone') || get_field('website_url')) : ?>
                 <div class="provider-single__buttons">
@@ -166,22 +186,37 @@ get_header();
                 <?php endif; ?>
 
                 <?php if (get_field('services_catalogue_relation')) : ?>
+                <?php 
+                $services = get_field('services_catalogue_relation');
+                $primary_services = array();
+                $additional_services = array();
+                
+                if ($services) {
+                    foreach ($services as $service_id) {
+                        $service = get_post($service_id);
+                        $is_additional = get_field('additional_service', $service_id);
+                        
+                        if ($is_additional) {
+                            $additional_services[] = $service;
+                        } else {
+                            $primary_services[] = $service;
+                        }
+                    }
+                }
+                ?>
+                
+                <?php if (!empty($primary_services)) : ?>
                 <div class="provider-single__section">
                     <h2 class="provider-single__section-heading">Services Offered</h2>
                     <div class="provider-single__section-content">
-                        <?php $services = get_field('services_catalogue_relation'); ?>
-                        <?php if ($services) : ?>
-                            <div class="d-flex flex-column justify-start items-start">
-                                <?php foreach ($services as $service_id) : ?>
-                                    <?php $service = get_post($service_id); ?>
-                                    <div class="icon-tag"><?= $service->post_title; ?></div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php else : ?>
-                            <p class="body-md">No services added yet.</p>
-                        <?php endif; ?>
+                        <div class="d-flex flex-column justify-start items-start">
+                            <?php foreach ($primary_services as $service) : ?>
+                                <div class="icon-tag"><?= $service->post_title; ?></div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
+                <?php endif; ?>
                 <?php endif; ?>
 
                 <?php if (get_field('conditions_list')) : ?>
@@ -192,7 +227,7 @@ get_header();
                         <?php if ($conditions) : ?>
                             <div class="d-flex flex-row">
                                 <?php foreach ($conditions as $condition) : ?>
-                                    <div class="icon-tag"><?= esc_html($condition->name); ?></div>
+                                    <div class="icon-tag icon-tag--condition"><?= esc_html($condition->name); ?></div>
                                 <?php endforeach; ?>
                             </div>
                         <?php else : ?>
@@ -202,11 +237,26 @@ get_header();
                 </div>
                 <?php endif; ?>
 
-                <?php if (get_field('promo_article')) : ?>
+                <?php if (get_field('services_catalogue_relation') && !empty($additional_services)) : ?>
+                <div class="provider-single__section">
+                    <h2 class="provider-single__section-heading">Additional Services</h2>
+                    <div class="provider-single__section-content">
+                        <div class="d-flex flex-column justify-start items-start">
+                            <?php foreach ($additional_services as $service) : ?>
+                                <div class="icon-tag"><?= $service->post_title; ?></div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+
+
+                <?php if (get_field('program_overview')) : ?>
                 <div class="provider-single__section">
                     <h2 class="provider-single__section-heading">Program Overview</h2>
                     <div class="provider-single__section-content">
-                        <?= get_field('promo_article'); ?>
+                        <?= get_field('program_overview'); ?>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -285,14 +335,8 @@ get_header();
     </article>
 
     <?php
-    // New articles Section
-    get_template_part('template-parts/mosaics/complex', '', [
-        'title' => 'Editor\'s Picks',
-        'taxonomy' => 'category',
-        'term' => 'provider-resources',
-        'count' => 6
-    ]);
-    ?>
+    get_template_part('template-parts/mosaics/recommendations');
+    ?> 
 
 <?php endwhile; ?>
 

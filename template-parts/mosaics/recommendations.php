@@ -4,9 +4,10 @@
  * Template part for displaying recommendations with fallback logic
  *
  * Priority order:
- * 1. Posts tagged "editorial pick" (up to count limit)
- * 2. Related articles (fill remaining slots)
- * 3. Latest articles (fill any remaining slots)
+ * 1. Mentioned articles from provider (if post type is provider, up to count limit)
+ * 2. Posts tagged "editorial pick" (fill remaining slots)
+ * 3. Related articles (fill remaining slots)
+ * 4. Latest articles (fill any remaining slots)
  *
  * Always ensures exactly 'count' number of articles are displayed
  *
@@ -22,19 +23,50 @@ $count = isset($args['count']) ? intval($args['count']) : 8;
 $posts_array = array();
 $sources = array();
 
-// First priority: Editorial picks
-$editorial_posts = new WP_Query(array(
-    'posts_per_page' => $count,
-    'post__not_in' => array(get_the_ID()),
-    'tag' => 'editorial-pick',
-    'orderby' => 'date',
-    'order' => 'DESC'
-));
+// First priority: Mentioned articles from provider (if current post type is provider)
+if (get_post_type() === 'provider') {
+    $mentioned_articles = get_field('mentioned_articles_relation');
+    
+    if ($mentioned_articles && is_array($mentioned_articles) && !empty($mentioned_articles)) {
+        // Filter out current post
+        $excluded_posts = array(get_the_ID());
+        $filtered_articles = array_diff($mentioned_articles, $excluded_posts);
+        
+        if (!empty($filtered_articles)) {
+            // Get the actual post objects
+            $mentioned_posts = get_posts(array(
+                'post__in' => $filtered_articles,
+                'post_type' => 'post',
+                'posts_per_page' => $count,
+                'orderby' => 'post__in', // Maintain the order from the field
+                'post_status' => 'publish'
+            ));
+            
+            if (!empty($mentioned_posts)) {
+                $posts_array = array_merge($posts_array, $mentioned_posts);
+                $sources = array_merge($sources, array_fill(0, count($mentioned_posts), 'mentioned'));
+            }
+        }
+    }
+}
 
-if ($editorial_posts->have_posts()) {
-    $editorial_array = $editorial_posts->posts;
-    $posts_array = array_merge($posts_array, $editorial_array);
-    $sources = array_merge($sources, array_fill(0, count($editorial_array), 'editorial-pick'));
+// Second priority: Editorial picks (only if we don't have enough mentioned articles)
+if (count($posts_array) < $count) {
+    $remaining_slots = $count - count($posts_array);
+    
+    $editorial_posts = new WP_Query(array(
+        'posts_per_page' => $remaining_slots,
+        'post__not_in' => array_merge(array(get_the_ID()), wp_list_pluck($posts_array, 'ID')),
+        'tag' => 'editorial-pick',
+        'orderby' => 'date',
+        'order' => 'DESC'
+    ));
+
+    if ($editorial_posts->have_posts()) {
+        $editorial_array = $editorial_posts->posts;
+        $posts_array = array_merge($posts_array, $editorial_array);
+        $sources = array_merge($sources, array_fill(0, count($editorial_array), 'editorial-pick'));
+    }
 }
 
 // If we don't have enough posts, fill with related articles using scoring system
@@ -161,9 +193,11 @@ if (empty($posts_array)) {
     return;
 }
 
-// Determine primary source for the button (prioritize editorial picks, then related, then latest)
+// Determine primary source for the button (prioritize mentioned, then editorial picks, then related, then latest)
 $primary_source = 'latest';
-if (in_array('editorial-pick', $sources)) {
+if (in_array('mentioned', $sources)) {
+    $primary_source = 'mentioned';
+} elseif (in_array('editorial-pick', $sources)) {
     $primary_source = 'editorial-pick';
 } elseif (in_array('related', $sources)) {
     $primary_source = 'related';
@@ -176,6 +210,10 @@ if (in_array('editorial-pick', $sources)) {
         <?php if ($primary_source === 'editorial-pick') : ?>
         <!-- <a href="<?= esc_url(get_tag_link(get_term_by('slug', 'editorial-pick', 'post_tag'))); ?>" class="btn btn--muted btn--arrow">
             See all editorial picks
+        </a> -->
+        <?php elseif ($primary_source === 'mentioned') : ?>
+        <!-- <a href="<?= esc_url(get_permalink()); ?>#mentioned" class="btn btn--muted btn--arrow">
+            More from this provider
         </a> -->
         <?php elseif ($primary_source === 'related') : ?>
         <!-- <a href="<?= esc_url(get_permalink()); ?>#related" class="btn btn--muted btn--arrow">

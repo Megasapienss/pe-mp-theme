@@ -36,9 +36,25 @@ $thumbnail = get_field('image_url', $id) ?: get_template_directory_uri() . '/dis
         </div>
         <?php endif; ?>
 
-        <h3 class="card-v2__title">
-            <?= esc_html($post->post_title); ?>
-        </h3>
+        <div class="card-v2__title-wrapper">
+            <h3 class="card-v2__title">
+                <?= esc_html($post->post_title); ?>
+            </h3>
+            <?php
+            $card_tier = get_field('card_tier_badge', $id);
+            if ($card_tier && is_object($card_tier)) {
+                $tier_slug = $card_tier->slug;
+                $tier_name = $card_tier->name;
+                $icon_path = get_template_directory_uri() . '/dist/icons/badges/' . $tier_slug . '--sm.svg';
+                if (file_exists(get_template_directory() . '/dist/icons/badges/' . $tier_slug . '--sm.svg')) {
+                    ?>
+                    <img src="<?= esc_url($icon_path); ?>" class="provider-single__tier--sm">
+                    <?php
+                }
+            }
+            ?>
+            
+        </div>
 
         <p class="card-v2__excerpt">
             <?= get_field('subtitle', $id); ?><br>

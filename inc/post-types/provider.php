@@ -50,7 +50,6 @@ function pe_mp_register_providers_post_type() {
             'custom-fields',   // For ACF
         ),
         'show_in_rest'       => false, // Disable Gutenberg editor
-        'taxonomies'         => array('provider-category', 'provider-tag'),
     );
 
     register_post_type('provider', $args);

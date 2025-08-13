@@ -401,6 +401,13 @@
         }
     }
 
+    &__title-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: $spacing-2;
+        align-items: center;
+    }
+
     &__title {
         font-weight: 600;
         color: $color-dark;

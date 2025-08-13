@@ -76,31 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // Update tocLinks reference after all links are created
             tocLinks = tocList.querySelectorAll('a');
         }
-
-        // Mouse wheel scrolling for TOC
-        if (tocList) {
-            tocList.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                // Reduce scroll sensitivity for smoother movement
-                const scrollAmount = e.deltaY * 3;
-                tocList.scrollLeft += scrollAmount;
-            });
-        }
-
-        // Sticky TOC functionality
-        const toc = document.querySelector('.hero__toc');
-        if (toc) {
-            const tocWrapper = document.querySelector('.hero__toc-wrapper');
-            const tocOffset = tocWrapper.offsetTop;
-
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset >= tocOffset) {
-                    toc.classList.add('sticky');
-                } else {
-                    toc.classList.remove('sticky');
-                }
-            });
-        }
     }
 
     initTableOfContents();
@@ -235,6 +210,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     
                     sourcesList.appendChild(sourceLink);
                 });
+            }
+        } else {
+            // Hide the sources tab if no external links are found
+            const sourcesTab = document.querySelector('[data-tab="sources"]');
+            if (sourcesTab) {
+                sourcesTab.style.display = 'none';
+            }
+            
+            // Also hide the sources tab button if it exists
+            const sourcesTabButton = document.querySelector('.tabs__button[data-tab="sources"]');
+            if (sourcesTabButton) {
+                sourcesTabButton.style.display = 'none';
             }
         }
     }

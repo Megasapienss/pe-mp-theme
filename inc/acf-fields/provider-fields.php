@@ -284,6 +284,17 @@ if (function_exists('acf_add_local_field_group')) {
                 'required' => 0,
             ),
             array(
+                'key' => 'field_program_overview',
+                'label' => 'Program Overview',
+                'name' => 'program_overview',
+                'type' => 'wysiwyg',
+                'instructions' => 'Rich program overview content with photos and formatting',
+                'tabs' => 'all',
+                'toolbar' => 'full',
+                'media_upload' => 1,
+                'required' => 0,
+            ),
+            array(
                 'key' => 'field_mentioned_articles_relation',
                 'label' => 'Mentioned Articles',
                 'name' => 'mentioned_articles_relation',

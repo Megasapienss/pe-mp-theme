@@ -41,9 +41,9 @@ add_action('init', 'pe_mp_register_service_delivery_method_taxonomy');
 // Add default terms
 function pe_mp_add_default_service_delivery_methods() {
     $default_methods = array(
-        'offline' => 'Offline',
-        'telemed' => 'Telemed',
         'hybrid' => 'Hybrid',
+        'online' => 'Online',
+        'in-person' => 'In-person',
     );
 
     foreach ($default_methods as $slug => $name) {
