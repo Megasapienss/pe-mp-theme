@@ -33,7 +33,7 @@ get_template_part('template-parts/mosaics/category', '', [
 
 // Discover safe psychedelic care in Europe and Asia Section
 get_template_part('template-parts/mosaics/category', '', [
-    'title' => 'Discover safe psychedelic care in Europe and Asia',
+    'title' => 'Progressive mental health treatments in Europe and Asia',
     'taxonomy' => 'post_tag',
     'term' => 'providers',
     'count' => 3

@@ -236,3 +236,27 @@
 .ml-1{
     margin-left: $spacing-1 !important;
 }
+
+.hide-on-mobile{
+    @include less-than(lg) {
+        display: none !important;
+    }
+}
+
+.hide-on-desktop{
+    @include more-than(lg) {
+        display: none !important;
+    }
+}
+
+.show-on-mobile{
+    @include less-than(lg) {
+        display: block !important;
+    }
+}
+
+.show-on-desktop{
+    @include more-than(lg) {
+        display: block !important;
+    }
+}

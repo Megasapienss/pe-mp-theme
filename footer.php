@@ -41,7 +41,10 @@ endif;
             <?php esc_html_e('WhatsApp', 'pe-mp-theme'); ?>
         </a>
     </div>
-    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/community.webp" alt="Community">
+    <div class="community-section__image">
+        <img class="hide-on-mobile" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/community.webp" alt="Community">
+        <img class="hide-on-desktop" src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/community-sm.webp" alt="Community">
+    </div>
 </section>
 <?php endif; ?>
 
@@ -49,7 +52,9 @@ endif;
     <div class="footer__menu">
         <div class="footer__menu-top">
             <p>States of Mind</p>
-            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>" class="footer__logo">
+            <a class="footer__logo" href="/">
+                <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/images/brand/logo-v1.svg" alt="<?php bloginfo('name'); ?>">
+            </a>
         </div>
         <div class="footer__menu-bottom">
             <div class="footer__links">
