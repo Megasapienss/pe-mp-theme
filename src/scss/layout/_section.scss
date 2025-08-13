@@ -219,61 +219,54 @@
 
 .tests-section{
     &__content{
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: $spacing-2;
-        scroll-behavior: smooth; // Add smooth scrolling
-        -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
-        cursor: grab; // Show grab cursor to indicate draggable
-
-        &:active {
-            cursor: grabbing; // Show grabbing cursor when dragging
-        }
-
-        & > .banner{
-            min-width: 310px;
-            max-width: 310px;
-            width: 100%;
-            user-select: none; // Prevent text selection during drag
-        }
-
-        // Hide scrollbar but keep functionality
-        &::-webkit-scrollbar {
-            display: none;
-        }
+        position: relative;
         
-        -ms-overflow-style: none;  // IE and Edge
-        scrollbar-width: none;  // Firefox
-    }
-}
-
-// New class for overflow-x that breaks out of body padding
-.overflow-breakout {
-    position: relative;
-    margin-left: -100vw;  // Negative margin to break out of body padding
-    margin-right: -100vw; // Negative margin to break out of body padding
-    padding-left: 100vw;  // Add padding back to maintain content spacing
-    padding-right: 100vw; // Add padding back to maintain content spacing
-    
-    // Ensure the overflow content appears above other elements
-    z-index: 1;
-    
-    // Optional: Add some visual separation
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: inherit;
-        z-index: -1;
-    }
-
-    // Custom scrollbar for horizontal overflow
-    &::-webkit-scrollbar {
-        display: none;
+        .tests-swiper {
+            padding: 0; // Space for navigation arrows
+            cursor: grab; // Show grab cursor
+            
+            &:active {
+                cursor: grabbing; // Show grabbing cursor when dragging
+            }
+            
+            .swiper-slide {
+                height: auto;
+                width: 310px !important; // Fixed width for each slide
+                transition: transform 0.2s ease-out; // Smooth transition for drag feedback
+                
+                .banner {
+                    height: 100%;
+                    min-height: 410px;
+                }
+            }
+            
+            .swiper-button-next,
+            .swiper-button-prev {
+                color: $color-dark;
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                margin-top: -20px;
+                
+                &:after {
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                
+                &:hover {
+                    background: rgba(255, 255, 255, 1);
+                }
+            }
+            
+            .swiper-button-prev {
+                left: 20px; // Position within the container
+            }
+            
+            .swiper-button-next {
+                right: 20px; // Position within the container
+            }
+        }
     }
 }
 

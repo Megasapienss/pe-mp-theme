@@ -43,7 +43,7 @@
 
     &__sidebar {
         position: sticky;
-        top: 96px;
+        top: 120px;
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -287,7 +287,7 @@
         gap: $spacing-1;
 
         @include less-than('lg') {
-            order: 1;
+            order: 2;
         }
 
         & .banner {
@@ -321,16 +321,24 @@
     }
 
     &__sidebar {
-        position: sticky;
-        top: 96px;
+        
         display: flex;
         flex-direction: column;
         gap: $spacing-2;
+
+        position: sticky;
+        top: 120px;
         align-self: flex-start;
+
+        @include less-than('xxl') {
+            align-self: flex-end;
+            top: initial;
+            bottom: $spacing-1;
+        }
 
         @include less-than('lg') {
             position: static;
-            order: 2;
+            order: 1;
         }
     }
 

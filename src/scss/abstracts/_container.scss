@@ -30,3 +30,32 @@
     }
   }
 }
+
+// New class for overflow-x that breaks out of body padding
+.overflow-breakout {
+  position: relative;
+  margin-left: -100vw;  // Negative margin to break out of body padding
+  margin-right: -100vw; // Negative margin to break out of body padding
+  padding-left: 100vw;  // Add padding back to maintain content spacing
+  padding-right: 100vw; // Add padding back to maintain content spacing
+  
+  // Ensure the overflow content appears above other elements
+  z-index: 1;
+  
+  // Optional: Add some visual separation
+  &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      z-index: -1;
+  }
+
+  // Custom scrollbar for horizontal overflow
+  &::-webkit-scrollbar {
+      display: none;
+  }
+}
