@@ -102,6 +102,7 @@
             max-height: none;
         }
 
+        // Custom scrollbar for Webkit (Chrome, Edge, Safari)
         &::-webkit-scrollbar {
             background: transparent;
             width: 1px;

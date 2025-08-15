@@ -75,7 +75,7 @@ endif;
     <div class="community-banner">
         <div class="d-flex flex-column">
             <h4>Meaningful connection can improve your well-being</h4>
-            <p>Come join our little community inner talks</p>
+            <p>Come join our little community States of Mind</p>
             <div class="community-banner__actions">
                 <a href="https://discord.gg/XwGZ82yeXz" target="_blank" class="arrow-btn">
                     <?php esc_html_e('Discord', 'pe-mp-theme'); ?>
