@@ -9,6 +9,10 @@
  */
 
 get_header();
+
+// Initialize global array to track displayed post IDs
+global $displayed_post_ids;
+$displayed_post_ids = array();
 ?>
 
 <!-- <section class="hero hero--minimalistic">
@@ -22,13 +26,14 @@ get_header();
 
 <?php
 // Hero Mosaic Section
-get_template_part('template-parts/mosaics/hero', '');
+get_template_part('template-parts/mosaics/hero', '', ['exclude_posts' => $displayed_post_ids]);
 
 // Science & Innovation Section
 get_template_part('template-parts/mosaics/category', '', [
     'title' => 'Science & Innovation',
     'taxonomy' => 'category',
-    'term' => 'science-innovation'
+    'term' => 'science-innovation',
+    'exclude_posts' => $displayed_post_ids
 ]);
 
 // Discover safe psychedelic care in Europe and Asia Section
@@ -36,7 +41,8 @@ get_template_part('template-parts/mosaics/category', '', [
     'title' => 'Progressive mental health treatments in Europe and Asia',
     'taxonomy' => 'post_tag',
     'term' => 'providers',
-    'count' => 3
+    'count' => 3,
+    'exclude_posts' => $displayed_post_ids
 ]);
 
 get_template_part('template-parts/sections/tests');
@@ -45,11 +51,14 @@ get_template_part('template-parts/sections/tests');
 get_template_part('template-parts/mosaics/category', '', [
     'title' => 'Mental Wellness',
     'taxonomy' => 'category',
-    'term' => 'mental-wellness'
+    'term' => 'mental-wellness',
+    'exclude_posts' => $displayed_post_ids
 ]);
 
 // New articles Section
-get_template_part('template-parts/mosaics/recommendations');
+get_template_part('template-parts/mosaics/recommendations', '', [
+    'exclude_posts' => $displayed_post_ids
+]);
 ?>
 
 <?php

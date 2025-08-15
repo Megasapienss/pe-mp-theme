@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize all swipers with delay to ensure DOM is ready
     setTimeout(() => {
         initAllSwipers();
-    }, 100);
+    }, 500);
 
     // Off-canvas menu toggle
     const offCanvasToggleButtons = document.querySelectorAll('.toggle--off-canvas--menu');
@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initTableOfContents();
+
+
 
     // Native share functionality
     const shareButtons = document.querySelectorAll('.share-trigger');
@@ -228,16 +230,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Accordion functionality
     function initAccordion() {
-        console.log('Accordion - Initializing accordion functionality');
+        // console.log('Accordion - Initializing accordion functionality');
 
         // Find all accordion headers
         const accordionHeaders = document.querySelectorAll('.accordion__header');
 
-        console.log('Accordion - Accordion headers found:', accordionHeaders.length);
+        // console.log('Accordion - Accordion headers found:', accordionHeaders.length);
 
         // Add click event listeners to each accordion header
         accordionHeaders.forEach((header, index) => {
-            console.log(`Accordion - Setting up accordion header ${index}:`, header);
+            // console.log(`Accordion - Setting up accordion header ${index}:`, header);
 
             header.addEventListener('click', (e) => {
                 console.log('Accordion - Accordion header clicked:', header);
@@ -326,21 +328,21 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // Check if any swipers exist
         if (!gallerySwiper && !testsSwiper) {
-            console.log('No swipers found, skipping initialization');
+            // console.log('No swipers found, skipping initialization');
             return;
         }
         
         // Check if Swiper is already loaded
         if (typeof Swiper !== 'undefined') {
-            console.log('Swiper already loaded, initializing directly');
+            // console.log('Swiper already loaded, initializing directly');
             initializeAllSwiperInstances();
         } else {
-            console.log('Loading Swiper from CDN...');
+            // console.log('Loading Swiper from CDN...');
             // Load Swiper dynamically
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
             script.onload = function() {
-                console.log('Swiper JS loaded successfully');
+                // console.log('Swiper JS loaded successfully');
                 // Load Swiper CSS
                 const link = document.createElement('link');
                 link.rel = 'stylesheet';
@@ -349,7 +351,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 
                 // Initialize after CSS is loaded
                 setTimeout(() => {
-                    console.log('Initializing all Swiper instances...');
+                    // console.log('Initializing all Swiper instances...');
                     initializeAllSwiperInstances();
                 }, 100);
             };
@@ -361,9 +363,15 @@ document.addEventListener('DOMContentLoaded', function () {
         
         function initializeAllSwiperInstances() {
             try {
+                // Check if swiper is already initialized
+                if (window.galleryMainSwiper && window.galleryThumbsSwiper) {
+                    // console.log('Gallery swiper already initialized, skipping...');
+                    return;
+                }
+                
                 // Initialize gallery swiper if it exists
                 if (gallerySwiper && galleryThumbs) {
-                    console.log('Initializing gallery swiper...');
+                    // console.log('Initializing gallery swiper...');
                     
                     // Check for images
                     const images = gallerySwiper.querySelectorAll('img');
@@ -418,10 +426,31 @@ document.addEventListener('DOMContentLoaded', function () {
                             loop: false,
                             autoplay: false,
                             effect: 'slide',
-                            speed: 300
+                            speed: 300,
+                            allowTouchMove: true,
+                            touchRatio: 1,
+                            touchAngle: 45,
+                            simulateTouch: true,
+                            shortSwipes: true,
+                            longSwipes: true,
+                            longSwipesRatio: 0.5,
+                            longSwipesMs: 300,
+                            followFinger: true,
+                            threshold: 0,
+                            touchMoveStopPropagation: false,
+                            // Prevent swiper from being destroyed
+                            observer: true,
+                            observeParents: true,
+                            // Ensure navigation works properly
+                            watchSlidesProgress: true,
+                            watchSlidesVisibility: true
                         });
 
-                        console.log('Gallery Swiper initialized successfully:', { mainSwiper, thumbsSwiper });
+                        // console.log('Gallery Swiper initialized successfully:', { mainSwiper, thumbsSwiper });
+                        
+                        // Store swiper instances globally for debugging
+                        window.galleryMainSwiper = mainSwiper;
+                        window.galleryThumbsSwiper = thumbsSwiper;
                         
                         // Handle grabbing state for better UX
                         thumbsSwiper.on('touchStart', () => {
@@ -431,12 +460,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         thumbsSwiper.on('touchEnd', () => {
                             galleryThumbs.classList.remove('swiper-grabbing');
                         });
+                        
+                        // Add navigation event listeners for debugging
+                        mainSwiper.on('slideChange', () => {
+                            console.log('Gallery slide changed to:', mainSwiper.activeIndex);
+                        });
                     }
                 }
                 
                 // Initialize tests swiper if it exists
                 if (testsSwiper) {
-                    console.log('Initializing tests swiper...');
+                    // console.log('Initializing tests swiper...');
                     
                     // Calculate dynamic offset based on screen width and container width (including padding)
                     const calculateSlidesOffsetAfter = () => {
@@ -507,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         testsSwiperInstance.update();
                     });
 
-                    console.log('Tests Swiper initialized successfully:', testsSwiperInstance);
+                    // console.log('Tests Swiper initialized successfully:', testsSwiperInstance);
                 }
                 
             } catch (error) {

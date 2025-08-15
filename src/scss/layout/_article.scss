@@ -327,14 +327,8 @@
         gap: $spacing-2;
 
         position: sticky;
-        top: 120px;
+        top: 100px;
         align-self: flex-start;
-
-        @include less-than('xxl') {
-            align-self: flex-end;
-            top: initial;
-            bottom: $spacing-1;
-        }
 
         @include less-than('lg') {
             position: static;

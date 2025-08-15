@@ -10,6 +10,10 @@ if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+// Initialize global displayed post IDs array
+global $displayed_post_ids;
+$displayed_post_ids = array();
+
 get_header();
 
 ?>

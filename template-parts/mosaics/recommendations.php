@@ -13,12 +13,14 @@
  *
  * @param string $args['title'] Section title
  * @param int $args['count'] Number of posts to display (default: 8)
+ * @param array $args['exclude_posts'] Array of post IDs to exclude from query
  *
  * @package PE_MP_Theme
  */
 
 $title = isset($args['title']) ? $args['title'] : 'Editorial Picks';
 $count = isset($args['count']) ? intval($args['count']) : 8;
+$exclude_posts = isset($args['exclude_posts']) ? $args['exclude_posts'] : array();
 
 $posts_array = array();
 $sources = array();
@@ -28,8 +30,8 @@ if (get_post_type() === 'provider') {
     $mentioned_articles = get_field('mentioned_articles_relation');
     
     if ($mentioned_articles && is_array($mentioned_articles) && !empty($mentioned_articles)) {
-        // Filter out current post
-        $excluded_posts = array(get_the_ID());
+        // Filter out current post and already displayed posts
+        $excluded_posts = array_merge(array(get_the_ID()), $exclude_posts);
         $filtered_articles = array_diff($mentioned_articles, $excluded_posts);
         
         if (!empty($filtered_articles)) {
@@ -56,7 +58,7 @@ if (count($posts_array) < $count) {
     
     $editorial_posts = new WP_Query(array(
         'posts_per_page' => $remaining_slots,
-        'post__not_in' => array_merge(array(get_the_ID()), wp_list_pluck($posts_array, 'ID')),
+        'post__not_in' => array_merge(array(get_the_ID()), $exclude_posts, wp_list_pluck($posts_array, 'ID')),
         'tag' => 'editorial-pick',
         'orderby' => 'date',
         'order' => 'DESC'
@@ -81,7 +83,7 @@ if (count($posts_array) < $count) {
     // Get all potential related posts (both tag and category matches)
     $related_query_args = array(
         'posts_per_page' => -1, // Get all posts to score them
-        'post__not_in' => array_merge(array(get_the_ID()), wp_list_pluck($posts_array, 'ID')),
+        'post__not_in' => array_merge(array(get_the_ID()), $exclude_posts, wp_list_pluck($posts_array, 'ID')),
         'orderby' => 'date',
         'order' => 'DESC'
     );
@@ -176,7 +178,7 @@ if (count($posts_array) < $count) {
     
     $latest_posts = new WP_Query(array(
         'posts_per_page' => $remaining_slots,
-        'post__not_in' => array_merge(array(get_the_ID()), wp_list_pluck($posts_array, 'ID')),
+        'post__not_in' => array_merge(array(get_the_ID()), $exclude_posts, wp_list_pluck($posts_array, 'ID')),
         'orderby' => 'date',
         'order' => 'DESC'
     ));
@@ -192,6 +194,13 @@ if (count($posts_array) < $count) {
 if (empty($posts_array)) {
     return;
 }
+
+// Update global displayed post IDs
+global $displayed_post_ids;
+if (!isset($displayed_post_ids) || !is_array($displayed_post_ids)) {
+    $displayed_post_ids = array();
+}
+$displayed_post_ids = array_merge($displayed_post_ids, wp_list_pluck($posts_array, 'ID'));
 
 // Determine primary source for the button (prioritize mentioned, then editorial picks, then related, then latest)
 $primary_source = 'latest';

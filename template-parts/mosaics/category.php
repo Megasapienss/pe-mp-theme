@@ -8,6 +8,7 @@
  * @param string $args['term'] Term slug or name
  * @param int $args['count'] Number of posts to display (default: 6)
  * @param string $args['category'] Category slug or name (deprecated, use taxonomy + term instead)
+ * @param array $args['exclude_posts'] Array of post IDs to exclude from query
  *
  * @package PE_MP_Theme
  */
@@ -16,6 +17,7 @@ $title = isset($args['title']) ? $args['title'] : 'Science & Innovation';
 $taxonomy = isset($args['taxonomy']) ? $args['taxonomy'] : '';
 $term = isset($args['term']) ? $args['term'] : '';
 $count = isset($args['count']) ? intval($args['count']) : 6;
+$exclude_posts = isset($args['exclude_posts']) ? $args['exclude_posts'] : array();
 
 // Backward compatibility for existing usage
 if (!$taxonomy && !$term && isset($args['category']) && $args['category']) {
@@ -26,7 +28,7 @@ if (!$taxonomy && !$term && isset($args['category']) && $args['category']) {
 // Query posts by taxonomy and term
 $query_args = array(
     'posts_per_page' => $count,
-    'post__not_in' => array(get_the_ID()),
+    'post__not_in' => array_merge(array(get_the_ID()), $exclude_posts),
     'orderby' => 'date',
     'order' => 'DESC'
 );
@@ -49,6 +51,13 @@ if (!$posts_query->have_posts()) {
 }
 
 $posts_array = $posts_query->posts;
+
+// Update global displayed post IDs
+global $displayed_post_ids;
+if (!isset($displayed_post_ids) || !is_array($displayed_post_ids)) {
+    $displayed_post_ids = array();
+}
+$displayed_post_ids = array_merge($displayed_post_ids, wp_list_pluck($posts_array, 'ID'));
 ?>
 
 <section class="section-v2 container">

@@ -102,6 +102,7 @@
         align-items: center;
 
         color: $color-muted;
+        text-wrap: nowrap;
     }
 
     &__excerpt {
@@ -137,7 +138,8 @@
         padding-bottom: $spacing-2;
         overflow: hidden; // Prevent overflow
 
-        &--gallery > div{
+        &--gallery > div,
+        &--video > div{
             padding-left: 0;
             padding-right: 0;
             overflow: hidden; // Prevent gallery overflow
@@ -173,7 +175,8 @@
                 flex-wrap: wrap;
             }
 
-            &:has(.provider-single__section-column){
+            &:has(.provider-single__section-column),
+            &:has(.provider-single__section-grid-item){
                 padding-left: 0;
                 padding-right: 0;
             }
@@ -196,6 +199,27 @@
                 border-bottom: none;
             }
         }
+
+        &-grid-item{
+            display: flex;
+            flex-direction: column;
+            gap: $spacing-1;
+            padding: $spacing-2 $spacing-2 $spacing-2 $spacing-2;
+            border-right: 1px solid $color-border;
+
+            &:nth-child(2n){
+                border-right: none;
+            }
+
+            @include less-than('md'){
+                border-right: none;
+                border-bottom: 1px solid $color-border;
+
+                &:last-child{
+                    border-bottom: none;
+                }
+            }
+        }
     }
 
     &__sidebar {
@@ -208,6 +232,46 @@
 
     &__share {
         margin-top: $spacing-5;
+    }
+}
+
+// Video embed styling
+.provider-video-embed {
+    width: 100%;
+    height: auto;
+    border-radius: $border-radius;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: $border-radius;
+    }
+}
+
+.video-embed-wrapper {
+    width: 100%;
+    margin: 0 !important;
+    position: relative;
+    padding-bottom: 56.25%; // 16:9 aspect ratio (9/16 = 0.5625)
+    height: 0;
+    overflow: hidden;
+    
+    > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 0;
     }
 }
 

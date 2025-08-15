@@ -8,6 +8,7 @@
  * @param string $args['term'] Term slug or name
  * @param int $args['count'] Number of posts to display (default: 8)
  * @param string $args['category'] Category slug or name (deprecated, use taxonomy + term instead)
+ * @param array $args['exclude_posts'] Array of post IDs to exclude from query
  *
  * @package PE_MP_Theme
  */
@@ -16,6 +17,7 @@ $title = isset($args['title']) ? $args['title'] : 'Editor\'s Picks';
 $taxonomy = isset($args['taxonomy']) ? $args['taxonomy'] : '';
 $term = isset($args['term']) ? $args['term'] : '';
 $count = isset($args['count']) ? intval($args['count']) : 8;
+$exclude_posts = isset($args['exclude_posts']) ? $args['exclude_posts'] : array();
 
 // Backward compatibility for existing usage
 if (!$taxonomy && !$term && isset($args['category']) && $args['category']) {
@@ -26,7 +28,7 @@ if (!$taxonomy && !$term && isset($args['category']) && $args['category']) {
 // Query posts by taxonomy and term
 $query_args = array(
     'posts_per_page' => $count,
-    'post__not_in' => array(get_the_ID()),
+    'post__not_in' => array_merge(array(get_the_ID()), $exclude_posts),
     'orderby' => 'date',
     'order' => 'DESC'
 );
@@ -49,6 +51,13 @@ if (!$posts_query->have_posts()) {
 }
 
 $posts_array = $posts_query->posts;
+
+// Update global displayed post IDs
+global $displayed_post_ids;
+if (!isset($displayed_post_ids) || !is_array($displayed_post_ids)) {
+    $displayed_post_ids = array();
+}
+$displayed_post_ids = array_merge($displayed_post_ids, wp_list_pluck($posts_array, 'ID'));
 ?>
 
 <section class="section-v2 container">
@@ -68,12 +77,14 @@ $posts_array = $posts_query->posts;
         ?>
     </div>
     <div class="section-v2__content">
-        <div class="mosaic mosaic--1-2-1">
-            <?php if (isset($posts_array[0])) : ?>
+        <div class="mosaic mosaic--2-1-1">
+            <?php if (!empty($posts_array)) : ?>
             <div class="mosaic__item">
                 <?php 
-                get_template_part('template-parts/cards/post-v2', '', [
-                    'post' => $posts_array[0]
+                $main_post = $posts_array[0];
+                get_template_part('template-parts/cards/post', 'shifted', [
+                    'post' => $main_post,
+                    'size' => 'small'
                 ]); 
                 ?>
             </div>
@@ -83,90 +94,26 @@ $posts_array = $posts_query->posts;
             <div class="mosaic__item">
                 <?php 
                 get_template_part('template-parts/cards/post-v2', '', [
-                    'post' => $posts_array[1],
-                    'size' => 'large'
+                    'post' => $posts_array[1]
                 ]); 
                 ?>
             </div>
             <?php endif; ?>
             
-            <div class="mosaic__column">
-                <?php if (isset($posts_array[2])) : ?>
-                <div class="mosaic__item">
-                    <?php 
-                    get_template_part('template-parts/cards/post-v2', '', [
-                        'post' => $posts_array[2],
-                        'show_image' => false
-                    ]); 
-                    ?>
-                </div>
-                <?php endif; ?>
-                
-                <?php if (isset($posts_array[3])) : ?>
-                <div class="mosaic__item">
-                    <?php 
-                    get_template_part('template-parts/cards/post-v2', '', [
-                        'post' => $posts_array[3],
-                        'show_image' => false
-                    ]); 
-                    ?>
-                </div>
-                <?php endif; ?>
-            </div>
-        </div>
-        
-        <?php if (count($posts_array) > 4) : ?>
-        <div class="mosaic mosaic--2-1-1">
-            <?php if (isset($posts_array[4])) : ?>
+            <?php if (isset($posts_array[2])) : ?>
             <div class="mosaic__item">
                 <?php 
                 get_template_part('template-parts/cards/post-v2', '', [
-                    'post' => $posts_array[4],
-                    'size' => 'large'
-                ]); 
-                ?>
-            </div>
-            <?php endif; ?>
-            
-            <div class="mosaic__column">
-                <?php if (isset($posts_array[5])) : ?>
-                <div class="mosaic__item">
-                    <?php 
-                    get_template_part('template-parts/cards/post-v2', '', [
-                        'post' => $posts_array[5],
-                        'show_image' => false
-                    ]); 
-                    ?>
-                </div>
-                <?php endif; ?>
-                
-                <?php if (isset($posts_array[6])) : ?>
-                <div class="mosaic__item">
-                    <?php 
-                    get_template_part('template-parts/cards/post-v2', '', [
-                        'post' => $posts_array[6],
-                        'show_image' => false
-                    ]); 
-                    ?>
-                </div>
-                <?php endif; ?>
-            </div>
-            
-            <?php if (isset($posts_array[7])) : ?>
-            <div class="mosaic__item">
-                <?php 
-                get_template_part('template-parts/cards/post-v2', '', [
-                    'post' => $posts_array[7]
+                    'post' => $posts_array[2]
                 ]); 
                 ?>
             </div>
             <?php endif; ?>
         </div>
-        <?php endif; ?>
         
-        <?php if (count($posts_array) > 8) : ?>
+        <?php if (count($posts_array) > 3) : ?>
         <div class="mosaic mosaic--1-1-1">
-            <?php for ($i = 8; $i < min($count, count($posts_array)); $i++) : ?>
+            <?php for ($i = 3; $i < min($count, count($posts_array)); $i++) : ?>
             <div class="mosaic__item">
                 <?php 
                 get_template_part('template-parts/cards/post-v2', '', [

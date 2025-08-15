@@ -82,3 +82,113 @@ function pe_mp_get_related_test_id($post_id = null)
             return 'assessment';
     }
 } 
+
+/**
+ * Get embedded video HTML from URL
+ * 
+ * @param string $video_url The video URL to embed
+ * @param array $args Additional arguments for the embed
+ * @return string HTML output for the embedded video
+ */
+function pe_mp_get_video_embed($video_url, $args = array())
+{
+    if (empty($video_url)) {
+        return '';
+    }
+
+    // Default arguments
+    $defaults = array(
+        'width' => 640,
+        'height' => 360,
+        'class' => 'video-embed',
+        'title' => '',
+        'autoplay' => false,
+        'muted' => false,
+        'controls' => true,
+        'loop' => false,
+        'rel' => false,
+        'preload_metadata' => false,
+        'lazy_load' => false,
+    );
+
+    $args = wp_parse_args($args, $defaults);
+
+    // Use WordPress oEmbed to get the embed HTML
+    $embed_html = wp_oembed_get($video_url, $args);
+
+    if (!$embed_html) {
+        // Fallback: create a basic iframe if oEmbed fails
+        $iframe_attributes = array(
+            'src' => esc_url($video_url),
+            'width' => $args['width'],
+            'height' => $args['height'],
+            'class' => esc_attr($args['class']),
+            'frameborder' => '0',
+            'allowfullscreen' => '',
+        );
+
+        // Add preload metadata if enabled
+        if ($args['preload_metadata']) {
+            $iframe_attributes['preload'] = 'metadata';
+        } else {
+            $iframe_attributes['preload'] = 'none';
+        }
+
+        // Add lazy loading if enabled
+        if ($args['lazy_load']) {
+            $iframe_attributes['loading'] = 'lazy';
+        }
+
+        $iframe_attr_string = '';
+        foreach ($iframe_attributes as $key => $value) {
+            if ($value === '') {
+                $iframe_attr_string .= ' ' . $key;
+            } else {
+                $iframe_attr_string .= ' ' . $key . '="' . $value . '"';
+            }
+        }
+
+        $embed_html = sprintf(
+            '<iframe%s></iframe>',
+            $iframe_attr_string
+        );
+    } else {
+        // For oEmbed content, we need to modify the HTML to add preload attributes
+        if ($args['preload_metadata'] || $args['lazy_load']) {
+            // Add preload and loading attributes to iframe elements
+            if (strpos($embed_html, '<iframe') !== false) {
+                $embed_html = preg_replace(
+                    '/<iframe([^>]*)>/i',
+                    '<iframe$1' . 
+                    ($args['preload_metadata'] ? ' preload="metadata"' : ' preload="none"') .
+                    ($args['lazy_load'] ? ' loading="lazy"' : '') . 
+                    '>',
+                    $embed_html
+                );
+            }
+        }
+    }
+
+    // Wrap in a responsive container
+    $output = sprintf(
+        '<div class="video-embed-wrapper">
+            <div>
+                %s
+            </div>
+        </div>',
+        $embed_html
+    );
+
+    return $output;
+}
+
+/**
+ * Echo embedded video HTML
+ * 
+ * @param string $video_url The video URL to embed
+ * @param array $args Additional arguments for the embed
+ */
+function pe_mp_video_embed($video_url, $args = array())
+{
+    echo pe_mp_get_video_embed($video_url, $args);
+} 

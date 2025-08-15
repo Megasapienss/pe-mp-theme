@@ -185,6 +185,47 @@ get_header();
                 </div>
                 <?php endif; ?>
 
+                <?php if (get_field('gallery_list')) : ?>
+                <div class="provider-single__section provider-single__section--gallery">
+                    <h2 class="provider-single__section-heading">Gallery</h2>
+                    <div class="provider-single__section-content">
+                        <?php $gallery = get_field('gallery_list'); ?>
+                        <?php if ($gallery && count($gallery) > 0) : ?>
+                            <!-- Debug: Gallery count: <?= count($gallery) ?> -->
+                            <div class="swiper gallery-swiper">
+                                <div class="swiper-wrapper">
+                                    <?php foreach ($gallery as $image) : ?>
+                                        <div class="swiper-slide">
+                                            <img src="<?= esc_url($image); ?>" alt="Gallery image">
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <!-- Navigation arrows -->
+                                <!-- <div class="swiper-button-next" style="display: flex !important;">
+                                        <img src="<?= get_template_directory_uri(); ?>/dist/icons/ph_arrow-right.svg" alt="Next">
+                                </div>
+                                <div class="swiper-button-prev" style="display: flex !important;">
+                                        <img src="<?= get_template_directory_uri(); ?>/dist/icons/ph_arrow-left.svg" alt="Previous">
+                                </div> -->
+                            </div>
+                            
+                            <!-- Thumbnail gallery -->
+                            <div class="swiper gallery-thumbs">
+                                <div class="swiper-wrapper">
+                                    <?php foreach ($gallery as $image) : ?>
+                                        <div class="swiper-slide">
+                                            <img src="<?= esc_url($image); ?>" alt="Gallery thumbnail">
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php else : ?>
+                            <p class="body-md">No gallery images available.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
                 <?php if (get_field('services_catalogue_relation')) : ?>
                 <?php 
                 $services = get_field('services_catalogue_relation');
@@ -250,8 +291,6 @@ get_header();
                 </div>
                 <?php endif; ?>
 
-
-
                 <?php if (get_field('program_overview')) : ?>
                 <div class="provider-single__section">
                     <h2 class="provider-single__section-heading">Program Overview</h2>
@@ -261,43 +300,22 @@ get_header();
                 </div>
                 <?php endif; ?>
 
-                <?php if (get_field('gallery_list')) : ?>
-                <div class="provider-single__section provider-single__section--gallery">
-                    <h2 class="provider-single__section-heading">Gallery</h2>
+                <?php if (get_field('video_url')) : ?>
+                <div class="provider-single__section provider-single__section--video">
+                    <h2 class="provider-single__section-heading">Video</h2>
                     <div class="provider-single__section-content">
-                        <?php $gallery = get_field('gallery_list'); ?>
-                        <?php if ($gallery && count($gallery) > 0) : ?>
-                            <!-- Debug: Gallery count: <?= count($gallery) ?> -->
-                            <div class="swiper gallery-swiper">
-                                <div class="swiper-wrapper">
-                                    <?php foreach ($gallery as $image) : ?>
-                                        <div class="swiper-slide">
-                                            <img src="<?= esc_url($image); ?>" alt="Gallery image">
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                                <!-- Navigation arrows -->
-                                <div class="swiper-button-next" style="display: flex !important;">
-                                        <img src="<?= get_template_directory_uri(); ?>/dist/icons/ph_arrow-right.svg" alt="Next">
-                                </div>
-                                <div class="swiper-button-prev" style="display: flex !important;">
-                                        <img src="<?= get_template_directory_uri(); ?>/dist/icons/ph_arrow-left.svg" alt="Previous">
-                                </div>
-                            </div>
-                            
-                            <!-- Thumbnail gallery -->
-                            <div class="swiper gallery-thumbs">
-                                <div class="swiper-wrapper">
-                                    <?php foreach ($gallery as $image) : ?>
-                                        <div class="swiper-slide">
-                                            <img src="<?= esc_url($image); ?>" alt="Gallery thumbnail">
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                        <?php else : ?>
-                            <p class="body-md">No gallery images available.</p>
-                        <?php endif; ?>
+                        <?php 
+                        $video_url = get_field('video_url');
+                        if ($video_url) {
+                            pe_mp_video_embed($video_url, array(
+                                'class' => 'provider-video-embed',
+                                'width' => 640,
+                                'height' => 360,
+                                'preload_metadata' => false,
+                                'lazy_load' => true
+                            ));
+                        }
+                        ?>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -310,7 +328,7 @@ get_header();
                         <?php if ($practitioners) : ?>
                             <?php foreach ($practitioners as $practitioner_id) : ?>
                                 <?php $practitioner = get_post($practitioner_id); ?>
-                                <div class="provider-single__section-column">
+                                <div class="provider-single__section-grid-item">
                                     <h3 class="heading-h5"><?= $practitioner->post_title; ?></h3>
                                     <p class="body-md"><?= get_field('subtitle', $practitioner_id); ?></p>
                                 </div>

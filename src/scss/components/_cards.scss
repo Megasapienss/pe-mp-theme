@@ -303,7 +303,6 @@
                 }
             }
         }
-
         & .card {
 
             &__title{
@@ -317,7 +316,7 @@
                 overflow: hidden;
 
                 img{
-                    height: 600px;
+                    height: 350px;
                     width: 100%;
                     object-fit: cover;
                     transition: transform 0.3s ease-in-out;
@@ -326,7 +325,7 @@
 
                 @include less-than(lg) {
                     img{
-                        height: 230px;
+                        height: 230px !important;
                     }
                 }
             }
@@ -364,6 +363,16 @@
                 &__image{
                     img{
                         // height: 350px;
+                    }
+                }
+            }
+        }
+
+        &--large{
+            & .card{
+                &__image{
+                    img{
+                        height: 600px;
                     }
                 }
             }
