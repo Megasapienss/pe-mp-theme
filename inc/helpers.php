@@ -71,13 +71,16 @@ function pe_mp_get_related_test_id($post_id = null)
             return 'ptsd'; // PTSD test ID
         case '/tests/eating-disorder-standalone':
         case '/tests/eating-disorder':
-            return 'eating-disorder'; // Eating Disorder test ID
+            return 'ed'; // Eating Disorder test ID
         case '/tests/ocd-standalone':
         case '/tests/ocd':
             return 'ocd'; // OCD test ID
         case '/tests/burnout-standalone':
         case '/tests/burnout':
             return 'burnout'; // Burnout test ID
+        case '/tests/bipolar-disorder-standalone':
+        case '/tests/bipolar-disorder':
+            return 'bipolar_disorder'; // Bipolar Disorder test ID
         default:
             return 'assessment';
     }

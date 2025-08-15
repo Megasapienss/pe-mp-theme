@@ -34,7 +34,7 @@ $test_configs = [
         'time' => '1 min'
     ],
     'depression' => [
-        'title' => 'Depression Screener',
+        'title' => 'Depression',
         'description' => 'Explore symptoms of low mood, loss of motivation, and mental fatigue.',
         'url' => '/tests/depression-standalone/',
         'bg_color' => '#AEE6D8',
@@ -43,8 +43,8 @@ $test_configs = [
         'time' => '2 min'
     ],
     'adhd' => [
-        'title' => 'Adult ADHD',
-        'description' => 'A quick screener to detect signs of trauma and stress response.',
+        'title' => 'ADHD',
+        'description' => 'A quick screener to detect signs of ADHD.',
         'url' => '/tests/adhd-standalone/',
         'bg_color' => '#FFC86B',
         'text_color' => '#202527',
@@ -52,7 +52,7 @@ $test_configs = [
         'time' => '3 min'
     ],
     'ptsd' => [
-        'title' => 'PTSD Checklist for DSM-5',
+        'title' => 'PTSD',
         'description' => 'A quick screener to detect signs of trauma and stress response.',
         'url' => '/tests/ptsd-standalone/',
         'bg_color' => '#FF6D8B',
@@ -86,11 +86,20 @@ $test_configs = [
         'text_color' => '#202527',
         'image' => get_template_directory_uri() . '/dist/images/states/burnout.svg',
         'time' => '3 min'
+    ],
+    'bipolar_disorder' => [
+        'title' => 'Bipolar Disorder',
+        'description' => 'A quick screener to detect signs of bipolar disorder.',
+        'url' => '/tests/bipolar-disorder-standalone/',
+        'bg_color' => '#9E9FF5',
+        'text_color' => '#202527',
+        'image' => get_template_directory_uri() . '/dist/images/states/general.svg',
+        'time' => '3 min'
     ]
 ];
 
-// Normalize test ID for lookup
-$test_key = strtolower(str_replace([' ', '-', '_'], '', $test_id));
+// Use test ID directly - no normalization needed
+$test_key = $test_id;
 
 // Don't output anything if test ID doesn't exist
 if (!isset($test_configs[$test_key])) {
