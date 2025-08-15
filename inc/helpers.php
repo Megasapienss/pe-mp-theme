@@ -191,4 +191,49 @@ function pe_mp_get_video_embed($video_url, $args = array())
 function pe_mp_video_embed($video_url, $args = array())
 {
     echo pe_mp_get_video_embed($video_url, $args);
+}
+
+/**
+ * Get the deepest/most specific category for a post
+ * 
+ * @param int $post_id Post ID (optional, defaults to current post)
+ * @return WP_Term|null The deepest category object or null if no categories found
+ */
+function pe_mp_get_deepest_category($post_id = null)
+{
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    
+    $categories = get_the_category($post_id);
+    
+    if (empty($categories)) {
+        return null;
+    }
+    
+    $deepest_category = null;
+    $max_depth = 0;
+    
+    foreach ($categories as $category) {
+        $depth = 0;
+        $current_cat = $category;
+        
+        // Count how many levels deep this category is
+        while ($current_cat->parent != 0) {
+            $depth++;
+            $current_cat = get_term($current_cat->parent, 'category');
+            if (!$current_cat || is_wp_error($current_cat)) {
+                break;
+            }
+        }
+        
+        // If this category is deeper than our current deepest, update it
+        if ($depth > $max_depth) {
+            $max_depth = $depth;
+            $deepest_category = $category;
+        }
+    }
+    
+    // Return the deepest category, or the first one if no hierarchy found
+    return $deepest_category ? $deepest_category : $categories[0];
 } 

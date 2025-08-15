@@ -18,8 +18,8 @@ $permalink = get_permalink($post->ID);
 $thumbnail = get_the_post_thumbnail_url($post->ID, 'large') ?: get_template_directory_uri() . '/dist/images/banner-default.webp';
 
 // Derive data from post
-$categories = get_the_category($post->ID);
-$tag = !empty($categories) ? $categories[0]->name : 'Science & Innovation';
+$deepest_category = pe_mp_get_deepest_category($post->ID);
+$tag = $deepest_category ? $deepest_category->name : 'Science & Innovation';
 $date = get_the_date('F j, Y', $post->ID);
 $excerpt = wp_trim_words(get_the_excerpt($post), 20);
 $author = get_the_author_meta('display_name', $post->post_author);

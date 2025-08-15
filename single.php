@@ -86,9 +86,8 @@ get_header();
             </div>
             <div class="article-v2__meta-item">
                 <?php
-                $categories = get_the_category();
-                if (!empty($categories)) {
-                    $main_category = $categories[0];
+                $main_category = pe_mp_get_deepest_category();
+                if ($main_category) {
                     ?>
                     <span class="label"><?= esc_html($main_category->name); ?></span>
                     <?php

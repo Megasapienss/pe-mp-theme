@@ -21,8 +21,9 @@ $permalink = get_permalink($post->ID);
 $thumbnail = get_the_post_thumbnail_url($post->ID, 'medium') ?: get_template_directory_uri() . '/dist/images/banner-default.webp';
 
 // Derive data from post
-$categories = get_the_category($post->ID);
-$tag = !empty($categories) ? $categories[0]->name : 'Mental Wellness';
+$deepest_category = pe_mp_get_deepest_category($post->ID);
+$tag = $deepest_category ? $deepest_category->name : '';
+
 $excerpt = wp_trim_words(get_the_excerpt($post), 15);
 $author = get_the_author_meta('display_name', $post->post_author);
 $author_link = get_author_posts_url($post->post_author);

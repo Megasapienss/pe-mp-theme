@@ -28,7 +28,7 @@ endif;
 <section class="section-v2 container community-section">
     <h2>Meaningful connection <br>can improve your well-being</h2>
     <div class="community-section__text">
-        <p>Come join our little community inner talks</p>
+        <p>Come join our little community States of Mind</p>
     </div>
     <div class="community-section__actions">
         <a href="https://discord.gg/XwGZ82yeXz" target="_blank" class="arrow-btn arrow-btn--primary">
