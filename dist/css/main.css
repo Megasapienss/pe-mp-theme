@@ -938,7 +938,7 @@ li {
 }
 
 a {
-  color: #007AFF;
+  color: #5D5FEF;
   text-decoration: none;
   transition: color 0.3s ease-in-out;
 }
@@ -962,7 +962,7 @@ em {
 blockquote {
   margin: 0 0 20px;
   padding: 20px 60px;
-  border-left: 4px solid #007AFF;
+  border-left: 4px solid #5D5FEF;
   font-style: italic;
   background-color: #f8f9fa;
 }
@@ -1048,7 +1048,7 @@ ul.list-basic {
 }
 
 .text-primary {
-  color: #007AFF !important;
+  color: #5D5FEF !important;
 }
 
 .text-muted {
@@ -1096,7 +1096,7 @@ ul.list-basic {
 }
 
 .bg-primary {
-  background-color: #007AFF !important;
+  background-color: #5D5FEF !important;
 }
 
 .bg-secondary {
@@ -1740,7 +1740,7 @@ button {
 
 .has-drop-cap:not(:focus):first-letter {
   font-size: 8em;
-  color: #007AFF;
+  color: #5D5FEF;
   font-family: Instrument Serif;
   font-style: italic;
 }
@@ -2124,27 +2124,54 @@ body {
   gap: 10px;
   margin-top: 5px;
   padding-top: 5px;
+  padding-right: 5px;
+  overflow-y: auto;
+  max-height: 300px;
+}
+@media (max-width: 1599px) {
+  .article-v2__sources nav {
+    max-height: 220px;
+  }
+}
+@media (max-width: 991px) {
+  .article-v2__sources nav {
+    max-height: none;
+  }
+}
+.article-v2__sources nav::-webkit-scrollbar {
+  background: transparent;
+  width: 1px;
+}
+.article-v2__sources nav::-webkit-scrollbar-thumb {
+  background: #202527;
 }
 .article-v2__sources nav a {
+  display: inline-flex;
+  gap: 5px;
   font-family: "Figtree", sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
   letter-spacing: 0px;
-  color: #B877FF;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #5D5FEF;
   word-break: break-all;
   text-wrap: unset;
+  text-decoration: none;
 }
 @media (max-width: 767px) {
   .article-v2__sources nav a {
     font-size: 16px;
     line-height: 140%;
   }
+}
+.article-v2__sources nav a span:first-child {
+  flex-shrink: 0;
+  width: 20px;
+  color: #202527;
+  text-decoration: none !important;
+}
+.article-v2__sources nav a:hover span:last-child {
+  text-decoration: underline;
 }
 
 .page__content {
@@ -4402,7 +4429,7 @@ body.single-provider .rank-math-breadcrumb a:last-child {
   color: #202527;
 }
 .hero__toc-list a:hover {
-  background: #007AFF;
+  background: #5D5FEF;
   color: #FFFFFF;
 }
 

@@ -349,18 +349,48 @@
             gap: $spacing-1;
             margin-top: $spacing-05;
             padding-top: $spacing-05;
+            padding-right: $spacing-05;
+
+            overflow-y: auto;
+            max-height: 300px;
+
+            @include less-than('xxl') {
+                max-height: 220px;
+            }
+
+            @include less-than('lg') {
+                max-height: none;
+            }
+
+            &::-webkit-scrollbar {
+                background: transparent;
+                width: 1px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: $color-dark;
+            }
 
             & a {
+                display: inline-flex;
+                gap: $spacing-05;
                 @include body;
-                color: $color-accent;
-                display: -webkit-box;
-                -webkit-line-clamp: 1;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                color: $color-primary;
                 word-break: break-all;
                 text-wrap: unset;
+                text-decoration: none;
+                
+                & span:first-child {
+                    flex-shrink: 0;
+                    width: 20px;
+                    color: $color-dark;
+                    text-decoration: none !important;
+                }
 
+                &:hover {
+                    & span:last-child {
+                        text-decoration: underline;
+                    }
+                }
             }
         }
     }

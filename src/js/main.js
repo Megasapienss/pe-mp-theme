@@ -77,8 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initTableOfContents();
 
-
-
     // Native share functionality
     const shareButtons = document.querySelectorAll('.share-trigger');
 
@@ -203,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 externalLinks.forEach((link, index) => {
                     const sourceLink = document.createElement('a');
                     sourceLink.href = link.url;
-                    sourceLink.textContent = `[${index + 1}] ${link.url}`;
+                    sourceLink.innerHTML = `<span>${index + 1}.</span> <span>${link.url}</span>`;
                     sourceLink.target = '_blank';
                     sourceLink.rel = 'noopener noreferrer';
                     

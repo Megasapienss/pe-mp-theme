@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
         externalLinks.forEach(function (link, index) {
           var sourceLink = document.createElement('a');
           sourceLink.href = link.url;
-          sourceLink.textContent = "[".concat(index + 1, "] ").concat(link.url);
+          sourceLink.innerHTML = "<span>".concat(index + 1, ".</span> <span>").concat(link.url, "</span>");
           sourceLink.target = '_blank';
           sourceLink.rel = 'noopener noreferrer';
           sourcesList.appendChild(sourceLink);
