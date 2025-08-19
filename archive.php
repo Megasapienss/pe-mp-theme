@@ -22,7 +22,7 @@ $post_count = $wp_query->found_posts;
 </section>
 
 <?php if ($term && !is_wp_error($term) && $term->slug === 'diagnostics') : ?>
-    <section class="section-v2 container grid grid--2">
+    <section class="section-v2 container grid grid--3">
     <?php
         $test_ids = [
             'anxiety',
@@ -30,7 +30,9 @@ $post_count = $wp_query->found_posts;
             'adhd',
             'ptsd',
             'burnout',
-            'bipolar_disorder',
+            'bipolar',
+            'eating',
+            'ocd',
         ];
         foreach ($test_ids as $test_id){
             get_template_part('template-parts/banners/test', '', [

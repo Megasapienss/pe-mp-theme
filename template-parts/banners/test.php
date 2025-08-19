@@ -30,7 +30,7 @@ $test_configs = [
         'url' => '/tests/anxiety-standalone/',
         'bg_color' => '#5D5FEF',
         'text_color' => '#FFFFFF',
-        'image' => get_template_directory_uri() . '/dist/images/states/anxiety.svg',
+        'image' => get_template_directory_uri() . '/dist/images/states/anxiety.webp',
         'time' => '1 min'
     ],
     'depression' => [
@@ -39,7 +39,7 @@ $test_configs = [
         'url' => '/tests/depression-standalone/',
         'bg_color' => '#AEE6D8',
         'text_color' => '#202527',
-        'image' => get_template_directory_uri() . '/dist/images/states/depression.svg',
+        'image' => get_template_directory_uri() . '/dist/images/states/depression.webp',
         'time' => '2 min'
     ],
     'adhd' => [
@@ -48,7 +48,7 @@ $test_configs = [
         'url' => '/tests/adhd-standalone/',
         'bg_color' => '#FFC86B',
         'text_color' => '#202527',
-        'image' => get_template_directory_uri() . '/dist/images/states/adhd.svg',
+        'image' => get_template_directory_uri() . '/dist/images/states/adhd.webp',
         'time' => '3 min'
     ],
     'ptsd' => [
@@ -57,25 +57,25 @@ $test_configs = [
         'url' => '/tests/ptsd-standalone/',
         'bg_color' => '#FF6D8B',
         'text_color' => '#FFFFFF',
-        'image' => get_template_directory_uri() . '/dist/images/states/ptsd.svg',
+        'image' => get_template_directory_uri() . '/dist/images/states/ptsd.webp',
         'time' => '3 min'
     ],
-    'ed' => [
+    'eating' => [
         'title' => 'Eat Disorder',
         'description' => 'Feeling out of control around food or your body?',
         'url' => '/tests/eating-disorder-standalone/',
         'bg_color' => '#CEF0E8',
         'text_color' => '#202527',
-        'image' => get_template_directory_uri() . '/dist/images/states/eating-disorder.svg',
+        'image' => get_template_directory_uri() . '/dist/images/states/eating.webp',
         'time' => '3 min'
     ],
     'ocd' => [
         'title' => 'OCD',
         'description' => 'Stuck in repeating thoughts or rituals?',
-        'url' => '/tests/ocd-standalone/',
+        'url' => '/tests/obsessive-compulsive-disorder-standalone/',
         'bg_color' => '#9E9FF5',
         'text_color' => '#202527',
-        'image' => get_template_directory_uri() . '/dist/images/states/ocd.svg',
+        'image' => get_template_directory_uri() . '/dist/images/states/ocd.webp',
         'time' => '3 min'
     ],
     'burnout' => [
@@ -84,18 +84,18 @@ $test_configs = [
         'url' => '/tests/burnout-standalone/',
         'bg_color' => '#FFDEA6',
         'text_color' => '#202527',
-        'image' => get_template_directory_uri() . '/dist/images/states/burnout.svg',
+        'image' => get_template_directory_uri() . '/dist/images/states/burnout.webp',
         'time' => '3 min'
     ],
-    'bipolar_disorder' => [
-        'title' => 'Bipolar Disorder',
-        'description' => 'A quick screener to detect signs of bipolar disorder.',
+    'bipolar' => [
+        'title' => 'Bipolar',
+        'description' => 'Riding the highs and lows of your mood?',
         'url' => '/tests/bipolar-disorder-standalone/',
-        'bg_color' => '#9E9FF5',
+        'bg_color' => '#FFC5D1',
         'text_color' => '#202527',
-        'image' => get_template_directory_uri() . '/dist/images/states/general.svg',
+        'image' => get_template_directory_uri() . '/dist/images/states/bipolar.webp',
         'time' => '3 min'
-    ]
+    ],
 ];
 
 // Use test ID directly - no normalization needed
