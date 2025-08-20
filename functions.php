@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define basic theme constants first
-define('PE_MP_THEME_VERSION', '1.5.0');
+define('PE_MP_THEME_VERSION', '1.6.0');
 define('PE_MP_THEME_DIR', get_template_directory());
 define('PE_MP_THEME_URI', get_template_directory_uri());
 
