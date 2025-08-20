@@ -58,6 +58,13 @@ add_action('acf/include_fields', function () {
                     'value' => 'provider',
                 ),
             ),
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'post',
+                ),
+            ),
         ),
         'menu_order' => 0,
         'position' => 'side',

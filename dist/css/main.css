@@ -2419,6 +2419,22 @@ body {
   }
 }
 
+.sidebar-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  overflow: hidden;
+}
+.sidebar-banner img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+.sidebar-banner:is(a):hover img {
+  transform: scale(0.95);
+}
+
 .section {
   margin-top: 16px;
   margin-bottom: 16px;
@@ -3324,21 +3340,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-.provider-single__sidebar-banner {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  overflow: hidden;
-}
-.provider-single__sidebar-banner img {
-  width: 100%;
-  height: auto;
-  transition: transform 0.3s ease-in-out;
-}
-.provider-single__sidebar-banner:is(a):hover img {
-  transform: scale(0.95);
 }
 .provider-single__share {
   margin-top: 60px;

@@ -352,7 +352,7 @@ get_header();
                 if ($custom_sidebar_cta) {
                     // Use custom sidebar image
                     ?>
-                    <a href="<?php echo esc_url($custom_sidebar_cta['link']); ?>" target="_blank" class="provider-single__sidebar-banner">
+                    <a href="<?php echo esc_url($custom_sidebar_cta['link']); ?>" target="_blank" class="sidebar-banner">
                         <img src="<?php echo esc_url($custom_sidebar_cta['image']); ?>">
                     </a>
                     <?php

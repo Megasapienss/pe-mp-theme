@@ -24,15 +24,32 @@ $query_args = array(
     'order' => 'DESC'
 );
 
+// Build taxonomy query array
+$tax_queries = array();
+
 // Add taxonomy query if taxonomy and terms are provided
 if ($taxonomy && !empty($terms)) {
+    $tax_queries[] = array(
+        'taxonomy' => $taxonomy,
+        'field' => 'slug',
+        'terms' => $terms,
+        'operator' => 'IN'
+    );
+}
+
+// Always exclude practitioner provider-type
+$tax_queries[] = array(
+    'taxonomy' => 'provider-type',
+    'field' => 'slug',
+    'terms' => 'practitioner',
+    'operator' => 'NOT IN'
+);
+
+// Add tax_query if we have any queries
+if (!empty($tax_queries)) {
     $query_args['tax_query'] = array(
-        array(
-            'taxonomy' => $taxonomy,
-            'field' => 'slug',
-            'terms' => $terms,
-            'operator' => 'IN'
-        )
+        'relation' => 'AND',
+        $tax_queries
     );
 }
 
@@ -51,15 +68,32 @@ if (count($providers_array) < $count) {
         'post_status' => 'publish'
     );
     
+    // Build taxonomy query array for random providers
+    $random_tax_queries = array();
+    
     // Add taxonomy exclusion if we have a taxonomy query
     if ($taxonomy && !empty($terms)) {
+        $random_tax_queries[] = array(
+            'taxonomy' => $taxonomy,
+            'field' => 'slug',
+            'terms' => $terms,
+            'operator' => 'NOT IN'
+        );
+    }
+    
+    // Always exclude practitioner provider-type
+    $random_tax_queries[] = array(
+        'taxonomy' => 'provider-type',
+        'field' => 'slug',
+        'terms' => 'practitioner',
+        'operator' => 'NOT IN'
+    );
+    
+    // Add tax_query if we have any queries
+    if (!empty($random_tax_queries)) {
         $random_query_args['tax_query'] = array(
-            array(
-                'taxonomy' => $taxonomy,
-                'field' => 'slug',
-                'terms' => $terms,
-                'operator' => 'NOT IN'
-            )
+            'relation' => 'AND',
+            $random_tax_queries
         );
     }
     

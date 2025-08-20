@@ -145,11 +145,22 @@ if ($enable_providers_block === null) {
                     </div>
                     <div class="sidebar-card-v2">
                         <?php
-
-                        get_template_part('template-parts/banners/test', '', [
-                            'test_id' => pe_mp_get_related_test_id()
-                        ]); 
-                            
+                        // Get custom sidebar CTA data
+                        $custom_sidebar_cta = pe_mp_get_sidebar_cta_data();
+                        
+                        if ($custom_sidebar_cta) {
+                            // Use custom sidebar image
+                            ?>
+                            <a href="<?php echo esc_url($custom_sidebar_cta['link']); ?>" target="_blank" class="sidebar-banner">
+                                <img src="<?php echo esc_url($custom_sidebar_cta['image']); ?>">
+                            </a>
+                            <?php
+                        } else {
+                            // Use default test banner
+                            get_template_part('template-parts/banners/test', '', [
+                                'test_id' => pe_mp_get_related_test_id()
+                            ]); 
+                        }
                         ?>
                     </div>
                 </div>
