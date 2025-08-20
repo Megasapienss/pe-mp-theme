@@ -101,13 +101,15 @@
                 // Use custom CTA
                 $cta_text = $custom_cta['text'];
                 $cta_link = $custom_cta['link'];
+                $cta_target = '_blank';
             } else {
                 // Use default CTA
                 $cta_text = __('Start 1 min test', 'pe-mp-theme');
                 $cta_link = '/tests/assessment/';
+                $cta_target = '_self';
             }
             ?>
-            <a href="<?php echo esc_url($cta_link); ?>" class="btn btn--56 btn--accent">
+            <a href="<?php echo esc_url($cta_link); ?>" class="btn btn--56 btn--accent" target="<?php echo esc_attr($cta_target); ?>">
                 <?php echo esc_html($cta_text); ?>
             </a>
         </div>

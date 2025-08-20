@@ -345,7 +345,24 @@ get_header();
             </div>
 
             <div class="provider-single__sidebar">
+                <?php
+                // Get custom sidebar CTA data
+                $custom_sidebar_cta = pe_mp_get_sidebar_cta_data();
                 
+                if ($custom_sidebar_cta) {
+                    // Use custom sidebar image
+                    ?>
+                    <a href="<?php echo esc_url($custom_sidebar_cta['link']); ?>" target="_blank" class="provider-single__sidebar-banner">
+                        <img src="<?php echo esc_url($custom_sidebar_cta['image']); ?>">
+                    </a>
+                    <?php
+                } else {
+                    // Use default test banner
+                    get_template_part('template-parts/banners/test', '', [
+                        'test_id' => 'assessment'
+                    ]);
+                }
+                ?>
             </div>
 
         </div>

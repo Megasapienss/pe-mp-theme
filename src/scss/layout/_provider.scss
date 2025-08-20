@@ -228,6 +228,27 @@
         flex-direction: column;
         gap: $spacing-2;
 
+        &-banner{
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            overflow: hidden;
+
+            & img{
+                width: 100%;
+                height: auto;
+
+                transition: transform 0.3s ease-in-out;
+            }
+
+
+            &:is(a):hover img{
+                transform: scale(0.95);
+            }
+        }
+
+
     }
 
     &__share {
