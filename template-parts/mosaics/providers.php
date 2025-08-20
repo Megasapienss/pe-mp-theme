@@ -68,34 +68,15 @@ if (count($providers_array) < $count) {
         'post_status' => 'publish'
     );
     
-    // Build taxonomy query array for random providers
-    $random_tax_queries = array();
-    
-    // Add taxonomy exclusion if we have a taxonomy query
-    if ($taxonomy && !empty($terms)) {
-        $random_tax_queries[] = array(
-            'taxonomy' => $taxonomy,
+    // Only exclude practitioner provider-type from random providers
+    $random_query_args['tax_query'] = array(
+        array(
+            'taxonomy' => 'provider-type',
             'field' => 'slug',
-            'terms' => $terms,
+            'terms' => 'practitioner',
             'operator' => 'NOT IN'
-        );
-    }
-    
-    // Always exclude practitioner provider-type
-    $random_tax_queries[] = array(
-        'taxonomy' => 'provider-type',
-        'field' => 'slug',
-        'terms' => 'practitioner',
-        'operator' => 'NOT IN'
+        )
     );
-    
-    // Add tax_query if we have any queries
-    if (!empty($random_tax_queries)) {
-        $random_query_args['tax_query'] = array(
-            'relation' => 'AND',
-            $random_tax_queries
-        );
-    }
     
     $random_providers = get_posts($random_query_args);
     

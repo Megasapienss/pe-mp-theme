@@ -40,7 +40,7 @@ if ($orientation) {
         <img src="<?= esc_url($thumbnail); ?>">
     </div>
     <div class="card-v2__content">
-        <?php if ($orientation == 'vertical') : ?>
+        <?php if ($orientation == 'vertical' && $type_name) : ?>
             <span class="card-v2__tag label">
                 <?= esc_html($type_name); ?>
             </span>
