@@ -5,6 +5,8 @@
  * 
  * @param WP_Post $args['post'] The post object to display
  * @param string $args['title_class'] Optional title class
+ * @param string $args['size'] Optional size modifier (e.g., 'small', 'large')
+ * @param string $args['orientation'] Optional orientation ('horizontal' or 'vertical', default: 'vertical')
  */
 
 // Exit if accessed directly or post is not passed
@@ -16,23 +18,37 @@ $post = $args['post'];
 $id = $post->ID;
 $permalink = get_permalink($id);
 $thumbnail = get_field('image_url', $id) ?: get_template_directory_uri() . '/dist/images/cover.webp';
+$type = get_field('provider_type', $id);
+$type_name = get_term($type)->name;
+
+// Card variations
+$size = isset($args['size']) ? $args['size'] : '';
+$orientation = isset($args['orientation']) ? $args['orientation'] : '';
+
+$card_classes = 'card-v2 card-v2--provider';
+if ($size) {
+    $card_classes .= ' card-v2--' . $size;
+}
+if ($orientation) {
+    $card_classes .= ' card-v2--' . $orientation;
+}
 
 ?>
 
-<a href="<?= esc_url($permalink); ?>" class="card-v2 card-v2--provider">
+<a href="<?= esc_url($permalink); ?>" class="<?= esc_attr($card_classes); ?>">
     <div class="card-v2__image">
         <img src="<?= esc_url($thumbnail); ?>">
     </div>
     <div class="card-v2__content">
-        <?php if (get_field('countries_list')) : ?>
-        <div class="provider-single__meta-item">
-            <?php $countries = get_field('countries_list'); ?>
-            <div class="d-flex flex-row">
-                <?php foreach ($countries as $country_id) : ?>
-                    <?php $country = get_post($country_id); ?>
-                    <div class="icon-tag icon-tag--globe text-muted"><?= esc_html($country->name); ?></div>
-                <?php endforeach; ?>
-            </div>
+        <?php if ($orientation == 'vertical') : ?>
+            <span class="card-v2__tag label">
+                <?= esc_html($type_name); ?>
+            </span>
+        <?php endif; ?>
+        <?php if (get_field('address')['country']) : ?>
+        <div class="provider-single__country">
+            <img src="<?= get_template_directory_uri(); ?>/dist/icons/countries/Country=<?= get_field('address')['country']; ?>, Style=Flag, Radius=Off.svg">
+            <?= esc_html(get_field('address')['country']); ?>
         </div>
         <?php endif; ?>
 
@@ -55,12 +71,16 @@ $thumbnail = get_field('image_url', $id) ?: get_template_directory_uri() . '/dis
             ?>
             
         </div>
-
+        <p class="card-v2__subtitle">
+            <?= get_field('subtitle', $id); ?>
+        </p>
         <p class="card-v2__excerpt">
-            <?= get_field('subtitle', $id); ?><br>
-            <?= get_field('short_description_text', $id); ?>
+            <?php if (!in_array($orientation, ['vertical', 'horizontal']) && $size != 'compact') : ?>
+                <?= get_field('short_description_text', $id); ?>
+            <?php endif; ?>
         </p>
 
+        <?php if (!in_array($orientation, ['vertical', 'horizontal']) && $size != 'compact') : ?>
         <div class="card-v2__meta">
                 <?php
                 // List of taxonomies to display
@@ -77,5 +97,6 @@ $thumbnail = get_field('image_url', $id) ?: get_template_directory_uri() . '/dis
                 }
                 ?>
             </div>
+        <?php endif; ?>
     </div>
 </a> 

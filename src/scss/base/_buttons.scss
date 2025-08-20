@@ -25,6 +25,10 @@ button {
         height: 56px;
     }
 
+    &--48{
+        height: 48px;
+    }
+
     &--secondary,
     &--muted {
         background: $bg-muted;
@@ -46,16 +50,23 @@ button {
 
     &--icon,
     &--arrow {
-        padding-right: 16px;
 
         &::after {
             content: '';
-            width: 20px;
-            height: 20px;
-            background-image: url('../icons/arrow-up-right.svg');
+            width: 24px !important;
+            height: 24px !important;
+            background-image: url('../icons/ph_arrow-up-right--light.svg');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
+        }
+
+
+        &.btn--secondary,
+        &.btn--muted{
+            &::after {
+                background-image: url('../icons/ph_arrow-up-right--dark.svg');
+            }
         }
     }
 

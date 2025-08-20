@@ -26,18 +26,19 @@ endif;
 
 <?php if ( is_front_page() ) : ?>
 <section class="section-v2 container community-section">
-    <h2>Meaningful connection <br>can improve your well-being</h2>
+    <h2>Join our private community States of Mind</h2>
     <div class="community-section__text">
-        <p>Come join our little community States of Mind</p>
+        <p>We're mapping what's next in mental health to help you find the right tool.</p>
+        <p>From deep psychedelic talks to live therapist support in chat. <br>From microdosing practices to fully held emotional deep work.</p> 
     </div>
     <div class="community-section__actions">
-        <a href="https://discord.gg/XwGZ82yeXz" target="_blank" class="arrow-btn arrow-btn--primary">
+        <a href="https://discord.gg/XwGZ82yeXz" target="_blank" class="btn btn--primary btn--48 btn--arrow">
             <?php esc_html_e('Discord', 'pe-mp-theme'); ?>
         </a>
-        <a href="https://www.facebook.com/groups/1281883746512308" target="_blank" class="arrow-btn arrow-btn--primary">
+        <a href="https://www.facebook.com/groups/1281883746512308" target="_blank" class="btn btn--primary btn--48 btn--arrow">
             <?php esc_html_e('Facebook', 'pe-mp-theme'); ?>
         </a>
-        <a href="https://chat.whatsapp.com/DmBpa5sQJ01Dc9uwYUnnkB" target="_blank" class="arrow-btn arrow-btn--primary">
+        <a href="https://chat.whatsapp.com/DmBpa5sQJ01Dc9uwYUnnkB" target="_blank" class="btn btn--primary btn--48 btn--arrow">
             <?php esc_html_e('WhatsApp', 'pe-mp-theme'); ?>
         </a>
     </div>
@@ -74,16 +75,17 @@ endif;
     <?php if ( !is_front_page() ) : ?>
     <div class="community-banner">
         <div class="d-flex flex-column">
-            <h4>Meaningful connection can improve your well-being</h4>
-            <p>Come join our little community States of Mind</p>
+            <h4>Join our private community States of Mind</h4>
+            <p>We're mapping what's next in mental health to help you find the right tool.</p>
+            <p>From deep psychedelic talks to live therapist support in chat. From microdosing practices to fully held emotional deep work.</p>
             <div class="community-banner__actions">
-                <a href="https://discord.gg/XwGZ82yeXz" target="_blank" class="arrow-btn">
+                <a href="https://discord.gg/XwGZ82yeXz" target="_blank" class="btn btn--secondary btn--48 btn--arrow">
                     <?php esc_html_e('Discord', 'pe-mp-theme'); ?>
                 </a>
-                <a href="https://www.facebook.com/groups/1281883746512308" target="_blank" class="arrow-btn">
+                <a href="https://www.facebook.com/groups/1281883746512308" target="_blank" class="btn btn--secondary btn--48 btn--arrow">
                     <?php esc_html_e('Facebook', 'pe-mp-theme'); ?>
                 </a>
-                <a href="https://chat.whatsapp.com/DmBpa5sQJ01Dc9uwYUnnkB" target="_blank" class="arrow-btn">
+                <a href="https://chat.whatsapp.com/DmBpa5sQJ01Dc9uwYUnnkB" target="_blank" class="btn btn--secondary btn--48 btn--arrow">
                     <?php esc_html_e('WhatsApp', 'pe-mp-theme'); ?>
                 </a>
             </div>

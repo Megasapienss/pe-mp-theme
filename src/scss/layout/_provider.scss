@@ -275,6 +275,8 @@
     }
 }
 
+
+
 .provider-archive{
     display: grid;
     grid-template-columns: 1fr 310px;
@@ -292,5 +294,32 @@ body.single-provider{
             color: $color-dark;
             pointer-events: none;
         }
+    }
+}
+
+.provider-filters{
+
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: $spacing-4;
+
+    .select-v2 {
+        @include text-button;
+        height: 48px;
+        padding: 8px 36px 8px 16px; // extra right padding for chevron
+        border-radius: 150px;
+        background: $bg-muted-2;
+        border: none;
+        outline: none;
+        appearance: none;
+        position: relative;
+        background-image: url("data:image/svg+xml;utf8,<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 8L10 13L15 8' stroke='%23202527' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        background-size: 16px 16px;
+        cursor: pointer;
     }
 }

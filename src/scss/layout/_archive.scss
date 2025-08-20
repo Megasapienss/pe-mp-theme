@@ -70,4 +70,15 @@
         object-position: center;
         margin-top: $spacing-2;
     }
+
+    &--providers{
+        .archive-title-v2__breadcrumbs,
+        .rank-math-breadcrumb{
+            margin-bottom: $spacing-2;
+        }
+
+        .archive-title-v2__cover{
+            margin-top: 0;
+        }
+    }
 }

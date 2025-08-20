@@ -58,9 +58,19 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        text-wrap: balance;
+        flex-wrap: wrap;
+
+        gap: $spacing-1;
 
         @include less-than(md) {
             align-items: flex-end;
+        }
+
+        @include less-than(sm) {
+            & > a{
+                width: 100%;
+            }
         }
     }
 }
@@ -299,7 +309,7 @@
         gap: $spacing-1;
 
         & p{
-            @include heading-h4;
+            @include heading-h5;
             font-weight: 300;
         }
     }
@@ -310,16 +320,18 @@
         flex-wrap: wrap;
         justify-content: center;
         gap: $spacing-1;
+        margin-top: $spacing-2;
 
-        // @include less-than(md) {
-        //     justify-content: stretch;
-        //     flex-direction: column;
-        //     align-items: stretch;
+        @include less-than(md) {
+            justify-content: stretch;
+            flex-direction: column;
+            align-items: stretch;
+            margin-top: 0;
 
-        //     & > *{
-        //         width: 100%;
-        //     }
-        // }
+            & > *{
+                width: 100%;
+            }
+        }
     }
 
     &__image{

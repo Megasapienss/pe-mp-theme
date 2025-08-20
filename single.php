@@ -159,6 +159,24 @@ get_header();
 
     <?php
     get_template_part('template-parts/mosaics/recommendations');
+    ?> 
+
+    <?php
+    // Get current post's tags
+    $post_tags = get_the_tags();
+    if ($post_tags && !empty($post_tags)) {
+        // Get all tag slugs
+        $tag_slugs = array();
+        foreach ($post_tags as $tag) {
+            $tag_slugs[] = $tag->slug;
+        }
+        
+        get_template_part('template-parts/mosaics/providers', '', [
+            'title' => 'Discover safe care in Europe and Asia',
+            'taxonomy' => 'post_tag',
+            'terms' => $tag_slugs,
+        ]);
+    }
     ?>  
 
 <?php endwhile; ?>

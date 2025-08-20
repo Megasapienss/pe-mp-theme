@@ -63,3 +63,18 @@ function pe_mp_exclude_practitioners_from_archive($query) {
     }
 }
 add_action('pre_get_posts', 'pe_mp_exclude_practitioners_from_archive');
+
+// Show post title in breadcrumbs only on pages
+add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
+    // If we're on a single post (not a page), remove the last item (post title)
+    if ( is_single() && !is_page() ) {
+        // Remove the last breadcrumb item (which is the post title)
+        if ( !empty( $crumbs ) ) {
+            array_pop( $crumbs );
+        }
+    }
+    return $crumbs;
+}, 10, 2 );
+
+
+

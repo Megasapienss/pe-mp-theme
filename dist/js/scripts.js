@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })));
   });
 
-  // External links collection and sources list
+  // External and internal links collection and sources list
   function collectExternalLinks() {
     var articleContent = document.querySelector('.article-v2__content');
     if (!articleContent) return;
@@ -141,15 +141,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Find all links in the article content
     var links = articleContent.querySelectorAll('a[href]');
     var externalLinks = [];
+    var internalLinks = [];
     links.forEach(function (link) {
       var href = link.href;
       var url = new URL(href);
 
+      // Get link text or fallback to URL
+      var linkText = link.textContent.trim() || link.href;
+
       // Check if it's an external link (different domain)
       if (url.hostname !== currentDomain && url.hostname !== '') {
-        // Get link text or fallback to URL
-        var linkText = link.textContent.trim() || link.href;
-
         // Check if this link is already in our list
         var existingLink = externalLinks.find(function (item) {
           return item.url === href;
@@ -160,11 +161,25 @@ document.addEventListener('DOMContentLoaded', function () {
             url: href
           });
         }
+      } else {
+        // Check if it's an internal link (same domain) and not just a fragment/anchor
+        if (url.hostname === currentDomain && url.pathname !== window.location.pathname) {
+          // Check if this link is already in our list
+          var _existingLink = internalLinks.find(function (item) {
+            return item.url === href;
+          });
+          if (!_existingLink) {
+            internalLinks.push({
+              text: linkText,
+              url: href
+            });
+          }
+        }
       }
     });
 
-    // If we found external links, populate the sources section
-    if (externalLinks.length > 0) {
+    // If we found any links, populate the sources section
+    if (externalLinks.length > 0 || internalLinks.length > 0) {
       // Function to add superscript numbers to external links in text (currently disabled)
       var addSuperscriptNumbersToLinks = function addSuperscriptNumbersToLinks() {
         links.forEach(function (link) {
@@ -218,17 +233,45 @@ document.addEventListener('DOMContentLoaded', function () {
       // Populate existing sources section
       var sourcesList = document.querySelector('.sources-list');
       if (sourcesList) {
-        externalLinks.forEach(function (link, index) {
-          var sourceLink = document.createElement('a');
-          sourceLink.href = link.url;
-          sourceLink.innerHTML = "<span>".concat(index + 1, ".</span> <span>").concat(link.url, "</span>");
-          sourceLink.target = '_blank';
-          sourceLink.rel = 'noopener noreferrer';
-          sourcesList.appendChild(sourceLink);
-        });
+        // Clear existing content
+        sourcesList.innerHTML = '';
+
+        // Add external sources first
+        if (externalLinks.length > 0) {
+          var externalHeading = document.createElement('h4');
+          externalHeading.className = 'sources-list__heading';
+          externalHeading.textContent = 'External';
+          sourcesList.appendChild(externalHeading);
+          externalLinks.forEach(function (link, index) {
+            var sourceLink = document.createElement('a');
+            sourceLink.href = link.url;
+            sourceLink.innerHTML = "<span>".concat(index + 1, ".</span> <span>").concat(link.url, "</span>");
+            sourceLink.target = '_blank';
+            sourceLink.rel = 'noopener noreferrer';
+            sourcesList.appendChild(sourceLink);
+          });
+        }
+
+        // Add internal sources section if there are internal links
+        if (internalLinks.length > 0) {
+          // Add separator and heading
+
+          var internalHeading = document.createElement('h4');
+          internalHeading.className = 'sources-list__heading';
+          internalHeading.textContent = 'Internal';
+          sourcesList.appendChild(internalHeading);
+
+          // Add internal links
+          internalLinks.forEach(function (link, index) {
+            var sourceLink = document.createElement('a');
+            sourceLink.href = link.url;
+            sourceLink.innerHTML = "<span>".concat(index + 1, ".</span> <span>").concat(link.url, "</span>");
+            sourcesList.appendChild(sourceLink);
+          });
+        }
       }
     } else {
-      // Hide the sources tab if no external links are found
+      // Hide the sources tab if no links are found
       var sourcesTab = document.querySelector('[data-tab="sources"]');
       if (sourcesTab) {
         sourcesTab.style.display = 'none';
@@ -560,6 +603,68 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
+
+  // Provider condition filter
+  function initProviderFilter() {
+    var conditionFilter = document.getElementById('condition-filter');
+    if (conditionFilter) {
+      // Check for condition parameter in URL on page load
+      var urlParams = new URLSearchParams(window.location.search);
+      var urlCondition = urlParams.get('condition');
+      if (urlCondition) {
+        // Set the select value to match URL parameter
+        conditionFilter.value = urlCondition;
+
+        // Add a small delay to ensure everything is ready, then trigger the filter
+        setTimeout(function () {
+          conditionFilter.dispatchEvent(new Event('change'));
+        }, 100);
+      }
+      conditionFilter.addEventListener('change', function () {
+        var condition = this.value;
+        var resultsContainer = document.getElementById('provider-results');
+        if (!resultsContainer) return;
+
+        // Show loading state
+        resultsContainer.innerHTML = '<p class="text-center">Loading...</p>';
+
+        // Prepare AJAX data
+        var formData = new FormData();
+        formData.append('action', 'filter_providers');
+        formData.append('condition', condition);
+        formData.append('nonce', pe_mp_ajax.nonce);
+
+        // Make AJAX request
+        fetch(pe_mp_ajax.ajax_url, {
+          method: 'POST',
+          body: formData
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          if (data.success) {
+            resultsContainer.innerHTML = data.data.html;
+
+            // Update URL without page reload
+            var url = new URL(window.location);
+            if (condition) {
+              url.searchParams.set('condition', condition);
+            } else {
+              url.searchParams["delete"]('condition');
+            }
+            window.history.pushState({}, '', url);
+          } else {
+            resultsContainer.innerHTML = '<p class="text-center">Error loading results.</p>';
+          }
+        })["catch"](function (error) {
+          console.error('Error:', error);
+          resultsContainer.innerHTML = '<p class="text-center">Error loading results.</p>';
+        });
+      });
+    }
+  }
+
+  // Initialize provider filter with delay to ensure DOM is ready
+  setTimeout(initProviderFilter, 500);
 });
 /******/ })()
 ;

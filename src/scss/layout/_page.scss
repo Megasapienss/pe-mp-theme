@@ -21,3 +21,24 @@
         margin-top: $spacing-2;
     }
 }
+
+.page-v2 {
+    display: grid;
+    grid-template-columns: 1fr 660px 1fr;
+    gap: $spacing-4;
+    margin-bottom: 80px;
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-4;
+    }
+
+    &__title{
+        @include heading-h2;
+        color: $color-dark;
+        margin-bottom: $spacing-4;
+        @include bold;
+
+    }
+}

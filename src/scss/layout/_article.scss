@@ -347,8 +347,6 @@
             display: flex;
             flex-direction: column;
             gap: $spacing-1;
-            margin-top: $spacing-05;
-            padding-top: $spacing-05;
             padding-right: $spacing-05;
 
             overflow-y: auto;
@@ -390,6 +388,18 @@
                     & span:last-child {
                         text-decoration: underline;
                     }
+                }
+            }
+
+            .sources-list__heading{
+                @include body-md;
+                font-weight: 600;
+                color: $color-dark;
+                margin-top: $spacing-1 !important;
+                margin-bottom: $spacing-1;
+
+                &:first-child {
+                    margin-top: 0 !important;
                 }
             }
         }

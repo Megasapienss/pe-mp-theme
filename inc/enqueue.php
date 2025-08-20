@@ -33,6 +33,12 @@ function pe_mp_theme_scripts()
         true
     );
 
+    // Localize AJAX for provider filter
+    wp_localize_script('pe-mp-theme-script', 'pe_mp_ajax', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('pe_mp_filter_nonce')
+    ));
+
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }

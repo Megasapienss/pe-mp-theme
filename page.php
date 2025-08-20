@@ -16,20 +16,34 @@ get_header();
 
 <?php while (have_posts()) : the_post(); ?>
 
-    <section class="hero hero--banner" style="background-image: url(<?= get_the_post_thumbnail_url() ?: get_template_directory_uri() . '/dist/images/cover.webp'; ?>);">
+    <!-- <section class="hero hero--banner" style="background-image: url(<?= get_the_post_thumbnail_url() ?: get_template_directory_uri() . '/dist/images/cover.webp'; ?>);">
         <?php
         get_template_part('template-parts/components/breadcrumbs', 'rankmath');
         ?>
         <div class="hero__inner">
             <h1 class="hero__title heading-h2"><?= get_the_title(); ?></h1>
         </div>
+    </section> -->
+
+    <section class="single-title-v2 container">
+        <?php
+        get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
+            'class' => 'breadcrumbs breadcrumbs--dark single-title-v2__breadcrumbs'
+        ));
+        ?>
+        <!-- <h1 class="single-title-v2__title heading-h1"><?= get_the_title(); ?></h1> -->
     </section>
 
-    <section class="page__content container body-lg">
-        <?php the_content(); ?>
-    </section>
-
-    <?php get_template_part('template-parts/sections/articles', 'latest'); ?>
+    <div class="page-v2 container">
+        <div class="page-v2__right-sidebar"></div>
+        <div class="page-v2__inner">
+            <h1 class="page-v2__title"><?= get_the_title(); ?></h1>
+            <div class="page-v2__content">
+                <?php the_content(); ?>
+            </div>
+        </div>
+        <div class="page-v2__left-sidebar"></div>
+    </div>
 
 <?php endwhile; ?>
 

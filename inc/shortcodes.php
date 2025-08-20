@@ -91,3 +91,47 @@ function pe_mp_newsletter_banner_shortcode($atts)
     return ob_get_clean();
 }
 add_shortcode('newsletter_banner', 'pe_mp_newsletter_banner_shortcode');
+
+/**
+ * Provider Card Shortcode
+ * 
+ * Usage: [provider_card id="123"] or [provider_card id="123" size="large" orientation="horizontal"]
+ *  
+ * @param array $atts Shortcode attributes
+ * @return string HTML output
+ */
+function pe_mp_provider_card_shortcode($atts)
+{
+    // Parse shortcode attributes
+    $atts = shortcode_atts(array(
+        'id' => 0,
+        'size' => 'compact',
+        'orientation' => '',
+    ), $atts, 'provider_card');
+
+    // Validate ID
+    $provider_id = intval($atts['id']);
+    if (!$provider_id || get_post_type($provider_id) !== 'provider') {
+        return '<p>Error: Invalid provider ID or provider not found.</p>';
+    }
+
+    // Get the provider post object
+    $provider = get_post($provider_id);
+    if (!$provider) {
+        return '<p>Error: Provider not found.</p>';
+    }
+
+    // Start output buffering to capture the template part
+    ob_start();
+
+    // Include the provider card template part
+    get_template_part('template-parts/cards/provider', '', array(
+        'post' => $provider,
+        'size' => $atts['size'],
+        'orientation' => $atts['orientation'],
+    ));
+
+    // Return the buffered content
+    return ob_get_clean();
+}
+add_shortcode('provider_card', 'pe_mp_provider_card_shortcode');
