@@ -66,11 +66,9 @@
             align-items: flex-end;
         }
 
-        @include less-than(sm) {
-            flex-wrap: wrap;
-
-            & > a{
-                width: 100%;
+        & > a > span{
+            @include less-than(md) {
+                display: none;
             }
         }
     }

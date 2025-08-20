@@ -1,0 +1,107 @@
+.test-landing{
+    margin-top: $spacing-6;
+
+    @include less-than('md'){
+        margin-top: $spacing-2;
+    }
+
+    &__inner{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacing-4;
+        align-items: stretch;
+        margin-bottom: $spacing-4;
+
+        @include less-than('md'){
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__content{
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-2;
+
+        & .wp-block-heading:first-child{
+            margin-top: 0 !important;
+        }
+
+        & h1{
+            @include heading-h2;
+            @include bold;
+        }
+    }
+
+    &__image{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        object-fit: cover;
+
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__link{
+        margin-top: auto;
+    }
+
+    &__disclaimer{
+        margin-top: $spacing-4;
+        background: $bg-muted;
+        padding: $spacing-2;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-1;
+
+        & p{
+            @include body-md;
+            color: $color-dark;
+        }
+
+        &-title{
+            @include heading-h4;
+            @include bold;
+        }
+    }
+
+    &__faq{
+        margin-top: $spacing-6;
+        margin-bottom: $spacing-4;
+    }
+}
+
+.faq{
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+
+    &__title{
+        @include heading-h4;
+        @include bold;
+    }
+
+    &__list{
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-2;
+    }
+
+    &__item{
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-1;
+    }
+
+    &__question{
+        @include heading-h5;
+        font-weight: 600;
+    }
+
+    &__answer{
+        @include body-md;
+        color: $color-dark;
+    }
+}

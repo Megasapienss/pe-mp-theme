@@ -31,8 +31,8 @@ $post_count = $wp_query->found_posts;
             'ptsd',
             'burnout',
             'bipolar',
-            'eating',
-            'ocd',
+            // 'eating',
+            // 'ocd',
         ];
         foreach ($test_ids as $test_id){
             get_template_part('template-parts/banners/test', '', [

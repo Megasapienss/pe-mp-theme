@@ -69,7 +69,7 @@ $displayed_post_ids = array_merge($displayed_post_ids, wp_list_pluck($posts_arra
             if ($term_obj) : 
         ?>
         <a href="<?= esc_url(get_term_link($term_obj)); ?>" class="btn btn--muted btn--arrow">
-            See all
+            <span>See all</span>
         </a>
         <?php 
             endif;

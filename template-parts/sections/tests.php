@@ -14,7 +14,9 @@ $default_test_ids = [
     'adhd',
     'ptsd',
     'burnout',
-    'bipolar_disorder',
+    'bipolar',
+    // 'eating',
+    // 'ocd',
 ];
 
 $test_ids = isset($args['test_ids']) ? $args['test_ids'] : $default_test_ids;
@@ -25,7 +27,7 @@ $test_ids = isset($args['test_ids']) ? $args['test_ids'] : $default_test_ids;
     <div class="section-v2__title">
         <h2>Check Your Mental State</h2>
         <a href="<?= esc_url(get_term_link('diagnostics', 'category')); ?>" class="btn btn--muted btn--arrow">
-            See all
+            <span>See all</span>
         </a>
     </div>
     </div>

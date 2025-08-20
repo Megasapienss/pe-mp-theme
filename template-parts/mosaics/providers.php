@@ -100,7 +100,7 @@ if (empty($providers_array)) {
             if ($term_obj) : 
         ?>
         <a href="/providers/" class="btn btn--muted btn--arrow">
-            See all
+            <span>See all</span>
         </a>
         <?php 
             endif;

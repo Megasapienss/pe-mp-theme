@@ -11,7 +11,10 @@
 </main>
 
 <?php
-get_template_part('template-parts/sections/newsletter', 'v2');
+if ( !is_page_template('page-templates/test-landing.php') ) {
+    get_template_part('template-parts/sections/newsletter', 'v2');
+}
+
 ?>
 
 <?php
