@@ -87,6 +87,32 @@ function pe_mp_get_related_test_id($post_id = null)
 } 
 
 /**
+ * Get custom header CTA button data
+ * 
+ * @param int $post_id Post ID (optional, defaults to current post)
+ * @return array|false Array with 'text' and 'link' keys, or false if not set
+ */
+function pe_mp_get_header_cta_data($post_id = null)
+{
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    
+    $cta_text = get_field('header_cta_text', $post_id);
+    $cta_link = get_field('header_cta_link', $post_id);
+    
+    // Only return data if both text and link are provided
+    if (!empty($cta_text) && !empty($cta_link)) {
+        return array(
+            'text' => $cta_text,
+            'link' => $cta_link
+        );
+    }
+    
+    return false;
+}
+
+/**
  * Get embedded video HTML from URL
  * 
  * @param string $video_url The video URL to embed

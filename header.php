@@ -93,8 +93,22 @@
         </nav>
 
         <div class="header__actions">
-            <a href="/tests/assessment/" class="btn btn--56 btn--accent">
-                <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
+            <?php
+            // Get custom header CTA data
+            $custom_cta = pe_mp_get_header_cta_data();
+            
+            if ($custom_cta) {
+                // Use custom CTA
+                $cta_text = $custom_cta['text'];
+                $cta_link = $custom_cta['link'];
+            } else {
+                // Use default CTA
+                $cta_text = __('Start 1 min test', 'pe-mp-theme');
+                $cta_link = '/tests/assessment/';
+            }
+            ?>
+            <a href="<?php echo esc_url($cta_link); ?>" class="btn btn--56 btn--accent">
+                <?php echo esc_html($cta_text); ?>
             </a>
         </div>
         </div>
@@ -119,8 +133,22 @@
             ?>
         </nav>
         <div class="off-canvas__actions">
-            <a href="/tests/assessment/" class="btn btn--accent">
-                <?php esc_html_e('Start 3 min test', 'pe-mp-theme'); ?>
+            <?php
+            // Get custom header CTA data (reuse the same logic)
+            $custom_cta = pe_mp_get_header_cta_data();
+            
+            if ($custom_cta) {
+                // Use custom CTA
+                $cta_text = $custom_cta['text'];
+                $cta_link = $custom_cta['link'];
+            } else {
+                // Use default CTA
+                $cta_text = __('Start 3 min test', 'pe-mp-theme');
+                $cta_link = '/tests/assessment/';
+            }
+            ?>
+            <a href="<?php echo esc_url($cta_link); ?>" class="btn btn--accent">
+                <?php echo esc_html($cta_text); ?>
             </a>
         </div>
     </aside>

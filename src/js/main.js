@@ -594,63 +594,112 @@ document.addEventListener('DOMContentLoaded', function () {
     // Provider condition filter
     function initProviderFilter() {
         const conditionFilter = document.getElementById('condition-filter');
-        if (conditionFilter) {
-            // Check for condition parameter in URL on page load
-            const urlParams = new URLSearchParams(window.location.search);
-            const urlCondition = urlParams.get('condition');
+        const serviceFilter = document.getElementById('service-filter');
+        const serviceDeliveryFilter = document.getElementById('service-delivery-filter');
+        const countryFilter = document.getElementById('country-filter');
+        
+        // Check for filter parameters in URL on page load
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlCondition = urlParams.get('condition');
+        const urlService = urlParams.get('service');
+        const urlServiceDelivery = urlParams.get('service_delivery');
+        const urlCountry = urlParams.get('country');
+        
+        // Function to apply filters
+        function applyFilters() {
+            const condition = conditionFilter ? conditionFilter.value : '';
+            const service = serviceFilter ? serviceFilter.value : '';
+            const serviceDelivery = serviceDeliveryFilter ? serviceDeliveryFilter.value : '';
+            const country = countryFilter ? countryFilter.value : '';
             
-            if (urlCondition) {
-                // Set the select value to match URL parameter
-                conditionFilter.value = urlCondition;
-                
-                // Add a small delay to ensure everything is ready, then trigger the filter
-                setTimeout(() => {
-                    conditionFilter.dispatchEvent(new Event('change'));
-                }, 100);
-            }
+            const resultsContainer = document.getElementById('provider-results');
+            if (!resultsContainer) return;
             
-            conditionFilter.addEventListener('change', function() {
-                const condition = this.value;
-                const resultsContainer = document.getElementById('provider-results');
-                
-                if (!resultsContainer) return;
-                
-                // Show loading state
-                resultsContainer.innerHTML = '<p class="text-center">Loading...</p>';
-                
-                // Prepare AJAX data
-                const formData = new FormData();
-                formData.append('action', 'filter_providers');
-                formData.append('condition', condition);
-                formData.append('nonce', pe_mp_ajax.nonce);
-                
-                // Make AJAX request
-                fetch(pe_mp_ajax.ajax_url, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        resultsContainer.innerHTML = data.data.html;
-                        
-                        // Update URL without page reload
-                        const url = new URL(window.location);
-                        if (condition) {
-                            url.searchParams.set('condition', condition);
-                        } else {
-                            url.searchParams.delete('condition');
-                        }
-                        window.history.pushState({}, '', url);
+            // Prepare AJAX data
+            const formData = new FormData();
+            formData.append('action', 'filter_providers');
+            formData.append('condition', condition);
+            formData.append('service', service);
+            formData.append('service_delivery', serviceDelivery);
+            formData.append('country', country);
+            formData.append('nonce', pe_mp_ajax.nonce);
+            
+            // Make AJAX request
+            fetch(pe_mp_ajax.ajax_url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultsContainer.innerHTML = data.data.html;
+                    
+                    // Update URL without page reload
+                    const url = new URL(window.location);
+                    if (condition) {
+                        url.searchParams.set('condition', condition);
                     } else {
-                        resultsContainer.innerHTML = '<p class="text-center">Error loading results.</p>';
+                        url.searchParams.delete('condition');
                     }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+                    if (service) {
+                        url.searchParams.set('service', service);
+                    } else {
+                        url.searchParams.delete('service');
+                    }
+                    if (serviceDelivery) {
+                        url.searchParams.set('service_delivery', serviceDelivery);
+                    } else {
+                        url.searchParams.delete('service_delivery');
+                    }
+                    if (country) {
+                        url.searchParams.set('country', country);
+                    } else {
+                        url.searchParams.delete('country');
+                    }
+                    window.history.pushState({}, '', url);
+                } else {
                     resultsContainer.innerHTML = '<p class="text-center">Error loading results.</p>';
-                });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultsContainer.innerHTML = '<p class="text-center">Error loading results.</p>';
             });
+        }
+        
+        // Set initial values from URL and apply filters if needed
+        if (urlCondition && conditionFilter) {
+            conditionFilter.value = urlCondition;
+        }
+        if (urlService && serviceFilter) {
+            serviceFilter.value = urlService;
+        }
+        if (urlServiceDelivery && serviceDeliveryFilter) {
+            serviceDeliveryFilter.value = urlServiceDelivery;
+        }
+        if (urlCountry && countryFilter) {
+            countryFilter.value = urlCountry;
+        }
+        
+        // Apply filters on page load if any URL parameters exist
+        if (urlCondition || urlService || urlServiceDelivery || urlCountry) {
+            setTimeout(() => {
+                applyFilters();
+            }, 100);
+        }
+        
+        // Add event listeners to all filters
+        if (conditionFilter) {
+            conditionFilter.addEventListener('change', applyFilters);
+        }
+        if (serviceFilter) {
+            serviceFilter.addEventListener('change', applyFilters);
+        }
+        if (serviceDeliveryFilter) {
+            serviceDeliveryFilter.addEventListener('change', applyFilters);
+        }
+        if (countryFilter) {
+            countryFilter.addEventListener('change', applyFilters);
         }
     }
 

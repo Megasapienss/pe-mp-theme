@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// AJAX handler for provider condition filter
+// AJAX handler for provider filters
 function pe_mp_filter_providers_by_condition() {
     // Verify nonce for security
     if (!wp_verify_nonce($_POST['nonce'], 'pe_mp_filter_nonce')) {
@@ -15,6 +15,9 @@ function pe_mp_filter_providers_by_condition() {
     }
     
     $condition = isset($_POST['condition']) ? sanitize_text_field($_POST['condition']) : '';
+    $service = isset($_POST['service']) ? intval($_POST['service']) : 0;
+    $service_delivery = isset($_POST['service_delivery']) ? sanitize_text_field($_POST['service_delivery']) : '';
+    $country = isset($_POST['country']) ? sanitize_text_field($_POST['country']) : '';
     
     // Build query args
     $args = array(
@@ -37,6 +40,33 @@ function pe_mp_filter_providers_by_condition() {
             'taxonomy' => 'condition',
             'field' => 'slug',
             'terms' => $condition
+        );
+    }
+    
+    // Add service filter if specified
+    if (!empty($service)) {
+        $args['meta_query'][] = array(
+            'key' => 'services_catalogue_relation',
+            'value' => '"' . $service . '"',
+            'compare' => 'LIKE'
+        );
+    }
+    
+    // Add service delivery method filter if specified
+    if (!empty($service_delivery)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'service-delivery-method',
+            'field' => 'slug',
+            'terms' => $service_delivery
+        );
+    }
+    
+    // Add country filter if specified
+    if (!empty($country)) {
+        $args['meta_query'][] = array(
+            'key' => 'address_country',
+            'value' => $country,
+            'compare' => '='
         );
     }
     

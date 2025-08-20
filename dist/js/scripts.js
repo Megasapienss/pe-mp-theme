@@ -607,59 +607,110 @@ document.addEventListener('DOMContentLoaded', function () {
   // Provider condition filter
   function initProviderFilter() {
     var conditionFilter = document.getElementById('condition-filter');
-    if (conditionFilter) {
-      // Check for condition parameter in URL on page load
-      var urlParams = new URLSearchParams(window.location.search);
-      var urlCondition = urlParams.get('condition');
-      if (urlCondition) {
-        // Set the select value to match URL parameter
-        conditionFilter.value = urlCondition;
+    var serviceFilter = document.getElementById('service-filter');
+    var serviceDeliveryFilter = document.getElementById('service-delivery-filter');
+    var countryFilter = document.getElementById('country-filter');
 
-        // Add a small delay to ensure everything is ready, then trigger the filter
-        setTimeout(function () {
-          conditionFilter.dispatchEvent(new Event('change'));
-        }, 100);
-      }
-      conditionFilter.addEventListener('change', function () {
-        var condition = this.value;
-        var resultsContainer = document.getElementById('provider-results');
-        if (!resultsContainer) return;
+    // Check for filter parameters in URL on page load
+    var urlParams = new URLSearchParams(window.location.search);
+    var urlCondition = urlParams.get('condition');
+    var urlService = urlParams.get('service');
+    var urlServiceDelivery = urlParams.get('service_delivery');
+    var urlCountry = urlParams.get('country');
 
-        // Show loading state
-        resultsContainer.innerHTML = '<p class="text-center">Loading...</p>';
+    // Function to apply filters
+    function applyFilters() {
+      var condition = conditionFilter ? conditionFilter.value : '';
+      var service = serviceFilter ? serviceFilter.value : '';
+      var serviceDelivery = serviceDeliveryFilter ? serviceDeliveryFilter.value : '';
+      var country = countryFilter ? countryFilter.value : '';
+      var resultsContainer = document.getElementById('provider-results');
+      if (!resultsContainer) return;
 
-        // Prepare AJAX data
-        var formData = new FormData();
-        formData.append('action', 'filter_providers');
-        formData.append('condition', condition);
-        formData.append('nonce', pe_mp_ajax.nonce);
+      // Prepare AJAX data
+      var formData = new FormData();
+      formData.append('action', 'filter_providers');
+      formData.append('condition', condition);
+      formData.append('service', service);
+      formData.append('service_delivery', serviceDelivery);
+      formData.append('country', country);
+      formData.append('nonce', pe_mp_ajax.nonce);
 
-        // Make AJAX request
-        fetch(pe_mp_ajax.ajax_url, {
-          method: 'POST',
-          body: formData
-        }).then(function (response) {
-          return response.json();
-        }).then(function (data) {
-          if (data.success) {
-            resultsContainer.innerHTML = data.data.html;
+      // Make AJAX request
+      fetch(pe_mp_ajax.ajax_url, {
+        method: 'POST',
+        body: formData
+      }).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        if (data.success) {
+          resultsContainer.innerHTML = data.data.html;
 
-            // Update URL without page reload
-            var url = new URL(window.location);
-            if (condition) {
-              url.searchParams.set('condition', condition);
-            } else {
-              url.searchParams["delete"]('condition');
-            }
-            window.history.pushState({}, '', url);
+          // Update URL without page reload
+          var url = new URL(window.location);
+          if (condition) {
+            url.searchParams.set('condition', condition);
           } else {
-            resultsContainer.innerHTML = '<p class="text-center">Error loading results.</p>';
+            url.searchParams["delete"]('condition');
           }
-        })["catch"](function (error) {
-          console.error('Error:', error);
+          if (service) {
+            url.searchParams.set('service', service);
+          } else {
+            url.searchParams["delete"]('service');
+          }
+          if (serviceDelivery) {
+            url.searchParams.set('service_delivery', serviceDelivery);
+          } else {
+            url.searchParams["delete"]('service_delivery');
+          }
+          if (country) {
+            url.searchParams.set('country', country);
+          } else {
+            url.searchParams["delete"]('country');
+          }
+          window.history.pushState({}, '', url);
+        } else {
           resultsContainer.innerHTML = '<p class="text-center">Error loading results.</p>';
-        });
+        }
+      })["catch"](function (error) {
+        console.error('Error:', error);
+        resultsContainer.innerHTML = '<p class="text-center">Error loading results.</p>';
       });
+    }
+
+    // Set initial values from URL and apply filters if needed
+    if (urlCondition && conditionFilter) {
+      conditionFilter.value = urlCondition;
+    }
+    if (urlService && serviceFilter) {
+      serviceFilter.value = urlService;
+    }
+    if (urlServiceDelivery && serviceDeliveryFilter) {
+      serviceDeliveryFilter.value = urlServiceDelivery;
+    }
+    if (urlCountry && countryFilter) {
+      countryFilter.value = urlCountry;
+    }
+
+    // Apply filters on page load if any URL parameters exist
+    if (urlCondition || urlService || urlServiceDelivery || urlCountry) {
+      setTimeout(function () {
+        applyFilters();
+      }, 100);
+    }
+
+    // Add event listeners to all filters
+    if (conditionFilter) {
+      conditionFilter.addEventListener('change', applyFilters);
+    }
+    if (serviceFilter) {
+      serviceFilter.addEventListener('change', applyFilters);
+    }
+    if (serviceDeliveryFilter) {
+      serviceDeliveryFilter.addEventListener('change', applyFilters);
+    }
+    if (countryFilter) {
+      countryFilter.addEventListener('change', applyFilters);
     }
   }
 

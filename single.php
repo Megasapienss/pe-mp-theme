@@ -15,7 +15,10 @@ global $displayed_post_ids;
 $displayed_post_ids = array();
 
 get_header();
-
+$enable_providers_block = get_field('enable_providers_block', get_the_ID());
+if ($enable_providers_block === null) {
+    $enable_providers_block = false;
+}
 ?>
 
 <?php while (have_posts()) : the_post(); ?>
@@ -162,20 +165,23 @@ get_header();
     ?> 
 
     <?php
-    // Get current post's tags
-    $post_tags = get_the_tags();
-    if ($post_tags && !empty($post_tags)) {
-        // Get all tag slugs
-        $tag_slugs = array();
-        foreach ($post_tags as $tag) {
-            $tag_slugs[] = $tag->slug;
+    
+    if ($enable_providers_block) {
+        // Get current post's tags
+        $post_tags = get_the_tags();
+        if ($post_tags && !empty($post_tags)) {
+            // Get all tag slugs
+            $tag_slugs = array();
+            foreach ($post_tags as $tag) {
+                $tag_slugs[] = $tag->slug;
+            }
+            
+            get_template_part('template-parts/mosaics/providers', '', [
+                'title' => 'Discover safe care in Europe and Asia',
+                'taxonomy' => 'post_tag',
+                'terms' => $tag_slugs,
+            ]);
         }
-        
-        get_template_part('template-parts/mosaics/providers', '', [
-            'title' => 'Discover safe care in Europe and Asia',
-            'taxonomy' => 'post_tag',
-            'terms' => $tag_slugs,
-        ]);
     }
     ?>  
 

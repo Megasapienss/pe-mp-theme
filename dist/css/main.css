@@ -2479,7 +2479,6 @@ body {
   justify-content: space-between;
   align-items: center;
   text-wrap: balance;
-  flex-wrap: wrap;
   gap: 10px;
 }
 @media (max-width: 767px) {
@@ -2488,6 +2487,9 @@ body {
   }
 }
 @media (max-width: 575px) {
+  .section-v2__title {
+    flex-wrap: wrap;
+  }
   .section-v2__title > a {
     width: 100%;
   }
@@ -3383,6 +3385,7 @@ body.single-provider .rank-math-breadcrumb a:last-child {
 .provider-filters {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
   justify-content: flex-start;
@@ -3397,6 +3400,7 @@ body.single-provider .rank-math-breadcrumb a:last-child {
   height: 48px;
   padding: 8px 36px 8px 16px;
   border-radius: 150px;
+  max-width: 200px;
   background: #F0F0F0;
   border: none;
   outline: none;
@@ -3407,6 +3411,9 @@ body.single-provider .rank-math-breadcrumb a:last-child {
   background-position: right 16px center;
   background-size: 16px 16px;
   cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .corner {
@@ -4467,10 +4474,10 @@ body.single-provider .rank-math-breadcrumb a:last-child {
     padding: 20px 0;
   }
 }
-.card-v2--provider .card-v2__image {
+.card-v2--provider:not(.card-v2--large) .card-v2__image {
   width: 100%;
 }
-.card-v2--provider .card-v2__image img {
+.card-v2--provider:not(.card-v2--large) .card-v2__image img {
   height: 138px;
   width: 100%;
   object-fit: cover;

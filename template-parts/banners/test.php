@@ -16,7 +16,7 @@ $test_id = isset($args['test_id']) ? $args['test_id'] : 'assessment';
 // Test configurations with default values
 $test_configs = [
     'assessment' => [
-        'title' => 'Find out what treatment is for you in this 1 min quiz',
+        'title' => 'Check what your current mental state means — take the 1-minute test',
         'description' => '',
         'url' => '/tests/assessment/',
         'bg_color' => '#BEBFF9',
@@ -67,7 +67,7 @@ $test_configs = [
         'bg_color' => '#CEF0E8',
         'text_color' => '#202527',
         'image' => get_template_directory_uri() . '/dist/images/states/eating.webp',
-        'time' => '3 min'
+        'time' => '1 min'
     ],
     'ocd' => [
         'title' => 'OCD',

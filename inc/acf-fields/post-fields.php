@@ -45,6 +45,24 @@ add_action('acf/include_fields', function () {
                     'id' => '',
                 ),
             ),
+            array(
+                'key' => 'field_post_enable_providers_block',
+                'label' => 'Enable Providers Block',
+                'name' => 'enable_providers_block',
+                'type' => 'true_false',
+                'instructions' => 'Enable the providers block at the bottom of this post.',
+                'required' => 0,
+                'default_value' => 0,
+                'ui' => 1,
+                'ui_on_text' => 'Enabled',
+                'ui_off_text' => 'Disabled',
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+            ),
         ),
         'location' => array(
             array(
@@ -56,7 +74,7 @@ add_action('acf/include_fields', function () {
             ),
         ),
         'menu_order' => 0,
-        'position' => 'normal',
+        'position' => 'side',
         'style' => 'default',
         'label_placement' => 'top',
         'instruction_placement' => 'label',

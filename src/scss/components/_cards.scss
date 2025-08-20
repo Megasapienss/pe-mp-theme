@@ -490,9 +490,8 @@
             padding: $spacing-2 0;
         }
 
-        & .card-v2{
-
-            &__image{
+        &:not(.card-v2--large){
+            .card-v2__image{
                 width: 100%;
                                 
                 & img{
@@ -501,6 +500,10 @@
                     object-fit: cover;
                 }
             }
+        }
+
+        & .card-v2{
+
 
             &__content{
                 
