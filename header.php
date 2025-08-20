@@ -143,7 +143,7 @@
                 $cta_link = $custom_cta['link'];
             } else {
                 // Use default CTA
-                $cta_text = __('Start 3 min test', 'pe-mp-theme');
+                $cta_text = __('Start 1 min test', 'pe-mp-theme');
                 $cta_link = '/tests/assessment/';
             }
             ?>
