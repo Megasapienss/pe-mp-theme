@@ -63,6 +63,81 @@ add_action('acf/include_fields', function () {
                     'id' => '',
                 ),
             ),
+            // Medical Review Section
+            array(
+                'key' => 'field_post_medical_review_section',
+                'label' => 'Medical Review',
+                'name' => 'medical_review_section',
+                'type' => 'group',
+                'instructions' => 'Configure medical review information for this post.',
+                'required' => 0,
+                'layout' => 'block',
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_post_medical_reviewer',
+                        'label' => 'Medical Reviewer',
+                        'name' => 'medical_reviewer',
+                        'type' => 'post_object',
+                        'instructions' => 'Select a practitioner to review this article. Only providers with "Practitioner" type will be shown.',
+                        'required' => 0,
+                        'post_type' => array('provider'),
+                        'multiple' => 0,
+                        'return_format' => 'id',
+                        'ui' => 1,
+                        'allow_null' => 1,
+                        'wrapper' => array(
+                            'width' => '100',
+                        ),
+                    ),
+                    array(
+                        'key' => 'field_post_review_date',
+                        'label' => 'Review Date',
+                        'name' => 'review_date',
+                        'type' => 'date_picker',
+                        'instructions' => 'Date when this article was medically reviewed.',
+                        'required' => 0,
+                        'display_format' => 'd/m/Y',
+                        'return_format' => 'Y-m-d',
+                        'first_day' => 1,
+                        'wrapper' => array(
+                            'width' => '100',
+                        ),
+                    ),
+                    array(
+                        'key' => 'field_post_review_quote',
+                        'label' => 'Review Quote',
+                        'name' => 'review_quote',
+                        'type' => 'textarea',
+                        'instructions' => 'Short quote from the reviewer about this article (1-2 sentences).',
+                        'required' => 0,
+                        'rows' => 3,
+                        'maxlength' => 200,
+                        'wrapper' => array(
+                            'width' => '',
+                        ),
+                    ),
+                    array(
+                        'key' => 'field_post_show_review_block',
+                        'label' => 'Show Review Block',
+                        'name' => 'show_review_block',
+                        'type' => 'true_false',
+                        'instructions' => 'Display the detailed medical review block below the title.',
+                        'required' => 0,
+                        'default_value' => 1,
+                        'ui' => 1,
+                        'ui_on_text' => 'Show',
+                        'ui_off_text' => 'Hide',
+                        'wrapper' => array(
+                            'width' => '',
+                        ),
+                    ),
+                ),
+            ),
         ),
         'location' => array(
             array(
@@ -127,4 +202,55 @@ function pe_mp_filter_test_pages_for_acf($args, $field) {
     
     return $args;
 }
-add_filter('acf/fields/page_link/query', 'pe_mp_filter_test_pages_for_acf', 10, 2); 
+add_filter('acf/fields/page_link/query', 'pe_mp_filter_test_pages_for_acf', 10, 2);
+
+/**
+ * Filter the post_object field to only show practitioners for medical review
+ * 
+ * @param array $args Query arguments for the post_object field
+ * @param array $field The ACF field array
+ * @return array Modified query arguments
+ */
+function pe_mp_filter_practitioners_for_medical_review($args, $field) {
+    // Only apply this filter to our medical reviewer field
+    if ($field['name'] === 'medical_reviewer') {
+        // Get the "Practitioner" term from provider-type taxonomy
+        $practitioner_term = get_term_by('slug', 'practitioner', 'provider-type');
+        
+        if ($practitioner_term) {
+            // Get all providers with "Practitioner" type
+            $practitioners = get_posts(array(
+                'post_type' => 'provider',
+                'posts_per_page' => -1,
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'provider-type',
+                        'field' => 'term_id',
+                        'terms' => $practitioner_term->term_id,
+                    ),
+                ),
+                'post_status' => 'publish',
+            ));
+            
+            // Create an array of provider IDs to include
+            $include_providers = array();
+            foreach ($practitioners as $provider) {
+                $include_providers[] = $provider->ID;
+            }
+            
+            // If we found practitioners, modify the query to only include them
+            if (!empty($include_providers)) {
+                $args['post__in'] = $include_providers;
+            } else {
+                // If no practitioners found, return empty result
+                $args['post__in'] = array(0);
+            }
+        } else {
+            // If "Practitioner" term doesn't exist, return empty result
+            $args['post__in'] = array(0);
+        }
+    }
+    
+    return $args;
+}
+add_filter('acf/fields/post_object/query', 'pe_mp_filter_practitioners_for_medical_review', 10, 2); 

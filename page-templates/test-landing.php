@@ -26,17 +26,16 @@ get_header();
             <?php if (get_field('related_test')) : ?>
                 <?php 
                 $test_link = get_field('related_test');
-                $related_test = get_post($related_test_id);
 
                 if ($test_link && !empty($test_link)) : ?>
                     <a href="<?php echo esc_url($test_link); ?>" class="test-landing__link btn btn--accent btn--icon btn--56">
-                        Start the Test
+                        Start the test
                     </a>
                     <?php endif; ?>
                 <?php endif; ?>
             </div>
             <div class="test-landing__image">
-                <?php the_post_thumbnail('full'); ?>
+                <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full') ?>" alt="">
             </div>
         </section>
 

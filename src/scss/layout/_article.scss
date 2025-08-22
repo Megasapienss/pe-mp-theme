@@ -405,3 +405,20 @@
         }
     }
 }
+
+.report-v2{
+    &__graph{
+        max-width: 100%;
+
+        & > img{
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    &__actions{
+        display: flex;
+        flex-direction: row;
+        gap: $spacing-1;
+    }
+}

@@ -705,4 +705,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize provider filter with delay to ensure DOM is ready
     setTimeout(initProviderFilter, 500);
+
 });

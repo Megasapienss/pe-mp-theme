@@ -53,23 +53,6 @@ if ($post_tags && !empty($post_tags)) {
     }
     ?>
     
-    <!-- <section class="hero hero--banner" style="background-image: url('<?= esc_url($background_url); ?>');">
-        <?php get_template_part('template-parts/components/breadcrumbs', 'rankmath'); ?>
-        <div class="hero__inner">
-            <div class="hero__date label label--arrow label--muted">
-                <?= get_the_date('d M Y'); ?>
-            </div>
-            <h1 class="hero__title heading-h2"><?= get_the_title(); ?></h1>
-
-        </div>
-        <div class="hero__toc-wrapper">
-            <div class="hero__toc">
-                <div class="hero__toc-list">
-                </div>
-            </div>
-        </div>
-    </section> -->
-
     <section class="single-title-v2 container">
         <?php
         get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
@@ -106,12 +89,16 @@ if ($post_tags && !empty($post_tags)) {
                 }
                 ?>
             </div>
+            <?php if (pe_mp_has_medical_review()) : ?>
+                <?php get_template_part('template-parts/components/medical-review-badge'); ?>
+            <?php endif; ?>
         </div>
 
         <div class="article-v2__inner">
 
             <h1 class="article-v2__title"><?= get_the_title(); ?></h1>
             <p class="article-v2__excerpt"><?= get_the_excerpt(); ?></p>
+            
             <div class="article-v2__author">
                 <div class="article-v2__author-avatar">
                     <?php echo get_avatar(get_the_author_meta('ID'), 60); ?>

@@ -31,14 +31,19 @@
 
 .page-v2 {
     display: grid;
-    grid-template-columns: 1fr 660px 1fr;
+    grid-template-columns: 1fr auto 1fr;
     gap: $spacing-4;
     margin-bottom: 80px;
+
+    @include less-than('lg'){
+        grid-template-columns: 1fr;
+    }
 
     &__inner {
         display: flex;
         flex-direction: column;
         gap: $spacing-4;
+        max-width: 660px;
     }
 
     &__title{

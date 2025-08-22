@@ -292,3 +292,118 @@ function pe_mp_get_deepest_category($post_id = null)
     // Return the deepest category, or the first one if no hierarchy found
     return $deepest_category ? $deepest_category : $categories[0];
 } 
+
+/**
+ * Get medical review data for a post
+ * 
+ * @param int $post_id Post ID (optional, defaults to current post)
+ * @return array|false Array with medical review data or false if not reviewed
+ */
+function pe_mp_get_medical_review_data($post_id = null) {
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    
+    $review_section = get_field('medical_review_section', $post_id);
+    
+    if (!$review_section || empty($review_section['medical_reviewer'])) {
+        return false;
+    }
+    
+    $reviewer_id = $review_section['medical_reviewer'];
+    $reviewer = get_post($reviewer_id);
+    
+    if (!$reviewer || $reviewer->post_type !== 'provider') {
+        return false;
+    }
+    
+    // Get reviewer details
+    $reviewer_data = array(
+        'id' => $reviewer_id,
+        'name' => $reviewer->post_title,
+        'url' => get_permalink($reviewer_id),
+        'image' => get_field('image_url', $reviewer_id),
+        'credentials' => pe_mp_get_provider_credentials($reviewer_id),
+        'review_date' => $review_section['review_date'],
+        'review_quote' => $review_section['review_quote'],
+        'show_review_block' => $review_section['show_review_block'] ?? true,
+    );
+    
+    return $reviewer_data;
+}
+
+/**
+ * Check if a post has been medically reviewed
+ * 
+ * @param int $post_id Post ID (optional, defaults to current post)
+ * @return bool True if post has been medically reviewed
+ */
+function pe_mp_has_medical_review($post_id = null) {
+    $review_data = pe_mp_get_medical_review_data($post_id);
+    return $review_data !== false;
+}
+
+/**
+ * Get provider credentials for display
+ * 
+ * @param int $provider_id Provider post ID
+ * @return string Formatted credentials string
+ */
+function pe_mp_get_provider_credentials($provider_id) {
+    $credentials = array();
+    
+    // Get provider type
+    $provider_types = get_the_terms($provider_id, 'provider-type');
+    if ($provider_types && !is_wp_error($provider_types)) {
+        foreach ($provider_types as $type) {
+            if ($type->slug === 'practitioner') {
+                $credentials[] = 'MD';
+                break;
+            }
+        }
+    }
+    
+    // Get verifications for additional credentials
+    $verifications = get_field('verifications_relation', $provider_id);
+    if ($verifications) {
+        foreach ($verifications as $verification_id) {
+            $verification = get_post($verification_id);
+            if ($verification && $verification->post_type === 'verification') {
+                $verification_title = $verification->post_title;
+                if (strpos($verification_title, 'PhD') !== false) {
+                    $credentials[] = 'PhD';
+                } elseif (strpos($verification_title, 'Licensed') !== false) {
+                    $credentials[] = 'Licensed';
+                }
+            }
+        }
+    }
+    
+    // Remove duplicates and format
+    $credentials = array_unique($credentials);
+    
+    if (empty($credentials)) {
+        return 'Healthcare Professional';
+    }
+    
+    return implode(', ', $credentials);
+}
+
+/**
+ * Format review date for display
+ * 
+ * @param string $date_string Date string in Y-m-d format
+ * @return string Formatted date string
+ */
+function pe_mp_format_review_date($date_string) {
+    if (!$date_string) {
+        return '';
+    }
+    
+    $date = DateTime::createFromFormat('Y-m-d', $date_string);
+    if (!$date) {
+        return '';
+    }
+    
+    return $date->format('j M Y');
+} 

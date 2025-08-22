@@ -82,10 +82,12 @@ get_header();
 
                 
                 <div class="provider-single__meta-item">
-                    <div class="provider-single__country">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/icons/countries/Country=<?= get_field('address')['country']; ?>, Style=Flag, Radius=Off.svg">
-                        <?= esc_html(get_field('address')['country']); ?>
-                    </div>
+                    <?php if (get_field('address') && get_field('address')['country']) : ?>
+                        <div class="provider-single__country">
+                            <img src="<?= get_template_directory_uri(); ?>/dist/icons/countries/Country=<?= get_field('address')['country']; ?>, Style=Flag, Radius=Off.svg">
+                            <?= esc_html(get_field('address')['country']); ?>
+                        </div>
+                    <?php endif; ?>
                     <?php if (get_field('countries_list')) : ?>
                         <?php $countries = get_field('countries_list'); ?>
                         <div class="d-flex flex-row">

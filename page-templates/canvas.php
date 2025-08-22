@@ -18,9 +18,15 @@ get_header();
 
 <?php while (have_posts()) : the_post(); ?>
 
-    <section class="page__content container body-lg">
-        <?php the_content(); ?>
-    </section>
+    <div class="page-v2 container">
+        <div class="page-v2__right-sidebar"></div>
+        <div class="page-v2__inner">
+            <div class="page-v2__content">
+                <?php the_content(); ?>
+            </div>
+        </div>
+        <div class="page-v2__left-sidebar"></div>
+    </div>
 
 <?php endwhile; ?>
 
