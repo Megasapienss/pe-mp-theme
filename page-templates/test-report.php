@@ -246,7 +246,7 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
             </div>
 
             <div class="article-v2__inner">
-                <h1 class="article-v2__title"><?php echo $condition_name; ?> Assessment Report</h1>
+                <h1 class="article-v2__title"><?php echo $condition_name; ?><?php echo !empty($condition_data) ? ' Assessment Report' : ''; ?></h1>
                 <p class="heading-h4"><span class="bold">Severity:</span> <?php echo $severity_v2 ? $severity_v2 : $severity; ?></p>
 
                 <div class="report-v2__graph">
@@ -388,7 +388,7 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
                             <!-- V2 WHAT YOU CAN DO SECTION -->
                             <?php if ($what_you_can_do): ?>
                             <div class="pe-quiz-results__section">
-                                <h4 class="pe-quiz-results__section-title" data-toc="true">What you can do</h4>
+                                <h4 class="pe-quiz-results__section-title pt-2" data-toc="true">What you can do about it</h4>
                                 <p class=""><?php echo esc_html($what_you_can_do); ?></p>
                             </div>
                             <?php endif; ?>
@@ -398,7 +398,7 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
                             <div class="pe-quiz-results__section">
                                 <div class="pe-quiz-results__accordion">
                                     <div class="pe-quiz-results__accordion-header">
-                                        <h4 class="pe-quiz-results__section-title" data-toc="true">Sleep</h4>
+                                        <h5 class="pe-quiz-results__section-title" data-toc="true">Sleep</h5>
                                         <img src="<?php echo PE_QUIZ_SYSTEM_PLUGIN_URL . 'assets/icons/arrow-down.svg'; ?>">
                                     </div>
                                     <div class="pe-quiz-results__accordion-body">
@@ -431,7 +431,7 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
                             <div class="pe-quiz-results__section">
                                 <div class="pe-quiz-results__accordion">
                                     <div class="pe-quiz-results__accordion-header">
-                                        <h4 class="pe-quiz-results__section-title" data-toc="true">Nutrition</h4>
+                                        <h5 class="pe-quiz-results__section-title" data-toc="true">Nutrition</h5>
                                         <img src="<?php echo PE_QUIZ_SYSTEM_PLUGIN_URL . 'assets/icons/arrow-down.svg'; ?>">
                                     </div>
                                     <div class="pe-quiz-results__accordion-body">
@@ -464,7 +464,7 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
                             <div class="pe-quiz-results__section">
                                 <div class="pe-quiz-results__accordion">
                                     <div class="pe-quiz-results__accordion-header">
-                                        <h4 class="pe-quiz-results__section-title" data-toc="true">Physical activity</h4>
+                                        <h5 class="pe-quiz-results__section-title" data-toc="true">Physical activity</h5>
                                         <img src="<?php echo PE_QUIZ_SYSTEM_PLUGIN_URL . 'assets/icons/arrow-down.svg'; ?>">
                                     </div>
                                     <div class="pe-quiz-results__accordion-body">
@@ -497,7 +497,7 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
                             <div class="pe-quiz-results__section">
                                 <div class="pe-quiz-results__accordion">
                                     <div class="pe-quiz-results__accordion-header">
-                                        <h4 class="pe-quiz-results__section-title" data-toc="true">Mental health</h4>
+                                        <h5 class="pe-quiz-results__section-title" data-toc="true">Mental health</h5>
                                         <img src="<?php echo PE_QUIZ_SYSTEM_PLUGIN_URL . 'assets/icons/arrow-down.svg'; ?>">
                                     </div>
                                     <div class="pe-quiz-results__accordion-body">
@@ -528,7 +528,7 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
                             <!-- V2 IMPORTANT NOTES SECTION -->
                             <?php if ($important_notes): ?>
                             <div class="pe-quiz-results__section">
-                                <h4 class="pe-quiz-results__section-title" data-toc="true">Important notes</h4>
+                                <h5 class="pe-quiz-results__section-title" data-toc="true">Important notes</h5>
                                 <p><?php echo esc_html($important_notes); ?></p>
                             </div>
                             <?php endif; ?>
@@ -819,29 +819,9 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
                                 </div>
                             <?php endif; ?>
 
-                            <!-- V2 RELEVANT LINKS SECTION -->
-                            <?php if (isset($relevant_links['articles']) && is_array($relevant_links['articles'])): ?>
-                                <?php if (count($relevant_links['articles']) > 0): ?>
-                                <div class="pe-quiz-results__section">
-                                    <div class="pe-quiz-results__accordion">
-                                        <div class="pe-quiz-results__accordion-header">
-                                            <h4 class="pe-quiz-results__section-title" data-toc="true">Recommended articles</h4>
-                                            <img src="<?php echo PE_QUIZ_SYSTEM_PLUGIN_URL . 'assets/icons/arrow-down.svg'; ?>">
-                                        </div>
-                                        <div class="pe-quiz-results__accordion-body">
-                                            <?php foreach ($relevant_links['articles'] as $article): ?>
-                                                <a class="pe-quiz-results__accordion-link" href="<?php echo esc_url($article['url']); ?>" target="_blank" rel="noopener noreferrer">
-                                                    <?php echo esc_html($article['title']); ?>
-                                                </a>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php endif; ?>
-                            <?php endif; ?>
-
                             <!-- LEGACY SCIENTIFIC LINKS (for backward compatibility) -->
                             <?php if (isset($scientific_links['links']) && is_array($scientific_links['links'])): ?>
+                                <?php if (count($scientific_links['links']) > 0): ?>
                                 <div class="pe-quiz-results__section">
                                     <div class="pe-quiz-results__accordion">
                                         <div class="pe-quiz-results__accordion-header">
@@ -856,11 +836,12 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
                                         </div>
                                     </div>
                                 </div>
+                                <?php endif; ?>
                             <?php endif; ?>
 
                         </div>
                     </div>
-                
+                    
                     <?php if (!$report || !is_array($report)): ?>
                         <div class="pe-quiz-results__error">
                             <h2 class="pe-quiz-results__error-title">No Results Available</h2>
@@ -904,9 +885,77 @@ get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
     </div>
 </div>
 
-<?php
-get_template_part('template-parts/mosaics/recommendations');
-?> 
+<?php 
+// Display relevant articles mosaic if available
+if (isset($relevant_links['articles']) && is_array($relevant_links['articles']) && count($relevant_links['articles']) > 0) {
+    // Function to get posts by URL or title
+    function get_posts_from_relevant_links($articles, $max_posts = 6) {
+        $found_posts = array();
+        
+        foreach ($articles as $article) {
+            if (count($found_posts) >= $max_posts) {
+                break;
+            }
+            
+            $post = null;
+            
+            // Try to find post by URL first
+            if (isset($article['url']) && !empty($article['url'])) {
+                $post_id = url_to_postid($article['url']);
+                if ($post_id) {
+                    $post = get_post($post_id);
+                }
+            }
+            
+            // If not found by URL, try to find by title
+            if (!$post && isset($article['title']) && !empty($article['title'])) {
+                $query = new WP_Query(array(
+                    'post_type' => 'post',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 1,
+                    'title' => $article['title'],
+                    'post__not_in' => wp_list_pluck($found_posts, 'ID')
+                ));
+                
+                if ($query->have_posts()) {
+                    $post = $query->posts[0];
+                }
+            }
+            
+            // If still not found, try fuzzy title matching
+            if (!$post && isset($article['title']) && !empty($article['title'])) {
+                $query = new WP_Query(array(
+                    'post_type' => 'post',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 1,
+                    's' => $article['title'],
+                    'post__not_in' => wp_list_pluck($found_posts, 'ID')
+                ));
+                
+                if ($query->have_posts()) {
+                    $post = $query->posts[0];
+                }
+            }
+            
+            if ($post) {
+                $found_posts[] = $post;
+            }
+        }
+        
+        return $found_posts;
+    }
+    
+    // Get posts from relevant links
+    $relevant_posts = get_posts_from_relevant_links($relevant_links['articles'], 6);
+    
+    if (!empty($relevant_posts)) {
+        get_template_part('template-parts/mosaics/complex', '', [
+            'title' => 'These materials will help you understand your current condition',
+            'posts' => $relevant_posts,
+        ]);
+    }
+}
+?>
 
 <?php
 get_footer();
