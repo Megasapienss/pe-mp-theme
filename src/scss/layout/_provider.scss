@@ -233,6 +233,32 @@
     &__share {
         margin-top: $spacing-5;
     }
+
+    & .gutenberg-content {
+        & > *:first-child{
+            margin-top: 0 !important;
+        }
+    }
+
+    &--practitioner {
+
+        & .provider-single{
+            &__avatar {
+                width: 150px;
+                height: 150px;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            &__title-wrapper {
+                margin-bottom: $spacing-2;
+                padding-bottom: $spacing-4;
+                border-bottom: 1px solid $color-border;
+            }
+
+        }
+    }
 }
 
 // Video embed styling

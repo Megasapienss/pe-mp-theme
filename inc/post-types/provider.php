@@ -47,9 +47,10 @@ function pe_mp_register_providers_post_type() {
         'menu_icon'          => 'dashicons-businessman',
         'supports'           => array(
             'title',           // Provider name
-            'custom-fields',   // For ACF
+            'custom-fields',   // For ACF,
+            'editor'
         ),
-        'show_in_rest'       => false, // Disable Gutenberg editor
+        'show_in_rest'       => true, // Enable Gutenberg editor
         'taxonomies'         => array(
             'post_tag',
         ),

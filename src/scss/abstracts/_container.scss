@@ -59,3 +59,7 @@
       display: none;
   }
 }
+
+.column {
+  @include flex(column);
+}

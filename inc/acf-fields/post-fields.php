@@ -121,21 +121,6 @@ add_action('acf/include_fields', function () {
                             'width' => '',
                         ),
                     ),
-                    array(
-                        'key' => 'field_post_show_review_block',
-                        'label' => 'Show Review Block',
-                        'name' => 'show_review_block',
-                        'type' => 'true_false',
-                        'instructions' => 'Display the detailed medical review block below the title.',
-                        'required' => 0,
-                        'default_value' => 1,
-                        'ui' => 1,
-                        'ui_on_text' => 'Show',
-                        'ui_off_text' => 'Hide',
-                        'wrapper' => array(
-                            'width' => '',
-                        ),
-                    ),
                 ),
             ),
         ),
@@ -218,10 +203,17 @@ function pe_mp_filter_practitioners_for_medical_review($args, $field) {
         $practitioner_term = get_term_by('slug', 'practitioner', 'provider-type');
         
         if ($practitioner_term) {
-            // Get all providers with "Practitioner" type
+            // Get all providers with "Practitioner" type AND reviewer functionality enabled
             $practitioners = get_posts(array(
                 'post_type' => 'provider',
                 'posts_per_page' => -1,
+                'meta_query' => array(
+                    array(
+                        'key' => 'enable_reviewer_functionality',
+                        'value' => '1',
+                        'compare' => '=',
+                    ),
+                ),
                 'tax_query' => array(
                     array(
                         'taxonomy' => 'provider-type',

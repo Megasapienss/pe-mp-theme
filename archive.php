@@ -14,7 +14,7 @@ $post_count = $wp_query->found_posts;
 <section class="archive-title-v2 container">
     <?php
     get_template_part('template-parts/components/breadcrumbs', 'rankmath', array(
-        'class' => 'breadcrumbs breadcrumbs--dark archive-title__breadcrumbs'
+        'class' => 'breadcrumbs breadcrumbs--dark archive-title-v2__breadcrumbs'
     ));
     ?>
     <h1 class="archive-title-v2__name"><?= get_field('h1', $term) ?: $term->name; ?></h1>

@@ -23,9 +23,10 @@ $thumbnail = get_the_post_thumbnail_url($post->ID, 'medium') ?: get_template_dir
 // Derive data from post
 $deepest_category = pe_mp_get_deepest_category($post->ID);
 $tag = $deepest_category ? $deepest_category->name : '';
-
+$review_data = pe_mp_get_medical_review_data($post->ID);    
 $excerpt = wp_trim_words(get_the_excerpt($post), 15);
 $author = get_the_author_meta('display_name', $post->post_author);
+
 $author_link = get_author_posts_url($post->post_author);
 
 // Card variations
@@ -34,6 +35,7 @@ $image_align = isset($args['image_align']) ? $args['image_align'] : 'left';
 $show_image = isset($args['show_image']) ? $args['show_image'] : true;
 $show_excerpt = isset($args['show_excerpt']) ? $args['show_excerpt'] : true;
 $show_author = isset($args['show_author']) ? $args['show_author'] : true;
+$show_review = isset($args['show_review']) ? $args['show_review'] : true;
 
 $card_classes = 'card-v2';
 if ($size) {
@@ -65,7 +67,16 @@ if ($image_align === 'right') {
         </p>
         <?php endif; ?>
         
-        <?php if ($show_author && $author) : ?>
+        <?php if ($show_author && $show_review && $review_data) : ?>
+        <div class="medical-review-badge card-v2__review">
+            <div class="medical-review-badge__reviewer">
+                <img src="<?= get_template_directory_uri(); ?>/dist/icons/checkmark.svg">
+                <span class="medical-review-badge__reviewer-name">
+                    Medically reviewed by: <span><?php echo esc_html($review_data['name']); ?></span>
+                </span>
+            </div>
+        </div>
+        <?php elseif ($show_author && $author) : ?>
         <div class="card-v2__author">
             Written by: <span><?= esc_html($author); ?></span>
         </div>

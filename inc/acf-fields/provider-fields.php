@@ -120,6 +120,18 @@ if (function_exists('acf_add_local_field_group')) {
                 'ui' => 1,
                 'required' => 0,
             ),
+            array(
+                'key' => 'field_enable_reviewer_functionality',
+                'label' => 'Enable Reviewer Functionality',
+                'name' => 'enable_reviewer_functionality',
+                'type' => 'true_false',
+                'instructions' => 'Enable this provider to be assigned as a medical reviewer for articles',
+                'ui' => 1,
+                'ui_on_text' => 'Enabled',
+                'ui_off_text' => 'Disabled',
+                'default_value' => 0,
+                'required' => 0,
+            ),
 
             // ========================================
             // CERTIFICATIONS & VERIFICATION
@@ -133,6 +145,16 @@ if (function_exists('acf_add_local_field_group')) {
                 'multiple' => 1,
                 'return_format' => 'id',
                 'required' => 0,
+            ),
+            array(
+                'key' => 'field_provider_credentials',
+                'label' => 'Credentials',
+                'name' => 'provider_credentials',
+                'type' => 'text',
+                'instructions' => 'Professional credentials (e.g., MD, PhD, Licensed, etc.)',
+                'required' => 0,
+                'default_value' => 'Healthcare Professional',
+                'placeholder' => 'MD, PhD, Licensed',
             ),
 
             // ========================================

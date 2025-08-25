@@ -317,16 +317,20 @@ function pe_mp_get_medical_review_data($post_id = null) {
         return false;
     }
     
+    // Verify the reviewer has functionality enabled
+    if (!pe_mp_is_provider_reviewer_enabled($reviewer_id)) {
+        return false;
+    }
+    
     // Get reviewer details
     $reviewer_data = array(
         'id' => $reviewer_id,
         'name' => $reviewer->post_title,
         'url' => get_permalink($reviewer_id),
         'image' => get_field('image_url', $reviewer_id),
-        'credentials' => pe_mp_get_provider_credentials($reviewer_id),
+        'credentials' => get_field('provider_credentials', $reviewer_id) ?: 'Healthcare Professional',
         'review_date' => $review_section['review_date'],
         'review_quote' => $review_section['review_quote'],
-        'show_review_block' => $review_section['show_review_block'] ?? true,
     );
     
     return $reviewer_data;
@@ -343,51 +347,7 @@ function pe_mp_has_medical_review($post_id = null) {
     return $review_data !== false;
 }
 
-/**
- * Get provider credentials for display
- * 
- * @param int $provider_id Provider post ID
- * @return string Formatted credentials string
- */
-function pe_mp_get_provider_credentials($provider_id) {
-    $credentials = array();
-    
-    // Get provider type
-    $provider_types = get_the_terms($provider_id, 'provider-type');
-    if ($provider_types && !is_wp_error($provider_types)) {
-        foreach ($provider_types as $type) {
-            if ($type->slug === 'practitioner') {
-                $credentials[] = 'MD';
-                break;
-            }
-        }
-    }
-    
-    // Get verifications for additional credentials
-    $verifications = get_field('verifications_relation', $provider_id);
-    if ($verifications) {
-        foreach ($verifications as $verification_id) {
-            $verification = get_post($verification_id);
-            if ($verification && $verification->post_type === 'verification') {
-                $verification_title = $verification->post_title;
-                if (strpos($verification_title, 'PhD') !== false) {
-                    $credentials[] = 'PhD';
-                } elseif (strpos($verification_title, 'Licensed') !== false) {
-                    $credentials[] = 'Licensed';
-                }
-            }
-        }
-    }
-    
-    // Remove duplicates and format
-    $credentials = array_unique($credentials);
-    
-    if (empty($credentials)) {
-        return 'Healthcare Professional';
-    }
-    
-    return implode(', ', $credentials);
-}
+
 
 /**
  * Format review date for display
@@ -405,5 +365,60 @@ function pe_mp_format_review_date($date_string) {
         return '';
     }
     
-    return $date->format('j M Y');
+    return $date->format('F j, Y');
+}
+
+/**
+ * Check if a provider has reviewer functionality enabled
+ * 
+ * @param int $provider_id Provider post ID
+ * @return bool True if provider can be assigned as a medical reviewer
+ */
+function pe_mp_is_provider_reviewer_enabled($provider_id) {
+    if (!$provider_id) {
+        return false;
+    }
+    
+    // Check if provider has reviewer functionality enabled
+    $reviewer_enabled = get_field('enable_reviewer_functionality', $provider_id);
+    
+    if (!$reviewer_enabled) {
+        return false;
+    }
+    
+    // Also verify the provider is of "Practitioner" type
+    $provider_types = get_the_terms($provider_id, 'provider-type');
+    if ($provider_types && !is_wp_error($provider_types)) {
+        foreach ($provider_types as $type) {
+            if ($type->slug === 'practitioner') {
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}
+
+/**
+ * Check if a provider is a practitioner
+ * 
+ * @param int $provider_id Provider post ID
+ * @return bool True if provider is of practitioner type
+ */
+function pe_mp_is_provider_practitioner($provider_id) {
+    if (!$provider_id) {
+        return false;
+    }
+    
+    // Check if provider is of "Practitioner" type
+    $provider_types = get_the_terms($provider_id, 'provider-type');
+    if ($provider_types && !is_wp_error($provider_types)) {
+        foreach ($provider_types as $type) {
+            if ($type->slug === 'practitioner') {
+                return true;
+            }
+        }
+    }
+    
+    return false;
 } 

@@ -25,7 +25,7 @@ $type_name = get_term($type)->name;
 $size = isset($args['size']) ? $args['size'] : '';
 $orientation = isset($args['orientation']) ? $args['orientation'] : '';
 
-$card_classes = 'card-v2 card-v2--provider';
+$card_classes = 'card-v2 card-v2--provider card-v2--practitioner';
 if ($size) {
     $card_classes .= ' card-v2--' . $size;
 }
@@ -81,21 +81,10 @@ if ($orientation) {
         </p>
 
         <?php if (!in_array($orientation, ['vertical', 'horizontal']) && $size != 'compact') : ?>
-        <div class="card-v2__meta">
-                <?php
-                // List of taxonomies to display
-                $taxonomies = array('provider-type', 'service-delivery-method');
-                foreach ($taxonomies as $taxonomy) {
-                    $terms = get_the_terms(get_the_ID(), $taxonomy);
-                    if (!empty($terms) && !is_wp_error($terms)) {
-                        foreach ($terms as $term) {
-                            ?>
-                            <span class="icon-tag icon-tag--rounded"><?= esc_html($term->name); ?></span>
-                            <?php
-                        }
-                    }
-                }
-                ?>
+            <div class="card-v2__meta">
+                <button class="btn btn--muted btn--40 btn--arrow">
+                    <span>Read more</span>
+                </button>
             </div>
         <?php endif; ?>
     </div>

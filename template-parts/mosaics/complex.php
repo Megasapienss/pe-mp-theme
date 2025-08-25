@@ -4,6 +4,7 @@
  * Template part for displaying complex mosaic sections
  *
  * @param string $args['title'] Section title
+ * @param array $args['posts'] Array of post objects to display (takes priority over taxonomy query)
  * @param string $args['taxonomy'] Taxonomy name (e.g., 'category', 'post_tag', 'custom-taxonomy')
  * @param string $args['term'] Term slug or name
  * @param int $args['count'] Number of posts to display (default: 8)
@@ -14,43 +15,54 @@
  */
 
 $title = isset($args['title']) ? $args['title'] : 'Editor\'s Picks';
+$posts = isset($args['posts']) ? $args['posts'] : array();
 $taxonomy = isset($args['taxonomy']) ? $args['taxonomy'] : '';
 $term = isset($args['term']) ? $args['term'] : '';
 $count = isset($args['count']) ? intval($args['count']) : 8;
 $exclude_posts = isset($args['exclude_posts']) ? $args['exclude_posts'] : array();
 
-// Backward compatibility for existing usage
-if (!$taxonomy && !$term && isset($args['category']) && $args['category']) {
-    $taxonomy = 'category';
-    $term = $args['category'];
-}
+// If posts are provided directly, use them
+if (!empty($posts)) {
+    $posts_array = $posts;
+} else {
+    // Backward compatibility for existing usage
+    if (!$taxonomy && !$term && isset($args['category']) && $args['category']) {
+        $taxonomy = 'category';
+        $term = $args['category'];
+    }
 
-// Query posts by taxonomy and term
-$query_args = array(
-    'posts_per_page' => $count,
-    'post__not_in' => array_merge(array(get_the_ID()), $exclude_posts),
-    'orderby' => 'date',
-    'order' => 'DESC'
-);
-
-if ($taxonomy && $term) {
-    $query_args['tax_query'] = array(
-        array(
-            'taxonomy' => $taxonomy,
-            'field' => 'slug',
-            'terms' => $term
-        )
+    // Query posts by taxonomy and term
+    $query_args = array(
+        'posts_per_page' => $count,
+        'post__not_in' => array_merge(array(get_the_ID()), $exclude_posts),
+        'orderby' => 'date',
+        'order' => 'DESC'
     );
-}
 
-$posts_query = new WP_Query($query_args);
+    if ($taxonomy && $term) {
+        $query_args['tax_query'] = array(
+            array(
+                'taxonomy' => $taxonomy,
+                'field' => 'slug',
+                'terms' => $term
+            )
+        );
+    }
+
+    $posts_query = new WP_Query($query_args);
+
+    // Don't output anything if there are no posts
+    if (!$posts_query->have_posts()) {
+        return;
+    }
+
+    $posts_array = $posts_query->posts;
+}
 
 // Don't output anything if there are no posts
-if (!$posts_query->have_posts()) {
+if (empty($posts_array)) {
     return;
 }
-
-$posts_array = $posts_query->posts;
 
 // Update global displayed post IDs
 global $displayed_post_ids;
@@ -64,7 +76,8 @@ $displayed_post_ids = array_merge($displayed_post_ids, wp_list_pluck($posts_arra
     <div class="section-v2__title">
         <h2><?= esc_html($title); ?></h2>
         <?php 
-        if ($taxonomy && $term) {
+        // Only show "See all" button if using taxonomy query (not when posts are passed directly)
+        if (empty($posts) && $taxonomy && $term) {
             $term_obj = get_term_by('slug', $term, $taxonomy);
             if ($term_obj) : 
         ?>

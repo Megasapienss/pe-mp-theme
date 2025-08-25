@@ -97,6 +97,7 @@
 
         & .hsfc-Step__Content {
             padding: 0 !important;
+            display: flex !important;
 
             & .hsfc-Button[type="submit"] {
                 width: 100% !important;
@@ -213,12 +214,26 @@
             border-radius: 150px !important;
         }
 
-        & .hsfc-Step__Content {
+        [data-hsfc-id=Renderer] .hsfc-Row {
+            margin: 0 !important;
+            gap: $spacing-2 !important;
 
+            &:nth-child(2),
+            &:nth-child(3),
+            &:nth-child(4) {
+                width: auto !important;
+            }
+        }
+
+
+        & .hsfc-Step__Content {
             padding: 0 !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: $spacing-2 !important;
 
             .hsfc-NavigationRow{
-                margin-top: $spacing-1 !important;
+                margin-top: 0 !important;
 
             }
 

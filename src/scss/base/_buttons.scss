@@ -29,6 +29,10 @@ button {
         height: 48px;
     }
 
+    &--40{
+        height: 40px;
+    }
+
     &--secondary,
     &--muted {
         background: $bg-muted;

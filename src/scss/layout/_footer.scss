@@ -149,7 +149,7 @@
         }
 
         & .hsfc-Step__Content {
-
+            display: flex !important;
             & .hsfc-Button[type="submit"] {
                 background: $bg-accent;
 

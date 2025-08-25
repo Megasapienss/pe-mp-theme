@@ -24,9 +24,12 @@ $date = get_the_date('F j, Y', $post->ID);
 $excerpt = wp_trim_words(get_the_excerpt($post), 20);
 $author = get_the_author_meta('display_name', $post->post_author);
 $author_link = get_author_posts_url($post->post_author);
+$review_data = pe_mp_get_medical_review_data($post->ID);
 
 // Card variations
 $size = isset($args['size']) ? $args['size'] : '';
+$show_author = isset($args['show_author']) ? $args['show_author'] : true;
+$show_review = isset($args['show_review']) ? $args['show_review'] : true;
 
 $card_classes = 'card card--shifted';
 if ($size) {
@@ -54,8 +57,19 @@ if ($size) {
         <p class="card__excerpt">
             <?= esc_html($excerpt); ?>
         </p>
+        <?php if ($show_author && $show_review && $review_data) : ?>
+        <div class="medical-review-badge card__review">
+            <div class="medical-review-badge__reviewer">
+                <img src="<?= get_template_directory_uri(); ?>/dist/icons/checkmark.svg">
+                <span class="medical-review-badge__reviewer-name">
+                    Medically reviewed by: <span><?php echo esc_html($review_data['name']); ?></span>
+                </span>
+            </div>
+        </div>
+        <?php elseif ($show_author && $author) : ?>
         <div class="card__author">
             Written By: <span><?= esc_html($author); ?></span>
         </div>
+        <?php endif; ?>
     </div>
 </a> 

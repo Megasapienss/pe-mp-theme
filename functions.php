@@ -76,5 +76,31 @@ add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
     return $crumbs;
 }, 10, 2 );
 
+/**
+ * Override template for practitioner providers
+ * 
+ * @param string $template The template file path
+ * @return string Modified template file path
+ */
+function pe_mp_override_provider_template($template) {
+    // Only apply to single provider pages
+    if (is_singular('provider')) {
+        $provider_id = get_the_ID();
+        
+        // Check if this provider is a practitioner
+        if (pe_mp_is_provider_practitioner($provider_id)) {
+            // Look for the practitioner template
+            $practitioner_template = get_template_directory() . '/single-provider-practitioner.php';
+            
+            if (file_exists($practitioner_template)) {
+                return $practitioner_template;
+            }
+        }
+    }
+    
+    return $template;
+}
+add_filter('single_template', 'pe_mp_override_provider_template');
+
 
 

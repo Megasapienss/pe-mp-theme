@@ -15,6 +15,12 @@
             height: 16px;
             position: relative;
             top: 2px;
+
+            .card-v2 &,
+            .card--shifted &{
+                width: 13px;
+                height: 13px;
+            }
         }
 
         &-name{
@@ -22,10 +28,60 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 0;
+            color: $color-dark;
+
+            a{
+                color: $color-primary;
+            }
+
+            .card-v2 &,
+            .card--shifted &{
+                display: block;
+                color: $color-muted;
+            }
         }
     }
 
     &__date{
         color: $color-muted;
+    }
+}
+
+.page-v2--medical-review-board{
+    .card-v2--practitioner:first-child{
+        border-top: 0;
+    }
+}
+
+.card-v2--practitioner{
+    & .card-v2{
+        &__image{
+            border-radius: 50%;
+            overflow: hidden;
+
+            & img{
+                width: 100% !important;
+                height: auto !important;
+                aspect-ratio: 1/1 !important;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        &__title{
+            @include heading-h4;
+            @include bold;
+        }
+
+        &__subtitle{
+            @include body;
+            color: $color-muted;
+        }
+    }
+
+    &:hover{
+        & .btn{
+            opacity: 0.5;
+        }
     }
 }
